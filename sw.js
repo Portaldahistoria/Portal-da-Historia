@@ -1,7 +1,7 @@
 /* Portal da História — offline application shell. */
-const VERSION = 'portal-historia-pwa-v1';
+const VERSION = 'portal-historia-pwa-v2';
 const CORE = VERSION + '-core';
-const MEDIA = VERSION + '-media';
+const MEDIA = 'portal-historia-pwa-v1-media';
 const BASE = new URL('./', self.location.href);
 const chapters = [
   '6-11','7-10','7-11',
@@ -9,7 +9,7 @@ const chapters = [
   ...Array.from({length:12},(_,i)=>'9-'+(i+1))
 ];
 const files = [
-  './','index.html','manifest.webmanifest','app-icon-192.png','app-icon-512.png',
+  './','index.html','manifest.webmanifest','app-icon-192.png','app-icon-512.png','aplicativo.html','aplicativo.js',
   'pwa.js','pwa.css','style.css','portal.css','refinement.css','fullwidth.css',
   'chronology.css','chapters.js','grades.js','app.js','portal.js','hero-grain.svg',
   'historical-mosaic.svg','roma-imperial.html','chapter-em.html','chapter-em.js',

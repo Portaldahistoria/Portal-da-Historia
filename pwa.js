@@ -6,12 +6,10 @@
     ...[6,7,8,9].flatMap(y=>(window.PORTAL_GRADES?.[y]||[]).map(c=>({key:'acervo-'+y+'-'+c.id,title:c.title,year:y+'º ano'}))),
     ...(window.CHAPTERS||[]).map(c=>({key:'capitulo-'+c.id,title:c.title,year:'1º ano EM'}))
   ];
-  let installPrompt=null,active=null,cacheReady=false;
-  const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
-  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;});
+  let active=null,cacheReady=false;
   const toolbar=make('section',null,'pwa-toolbar');
   toolbar.setAttribute('aria-label','Aplicativo Portal da História');
-  const install=make('button','Instalar aplicativo','pwa-install');install.type='button';
+  const install=make('button','Baixar aplicativo','pwa-install');install.type='button';
   const studies=make('button','Meus estudos','pwa-studies');studies.type='button';
   const state=make('span','Preparando estudo offline…','pwa-state');state.setAttribute('role','status');
   toolbar.append(install,studies,state);
@@ -21,14 +19,7 @@
     modal.replaceChildren();const head=make('div',null,'pwa-dialog-head'),close=make('button','Fechar');close.type='button';close.onclick=()=>modal.close();
     head.append(make('h2',title),close);modal.append(head,body);if(!modal.open)modal.showModal();
   }
-  function installHelp(){
-    const body=make('div');const list=make('ol');
-    for(const line of ['Android (Chrome): abra o menu ⋮ e toque em Instalar aplicativo ou Adicionar à tela inicial.','iPhone/iPad (Safari): toque em Compartilhar e depois em Adicionar à Tela de Início.','Computador (Chrome ou Edge): use o ícone de instalação na barra de endereços ou o menu do navegador.'])list.append(make('li',line));
-    body.append(make('p','Abra este portal no navegador do seu dispositivo e instale-o sem precisar de uma loja de aplicativos.'),list);show('Instalar Portal da História',body);
-  }
-  install.onclick=async()=>{if(!installPrompt){installHelp();return;}try{await installPrompt.prompt();await installPrompt.userChoice;}finally{installPrompt=null;}};
-  window.addEventListener('appinstalled',()=>{install.hidden=true;installPrompt=null;});
-  install.hidden=standalone();
+  install.onclick=()=>{location.href='aplicativo.html';};
   const actions=make('div',null,'pwa-chapter-actions');actions.hidden=true;
   const favorite=make('button','Favoritar capítulo');favorite.type='button';const complete=make('button','Marcar como estudado');complete.type='button';
   actions.append(favorite,complete);toolbar.after(actions);
