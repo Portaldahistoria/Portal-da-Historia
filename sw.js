@@ -1,5 +1,5 @@
 /* Portal da História — offline application shell. */
-const VERSION = 'portal-historia-pwa-v10';
+const VERSION = 'portal-historia-pwa-v11';
 const CORE = VERSION + '-core';
 const MEDIA = 'portal-historia-pwa-v1-media';
 const BASE = new URL('./', self.location.href);
@@ -39,7 +39,7 @@ self.addEventListener('fetch', event=>{
     event.respondWith((async()=>{
       const cache=await caches.open(CORE), key=canonical(url);
       try{
-        const response=await fetch(req);
+        const response=await fetch(req,{cache:'no-cache'});
         if(response.ok){try{await cache.put(key,response.clone());}catch{}return response;}
         return await cache.match(key)||response;
       }catch{
