@@ -27,12 +27,12 @@ body.portal-chapter .panel :is(input,textarea,select){background:#fff!important;
 body.portal-chapter .panel button:focus-visible{outline:2px solid #b52b33!important;outline-offset:3px}
 body.portal-chapter #glossario .portal-search{display:block;width:100%;margin:10px 0 18px}
 body.portal-chapter #glossario [hidden]{display:none!important}
-body.portal-chapter #glossario .cards>*,body.portal-chapter #cotidiano .cards>*{background:#fff!important}
+body.portal-chapter #glossario .cards>*,body.portal-chapter #cotidiano .cards>*{background:#f8f4ec!important}
 body.portal-chapter #mapa .mind-root{display:none!important}
 body.portal-chapter #mapa .mind-layout{display:grid!important;grid-template-columns:minmax(230px,.8fr) minmax(0,1.3fr)!important;gap:18px!important}
 body.portal-chapter #mapa .mind-info{padding:20px!important;border-left:4px solid #b52b33!important}
 body.portal-chapter #mapa .mind-info button{margin:4px;border:1px solid #a51e26!important;background:#f8e6e9!important;color:#861b23!important;border-radius:7px!important;padding:10px!important}
-body.portal-chapter #mapa :is(.branch,.mind-branch,.mind-card){background:#fff!important;border:1px solid #c8b9bc!important;border-left:4px solid #b52b33!important;color:#292325!important;border-radius:10px!important}
+body.portal-chapter #mapa :is(.branch,.mind-branch,.mind-card){background:#f8f4ec!important;border:1px solid #c8b9bc!important;border-left:4px solid #b52b33!important;color:#292325!important;border-radius:10px!important}
 body.portal-chapter #mapa :is(.selected,.active,.mind-branch.selected){background:#f8e6e9!important;border-color:#a51e26!important;color:#861b23!important}
 body.portal-chapter #mapa .portal-export{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:20px 0;padding:15px;border-top:1px solid #e7d7db}
 body.portal-chapter #mapa .portal-export button{background:white!important;border:1px solid #b52b33!important;padding:10px 12px;border-radius:7px;color:#861b23!important;font-weight:700}
@@ -40,7 +40,7 @@ body.portal-chapter #mapa .portal-export button[aria-pressed=true],body.portal-c
 body.portal-chapter #mapa .portal-preview{width:100%;height:360px;border:1px solid #d7c9cb;border-radius:8px;background:#f4f4f5}
 body.portal-chapter #mapa .portal-preview[hidden]{display:none!important}
 body.portal-chapter #explorar .portal-station-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px!important;align-items:stretch}
-body.portal-chapter #explorar .portal-station{border:1px solid #e0d4d6!important;border-top:4px solid #b52b33!important;border-radius:15px!important;background:#fff!important;color:#292325!important;display:flex!important;flex-direction:column;align-items:center;text-align:center;padding:15px!important;gap:9px;cursor:pointer;min-width:0;box-shadow:0 3px 10px #321d220a!important}
+body.portal-chapter #explorar .portal-station{border:1px solid #e0d4d6!important;border-top:4px solid #b52b33!important;border-radius:15px!important;background:#f8f4ec!important;color:#292325!important;display:flex!important;flex-direction:column;align-items:center;text-align:center;padding:15px!important;gap:9px;cursor:pointer;min-width:0;box-shadow:0 3px 10px #321d220a!important}
 body.portal-chapter #explorar .portal-station:hover,body.portal-chapter #explorar .portal-station[aria-expanded=true]{border-color:#a51e26!important;background:#f8e6e9!important}
 body.portal-chapter #explorar .portal-station img{width:100%;height:145px;object-fit:cover;object-position:center 20%;border-radius:9px}
 body.portal-chapter #explorar .portal-station .portal-art{height:105px;width:100%;display:grid;place-items:center;background:#e9d8d8;border-radius:9px;color:#a51e26}
@@ -65,7 +65,7 @@ body.portal-chapter #explorar .portal-full img{max-width:100%;height:auto;object
 body.portal-chapter #mapa .rome-mind-layout{display:grid;grid-template-columns:minmax(270px,.8fr) minmax(0,1.4fr);gap:22px;align-items:start;margin:20px auto 44px;max-width:1500px}
 body.portal-chapter #mapa .rome-mind-left{min-width:0}
 body.portal-chapter #mapa .mental-branches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-body.portal-chapter #mapa .mental-branch{display:block;text-align:left;position:relative;padding:17px 14px;min-height:113px;background:#fff!important;border:1px solid #d7c9cb!important;border-left:4px solid #b52b33!important;border-radius:10px!important;box-shadow:0 3px 10px #321d220b!important}
+body.portal-chapter #mapa .mental-branch{display:block;text-align:left;position:relative;padding:17px 14px;min-height:113px;background:#f8f4ec!important;border:1px solid #d7c9cb!important;border-left:4px solid #b52b33!important;border-radius:10px!important;box-shadow:0 3px 10px #321d220b!important}
 body.portal-chapter #mapa .mental-branch.selected,body.portal-chapter #mapa .mental-branch:hover{background:#f8e6e9!important;border-color:#a51e26!important}
 body.portal-chapter #mapa .mental-branch-icon{position:absolute;top:14px;left:12px;width:27px!important;height:27px!important;margin:0!important}
 body.portal-chapter #mapa .mental-branch-icon svg{width:22px;height:22px}
