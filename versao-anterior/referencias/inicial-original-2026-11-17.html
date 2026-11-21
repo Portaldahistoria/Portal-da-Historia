@@ -1,0 +1,119 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#121a2d"><meta name="description" content="Portal interativo de História do Professor Gabriel. Acesse conteúdos do Ensino Fundamental e Médio."><title>Portal da História | Professor Gabriel</title><style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap');
+:root{--bg:#f5f1e8;--ink:#172238;--deep:#131d30;--gold:#d7a653;--muted:#657184;--line:#ddd7cb;--white:#fffdf9}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif}a{color:inherit;text-decoration:none}a:focus-visible{outline:3px solid #d7a653;outline-offset:4px}.wrap{max-width:1180px;margin:auto;padding:0 28px}.top{background:#10192b;color:#fff;border-bottom:1px solid #ffffff25}.top-in{height:85px;display:flex;justify-content:space-between;align-items:center;gap:18px}.identity{display:flex;align-items:center;gap:14px}.symbol{width:45px;height:45px;border:1px solid #d7a65380;border-radius:50%;display:grid;place-items:center;color:#e8c17b;font-family:Georgia,serif;font-size:26px}.identity strong{display:block;font-family:'Playfair Display',Georgia,serif;font-size:21px;letter-spacing:.1px}.identity small{display:block;font-size:11px;letter-spacing:2.1px;text-transform:uppercase;color:#d2c1a0;margin-top:3px}.nav{display:flex;gap:27px;align-items:center;font-size:13px;font-weight:700}.nav a{color:#eae6dc}.nav a:hover{color:#eccb88}.hero{background:radial-gradient(circle at 73% 38%,#263c57 0%,#17273e 40%,#111b2d 80%);color:white;overflow:hidden;position:relative}.hero:after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.13;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(90deg,transparent 30%,black)}.hero-in{min-height:520px;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center;position:relative;z-index:1;padding-top:48px;padding-bottom:58px}.eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:800;color:#e5ba6d;display:flex;gap:15px;align-items:center}.eyebrow:before{content:'';width:32px;height:1px;background:#d3aa64}h1,h2,h3,p{margin-top:0}.hero h1{font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:clamp(48px,5.1vw,78px);line-height:1.1;letter-spacing:-1.5px;margin:22px 0}.hero h1 em{color:#e6b96b;font-style:normal}.hero p{font-size:17px;line-height:1.85;color:#d9dfeb;max-width:570px}.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;gap:13px;padding:15px 22px;border-radius:7px;font-size:14px;font-weight:800;transition:transform .2s,background .2s}.button:hover{transform:translateY(-2px)}.button.gold{background:#d8aa61;color:#192132}.button.outline{border:1px solid #b9c2cf70;color:#fff}.history-art{min-height:370px;position:relative;display:grid;place-items:center}.orb{width:min(100%,400px);aspect-ratio:1;border:1px solid #e0b87770;border-radius:50%;position:relative;display:grid;place-items:center;background:radial-gradient(circle,#c4a06b12,transparent 65%)}.orb:before,.orb:after{content:'';position:absolute;border:1px solid #d2ad7770;border-radius:50%;inset:24px}.orb:after{inset:58px;border-style:dashed;opacity:.6}.orb .roman{font-size:clamp(95px,12vw,160px);filter:drop-shadow(0 10px 2px #111a2d);line-height:1}.orb .age{position:absolute;bottom:37px;font-size:11px;letter-spacing:3px;font-weight:800;color:#dfbe82}.date{position:absolute;font-family:'Playfair Display',serif;color:#e2c38a;font-size:24px}.date.a{top:40px;left:-12px}.date.b{right:-10px;bottom:82px}.heritage{background:#e7dfcf;border-bottom:1px solid #d7d0c3}.heritage-inner{min-height:68px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-top:15px;padding-bottom:15px}.heritage span{font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:1.4px;color:#5a554c}.heritage span b{color:#a67836;margin-right:8px}.section{padding-top:77px;padding-bottom:84px}.section-label{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:#966d3d;font-weight:800;margin-bottom:13px}.section h2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(34px,3.5vw,49px);font-weight:600;letter-spacing:-.7px;margin-bottom:12px}.section-lead{color:var(--muted);line-height:1.75;font-size:16px;max-width:620px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:35px}.card{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:block;box-shadow:0 9px 23px #1824370c;transition:transform .2s,box-shadow .2s}.card:hover{transform:translateY(-5px);box-shadow:0 20px 32px #18243720}.art{height:222px;position:relative;overflow:hidden}.art svg{width:100%;height:100%;display:block}.number{position:absolute;left:22px;top:20px;background:#152136da;color:#fff;border:1px solid #f3e3bb60;padding:8px 12px;border-radius:3px;text-transform:uppercase;letter-spacing:1.5px;font-size:10px;font-weight:800}.card-inner{padding:29px 30px 34px}.card-kicker{color:#a0753d;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;font-weight:800}.card h3{font-family:'Playfair Display',Georgia,serif;font-size:30px;font-weight:600;margin:10px 0}.card p{color:var(--muted);line-height:1.75;margin-bottom:23px;font-size:15px}.action{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;color:#1d4260;padding-top:16px;border-top:1px solid var(--line)}.action .arrow{border:1px solid #c6b6a3;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:18px}.feature{background:#ede7db;border-top:1px solid #dcd3c4;border-bottom:1px solid #dcd3c4}.feature-in{display:grid;grid-template-columns:1.3fr auto;align-items:center;gap:35px;padding-top:44px;padding-bottom:46px}.feature h2{font-family:'Playfair Display',Georgia,serif;font-size:29px;font-weight:600;margin:0 0 9px}.feature p{color:#626a76;line-height:1.6;margin:0}.feature a{background:#182a42;color:#fff}.footer{background:#111a2a;color:#d4d8df}.footer-in{padding-top:27px;padding-bottom:27px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;font-size:13px}.footer strong{color:#e1bd7b}@media(max-width:760px){.top-in{height:auto;min-height:77px}.nav{gap:10px}.nav a{font-size:11px}.hero-in{grid-template-columns:1fr;min-height:auto;padding-top:65px}.history-art{min-height:220px}.orb{width:245px}.orb .roman{font-size:95px}.orb .age{bottom:25px}.date{font-size:17px}.hero h1{font-size:49px}.cards{grid-template-columns:1fr}.feature-in{grid-template-columns:1fr}.heritage-inner{justify-content:flex-start}.section{padding-top:54px;padding-bottom:60px}}@media(max-width:440px){.wrap{padding-left:18px;padding-right:18px}.identity strong{font-size:16px}.nav a:first-child{display:none}.hero h1{font-size:42px}.art{height:180px}.card-inner{padding:23px}.card h3{font-size:27px}}
+
+/* Composição definitiva de três azuis com destaques em lavanda */
+:root{--bg:#eaf3fc;--ink:#1a3451;--deep:#101d34;--gold:#bcb3ed;--muted:#5e7591;--line:#cbdced;--white:#fff}
+body{background:#e9f3fc;color:var(--ink)}
+.top{background:#101d34;border-bottom:1px solid #ffffff20}
+.symbol{color:#c6b8f8;border-color:#978ac685}
+.identity small{color:#c4b8e8}
+.hero{background:linear-gradient(120deg,#1b3658 0%,#315a80 63%,#4f7ba2 100%);padding:50px 0 64px}
+.hero:after{opacity:.09;mask-image:linear-gradient(90deg,transparent,black)}
+.hero-in{display:block;min-height:auto;padding-top:10px;padding-bottom:0}
+.hero-panel{position:relative;max-width:980px;padding:60px 65px;background:linear-gradient(120deg,#2c5077de,#426d98c9);border:1px solid #d5e4f344;border-radius:20px;box-shadow:0 22px 60px #12274136;backdrop-filter:blur(8px)}
+.hero-panel:after{content:'';pointer-events:none;position:absolute;width:270px;height:270px;border:1px solid #ffffff16;border-radius:50%;right:0;top:-60px;box-shadow:0 0 0 36px #ffffff07}
+.hero h1{font-size:clamp(43px,4.8vw,66px);max-width:850px;margin:18px 0 23px;line-height:1.17}
+.hero h1 em{color:#d5c5ff}
+.eyebrow{color:#d7c6fc}.eyebrow:before{background:#d7c6fc}
+.hero p{color:#e5edf9;max-width:780px}
+.button.gold{background:#c9bafa;color:#213550;border-radius:8px}
+.button.gold:hover{background:#dfd3ff}
+.section{background:linear-gradient(150deg,#e9f3fc,#dcecfb 60%,#edf6ff);max-width:none;padding-left:max(28px,calc((100% - 1124px)/2));padding-right:max(28px,calc((100% - 1124px)/2));padding-top:72px;padding-bottom:90px}
+.section-label{color:#6658a4}
+.section h2{color:#203c5b}
+.section-lead{max-width:unset;white-space:normal}
+.cards{margin-top:34px}
+.card{background:#ffffff;border:1px solid #c9dced;box-shadow:0 12px 30px #27466813}
+.card-kicker{color:#6959a6}
+.card h3{color:#203b5c}
+.card p{color:#64768a}
+.action{color:#426a98;border-color:#d8e3ec}
+.action .arrow{border-color:#b7cbe1}
+.footer{background:#121f34}
+.footer strong{color:#c4b5f5}
+@media(max-width:760px){.hero{padding:25px 0 45px}.hero-in{padding:0 18px}.hero-panel{padding:39px 29px}.hero h1{font-size:42px}.section{padding:52px 18px 65px}.cards{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+
+/* Revisão: painel mais largo e escuro, dourado no topo, lavanda preservada no acervo */
+.top{background:#10192b}
+.symbol{color:#c6b8f8;border-color:#978ac685}
+.identity small{color:#c4b8e8}
+.hero{background:linear-gradient(115deg,#234668 0%,#37658b 70%,#527ba0 100%);padding:56px 0 68px}
+.hero-in{max-width:1220px}
+.hero-panel{width:100%;max-width:none;min-height:365px;padding:67px clamp(32px,6vw,82px);background:linear-gradient(120deg,#111b2d 0%,#17273e 68%,#1e3350 100%);border:1px solid #e4d9c12b;border-radius:18px}
+.hero h1{max-width:980px}
+.hero h1 em{color:#e6b96b}
+.eyebrow{color:#e5ba6d}.eyebrow:before{background:#d3aa64}
+.button.gold{background:#d8aa61;color:#192132}
+.button.gold:hover{background:#eac27f}
+.hero p{max-width:840px}
+.section{background:linear-gradient(145deg,#f0ecfc 0%,#e8e4f7 58%,#f5f2fd 100%)}
+.section-label{color:#7361b2}.card-kicker{color:#7464aa}
+.footer strong{color:#e1bd7b}
+@media(max-width:760px){.hero-panel{min-height:0;padding:42px 27px}.hero{padding:32px 0 48px}}
+/* Ornamentos históricos em duotone nas laterais do acervo, sem competir com o conteúdo */
+#etapas{position:relative;isolation:isolate;overflow:hidden}
+#etapas>.history-rails{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.history-rail{position:absolute;top:16px;width:clamp(120px,16vw,280px);height:100%;opacity:.23;filter:blur(.25px);mix-blend-mode:multiply}
+.history-rail svg{display:block;width:100%;height:auto}
+.rail-left{left:max(-85px,calc((100vw - 1480px)/2 - 200px));transform:rotate(-4deg);mask-image:linear-gradient(to right,#000 0%,#000 44%,transparent 100%)}
+.rail-right{right:max(-85px,calc((100vw - 1480px)/2 - 200px));transform:rotate(4deg);mask-image:linear-gradient(to left,#000 0%,#000 44%,transparent 100%)}
+#etapas .section-label,#etapas h2,#etapas .section-lead,#etapas .cards{position:relative;z-index:1}
+@media(max-width:1100px){.history-rail{opacity:.11;width:140px}.rail-left{left:-100px}.rail-right{right:-100px}}
+@media(max-width:750px){.history-rails{display:none}}
+
+/* Etiqueta discreta em formato de pílula para o acervo */
+#etapas .section-label{display:inline-flex;align-items:center;width:max-content;max-width:100%;padding:8px 15px;border:1px solid #a99bcc;border-radius:999px;background:rgba(218,210,238,.34);color:#68558e;font-size:11px;font-weight:800;letter-spacing:1.7px;line-height:1.2;margin-bottom:19px}
+
+/* Fotografias patrimoniais e etiquetas em pílulas */
+.art{position:relative;background:#28364e}.art .historical-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:center 53%;filter:saturate(.83) contrast(1.04)}.art:after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#111b2d20,transparent 65%)}.era-pill{position:absolute;z-index:2;top:16px;left:18px;display:inline-flex;padding:8px 14px;border-radius:999px;color:#fff;font-size:11px;font-weight:800;letter-spacing:.6px;background:#14243abf;border:1px solid #eadbe7a8;backdrop-filter:blur(7px)}.action{border-top:1px solid #d8e3ec;padding-top:16px}.choice-pill{display:inline-flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 16px;border:1px solid #a99bcc;border-radius:999px;background:#ebe5f671;color:#62518d;transition:background .2s,border-color .2s}.card:hover .choice-pill{background:#e0d6f7;border-color:#8873c0}
+
+/* Laterais redesenhadas: apenas atmosfera e textura, sem ilustrações */
+#etapas{background:radial-gradient(ellipse 28% 64% at 0% 51%,rgba(143,126,191,.19),transparent 92%),radial-gradient(ellipse 28% 64% at 100% 50%,rgba(115,148,202,.17),transparent 92%),linear-gradient(145deg,#f0ecfc 0%,#e8e4f7 58%,#f5f2fd 100%)}
+#etapas:before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.22;background-image:radial-gradient(#948ab4 .65px,transparent .65px);background-size:24px 24px;mask-image:linear-gradient(90deg,#000 0%,transparent 24%,transparent 76%,#000 100%)}
+#etapas>.history-rails{display:none!important}
+@media(max-width:750px){#etapas:before{opacity:.08}}
+
+/* Névoa ambiente animada nas laterais do acervo */
+#etapas{position:relative;isolation:isolate;overflow:hidden}
+#etapas .mist-layer{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+#etapas .mist-cloud{position:absolute;display:block;width:clamp(350px,43vw,690px);height:clamp(360px,48vw,720px);border-radius:50%;filter:blur(75px);will-change:transform;opacity:.30;mix-blend-mode:multiply}
+#etapas .mist-cloud.left{left:-29%;top:2%;background:radial-gradient(ellipse at center,#b2a0e4 0%,#c0b7eb 32%,transparent 72%);animation:mistFloatLeft 28s ease-in-out infinite alternate}
+#etapas .mist-cloud.right{right:-29%;top:13%;background:radial-gradient(ellipse at center,#9dc6e8 0%,#b1bce7 35%,transparent 73%);animation:mistFloatRight 36s ease-in-out infinite alternate}
+#etapas .mist-cloud.low{left:20%;bottom:-53%;width:50%;height:450px;opacity:.12;background:radial-gradient(ellipse,#ac9dda,transparent 72%);animation:mistFloatLow 42s ease-in-out infinite alternate}
+@keyframes mistFloatLeft{0%{transform:translate3d(-9%,6%,0) scale(.90)}50%{transform:translate3d(15%,-8%,0) scale(1.14)}100%{transform:translate3d(23%,10%,0) scale(1.02)}}
+@keyframes mistFloatRight{0%{transform:translate3d(12%,-6%,0) scale(1)}50%{transform:translate3d(-18%,9%,0) scale(1.16)}100%{transform:translate3d(-27%,-7%,0) scale(.95)}}
+@keyframes mistFloatLow{from{transform:translate3d(-15%,0,0) scale(1)}to{transform:translate3d(20%,-11%,0) scale(1.2)}}
+@media(max-width:750px){#etapas .mist-cloud{opacity:.18;filter:blur(65px)}#etapas .mist-cloud.low{display:none}}
+@media(prefers-reduced-motion:reduce){#etapas .mist-cloud{animation:none!important}}
+/* Névoa realmente perceptível nas margens, mantendo textos sempre acima */
+#etapas .mist-cloud{opacity:.52;filter:blur(54px);mix-blend-mode:normal}
+#etapas .mist-cloud.left{left:-18%;background:radial-gradient(ellipse at center,rgba(144,113,213,.64),rgba(176,152,226,.38) 38%,transparent 75%)}
+#etapas .mist-cloud.right{right:-18%;background:radial-gradient(ellipse at center,rgba(112,161,220,.62),rgba(169,167,224,.35) 38%,transparent 75%)}
+#etapas .mist-cloud.low{opacity:.19}
+@media(max-width:750px){#etapas .mist-cloud{opacity:.25}}
+
+/* Ajuste solicitado: acervo azul quase branco e fumaça azul mais intensa */
+#etapas{background:linear-gradient(145deg,#f8fbff 0%,#eef6fd 55%,#f6faff 100%)}
+#etapas .mist-cloud{mix-blend-mode:multiply;filter:blur(57px);opacity:.58}
+#etapas .mist-cloud.left{background:radial-gradient(ellipse at center,rgba(53,108,169,.48) 0%,rgba(91,149,201,.31) 40%,transparent 76%)}
+#etapas .mist-cloud.right{background:radial-gradient(ellipse at center,rgba(38,89,151,.48) 0%,rgba(101,154,204,.30) 40%,transparent 76%)}
+#etapas .mist-cloud.low{background:radial-gradient(ellipse at center,rgba(64,121,177,.30),transparent 73%);opacity:.30}
+#etapas:before{background-image:radial-gradient(#8caecb .65px,transparent .65px)}
+@media(max-width:750px){#etapas .mist-cloud{opacity:.30}}
+
+/* Recursos futuros ao lado da abertura do acervo */
+.journey-intro{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(285px,.85fr);gap:36px;align-items:center}.journey-copy{min-width:0}.journey-extras{border-left:1px solid #c6d3e8;padding:8px 0 8px 28px}.journey-extras-title{display:block;color:#5a6b8b;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.6px;margin-bottom:13px}.journey-pills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.journey-pill{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;min-height:60px;border:1px solid #c8d5e8;border-radius:12px;background:#ffffffbf;padding:10px 13px;color:#294463;font-size:12px;font-weight:800;line-height:1.35}.journey-pill small{font-size:10px;letter-spacing:.3px;color:#7c87a2;font-weight:600}@media(max-width:850px){.journey-intro{grid-template-columns:1fr;gap:20px}.journey-extras{border-left:0;border-top:1px solid #c6d3e8;padding:20px 0 0}.journey-pill{min-height:54px}}@media(max-width:430px){.journey-pills{gap:8px}.journey-pill{padding:10px;font-size:11px}}
+
+/* Orientação discreta no espaço lateral do painel de entrada */
+.hero-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,.36fr);gap:clamp(20px,3vw,46px);align-items:center}.hero-main{min-width:0}.hero-guide{align-self:center;position:relative;z-index:1;border-left:2px solid #e6b96b;padding:10px 0 10px 22px}.hero-guide-label{display:block;color:#e6b96b;font-size:10px;font-weight:800;letter-spacing:1.5px}.hero-guide p{color:#f4f1ed;font-size:17px;line-height:1.5;margin:15px 0}.hero-guide-detail{color:#bdcbdc;font-size:12px;line-height:1.5}@media(max-width:950px){.hero-panel{grid-template-columns:1fr}.hero-guide{border-left:0;border-top:1px solid #647993;padding:20px 0 0}.hero-guide p{font-size:15px;max-width:500px;margin:9px 0}}
+</style></head><body>
+<header class="top"><div class="wrap top-in"><a class="identity" href="./" aria-label="Portal da História, início"><span class="symbol">✦</span><span><strong>Portal da História</strong><small>Professor Gabriel</small></span></a></div></header>
+<main><section class="hero"><div class="wrap hero-in"><div class="hero-panel"><div class="hero-main"><div class="eyebrow">Sua jornada pelo passado começa aqui</div><h1>História para explorar,<br>investigar e <em>descobrir.</em></h1><p>Um espaço para explorar o mundo, investigar fontes históricas e descobrir como o passado ajuda a compreender o presente. Escolha sua turma e comece a sua jornada.</p><div class="hero-cta"><a class="button gold" href="#etapas">Explorar as turmas <span aria-hidden="true">↗</span></a></div></div><aside class="hero-guide" aria-label="Uma sugestão para explorar"><span class="hero-guide-label">COMECE SUA INVESTIGAÇÃO</span><p>Escolha um período, explore uma estação e investigue fontes.</p><span class="hero-guide-detail">Cada descoberta abre uma nova pergunta.</span></aside></div></div></section>
+<section class="section wrap" id="etapas"><div class="mist-layer" aria-hidden="true"><span class="mist-cloud left"></span><span class="mist-cloud right"></span><span class="mist-cloud low"></span></div><div class="journey-intro"><div class="journey-copy"><div class="section-label">Acervo de aprendizagem</div><h2>Por onde começa sua jornada?</h2><p class="section-lead">Os materiais estão organizados por etapa de ensino e ano escolar. Você encontrará capítulos, mapas, documentos, atividades e experiências interativas.</p></div><aside class="journey-extras" aria-label="Recursos em preparação"><span class="journey-extras-title">Outras formas de explorar</span><div class="journey-pills"><span class="journey-pill"><span>Fontes históricas</span><small>Em breve</small></span><span class="journey-pill"><span>Mapas interativos</span><small>Em breve</small></span><span class="journey-pill"><span>Glossário</span><small>Em breve</small></span><span class="journey-pill"><span>Desafios</span><small>Em breve</small></span></div></aside></div><div class="cards">
+<a class="card" href="fundamental/"><div class="art"><span class="era-pill">6º ao 9º ano</span><img class="historical-photo" src="https://commons.wikimedia.org/wiki/Special:FilePath/Peru_Machu_Picchu.jpg?width=1200" alt="Fotografia de Machu Picchu, patrimônio histórico andino no Peru" loading="lazy" decoding="async"></div><div class="card-inner"><div class="card-kicker">Ensino Fundamental · Anos Finais</div><h3>Descobrir o mundo e suas histórias.</h3><p>Do 6º ao 9º ano: explorações visuais, perguntas instigantes, mapas históricos e atividades para aprender investigando.</p><div class="action"><span class="choice-pill">Escolher meu ano escolar <span aria-hidden="true">↗</span></span></div></div></a>
+<a class="card" href="medio/"><div class="art"><span class="era-pill">1º ao 3º ano</span><img class="historical-photo" src="https://commons.wikimedia.org/wiki/Special:FilePath/Parthenon.jpg?width=1200" alt="Fotografia do Partenon, monumento histórico na Acrópole de Atenas" loading="lazy" decoding="async"></div><div class="card-inner"><div class="card-kicker">Ensino Médio</div><h3>Investigar, interpretar e pensar criticamente.</h3><p>Do 1º ao 3º ano: fontes, debates, processos históricos e aprofundamento dos conteúdos para análises mais complexas.</p><div class="action"><span class="choice-pill">Escolher minha série <span aria-hidden="true">↗</span></span></div></div></a>
+</div></section>
+</main>
+<footer class="footer"><div class="wrap footer-in"><span><strong>Portal da História</strong> · Professor Gabriel</span><span>Aprender História é investigar o mundo.</span></div></footer></body></html>

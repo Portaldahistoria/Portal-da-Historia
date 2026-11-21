@@ -1,0 +1,147 @@
+/* Shared visual system from Roma Imperial, applied to the original learning materials. */
+:root{--ink:#292325;--muted:#62565a;--paper:#fff;--red:#a51e26;--deep:#861b23;--line:#e7d7db;--purple:#a51e26;--orange:#b52b33;--teal:#a51e26;--pink:#f8e6e9;--blue:#a51e26;--navy:#861b23;--cream:#fff;--gold:#b52b33}
+html,body{margin:0!important;background:#fff!important;color:#292325!important;font-family:Arial,Helvetica,sans-serif!important;min-height:0!important;height:auto!important;scroll-behavior:smooth}
+body>header,body>.site-head,body>#fixed-back-nav,body>footer,body>.footer,body>.unified-portal-header{display:none!important}
+body.portal-chapter .shell{width:min(1150px,calc(100% - 36px))!important;max-width:1150px!important;margin:0 auto!important;padding:0 0 36px!important}
+body.portal-chapter main{max-width:1150px!important;width:min(100%,1150px)!important;margin:0 auto!important;padding:0 18px 36px!important}
+body.portal-chapter .hero,body.portal-chapter .banner{background:#fff!important;color:#292325!important;min-height:0!important;box-shadow:none!important;border:0!important;border-bottom:1px solid #e7d7db!important;padding:20px!important}
+body.portal-chapter .hero h1,body.portal-chapter .hero h1 span,body.portal-chapter .hero h1 em{color:#a51e26!important;font-family:Impact,'Arial Black',Arial,sans-serif!important;font-size:clamp(32px,5vw,62px)!important;line-height:1.06}
+body.portal-chapter .hero p,body.portal-chapter .hero small{color:#62565a!important}
+body.portal-chapter nav.tabs{display:none!important}
+body.portal-chapter .panel{display:none!important;background:#fff!important;border:0!important;box-shadow:none!important;padding:0!important;margin:18px auto!important;border-radius:0!important}
+body.portal-chapter .panel.active{display:block!important}
+body.portal-chapter .panel>.sectionhead{text-align:center!important;margin:19px auto 22px!important;max-width:800px}
+body.portal-chapter .panel>.sectionhead h2,body.portal-chapter .panel>h2{display:table!important;background:#b52b33!important;border:1px solid #171717!important;-webkit-text-stroke:.8px #171717;paint-order:stroke fill;text-shadow:0 1px 1px #171717;color:#fff!important;padding:10px 20px!important;border-radius:6px!important;margin:0 auto 13px!important;font:700 clamp(23px,3vw,34px)/1.2 Impact,'Arial Black',Arial,sans-serif!important;text-align:center;text-transform:uppercase;max-width:100%}
+body.portal-chapter .panel>p{text-align:center;color:#50464a!important}
+body.portal-chapter .sectionhead p{color:#62565a!important;font-size:16px;line-height:1.6}
+body.portal-chapter .panel :is(.card,.tile,.station,.inter-card,.gloss-card,.challenge,.quiz,.mind-info,.mind-branch,.branch,.time,.note,.callout,.source-card,.detail,.lesson,.station-detail){background:#fff!important;color:#292325!important;border:1px solid #d7c9cb!important;border-radius:12px!important;box-shadow:0 4px 12px #321d2210!important}
+body.portal-chapter .panel :is(.card,.tile,.station,.gloss-card,.challenge,.source-card){border-top:4px solid #b52b33!important}
+body.portal-chapter .panel :is(h3,h4,strong,b,.chip,.eyebrow,.progress,.feedback){color:#861b23!important}
+body.portal-chapter .panel :is(p,small,li,label,summary){color:#292325!important;line-height:1.6}
+body.portal-chapter .panel :is(.action,.btn,.return,.next,.restart,.mind-model,button[data-sub],button[data-map]){background:#a51e26!important;border:1px solid #861b23!important;border-radius:7px!important;color:#fff!important;font:700 14px Arial,sans-serif!important;padding:10px 14px!important;cursor:pointer}
+body.portal-chapter .panel :is(.action-secondary,.mind-model:not(.selected)){background:white!important;color:#861b23!important}
+body.portal-chapter .panel :is(.choice,.answer){background:white!important;color:#292325!important;border:1px solid #d7c9cb!important;border-radius:8px!important}
+body.portal-chapter .panel :is(.good,.correct,.right){background:#e3f4e9!important;color:#225b36!important;border-color:#77a98a!important}
+body.portal-chapter .panel :is(.bad,.wrong){background:#f8e6e9!important;color:#861b23!important;border-color:#b52b33!important}
+body.portal-chapter .panel :is(input,textarea,select){background:#fff!important;border:1px solid #c8b9bc!important;border-radius:8px!important;color:#292325!important;padding:12px;font:16px Arial,sans-serif;max-width:100%}
+body.portal-chapter .panel button:focus-visible{outline:2px solid #b52b33!important;outline-offset:3px}
+body.portal-chapter #glossario .portal-search{display:block;width:100%;margin:10px 0 18px}
+body.portal-chapter #glossario [hidden]{display:none!important}
+body.portal-chapter #glossario .cards>*,body.portal-chapter #cotidiano .cards>*{background:#f4f4f5!important}
+body.portal-chapter #mapa .mind-root{display:none!important}
+body.portal-chapter #mapa .mind-layout{display:grid!important;grid-template-columns:minmax(230px,.8fr) minmax(0,1.3fr)!important;gap:18px!important}
+body.portal-chapter #mapa .mind-info{padding:20px!important;border-left:4px solid #b52b33!important}
+body.portal-chapter #mapa .mind-info button{margin:4px;border:1px solid #a51e26!important;background:#f8e6e9!important;color:#861b23!important;border-radius:7px!important;padding:10px!important}
+body.portal-chapter #mapa :is(.branch,.mind-branch,.mind-card){background:#f4f4f5!important;border:1px solid #c8b9bc!important;border-left:4px solid #b52b33!important;color:#292325!important;border-radius:10px!important}
+body.portal-chapter #mapa :is(.selected,.active,.mind-branch.selected){background:#f8e6e9!important;border-color:#a51e26!important;color:#861b23!important}
+body.portal-chapter #mapa .portal-export{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:20px 0;padding:15px;border-top:1px solid #e7d7db}
+body.portal-chapter #mapa .portal-export button{background:white!important;border:1px solid #b52b33!important;padding:10px 12px;border-radius:7px;color:#861b23!important;font-weight:700}
+body.portal-chapter #mapa .portal-export button[aria-pressed=true],body.portal-chapter #mapa .portal-export .save{background:#a51e26!important;color:white!important}
+body.portal-chapter #mapa .portal-preview{width:100%;height:360px;border:1px solid #d7c9cb;border-radius:8px;background:#f4f4f5}
+body.portal-chapter #mapa .portal-preview[hidden]{display:none!important}
+body.portal-chapter #explorar .portal-station-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px!important;align-items:stretch}
+body.portal-chapter #explorar .portal-station{border:1px solid #b8b9bf!important;border-top:4px solid #b52b33!important;border-radius:15px!important;background:#f4f4f5!important;color:#292325!important;display:flex!important;flex-direction:column;align-items:center;text-align:center;padding:15px!important;gap:9px;cursor:pointer;min-width:0;box-shadow:0 4px 12px #211b251c!important}
+body.portal-chapter #explorar .portal-station:hover,body.portal-chapter #explorar .portal-station[aria-expanded=true]{border-color:#a51e26!important;background:#f8e6e9!important}
+body.portal-chapter #explorar .portal-station img{width:100%;height:145px;object-fit:cover;object-position:center 20%;border-radius:9px}
+body.portal-chapter #explorar .portal-station .portal-art{height:105px;width:100%;display:grid;place-items:center;background:#e9d8d8;border-radius:9px;color:#a51e26}
+body.portal-chapter #explorar .portal-station .portal-art svg{height:70px;width:70px}
+body.portal-chapter #explorar .portal-station strong{font-size:17px;color:#292325!important;line-height:1.35}
+body.portal-chapter #explorar .portal-station small{font-size:14px;color:#50464a!important}
+body.portal-chapter #explorar .portal-station em{font-style:normal;color:#a51e26;font-size:14px;font-weight:700;margin-top:auto}
+body.portal-chapter #explorar .portal-expanded{width:min(100%,760px);margin:16px auto 24px;padding:22px;background:white;border:1px solid #c8b9bc;border-top:5px solid #b52b33;border-radius:15px;box-shadow:0 8px 24px #321d2218}
+body.portal-chapter #explorar .portal-expanded[hidden],body.portal-chapter #explorar .portal-full[hidden]{display:none!important}
+body.portal-chapter #explorar .portal-expanded.study-open{width:min(100%,1000px)}
+body.portal-chapter #explorar .portal-expanded h2{color:#a51e26;font:700 27px/1.2 Arial,sans-serif;margin:10px 0 18px;text-align:left}
+body.portal-chapter #explorar .portal-summary{display:flex;gap:18px;align-items:center;background:#f8e6e9;padding:15px;border-radius:8px;border-left:4px solid #b52b33}
+body.portal-chapter #explorar .portal-summary img{width:35%;max-height:210px;object-fit:contain}
+body.portal-chapter #explorar .portal-summary p{margin:0;line-height:1.6;font-size:16px}
+body.portal-chapter #explorar .portal-expanded .portal-close{float:right;background:#fff!important;color:#861b23!important;border:1px solid #a51e26!important;padding:8px 12px!important;border-radius:6px}
+body.portal-chapter #explorar .portal-full{border-top:1px solid #e7d7db;margin-top:18px;padding-top:16px;font-size:17px;line-height:1.7}
+body.portal-chapter #explorar .portal-full p{text-align:left!important;font-size:17px;line-height:1.7}
+body.portal-chapter #explorar .portal-full img{max-width:100%;height:auto;object-fit:contain}
+@media(max-width:850px){body.portal-chapter #explorar .portal-station-grid{grid-template-columns:repeat(2,minmax(0,1fr))}body.portal-chapter #mapa .mind-layout{grid-template-columns:1fr!important}}
+@media(max-width:520px){body.portal-chapter #explorar .portal-station-grid{grid-template-columns:1fr}body.portal-chapter #explorar .portal-summary{flex-direction:column}body.portal-chapter #explorar .portal-summary img{width:100%}}
+/* Same radial structure, layout and PDF controls as Roma Imperial. */
+body.portal-chapter #mapa .rome-mind-layout{display:grid;grid-template-columns:minmax(270px,.8fr) minmax(0,1.4fr);gap:22px;align-items:start;margin:20px auto 44px;max-width:1500px}
+body.portal-chapter #mapa .rome-mind-left{min-width:0}
+body.portal-chapter #mapa .mental-branches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+body.portal-chapter #mapa .mental-branch{display:block;text-align:left;position:relative;padding:17px 14px;min-height:113px;background:#f5f5f6!important;border:1px solid #d7c9cb!important;border-left:4px solid #b52b33!important;border-radius:10px!important;box-shadow:0 3px 10px #321d220b!important}
+body.portal-chapter #mapa .mental-branch.selected,body.portal-chapter #mapa .mental-branch:hover{background:#f8e6e9!important;border-color:#a51e26!important}
+body.portal-chapter #mapa .mental-branch-icon{position:absolute;top:14px;left:12px;width:27px!important;height:27px!important;margin:0!important}
+body.portal-chapter #mapa .mental-branch-icon svg{width:22px;height:22px}
+body.portal-chapter #mapa .mental-branch strong{display:block;padding-left:33px;min-height:28px;color:#292325!important;font-size:16px;line-height:1.35;margin-bottom:9px}
+body.portal-chapter #mapa .mental-branch small{display:block;color:#292325!important;font-size:14px;line-height:1.4}
+body.portal-chapter #mapa .mental-expanded{min-width:0;background:#fff;border:1px solid #e7d7db;border-radius:12px;padding:25px;box-shadow:0 4px 18px #321d220a;min-height:530px}
+body.portal-chapter #mapa .mental-expanded h3{font-size:23px;margin:8px 0 18px;color:#a51e26!important}
+body.portal-chapter #mapa .mental-expanded>p{font-size:16px;margin:0 0 20px}
+body.portal-chapter #mapa .mental-expanded-head .chip{background:none!important;font-size:12px;letter-spacing:1.1px;padding:0!important}
+body.portal-chapter #mapa .rome-map-heading{background:#a51e26;color:white;text-align:center;font-weight:900;font-size:19px;padding:14px;border-radius:10px}
+body.portal-chapter #mapa .roman-radial{position:relative;display:block;width:100%;height:620px;margin:18px 0 12px;overflow:hidden;border:1px solid #d7c9cb;border-radius:12px;background:#f5f5f6}
+body.portal-chapter #mapa .roman-radial>svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+body.portal-chapter #mapa .radial-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34%;height:25%;background:#a51e26;color:white;border:3px solid white;border-radius:12px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-size:clamp(13px,1.8vw,23px);font-weight:900;box-shadow:0 4px 14px #321d2220;z-index:2}
+body.portal-chapter #mapa .radial-node{position:absolute;transform:translate(-50%,-50%);width:31%;min-height:103px;background:white;border:1px solid #bc777d;border-radius:10px;box-shadow:0 3px 8px #321d2215;color:#292325;display:flex;flex-direction:column;gap:7px;align-items:center;justify-content:center;padding:10px;text-align:center;z-index:3}
+body.portal-chapter #mapa .radial-node.selected,body.portal-chapter #mapa .radial-node:hover{background:#f8e6e9!important;border:2px solid #a51e26!important}
+body.portal-chapter #mapa .node-mark{background:#a51e26;color:white;font-size:11px;font-weight:900;border-radius:4px;padding:4px 9px}
+body.portal-chapter #mapa .node-title{font-weight:900;font-size:clamp(12px,1.2vw,16px);line-height:1.2}
+body.portal-chapter #mapa .node-excerpt{font-size:11px;line-height:1.3;color:#50464a;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+body.portal-chapter #mapa .mental-info{background:#f8e6e9!important;border:1px solid #e7c5cb;border-left:4px solid #b52b33;border-radius:8px;padding:20px;min-height:105px}
+body.portal-chapter #mapa .mental-info h4{margin:8px 0;font-size:20px;color:#a51e26!important}
+body.portal-chapter #mapa .map-export-controls{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin:18px 0 12px}
+body.portal-chapter #mapa .map-export-controls button{background:#a51e26!important;color:white!important;border:1px solid #861b23;border-radius:7px;padding:11px 14px;font-weight:700}
+body.portal-chapter #mapa .map-export-controls small{color:#50464a;font-size:13px}
+body.portal-chapter #mapa .roman-pdf-styles{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 25px}
+body.portal-chapter #mapa .roman-pdf-styles button{background:white;border:1px solid #b8a2a6;color:#861b23;border-radius:6px;padding:9px 11px;cursor:pointer;font-weight:700}
+body.portal-chapter #mapa .roman-pdf-styles button[aria-pressed=true]{background:#a51e26;color:white;border-color:#861b23}
+body.portal-chapter #mapa .roman-pdf-preview{background:#f5f5f6;border:1px solid #d7c9cb;border-radius:10px;padding:12px;margin:12px 0}
+body.portal-chapter #mapa .roman-pdf-preview iframe{width:100%;height:350px;border:1px solid #d7c9cb;border-radius:8px}
+body.portal-chapter #mapa [hidden]{display:none!important}
+body.portal-chapter .portal-photo-credit{font-size:13px!important;color:#62565a!important;margin:9px 0 0}
+body.portal-chapter .portal-photo-credit a{color:#861b23;font-weight:700;text-decoration:underline}
+/* Override the original chapter-specific palettes, including hard-coded purple panels. */
+body.portal-chapter .portal-unified-hero{display:grid!important;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)!important;gap:24px!important;align-items:center!important;margin:0 auto!important;padding:20px!important}
+body.portal-chapter .portal-hero-copy{min-width:0}
+body.portal-chapter .portal-hero-copy .eyebrow{color:#861b23!important;background:transparent!important}
+body.portal-chapter .portal-hero-figure{margin:0;min-width:0}
+body.portal-chapter .portal-hero-figure img{display:block;width:100%;height:210px;object-fit:cover;object-position:center 25%;border-radius:12px;border:1px solid #e7d7db}
+body.portal-chapter .portal-hero-figure figcaption{font:13px/1.4 Arial,sans-serif;color:#62565a;margin-top:6px}
+body.portal-chapter .portal-hero-figure a{color:#861b23;font-weight:700;text-decoration:underline}
+body.portal-chapter :is(.hero-banner,.notice,.pill,.chip,.topic-tag,.era-tag,.era-tag.later,.expanded-label){background:#f8e6e9!important;color:#861b23!important;border-color:#e7c5cb!important;border-radius:6px!important;box-shadow:none!important}
+body.portal-chapter .panel :is(.game-item,.objective-item,.objective-set,.source-study,.atlas-layout,.atlas-hero,.atlas-map,.atlas-notes,.dialog-reading,.dialog-summary,.event-more,.mind-explanation,.node-explanation,.source-box,.connection,.time-item,.portal-assessment-extra){background:white!important;color:#292325!important;border-color:#d7c9cb!important;box-shadow:none!important}
+body.portal-chapter .panel :is(.game-item,.objective-item,.time-item,.source-study,.portal-assessment-extra){border:1px solid #d7c9cb!important;border-top:4px solid #b52b33!important;border-radius:12px!important;padding:18px!important;margin:14px 0!important}
+body.portal-chapter .panel .objective-set,body.portal-chapter .panel .portal-assessment-extra{border:0!important;padding:0!important}
+body.portal-chapter .panel .objective-option{background:#fff!important;color:#292325!important;border:1px solid #d7c9cb!important;border-radius:8px!important}
+body.portal-chapter .panel :is(.choice,.answer,.objective-option):is(.correct,.good,.right){background:#e3f4e9!important;color:#225b36!important;border-color:#77a98a!important}
+body.portal-chapter .panel :is(.choice,.answer,.objective-option):is(.wrong,.bad){background:#f8e6e9!important;color:#861b23!important;border-color:#b52b33!important}
+body.portal-chapter .panel :is(.objective-response,.feedback,.callout,.note,.source-box,.event-more){background:#f8e6e9!important;color:#292325!important;border-left:4px solid #b52b33!important;border-radius:8px!important}
+body.portal-chapter .panel :is(.quiz-question,.progress,.quiz-top,.time-item strong,.time strong,.chronology-title){color:#a51e26!important}
+body.portal-chapter .panel .timeline{border-left-color:#b52b33!important}
+body.portal-chapter .panel .time-item:before{background:#a51e26!important;border-color:#f8e6e9!important}
+body.portal-chapter .panel .date{background:#a51e26!important;color:white!important;border-radius:8px!important}
+body.portal-chapter .panel .bar{background:#a51e26!important}
+body.portal-chapter .panel .quiz-top .progress{background:#e7d7db!important}
+body.portal-chapter .panel .medieval-icon{display:inline-flex!important;width:34px;height:34px;background:#a51e26;color:white!important;border-radius:7px;align-items:center;justify-content:center;margin:0 0 8px}
+body.portal-chapter .panel .medieval-icon svg{width:24px;height:24px;display:block}
+body.portal-chapter #mapa .roman-radial .node-mark{color:white!important}
+body.portal-chapter #mapa .roman-pdf-styles button{color:#861b23!important;background:#fff!important}
+body.portal-chapter #mapa .roman-pdf-styles button[aria-pressed=true]{color:#fff!important;background:#a51e26!important}
+body.portal-chapter .portal-source-panel img{width:100%;max-width:760px;max-height:420px;object-fit:contain;display:block;margin:auto}
+body.portal-chapter .portal-source-tools{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+body.portal-chapter .portal-source-tools button{background:white;border:1px solid #a51e26;color:#861b23;border-radius:6px;padding:9px 13px;font-weight:700}
+body.portal-chapter .portal-source-viewport{width:100%;overflow:auto;max-height:550px;background:#f4f4f5;border-radius:8px}
+body.portal-chapter .portal-source-stage{width:100%;min-width:100%}
+body.portal-chapter .portal-source-stage img{width:100%!important;height:auto!important;max-height:none!important;max-width:none!important;object-fit:contain!important}
+body.portal-chapter .panel[hidden]{display:none!important}
+body.portal-chapter .portal-quiz{max-width:790px;margin:18px auto;padding:25px;background:#fff!important;border:1px solid #e7d7db!important;border-radius:12px!important;box-shadow:0 4px 18px #321d220a!important}
+body.portal-chapter .portal-quiz-top{display:flex;justify-content:space-between;gap:12px;color:#a51e26;font-weight:700;font-size:14px}
+body.portal-chapter .portal-quiz-progress{height:9px;background:#e7d7db;border-radius:8px;overflow:hidden;margin:12px 0 20px}
+body.portal-chapter .portal-quiz-progress span{display:block;height:100%;background:#a51e26;transition:width .2s}
+body.portal-chapter .portal-quiz-question{font-size:23px;line-height:1.35;color:#a51e26!important;margin:12px 0 20px}
+body.portal-chapter .portal-quiz-answers{display:grid;gap:10px;margin-bottom:16px}
+body.portal-chapter .portal-quiz-answers .choice{width:100%;text-align:left;font-size:16px;padding:14px;margin:0!important;line-height:1.45}
+body.portal-chapter .portal-quiz-feedback{padding:14px;background:#f8e6e9;border-left:4px solid #b52b33;border-radius:8px;margin:12px 0;line-height:1.5}
+body.portal-chapter .portal-quiz-feedback[hidden]{display:none!important}
+body.portal-chapter .portal-quiz button:disabled{cursor:default}
+body.portal-chapter .portal-quiz .btn:disabled{opacity:.45}
+@media(max-width:740px){body.portal-chapter .portal-unified-hero{grid-template-columns:1fr!important}body.portal-chapter .portal-hero-figure img{height:175px}}
+@media(max-width:920px){body.portal-chapter #mapa .rome-mind-layout{grid-template-columns:1fr}}
+@media(max-width:530px){body.portal-chapter #mapa .mental-branches{grid-template-columns:1fr}body.portal-chapter #mapa .mental-expanded{padding:15px}body.portal-chapter #mapa .roman-radial{height:440px}body.portal-chapter #mapa .radial-node{width:34%;min-height:85px;padding:6px}body.portal-chapter #mapa .node-excerpt{display:none}body.portal-chapter #mapa .radial-center{font-size:12px}}
