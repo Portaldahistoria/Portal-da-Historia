@@ -4,9 +4,6 @@ html{scroll-padding-top:calc(var(--portal-header-height) + 12px)}
 body,#home,.acervo-layout,.library,.year-drawer,.local-roma .roma-content-layout,.local-roma .chapter-menu,.local-roma .embedded-material,.acervo-layout .card,.pwa-dialog,.android-card{background-image:var(--history-texture-dark)!important;background-size:126px 126px!important;background-repeat:repeat!important}
 header.top,#home>.hero,#external-reader>.hero,.reading-hero,.about,body>footer{background-image:var(--history-texture-light)!important;background-size:132px 132px!important;background-repeat:repeat!important}
 #home>.hero,.roma-hero{background-color:#a51e26!important}
-.hero-mosaic{display:none!important}
-@media(min-width:621px){.hero-copy{max-width:650px}}
-@media(max-width:620px){#home>.hero,.roma-hero{min-height:0;padding-top:27px;padding-bottom:31px}.hero-copy{max-width:100%}}
 header.top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 3vw}
 header.top .brand{flex-shrink:0}
 header.top nav{position:static;transform:none;display:flex;flex:1;align-items:center;justify-content:center;gap:clamp(9px,1.15vw,18px);flex-wrap:wrap;white-space:normal}
