@@ -23,16 +23,21 @@
     head.append(make('h2',title),close);modal.append(head,body);if(!modal.open)modal.showModal();
   }
   install.onclick=()=>{location.href='aplicativo.html';};
-  const actions=make('div',null,'pwa-chapter-actions');actions.hidden=true;
-  const favorite=make('button','Favoritar capítulo');favorite.type='button';const complete=make('button','Marcar como estudado');complete.type='button';
-  actions.append(favorite,complete);header.after(actions);
+  const actions=make('div',null,'pwa-chapter-actions');actions.hidden=true;actions.setAttribute('aria-label','Ações deste capítulo');
+  const pill=(label,path)=>{const b=make('button');b.type='button';b.setAttribute('aria-pressed','false');b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+path+'</svg>';b.append(make('span',label));return b};
+  const favorite=pill('Favoritar capítulo','<path d="M20.8 8.7c0 4.2-8.8 10-8.8 10S3.2 12.9 3.2 8.7a4.7 4.7 0 0 1 8.8-2.3 4.7 4.7 0 0 1 8.8 2.3Z"/>');
+  const complete=pill('Marcar como estudado','<circle cx="12" cy="12" r="9"/><path d="m8 12 2.6 2.6 5.4-5.4"/>');
+  actions.append(favorite,complete);(document.querySelector('.chapter-menu .drawer-heading')||header).after(actions);
   function selected(k){return library.find(c=>c.key===k);}
   function renderActions(){
     active=selected(location.hash.slice(1));actions.hidden=!active;
     if(!active)return;
     const fav=get('ph-favorites',[]),done=get('ph-completed',[]);
-    favorite.textContent=fav.includes(active.key)?'Remover dos favoritos':'Favoritar capítulo';
-    complete.textContent=done.includes(active.key)?'Estudado ✓ (desmarcar)':'Marcar como estudado';
+    const isFavorite=fav.includes(active.key),isComplete=done.includes(active.key);
+    favorite.querySelector('span').textContent=isFavorite?'Favoritado':'Favoritar capítulo';
+    favorite.setAttribute('aria-pressed',String(isFavorite));favorite.setAttribute('aria-label',isFavorite?'Remover dos favoritos':'Favoritar capítulo');
+    complete.querySelector('span').textContent=isComplete?'Estudado':'Marcar como estudado';
+    complete.setAttribute('aria-pressed',String(isComplete));complete.setAttribute('aria-label',isComplete?'Desmarcar capítulo estudado':'Marcar como estudado');
     const visited=get('ph-history',[]).filter(x=>x!==active.key);put('ph-history',[active.key,...visited].slice(0,38));
   }
   function toggle(key){if(!active)return;const values=get(key,[]);const next=values.includes(active.key)?values.filter(x=>x!==active.key):[...values,active.key];if(!put(key,next)){state.textContent='Armazenamento local indisponível';return;}renderActions();}
