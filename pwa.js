@@ -7,15 +7,16 @@
     ...(window.CHAPTERS||[]).map(c=>({key:'capitulo-'+c.id,title:c.title,year:'1º ano EM'}))
   ];
   let active=null,cacheReady=false;
-  const toolbar=make('section',null,'pwa-toolbar');
-  toolbar.setAttribute('aria-label','Aplicativo Portal da História');
+  const header=document.querySelector('header.top');
+  const toolbar=header.querySelector('nav');
   const install=make('button','Baixar aplicativo','pwa-install');install.type='button';
   const studies=make('button','Meus estudos','pwa-studies');studies.type='button';
   const state=make('span','Preparando estudo offline…','pwa-state');state.setAttribute('role','status');
   const androidWebView=/Android/i.test(navigator.userAgent)&&(/;\s*wv\b/i.test(navigator.userAgent)||/Version\/4\.0.*Chrome\//i.test(navigator.userAgent));
   const appMode=androidWebView||matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
   if(!appMode)toolbar.append(install);toolbar.append(studies,state);
-  const header=document.querySelector('header.top');header.after(toolbar);
+  const measureHeader=()=>document.documentElement.style.setProperty('--portal-header-height',Math.ceil(header.getBoundingClientRect().height)+'px');
+  new ResizeObserver(measureHeader).observe(header);measureHeader();
   const modal=make('dialog',null,'pwa-dialog');modal.setAttribute('aria-label','Meus estudos e instalação');document.body.append(modal);
   function show(title,body){
     modal.replaceChildren();const head=make('div',null,'pwa-dialog-head'),close=make('button','Fechar');close.type='button';close.onclick=()=>modal.close();
@@ -24,7 +25,7 @@
   install.onclick=()=>{location.href='aplicativo.html';};
   const actions=make('div',null,'pwa-chapter-actions');actions.hidden=true;
   const favorite=make('button','Favoritar capítulo');favorite.type='button';const complete=make('button','Marcar como estudado');complete.type='button';
-  actions.append(favorite,complete);toolbar.after(actions);
+  actions.append(favorite,complete);header.after(actions);
   function selected(k){return library.find(c=>c.key===k);}
   function renderActions(){
     active=selected(location.hash.slice(1));actions.hidden=!active;

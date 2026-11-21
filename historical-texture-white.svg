@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 330" fill="none">
+ <g opacity="0.065" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+ <!-- Egypt -->
+ <g transform="translate(12 12)" stroke="none"><path fill="#fff" d="M1 75 26 20 48 75ZM31 75 55 29 76 75ZM61 75 78 45 90 75Z"/><path fill="#a51e26" d="M26 20 35 75H48ZM55 29 63 75H76ZM78 45 82 75H90Z"/><path d="M1 79h89" stroke="#fff" stroke-width="1.5"/></g>
+ <!-- Venus de Milo: recognizable armless marble figure and drapery -->
+ <g transform="translate(122 12)">
+  <path fill="#fff" stroke="none" d="M39 5Q44 0 50 5L55 9 54 16 50 23 52 28Q59 29 63 34L60 40 54 38 53 48 58 56 62 65 58 84H32L32 73 28 64Q30 55 34 49L35 39 28 40 25 34Q30 29 39 27L41 22 36 17 35 10Z"/>
+  <path stroke="#a51e26" stroke-width="1.15" d="M38 8q6-5 13 0M38 11q4-4 9-3M36 14l3 4 5 1M48 12l3 1M48 19l-4 2M41 24l7 3M34 32l7 1 4 5 7-4M36 45q7 3 13-1M44 44v5M34 51q13 6 23 3M31 59q12 1 26-3M30 64q14 1 29-4M34 68q16-1 22-5M36 72l-1 10M43 70l-2 13M50 68l-2 15M56 67l-3 16"/>
+  <path stroke-width="1.7" d="M30 85h33M27 88h39"/>
+ </g>
+ <!-- Colosseum -->
+ <g transform="translate(232 12)" stroke="none"><path fill="#fff" d="M3 69V29Q5 16 25 10Q43 5 60 10L60 24 68 28 68 39 76 42 76 48 86 52V70Q77 82 49 83Q18 84 3 69Z"/><path fill="#a51e26" d="M9 35v-7q4-7 8-3v9zm12-4v-8q4-7 8-5v10zm13-3v-8q4-6 8-3v10zm13 0v-9q4-6 8-1v10zM9 50v-8q4-6 8-3v9zm12-3v-9q4-6 8-4v11zm13-1v-10q4-6 8-3v12zm13 1v-11q4-5 8-2v13zm13 2v-8q4-5 8-1v10zM9 65V57q4-6 8-2v12zm12 4v-11q4-6 8-3v15zm13 3v-12q4-6 8-3v16zm13 0v-12q4-6 8-2v14zm13-2v-10q4-5 8-1v10zm13-4v-8q4-5 8-1v7z"/><path d="M5 37Q28 30 58 31M5 53Q40 45 77 53M5 70Q46 84 86 70" stroke="#a51e26" stroke-width="1.25" fill="none"/></g>
+ <!-- castle -->
+ <g transform="translate(12 122)" stroke="none"><path fill="#fff" d="M5 77V58L12 55V38L20 32V20L26 12 32 20V35L38 39V23L44 8 50 23V39L56 35V20L62 12 68 20V32L76 38V55L83 58V77Z"/><path stroke="#a51e26" stroke-width="2" d="M12 57h64M24 25v32M44 20v37M64 25v32M15 45h17m-15 6h14m6-24h14m-14 8h14m-14 8h14m6 2h17m-14 6h14M36 76V66q8-12 16 0v10M18 64v8m52-8v8"/></g>
+ <!-- hourglass -->
+ <g transform="translate(122 122)"><path d="M21 8h46M21 80h46M27 12h34v9c0 14-13 20-17 23 4 3 17 9 17 23v9H27v-9c0-14 13-20 17-23-4-3-17-9-17-23Zm7 16 20 0-10 11zM34 69l10-12 10 12zM44 46v7"/></g>
+ <!-- sailing ship -->
+ <g transform="translate(232 122)" stroke="none">
+  <path fill="#fff" d="M43 8h2v56h-2ZM65 23h2v41h-2ZM43 8l14 5-14 4Z"/>
+  <path fill="#fff" d="M40 18Q20 22 12 52Q25 46 40 51ZM47 23Q61 27 59 52H47ZM63 29Q55 36 58 54H63ZM69 31Q79 41 81 53L69 52Z"/>
+  <path fill="#fff" d="M8 59H26V55H34V59H69L83 53 79 67Q70 75 44 76H22Q12 72 8 59Z"/>
+  <path stroke="#a51e26" stroke-width="1.5" d="M17 64h57M26 68h40"/>
+  <path stroke="#fff" stroke-width="1.8" d="M5 81q9-4 18 0t18 0 18 0 18 0"/>
+ </g>
+ <!-- industry -->
+ <g transform="translate(12 232)"><path d="M9 77V47l20-12v14l23-14v14l18-10V77ZM58 44l4-30h11l5 63M62 14h11M6 77h78M19 61h8v8h-8zM37 61h8v8h-8zM55 61h8v8h-8zM66 9q-9-8-17-3M74 8q-4-10-14-8"/></g>
+ <!-- historical sources -->
+ <g transform="translate(122 232)"><path d="M44 27Q22 13 6 20v53q18-5 38 8 20-13 38-8V20q-16-7-38 7v54M13 31q15-1 24 6M13 42q15-1 24 6M13 53q15-1 24 6M51 37q9-7 24-6M51 48q9-7 24-6M51 59q9-7 24-6"/></g>
+ <!-- coffee and Brazil -->
+ <g transform="translate(232 232)"><path d="M44 81V12M44 31Q25 30 19 14Q36 12 44 31ZM44 31Q63 30 69 14Q52 12 44 31ZM44 49Q18 48 13 31Q33 28 44 49ZM44 49Q70 48 75 31Q55 28 44 49ZM44 68Q20 68 14 53Q34 49 44 68ZM44 68Q68 68 74 53Q54 49 44 68Z"/><g fill="#fff" stroke="none"><circle cx="38" cy="44" r="3.6"/><circle cx="50" cy="44" r="3.6"/><circle cx="38" cy="62" r="3.6"/><circle cx="50" cy="62" r="3.6"/></g></g>
+ </g>
+</svg>
