@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "Portal da História — Professor Gabriel",
+  "short_name": "Portal História",
+  "description": "Estude História do Ensino Fundamental ao Ensino Médio.",
+  "lang": "pt-BR",
+  "start_url": "./#inicio",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#861b23",
+  "icons": [
+    {"src":"app-icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"app-icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
