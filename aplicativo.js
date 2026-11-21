@@ -7,7 +7,7 @@
   window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();prompt=e;});
   window.addEventListener('appinstalled',()=>{prompt=null;installed();});
   button.addEventListener('click',async()=>{
-    if(!prompt){notice('Use o menu do navegador e selecione Instalar aplicativo ou Adicionar à tela inicial.');document.getElementById('instructions').scrollIntoView({behavior:'smooth',block:'nearest'});return;}
+    if(!prompt){notice('Use o menu do navegador e selecione Instalar aplicativo ou Adicionar à tela inicial.');status.scrollIntoView({behavior:'smooth',block:'nearest'});return;}
     try{await prompt.prompt();const result=await prompt.userChoice;if(result.outcome==='accepted')notice('Instalação iniciada.');else notice('Instalação cancelada. Você pode tentar novamente pelo menu do navegador.');}
     catch{notice('Abra o menu do navegador para instalar.');}
     finally{prompt=null;}
