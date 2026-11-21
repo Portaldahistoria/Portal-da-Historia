@@ -1,5 +1,5 @@
 /* The historical motifs become a faint, repeating paper texture. */
-:root{--portal-header-height:76px;--history-texture-light:url("historical-texture-white.svg");--history-texture-dark:url("historical-texture-red.svg")}
+:root{--portal-header-height:76px;--history-texture-light:url("historical-texture-white.svg?v=6");--history-texture-dark:url("historical-texture-red.svg?v=6")}
 html{scroll-padding-top:calc(var(--portal-header-height) + 12px)}
 body,#home,.acervo-layout,.library,.year-drawer,.local-roma .roma-content-layout,.local-roma .chapter-menu,.local-roma .embedded-material,.acervo-layout .card,.pwa-dialog,.android-card{background-image:var(--history-texture-dark)!important;background-size:126px 126px!important;background-repeat:repeat!important}
 header.top,#home>.hero,#external-reader>.hero,.reading-hero,.about,body>footer{background-image:var(--history-texture-light)!important;background-size:132px 132px!important;background-repeat:repeat!important}
