@@ -36,8 +36,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if gh release view android-v1.0 >/dev/null 2>&1; then
+          if gh release view android-v1.1 >/dev/null 2>&1; then
             echo "Version already published; preserving its original signing identity."
           else
-            gh release create android-v1.0 build/Portal-da-Historia.apk --title "Portal da História Android 1.0" --notes "Primeira versão Android. O conteúdo acompanha o site. Versão de teste; futuras versões do instalador podem exigir reinstalação."
+            gh release create android-v1.1 build/Portal-da-Historia.apk --title "Portal da História Android 1.1" --notes "Versão de teste com correção das barras do sistema. A assinatura mudou; a instalação sobre a versão anterior não é possível."
           fi
