@@ -1,17 +1,18 @@
 /* Shared visual system from Roma Imperial, applied to the original learning materials. */
+@font-face{font-family:Anton;src:url('fonts/Anton-Regular.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
 :root{--ink:#292325;--muted:#62565a;--paper:#fff;--red:#a51e26;--deep:#861b23;--line:#e7d7db;--purple:#a51e26;--orange:#b52b33;--teal:#a51e26;--pink:#e7e7e7;--blue:#a51e26;--navy:#861b23;--cream:#fff;--gold:#b52b33}
 html,body{margin:0!important;background:#fff!important;color:#292325!important;font-family:Arial,Helvetica,sans-serif!important;min-height:0!important;height:auto!important;scroll-behavior:smooth}
 body>header,body>.site-head,body>#fixed-back-nav,body>footer,body>.footer,body>.unified-portal-header{display:none!important}
 body.portal-chapter .shell{width:min(1150px,calc(100% - 36px))!important;max-width:1150px!important;margin:0 auto!important;padding:0 0 36px!important}
 body.portal-chapter main{max-width:1150px!important;width:min(100%,1150px)!important;margin:0 auto!important;padding:0 18px 36px!important}
 body.portal-chapter .hero,body.portal-chapter .banner{background:#fff!important;color:#292325!important;min-height:0!important;box-shadow:none!important;border:0!important;border-bottom:1px solid #e7d7db!important;padding:20px!important}
-body.portal-chapter .hero h1,body.portal-chapter .hero h1 span,body.portal-chapter .hero h1 em{color:#a51e26!important;font-family:Impact,'Arial Black',Arial,sans-serif!important;font-size:clamp(32px,5vw,62px)!important;line-height:1.06}
+body.portal-chapter .hero h1,body.portal-chapter .hero h1 span,body.portal-chapter .hero h1 em{color:#a51e26!important;font-family:Anton,'Arial Narrow',Arial,sans-serif!important;font-weight:400!important;font-size:clamp(32px,5vw,62px)!important;line-height:1.06}
 body.portal-chapter .hero p,body.portal-chapter .hero small{color:#62565a!important}
 body.portal-chapter nav.tabs{display:none!important}
 body.portal-chapter .panel{display:none!important;background:#fff!important;border:0!important;box-shadow:none!important;padding:0!important;margin:18px auto!important;border-radius:0!important}
 body.portal-chapter .panel.active{display:block!important}
 body.portal-chapter .panel>.sectionhead{text-align:center!important;margin:19px auto 22px!important;max-width:800px}
-body.portal-chapter .panel>.sectionhead h2,body.portal-chapter .panel>h2{display:table!important;background:#b52b33!important;border:1px solid #171717!important;-webkit-text-stroke:.8px #171717;paint-order:stroke fill;text-shadow:0 1px 1px #171717;color:#fff!important;padding:10px 20px!important;border-radius:6px!important;margin:0 auto 13px!important;font:700 clamp(23px,3vw,34px)/1.2 Impact,'Arial Black',Arial,sans-serif!important;text-align:center;text-transform:uppercase;max-width:100%}
+body.portal-chapter .panel>.sectionhead h2,body.portal-chapter .panel>h2{display:table!important;background:#b52b33!important;border:1px solid #171717!important;-webkit-text-stroke:.8px #171717;paint-order:stroke fill;text-shadow:0 1px 1px #171717;color:#fff!important;padding:10px 20px!important;border-radius:6px!important;margin:0 auto 13px!important;font:400 clamp(23px,3vw,34px)/1.2 Anton,'Arial Narrow',Arial,sans-serif!important;text-align:center;text-transform:uppercase;max-width:100%}
 body.portal-chapter .panel>p{text-align:center;color:#50464a!important}
 body.portal-chapter .sectionhead p{color:#62565a!important;font-size:16px;line-height:1.6}
 body.portal-chapter .panel :is(.card,.tile,.station,.inter-card,.gloss-card,.challenge,.quiz,.mind-info,.mind-branch,.branch,.time,.note,.callout,.source-card,.detail,.lesson,.station-detail){background:#fff!important;color:#292325!important;border:1px solid #d7c9cb!important;border-radius:12px!important;box-shadow:0 4px 12px #321d2210!important}
