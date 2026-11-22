@@ -1,8 +1,8 @@
 /* The historical motifs become a faint, repeating paper texture. */
-:root{--portal-header-height:76px;--history-texture-light:url("historical-texture-white.svg?v=6");--history-texture-dark:url("historical-texture-red.svg?v=6")}
+:root{--portal-header-height:76px;--history-texture-light:url("historical-texture-white.svg?v=31");--history-texture-dark:url("historical-texture-red.svg?v=31")}
 html{scroll-padding-top:calc(var(--portal-header-height) + 12px)}
-body,#home,.acervo-layout,.library,.year-drawer,.local-roma .roma-content-layout,.local-roma .chapter-menu,.local-roma .embedded-material,.acervo-layout .card,.pwa-dialog,.android-card{background-image:var(--history-texture-dark)!important;background-size:126px 126px!important;background-repeat:repeat!important}
-header.top,#home>.hero,#external-reader>.hero,.reading-hero,.about,body>footer{background-image:var(--history-texture-light)!important;background-size:132px 132px!important;background-repeat:repeat!important}
+body,#home,.acervo-layout,.library,.year-drawer,.local-roma .roma-content-layout,.local-roma .chapter-menu,.local-roma .embedded-material,.acervo-layout .card,.pwa-dialog,.android-card{background-image:var(--history-texture-dark)!important;background-size:84px 84px!important;background-repeat:repeat!important}
+header.top,#home>.hero,#external-reader>.hero,.reading-hero,.about,body>footer{background-image:var(--history-texture-light)!important;background-size:84px 84px!important;background-repeat:repeat!important}
 #home>.hero,.roma-hero{background-color:#a51e26!important}
 header.top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 3vw}
 header.top .brand{flex-shrink:0}
@@ -17,8 +17,8 @@ header.top .year-indicator{flex-shrink:0}
 @media(min-width:901px){.acervo-layout .year-drawer,.local-roma .chapter-menu{top:var(--portal-header-height);max-height:calc(100vh - var(--portal-header-height))}.year-drawer{top:var(--portal-header-height)}}
 .local-roma .roma-content-layout{scroll-margin-top:var(--portal-header-height)}
 /* Embedded educational chapter: quiet white-paper texture, including the cards. */
-html body.portal-chapter,html body.medieval-standard,html body.portal-chapter .panel,html body.portal-chapter .hero,html body.portal-chapter .banner,html body.portal-chapter .portal-station,html body.portal-chapter .portal-expanded,html body.portal-chapter .panel :is(.card,.tile,.inter-card,.gloss-card,.lesson),html body.medieval-standard .panel,html body.medieval-standard .hero,html body.medieval-standard .life-card,html body.medieval-standard .word-card,html body #explorar .topic,html body #explorar .station-selected,html body .shell{background-image:var(--history-texture-dark)!important;background-size:126px 126px!important;background-repeat:repeat!important}
-html body.portal-chapter .panel>.sectionhead h2,html body.portal-chapter .panel>h2,html body.medieval-standard .panel>.sectionhead h2{background-image:var(--history-texture-light)!important;background-size:132px 132px!important}
+html body.portal-chapter,html body.medieval-standard,html body.portal-chapter .panel,html body.portal-chapter .hero,html body.portal-chapter .banner,html body.portal-chapter .portal-station,html body.portal-chapter .portal-expanded,html body.portal-chapter .panel :is(.card,.tile,.inter-card,.gloss-card,.lesson),html body.medieval-standard .panel,html body.medieval-standard .hero,html body.medieval-standard .life-card,html body.medieval-standard .word-card,html body #explorar .topic,html body #explorar .station-selected,html body .shell{background-image:var(--history-texture-dark)!important;background-size:84px 84px!important;background-repeat:repeat!important}
+html body.portal-chapter .panel>.sectionhead h2,html body.portal-chapter .panel>h2,html body.medieval-standard .panel>.sectionhead h2{background-image:var(--history-texture-light)!important;background-size:84px 84px!important}
 /* Soft warm cream card surfaces; preserve the red selected states. */
 html body.portal-chapter #explorar .portal-station:not([aria-expanded="true"]),html body #explorar:not(.station-open) .topics>button.topic:not(.is-current),html body.medieval-standard #cotidiano .life-card,html body.medieval-standard #glossario .word-card,html body.portal-chapter #glossario .cards>*,html body.portal-chapter #cotidiano .cards>*,html body :is(#vida,#glossario) .inter-card{background-color:#ffffff!important}
 html body.portal-chapter #mapa :is(.branch,.mind-branch,.mind-card,.mental-branch):not(.selected):not(.active),html body.medieval-standard #mapa :is(.mental-branch,.mind-node,.stem):not(.selected):not(.active),html body #mapa .mental-branch:not(.selected):not(.active){background-color:#ffffff!important}
@@ -67,8 +67,8 @@ html body.medieval-standard .hero .eyebrow{color:#861b23!important}
 html body.portal-chapter #explorar .portal-station,html body #explorar:not(.station-open) .topics>button.topic,html body.portal-chapter #mapa :is(.branch,.mind-branch,.mind-card,.mental-branch),html body.medieval-standard #mapa :is(.mental-branch,.mind-node,.stem),html body #mapa .mental-branch,html body.portal-chapter #glossario .cards>*,html body.portal-chapter #cotidiano .cards>*,html body.medieval-standard #cotidiano .life-card,html body.medieval-standard #glossario .word-card,html body :is(#vida,#glossario) .inter-card{background-color:#ffffff!important;background-image:none!important}
 html body.portal-chapter #explorar .portal-station:is(:hover,[aria-expanded="true"]),html body #explorar:not(.station-open) .topics>button.topic:is(:hover,.is-current),html body #mapa .mental-branch:is(:hover,.selected,.active){background-color:#e3e3e3!important}
 /* Keep the historic mosaic continuous on every red and white page surface. */
-:root{--history-texture-light:url("historical-texture-white.svg?v=16");--history-texture-dark:url("historical-texture-red.svg?v=16");--neutral-card:#ffffff;--neutral-active:#e9e9e9}
-html body header.top,html body .hero,html body .roma-hero,html body .reading-hero,html body .about,html body:has(> #home)>footer{background-image:var(--history-texture-light)!important;background-size:126px 126px!important;background-repeat:repeat!important}
+:root{--history-texture-light:url("historical-texture-white.svg?v=31");--history-texture-dark:url("historical-texture-red.svg?v=31");--neutral-card:#ffffff;--neutral-active:#e9e9e9}
+html body header.top,html body .hero,html body .roma-hero,html body .reading-hero,html body .about,html body:has(> #home)>footer{background-image:var(--history-texture-light)!important;background-size:84px 84px!important;background-repeat:repeat!important}
 html body.portal-chapter .hero,html body.medieval-standard .hero,html body .shell>.hero{background-image:var(--history-texture-dark)!important}
 html body .local-roma .roma-content-layout,html body .local-roma .chapter-menu,html body .local-roma .embedded-material,html body .acervo-layout,html body .library,html body .year-drawer,html body .shell,html body .panel{background-image:var(--history-texture-dark)!important}
 /* Neutral surface, including summaries and selected cards; reserve red for accents. */
@@ -85,8 +85,8 @@ html body.portal-chapter #explorar .portal-station:is(:hover,[aria-expanded="tru
 /* White surfaces: red silhouettes on a literal white base, not cream paper. */
 html body .acervo-layout,html body .library,html body .year-drawer,html body .local-roma .roma-content-layout,html body .local-roma .chapter-menu,html body .local-roma .embedded-material,html body.portal-chapter,html body.medieval-standard,html body .shell,html body .panel{background-color:#fff!important;background-image:var(--history-texture-dark)!important}
 /* One continuous canvas under the chapter, without overlapping texture tiles. */
-:root{--portal-paper:#f9f1f2}
-html body #home,html body .acervo-layout,html body .local-roma .roma-content-layout{background-color:var(--portal-paper)!important;background-image:var(--history-texture-dark)!important;background-size:126px 126px!important;background-position:0 0!important}
+:root{--portal-paper:#fdfafb}
+html body #home,html body .acervo-layout,html body .local-roma .roma-content-layout{background-color:var(--portal-paper)!important;background-image:var(--history-texture-dark)!important;background-size:84px 84px!important;background-position:0 0!important}
 html body .library,html body .local-roma .embedded-material,html body .local-roma .embedded-material iframe,html body .shell,html body .panel,html body.portal-chapter .hero,html body.portal-chapter .banner,html body.medieval-standard .hero,html body .shell>.hero{background-color:transparent!important;background-image:none!important}
 html:has(body.portal-chapter),html:has(body.medieval-standard),html:has(body .shell),html body.portal-chapter,html body.medieval-standard,html body:has(.shell){background:transparent!important}
 html body .local-roma .chapter-menu,html body .year-drawer{background:var(--portal-paper)!important;background-image:none!important;border-color:#e5d4d6}
@@ -94,7 +94,7 @@ html body #home>.hero,html body .roma-hero{background-color:#a51e26!important;ba
 html body.portal-chapter .shell,html body.portal-chapter .panel,html body.medieval-standard .shell,html body.medieval-standard .panel,html body.portal-chapter main,html body.medieval-standard main,html body main.shell{background:transparent!important}
 /* The sidebar is a continuous solid column, with the navigation sticking below the header. */
 @media(min-width:901px){
-html body .local-roma .roma-content-layout{background-image:linear-gradient(to right,var(--portal-paper) 0 var(--sidebar-width),transparent var(--sidebar-width)),var(--history-texture-dark)!important;background-size:100% 100%,126px 126px!important}
+html body .local-roma .roma-content-layout{background-image:linear-gradient(to right,var(--portal-paper) 0 var(--sidebar-width),transparent var(--sidebar-width)),var(--history-texture-dark)!important;background-size:100% 100%,84px 84px!important}
 html body .local-roma .chapter-menu{align-self:start;min-height:calc(100vh - var(--portal-header-height));max-height:calc(100vh - var(--portal-header-height));top:var(--portal-header-height);box-sizing:border-box}
 html body .local-roma .embedded-material{padding-right:0!important}
 }
@@ -192,7 +192,7 @@ html body .sidebar-back-link:hover,html body .chapter-menu .chapter-back-link:ho
 html body .chapter-menu .chapter-back-link,html body .sidebar-back-link{margin-top:auto!important}
 html body .chapter-menu .pwa-chapter-actions{margin-bottom:10px!important}
 @media(min-width:901px){
-html body .acervo-layout,html body .local-roma .roma-content-layout{background-image:linear-gradient(to right,#fff 0 var(--sidebar-width),transparent var(--sidebar-width)),var(--history-texture-dark)!important;background-size:100% 100%,126px 126px!important;align-items:start}
+html body .acervo-layout,html body .local-roma .roma-content-layout{background-image:linear-gradient(to right,#fff 0 var(--sidebar-width),transparent var(--sidebar-width)),var(--history-texture-dark)!important;background-size:100% 100%,84px 84px!important;align-items:start}
 html body .acervo-layout .year-drawer{position:sticky!important;top:var(--portal-header-height)!important;min-height:calc(100vh - var(--portal-header-height))!important;max-height:calc(100vh - var(--portal-header-height))!important;width:100%!important;padding:18px 14px 12px!important;box-sizing:border-box}
 html body .acervo-layout .year-drawer .drawer-heading{padding-bottom:6px}
 html body .acervo-layout .year-drawer .drawer-heading h2{font-size:23px;margin:5px 0}
