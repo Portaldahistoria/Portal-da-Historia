@@ -40,6 +40,15 @@
  const key=meta.year+'-'+meta.id;let items=bank[key];
  if(!items&&typeof quiz!=='undefined'&&Array.isArray(quiz)){const pool=(meta.branches||[]).map(b=>b.name||b.n||b.title).filter(Boolean);items=quiz.map((q,i)=>{const opts=[...q.options];while(opts.length<4){const candidate=pool.find(t=>!opts.includes(t));opts.push(candidate||'Nenhum dos temas apresentados')}const correct=q.correct;const pos=i%4;[opts[correct],opts[pos]]=[opts[pos],opts[correct]];return[q.question,opts,pos,q.why]})}
  if(!items&&Array.isArray(meta.assessment))items=meta.assessment;
+ // Replace prompts generated merely from section headings with relevant concepts and events.
+ if(!bank[key]){let concepts,chronology;try{concepts=parent.PORTAL_GLOSSARIES?.[key];chronology=parent.PORTAL_HISTORY_DATA?.[key]?.dates}catch{}
+  if(concepts?.length>=4&&chronology?.length>=4){
+   const questions=[];const rotate=(correct,wrong,index)=>{const opts=wrong.slice(0,3);const position=index%4;opts.splice(position,0,correct);return[opts,position]};
+   for(let i=0;i<Math.min(5,concepts.length);i++){const [term,definition]=concepts[i],wrong=concepts.filter((_,j)=>i!==j).slice(0,3).map(x=>x[0]),[options,position]=rotate(term,wrong,i);questions.push(['Qual conceito histórico corresponde a esta definição? '+definition,options,position,term+': '+definition])}
+   for(let i=0;i<Math.min(4,chronology.length);i++){const [date,event]=chronology[i],wrong=chronology.filter((_,j)=>i!==j).slice(0,3).map(x=>x[1]),[options,position]=rotate(event,wrong,i+5);questions.push(['Qual acontecimento está associado a '+date+'?',options,position,date+' — '+event])}
+   items=questions;
+  }
+ }
  if(!items||!items.length)return;
  // All response-bearing fields are removed; original source/context content remains.
  d.querySelectorAll('textarea').forEach(t=>t.remove());

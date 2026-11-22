@@ -233,3 +233,22 @@ html body .portal-about-dialog #sobre p{font-size:16px;line-height:1.6;max-width
 html body .portal-about-dialog .about-close,html body .portal-about-dialog #sobre .button{border:1px solid #861b23;background:#861b23;color:white;padding:9px 14px;border-radius:6px;font:700 14px/1.3 Arial,sans-serif;cursor:pointer;text-decoration:none}
 html body .portal-about-dialog .about-close{float:right;margin:0 0 10px 12px}
 @media(max-width:600px){html body:has(> #home)>footer{padding:16px 4vw!important;gap:5px!important}html body:has(> #home)>footer>span{font-size:12px!important}}
+/* Navigation: comfortable type and touch targets without covering chapter content. */
+@media(min-width:901px){
+:root{--sidebar-width:252px}
+html body .acervo-layout .year-drawer,html body .local-roma .chapter-menu{padding:20px 16px 14px!important}
+html body .chapter-menu .drawer-heading h2,html body .acervo-layout .year-drawer .drawer-heading h2{font-size:26px!important}
+html body .chapter-menu .chapter-options>button,html body .acervo-layout .year-drawer #year-options a,html body .chapter-menu .pwa-chapter-actions button,html body .chapter-menu .chapter-back-link,html body .sidebar-back-link{font-size:16px!important;min-height:41px!important;padding:9px 11px!important}
+html body .chapter-menu .chapter-options{gap:3px!important}
+}
+html body.chapter-normalized .portal-station{min-height:0!important}
+html body.chapter-normalized .portal-station small{display:block!important;line-height:1.45!important;min-height:54px;max-height:none!important;-webkit-line-clamp:unset!important}
+html body.chapter-normalized .enem-facsimile{display:block;max-width:100%;width:auto;max-height:none;margin:12px auto;border:1px solid #e0d4d6;border-radius:6px;background:#fff}
+html body.chapter-normalized .enem-letter-options{grid-template-columns:repeat(5,minmax(0,1fr))}
+html body.chapter-normalized .enem-letter-options .enem-option{text-align:center;min-height:44px;font-weight:700}
+html body.chapter-normalized .portal-atlas-card{background:#fff!important;padding:18px!important;margin:18px auto!important}
+html body.chapter-normalized .portal-atlas-points{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+html body.chapter-normalized .portal-atlas-points button[aria-pressed="false"]{background:#fff;color:#861b23}
+html body.chapter-normalized .portal-atlas-detail{padding:12px;border-left:4px solid #861b23;background:#fff}
+html body.chapter-normalized .portal-atlas-detail p{margin:5px 0}
+html body.chapter-normalized .portal-atlas-frame{display:block;width:100%;height:360px;max-width:100%;border:1px solid #e1d4d6;border-radius:8px;margin:12px 0}
