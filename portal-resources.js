@@ -1382,7 +1382,26 @@
     }
     render();renderAnswers();const other=node(d,'article','portal-resource-card');other.append(node(d,'h3','','Mais questões e provas oficiais'));for(const q of (enemData['1-'+id]||[]).filter(x=>x.title.startsWith('Mais questões')))other.append(link(d,q));other.append(link(d,{title:'Provas e gabaritos oficiais do Inep',url:official}));wrapper.append(other);return {wrapper,answerBox};
   }
+  function unifyChapterDesign(d,year,id){
+    d.body.classList.add('chapter-normalized');
+    const hero=d.querySelector('.hero'),title=hero?.querySelector('h1');
+    if(hero&&title&&!hero.querySelector('.roman-banner-label')){
+      const picture=hero.querySelector('.portal-hero-figure img,.medieval-banner,.hero-banner img,.hero img');
+      if(picture){const visual=node(d,'div','chapter-cover-visual');picture.before(visual);visual.append(picture,node(d,'span','roman-banner-label',title.textContent.trim()));}
+    }
+    const timeline=d.querySelector('#tempo .timeline,#linha .timeline');
+    if(timeline){timeline.classList.add('portal-compact-timeline');
+      for(const card of timeline.querySelectorAll(':scope > .time,:scope > .time-item')){
+        const date=card.querySelector('strong,.date'),detail=card.querySelector('p,span:not(.date),.description');
+        if(!date||!detail||detail.textContent.trim().length<100||card.querySelector('button,details'))continue;
+        const text=detail.textContent.trim(),short=text.length>100?text.slice(0,100).replace(/\s+\S*$/,'')+'…':text;
+        const disclosure=node(d,'details','timeline-disclosure');disclosure.append(node(d,'summary','',short),detail);card.append(disclosure);
+      }
+      const head=timeline.closest('.panel')?.querySelector('.sectionhead h2,h2');if(head)head.textContent='Linha do tempo interativa';
+    }
+  }
   function installChapter(d,year,id){const explorar=d.getElementById('explorar');if(!explorar)return [];
+    unifyChapterDesign(d,year,id);
     // Keep the original daily-life material accessible from Explorar without
     // introducing a different sidebar order in each chapter.
     const life=d.getElementById('cotidiano')||d.getElementById('vida');

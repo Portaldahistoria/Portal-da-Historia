@@ -92,3 +92,42 @@ html:has(body.portal-chapter),html:has(body.medieval-standard),html:has(body .sh
 html body .local-roma .chapter-menu,html body .year-drawer{background:var(--portal-paper)!important;background-image:none!important;border-color:#e5d4d6}
 html body #home>.hero,html body .roma-hero{background-color:#a51e26!important;background-image:var(--history-texture-light)!important}
 html body.portal-chapter .shell,html body.portal-chapter .panel,html body.medieval-standard .shell,html body.medieval-standard .panel,html body.portal-chapter main,html body.medieval-standard main,html body main.shell{background:transparent!important}
+/* The sidebar is a continuous solid column, with the navigation sticking below the header. */
+@media(min-width:901px){
+html body .local-roma .roma-content-layout{background-image:linear-gradient(to right,var(--portal-paper) 0 var(--sidebar-width),transparent var(--sidebar-width)),var(--history-texture-dark)!important;background-size:100% 100%,126px 126px!important}
+html body .local-roma .chapter-menu{align-self:start;min-height:calc(100vh - var(--portal-header-height));max-height:calc(100vh - var(--portal-header-height));top:var(--portal-header-height);box-sizing:border-box}
+html body .local-roma .embedded-material{padding-right:0!important}
+}
+/* Roma Imperial editorial header: same photo, centered title plaque and compact proportions. */
+html body.chapter-normalized .portal-unified-hero,html body.chapter-normalized .hero-grid{display:grid!important;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)!important;gap:22px!important;align-items:center!important;max-width:1150px;margin:0 auto!important;padding:20px 18px 12px!important}
+html body.chapter-normalized .hero h1{font-size:clamp(30px,4vw,52px)!important;line-height:1.05!important;margin:5px 0 10px!important;color:#a51e26!important}
+html body.chapter-normalized .hero .eyebrow{color:#861b23!important;background:none!important}
+html body.chapter-normalized .chapter-cover-visual{position:relative;min-width:0;height:190px;border:1px solid #dbc4c7;border-radius:12px;overflow:hidden}
+html body.chapter-normalized .chapter-cover-visual img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important}
+html body.chapter-normalized .chapter-cover-visual .roman-banner-label{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:max-content;max-width:88%;text-align:center;padding:10px 14px;background:#861b23ed;color:#fff;font:700 13px/1.3 Arial,sans-serif;text-transform:uppercase;border:1px solid #ffffff80;border-radius:6px;letter-spacing:1px;box-shadow:0 4px 16px #230d1640}
+/* Compact two-column interactive map, with full explanations kept in the expanded view. */
+html body.chapter-normalized #mapa .rome-mind-layout{display:grid!important;grid-template-columns:minmax(235px,.8fr) minmax(0,1.4fr)!important;gap:16px!important;align-items:start!important;margin:16px auto 28px!important}
+html body.chapter-normalized #mapa .mental-branches{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important;align-items:start!important}
+html body.chapter-normalized #mapa .mental-branch{min-height:0!important;height:auto!important;padding:10px 9px!important;display:block!important;overflow:hidden!important}
+html body.chapter-normalized #mapa .mental-branch strong{font-size:13px!important;line-height:1.25!important;min-height:24px!important;padding-left:26px!important;margin:0 0 5px!important;overflow-wrap:anywhere}
+html body.chapter-normalized #mapa .mental-branch small{font-size:12px!important;line-height:1.3!important;display:-webkit-box!important;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden!important}
+html body.chapter-normalized #mapa .mental-branch-icon{width:22px!important;height:22px!important;left:7px!important;top:9px!important}
+html body.chapter-normalized #mapa .mental-branch-icon svg{width:18px!important;height:18px!important}
+html body.chapter-normalized #mapa .mental-expanded{min-height:0!important;padding:16px!important;margin-top:0!important}
+html body.chapter-normalized #mapa .roman-radial{height:440px!important;min-height:440px!important}
+html body.chapter-normalized #mapa .radial-node{min-height:62px!important;padding:7px!important;gap:3px!important}
+html body.chapter-normalized #mapa .radial-node .node-excerpt{display:-webkit-box!important;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden!important;font-size:11px!important;line-height:1.2!important}
+/* Match the compact Roma Imperial date-and-event cards. */
+html body.chapter-normalized :is(#tempo,#linha) .portal-compact-timeline{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;max-width:none!important;margin:14px auto!important;padding:0!important;border:0!important}
+html body.chapter-normalized :is(#tempo,#linha) .portal-compact-timeline>:is(.time,.time-item,.event){display:flex!important;align-items:flex-start!important;gap:12px!important;margin:0!important;padding:12px!important;min-height:0!important;height:auto!important;border:1px solid #dbc4c7!important;border-left:4px solid #a51e26!important;border-radius:9px!important;background:#fff!important;box-shadow:0 3px 9px #0000000b!important;overflow-wrap:anywhere}
+html body.chapter-normalized :is(#tempo,#linha) .portal-compact-timeline .time strong{min-width:68px!important;flex-shrink:0;color:#a51e26!important;font-size:14px!important}
+html body.chapter-normalized :is(#tempo,#linha) .portal-compact-timeline :is(p,span){margin:0!important;font-size:14px!important;line-height:1.45!important}
+html body.chapter-normalized .timeline-disclosure{min-width:0;flex:1;font-size:14px;line-height:1.4}
+html body.chapter-normalized .timeline-disclosure summary{cursor:pointer;color:#292325}
+html body.chapter-normalized .timeline-disclosure[open] summary{color:#a51e26;font-weight:700;margin-bottom:8px}
+html body.chapter-normalized .portal-compact-timeline .event>.card{flex:1;min-width:0;background:transparent!important;box-shadow:none!important;border:0!important;padding:0!important}
+/* All educational cards are white; red stays on accents and selected borders. */
+html body.chapter-normalized .panel :is(.card,.tile,.station,.inter-card,.gloss-card,.lesson,.source-card,.time-item,.life-card,.word-card,.challenge,.quiz,.portal-expanded,.portal-resource-card,.portal-slide-preview,.portal-quiz,.portal-summary,.station-summary,.mental-info,.atlas-region-detail,.atlas-hero,.atlas-map,.atlas-layout,.dialog-summary,.source-box,.event-more,.note,.callout,.feedback,.answer,.choice,.enem-option,.objective-option,.portal-art),html body.chapter-normalized #explorar .portal-station,html body.chapter-normalized #explorar:not(.station-open) .topics>button.topic,html body.chapter-normalized #mapa :is(.mental-branch,.mind-branch,.mind-card,.mind-node,.branch,.stem,.radial-node),html body .portal-resource-card,html body .library .card,html body .acervo-layout .card{background-color:#fff!important;background-image:none!important}
+html body.chapter-normalized #explorar .portal-station:is(:hover,[aria-expanded="true"]),html body.chapter-normalized #mapa :is(.mental-branch,.radial-node):is(:hover,.selected,.active),html body.chapter-normalized #vida .inter-card:hover{border-color:#a51e26!important;background-color:#fff!important}
+@media(max-width:720px){html body.chapter-normalized .portal-unified-hero,html body.chapter-normalized .hero-grid{grid-template-columns:1fr!important}html body.chapter-normalized #mapa .rome-mind-layout{grid-template-columns:1fr!important}html body.chapter-normalized :is(#tempo,#linha) .portal-compact-timeline{grid-template-columns:1fr!important}}
+@media(max-width:480px){html body.chapter-normalized #mapa .mental-branches{grid-template-columns:repeat(2,minmax(0,1fr))!important}html body.chapter-normalized #mapa .roman-radial{height:380px!important;min-height:380px!important}}
