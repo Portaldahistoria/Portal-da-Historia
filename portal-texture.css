@@ -164,3 +164,21 @@ html body.chapter-normalized #mapa .node-excerpt{display:none!important}
 html body.chapter-normalized #mapa:not(:has(.radial-node[aria-pressed="true"])) .mental-info{display:none!important}
 @media(max-width:740px){html body.chapter-normalized .hero>.hero-grid,html body.chapter-normalized #mapa .rome-mind-layout{grid-template-columns:1fr!important}html body.chapter-normalized .hero>.hero-grid{padding:18px!important}html body.chapter-normalized .hero .roman-banner{height:165px!important}}
 @media(max-width:480px){html body.chapter-normalized #mapa .roman-radial{height:385px!important;min-height:385px!important}html body.chapter-normalized #mapa .radial-node{height:66px!important;min-height:66px!important;max-height:66px!important}html body.chapter-normalized #mapa .node-title{font-size:11px!important}}
+/* Sidebar actions share the same rounded rectangular treatment as chapter tabs. */
+html body .chapter-menu .chapter-options>button,html body .chapter-menu .pwa-chapter-actions button,html body .chapter-menu .chapter-back-link{border-radius:6px!important;min-height:34px!important;font:700 14px/1.3 Arial,sans-serif!important;padding:7px 10px!important;box-sizing:border-box;text-align:left}
+html body .chapter-menu .pwa-chapter-actions{display:grid!important;grid-template-columns:1fr;gap:4px!important;width:100%;align-items:stretch!important}
+html body .chapter-menu .pwa-chapter-actions button,html body .chapter-menu .chapter-back-link{width:100%;display:flex;align-items:center;gap:7px;border:1px solid #c8a1a5;background:#fff;color:#861b23;box-shadow:none}
+html body .chapter-menu .pwa-chapter-actions button[aria-pressed=true]{background:#861b23;color:white}
+html body .chapter-menu .chapter-back-link{position:static!important;inset:auto!important;margin:5px 0 0!important;text-decoration:none}
+html body .chapter-menu .chapter-back-link:hover{border-color:#861b23;background:#e7e7e7}
+@media(max-width:900px){html body .chapter-menu .pwa-chapter-actions{grid-template-columns:repeat(2,minmax(0,1fr))}html body .chapter-menu .chapter-back-link{margin-top:8px!important}}
+/* Keep the white cover compact; restore the prominence of the chapter heading. */
+html body.chapter-normalized .hero>.hero-grid{padding-top:18px!important;padding-bottom:16px!important}
+html body.chapter-normalized .hero h1,html body.chapter-normalized .hero h1 em{font-size:clamp(40px,6.2vw,84px)!important}
+html body.chapter-normalized .hero .roman-banner{height:175px!important}
+/* A real dictionary, with brief definitions and alphabetical ordering. */
+html body.chapter-normalized #glossario .portal-dictionary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px auto}
+html body.chapter-normalized #glossario .portal-dictionary-card{display:block!important;min-height:0!important;padding:15px 18px!important;margin:0!important;border:1px solid #dbc4c7!important;border-left:4px solid #a51e26!important;border-radius:9px!important;background:#fff!important}
+html body.chapter-normalized #glossario .portal-dictionary-card h3{font-size:19px!important;line-height:1.2!important;margin:0 0 7px!important;color:#861b23!important}
+html body.chapter-normalized #glossario .portal-dictionary-card p{font-size:15px!important;line-height:1.45!important;margin:0!important;color:#292325!important}
+@media(max-width:600px){html body.chapter-normalized #glossario .portal-dictionary{grid-template-columns:1fr}}

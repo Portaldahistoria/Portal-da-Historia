@@ -1420,6 +1420,8 @@
   }
   function installChapter(d,year,id){const explorar=d.getElementById('explorar');if(!explorar)return [];
     unifyChapterDesign(d,year,id);
+    const terms=window.PORTAL_GLOSSARIES?.[slug(year,id)],gloss=d.getElementById('glossario');
+    if(terms&&gloss){const grid=node(d,'div','portal-dictionary');for(const [term,definition] of [...terms].sort((a,b)=>a[0].localeCompare(b[0],'pt-BR'))){const card=node(d,'article','card portal-dictionary-card');card.append(node(d,'h3','',term),node(d,'p','',definition));grid.append(card)}const head=node(d,'div','sectionhead');head.append(node(d,'h2','','Glossário'),node(d,'p','','Consulte os principais termos e conceitos históricos do capítulo.'));gloss.replaceChildren(head,grid)}
     // Keep the original daily-life material accessible from Explorar without
     // introducing a different sidebar order in each chapter.
     const life=d.getElementById('cotidiano')||d.getElementById('vida');
