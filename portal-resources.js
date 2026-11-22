@@ -1385,9 +1385,27 @@
   function unifyChapterDesign(d,year,id){
     d.body.classList.add('chapter-normalized');
     const hero=d.querySelector('.hero'),title=hero?.querySelector('h1');
-    if(hero&&title&&!hero.querySelector('.roman-banner-label')){
-      const picture=hero.querySelector('.portal-hero-figure img,.medieval-banner,.hero-banner img,.hero img');
-      if(picture){const visual=node(d,'div','chapter-cover-visual');picture.before(visual);visual.append(picture,node(d,'span','roman-banner-label',title.textContent.trim()));}
+    if(hero&&title&&!hero.querySelector('.roman-banner')){
+      const picture=hero.querySelector('.portal-hero-figure img,.medieval-banner,.hero-banner img,img');
+      if(picture){
+        const copy=node(d,'div','portal-hero-copy'),grid=node(d,'div','hero-grid chapter-hero-grid'),visual=node(d,'div','roman-banner chapter-cover-visual');
+        const kicker=hero.querySelector('.eyebrow'),lead=hero.querySelector('p'),caption=hero.querySelector('figcaption');
+        if(kicker)copy.append(kicker);copy.append(title);if(lead)copy.append(lead);
+        visual.append(picture,node(d,'span','roman-banner-label',title.textContent.trim()));
+        const media=node(d,'div','chapter-hero-media');media.append(visual);if(caption)media.append(caption);
+        grid.append(copy,media);hero.replaceChildren(grid);hero.classList.remove('portal-unified-hero');hero.classList.add('chapter-cover');
+      }
+    }
+    const map=d.getElementById('mapa');
+    if(map){
+      const adapt=()=>{
+        for(const b of map.querySelectorAll('.mental-branch')){const title=b.querySelector('strong');if(title)b.title=title.textContent.trim();}
+        const radial=map.querySelector('.roman-radial');if(!radial)return;
+        const nodes=[...radial.querySelectorAll('.radial-node')],paths=[...radial.querySelectorAll('svg path')];
+        const spots=({1:[[50,15]],2:[[17,50],[83,50]],3:[[50,15],[80,82],[20,82]],4:[[18,18],[82,18],[82,82],[18,82]],5:[[50,12],[82,32],[74,82],[26,82],[18,32]],6:[[18,15],[50,15],[82,15],[82,85],[50,85],[18,85]]})[nodes.length];
+        if(spots)nodes.forEach((b,i)=>{const [x,y]=spots[i];b.style.left=x+'%';b.style.top=y+'%';if(paths[i])paths[i].setAttribute('d','M50 50 Q'+(50+(x-50)*.4)+' '+(50+(y-50)*.08)+' '+x+' '+y);const title=b.querySelector('.node-title');if(title)b.title=title.textContent.trim();});
+      };
+      adapt();new d.defaultView.MutationObserver(adapt).observe(map,{childList:true,subtree:true});
     }
     const timeline=d.querySelector('#tempo .timeline,#linha .timeline');
     if(timeline){timeline.classList.add('portal-compact-timeline');
