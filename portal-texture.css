@@ -68,7 +68,7 @@ html body.portal-chapter #explorar .portal-station,html body #explorar:not(.stat
 html body.portal-chapter #explorar .portal-station:is(:hover,[aria-expanded="true"]),html body #explorar:not(.station-open) .topics>button.topic:is(:hover,.is-current),html body #mapa .mental-branch:is(:hover,.selected,.active){background-color:#e3e3e3!important}
 /* Keep the historic mosaic continuous on every red and white page surface. */
 :root{--history-texture-light:url("historical-texture-white.svg?v=16");--history-texture-dark:url("historical-texture-red.svg?v=16");--neutral-card:#ffffff;--neutral-active:#e9e9e9}
-html body header.top,html body .hero,html body .roma-hero,html body .reading-hero,html body .about,html body>footer{background-image:var(--history-texture-light)!important;background-size:126px 126px!important;background-repeat:repeat!important}
+html body header.top,html body .hero,html body .roma-hero,html body .reading-hero,html body .about,html body:has(> #home)>footer{background-image:var(--history-texture-light)!important;background-size:126px 126px!important;background-repeat:repeat!important}
 html body.portal-chapter .hero,html body.medieval-standard .hero,html body .shell>.hero{background-image:var(--history-texture-dark)!important}
 html body .local-roma .roma-content-layout,html body .local-roma .chapter-menu,html body .local-roma .embedded-material,html body .acervo-layout,html body .library,html body .year-drawer,html body .shell,html body .panel{background-image:var(--history-texture-dark)!important}
 /* Neutral surface, including summaries and selected cards; reserve red for accents. */
@@ -210,3 +210,13 @@ html body.chapter-normalized .hero .eyebrow{margin:0 0 4px!important;font-size:1
 html body.chapter-normalized .hero p{margin:4px 0!important;line-height:1.35!important;font-size:16px!important}
 html body.chapter-normalized .hero .roman-banner{height:155px!important}
 @media(max-width:740px){html body.chapter-normalized .hero{width:calc(100% - 20px)!important}html body.chapter-normalized .hero>.hero-grid{grid-template-columns:1fr!important;padding:14px!important}}
+/* Compact, full-width footer: no separate oversized About section in the acervo. */
+html body:has(> #home)>footer{display:flex!important;flex-wrap:wrap!important;align-items:center!important;justify-content:space-between!important;gap:8px 20px!important;width:100%!important;margin:0!important;padding:12px 3vw!important;background-color:#781b22!important;box-sizing:border-box!important}
+html body:has(> #home)>footer #sobre{display:flex!important;flex:1 1 100%;align-items:center!important;justify-content:flex-start!important;gap:8px 18px!important;flex-wrap:wrap!important;width:100%!important;margin:0!important;padding:0 0 9px!important;background:transparent!important;border-bottom:1px solid #ffffff30!important;min-height:0!important}
+html body:has(> #home)>footer #sobre>div{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+html body:has(> #home)>footer #sobre .kicker{font-size:11px!important;letter-spacing:1px!important;margin:0!important}
+html body:has(> #home)>footer #sobre h2{font-size:16px!important;line-height:1.2!important;margin:0!important}
+html body:has(> #home)>footer #sobre p{font-size:13px!important;line-height:1.35!important;max-width:none!important;margin:0!important;flex:1 1 300px}
+html body:has(> #home)>footer #sobre .button{padding:5px 9px!important;font-size:11px!important;line-height:1.25!important;min-height:0!important;margin:0!important}
+html body:has(> #home)>footer>span{font-size:11px!important;line-height:1.3!important}
+@media(max-width:600px){html body:has(> #home)>footer{padding:10px 4vw!important}html body:has(> #home)>footer #sobre{gap:5px 10px!important}html body:has(> #home)>footer #sobre p{flex-basis:100%}}
