@@ -23,3 +23,19 @@ html body.portal-chapter .panel>.sectionhead h2,html body.portal-chapter .panel>
 html body.portal-chapter #explorar .portal-station:not([aria-expanded="true"]),html body #explorar:not(.station-open) .topics>button.topic:not(.is-current),html body.medieval-standard #cotidiano .life-card,html body.medieval-standard #glossario .word-card,html body.portal-chapter #glossario .cards>*,html body.portal-chapter #cotidiano .cards>*,html body :is(#vida,#glossario) .inter-card{background-color:#f8f4ec!important}
 html body.portal-chapter #mapa :is(.branch,.mind-branch,.mind-card,.mental-branch):not(.selected):not(.active),html body.medieval-standard #mapa :is(.mental-branch,.mind-node,.stem):not(.selected):not(.active),html body #mapa .mental-branch:not(.selected):not(.active){background-color:#f8f4ec!important}
 @media(min-width:901px){.chapter-menu .pwa-chapter-actions{position:sticky;top:0;z-index:1}.chapter-menu .chapter-options{margin-top:10px}}
+/* Shared material lists for school years and chapter tabs. */
+#cards.portal-resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;grid-auto-flow:row;align-items:start;gap:14px}
+.portal-resource-card{background:#f8f4ec;border:1px solid #e0d4d6;border-top:4px solid #b52b33;border-radius:12px;padding:20px;min-width:0;color:#292325;box-shadow:0 3px 10px #321d220a}
+.portal-resource-card h3{font-size:clamp(17px,2vw,22px);margin:7px 0 14px;line-height:1.25;color:#292325}
+.portal-resource-card .resource-label{font:700 11px/1.4 Arial,sans-serif;color:#861b23;letter-spacing:1px}
+.portal-resource-link{display:flex!important;flex-direction:column;align-items:flex-start;gap:4px;padding:11px 12px;border:1px solid #e0d4d6;border-radius:8px;margin:7px 0;background:#fff;color:#861b23!important;text-decoration:none!important;line-height:1.4;overflow-wrap:anywhere}
+.portal-resource-link:hover,.portal-resource-link:focus-visible{border-color:#861b23;background:#fff8f8}
+.portal-resource-link strong{font-size:15px}.portal-resource-link small{font-size:13px;color:#62565a}
+.portal-resource-card .resource-empty{font-size:14px;line-height:1.5;color:#62565a;margin:0}
+.portal-resource-list{display:grid;gap:16px;width:min(100%,900px);margin:20px auto}
+.portal-preview-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.portal-preview-button{background:#861b23;color:#fff;border:1px solid #861b23;border-radius:7px;padding:10px 14px;font-weight:700;cursor:pointer}
+.portal-slide-preview{background:#fff;padding:16px;border:1px solid #e0d4d6;border-radius:12px}
+.portal-slide-preview iframe{display:block;width:100%;height:clamp(360px,60vh,700px);border:0;background:#f8f4ec}
+.portal-slide-preview[hidden]{display:none!important}
+@media(max-width:700px){#cards.portal-resource-grid{grid-template-columns:1fr}.portal-resource-card{padding:16px}.portal-slide-preview iframe{height:400px}}
