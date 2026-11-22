@@ -258,3 +258,31 @@ html body.chapter-normalized .portal-atlas-tile{position:absolute;width:256px!im
 html body.chapter-normalized .portal-atlas-marker{position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);background:#861b23;color:#fff;padding:7px 10px;border:2px solid white;border-radius:7px;box-shadow:0 2px 8px #0004;font-size:13px;font-weight:bold;white-space:nowrap}
 html body.chapter-normalized .portal-atlas-marker:after{content:'';position:absolute;left:50%;top:100%;transform:translateX(-50%);border:7px solid transparent;border-top-color:#861b23}
 html body.chapter-normalized .portal-atlas-credit{display:block;text-align:right;font-size:11px;color:#861b23;text-decoration:underline}
+
+/* Editorial refinements: preserve the landing mosaic; prioritize chapter reading. */
+:root{--sidebar-width:270px}
+html body header.top nav a,html body header.top nav button{font-size:14px!important}
+html body header.top nav .pwa-state{font-size:12px!important}
+html body .portal-home-overview[hidden]{display:none!important}
+html body .portal-home-overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:28px 0 14px;max-width:1320px}
+html body .portal-home-feature{display:flex;gap:15px;align-items:flex-start;padding:21px 18px;margin:0;background:#fff;border:1px solid #ded4d6;border-top:3px solid #a51e26;border-radius:9px;box-shadow:0 3px 10px #321d2208;min-width:0}
+html body .portal-feature-icon{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;background:#861b23;color:#fff;border-radius:8px}
+html body .portal-feature-icon svg{width:24px;height:24px}
+html body .portal-home-feature h3{margin:1px 0 7px!important;color:#292325;font:700 17px/1.25 Arial,sans-serif}
+html body .portal-home-feature p{margin:0!important;color:#51494b;font:400 14px/1.45 Arial,sans-serif}
+html body .library.portal-landing .section-head h2{font-size:clamp(34px,4.25vw,62px)!important;line-height:1.06}
+html body .library.portal-landing{padding-bottom:40px!important}
+html body.chapter-normalized .hero{width:min(1320px,calc(100% - 36px))!important;max-width:1320px!important;margin:10px auto 12px!important}
+html body.chapter-normalized .hero>.hero-grid{width:100%!important;max-width:1320px!important;gap:18px!important;padding:9px 16px!important;grid-template-columns:minmax(0,1.7fr) minmax(0,.85fr)!important;align-items:center!important;min-height:0!important}
+html body.chapter-normalized .hero h1,html body.chapter-normalized .hero h1 em{font-size:clamp(38px,5.2vw,72px)!important;line-height:1.03!important;margin:3px 0 7px!important}
+html body.chapter-normalized .hero.chapter-title-long h1,html body.chapter-normalized .hero.chapter-title-long h1 em{font-size:clamp(34px,4.3vw,60px)!important}
+html body.chapter-normalized .hero.chapter-title-very-long h1,html body.chapter-normalized .hero.chapter-title-very-long h1 em{font-size:clamp(31px,3.7vw,52px)!important}
+html body.chapter-normalized .hero .roman-banner{height:142px!important;background:#f4f2f2!important;border-radius:9px!important}
+html body.chapter-normalized .hero .roman-banner img{object-fit:contain!important;object-position:center!important;transform:none!important}
+html body.chapter-normalized .hero .roman-banner-label{display:none!important}
+html body.chapter-normalized .hero .chapter-hero-media figcaption{font-size:12px!important;line-height:1.25!important;margin:4px 0 0!important}
+@media(min-width:901px){html body .acervo-layout,html body .local-roma .roma-content-layout{grid-template-columns:var(--sidebar-width) minmax(0,1fr)!important}html body.chapter-normalized main.shell,html body.chapter-normalized .shell{width:min(1320px,calc(100% - 44px))!important;max-width:1320px!important;margin-left:auto!important;margin-right:auto!important}}
+@media(min-width:621px){html body #external-reader>.roma-hero{min-height:272px!important;height:auto!important;padding-top:19px!important;padding-bottom:19px!important}html body #external-reader>.roma-hero .hero-copy h1{font-size:clamp(46px,4.6vw,74px)!important;margin-bottom:10px!important}html body #external-reader>.roma-hero .hero-copy .kicker{margin-bottom:10px!important}html body #external-reader>.roma-hero .hero-copy p{font-size:15px!important;line-height:1.45!important}html body #external-reader>.roma-hero .hero-mosaic{width:clamp(165px,18vw,230px)!important}html body #external-reader>.roma-hero .roma-grade strong{font-size:clamp(30px,3.4vw,55px)!important}html body #external-reader>.roma-hero .hero-side p{font-size:clamp(18px,1.7vw,27px)!important}}
+@media(max-width:1100px){html body .portal-home-overview{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:740px){html body.chapter-normalized .hero{width:calc(100% - 20px)!important}html body.chapter-normalized .hero>.hero-grid{grid-template-columns:1fr!important;padding:12px!important;gap:10px!important}html body.chapter-normalized .hero h1,html body.chapter-normalized .hero h1 em{font-size:clamp(32px,8vw,48px)!important}html body.chapter-normalized .hero.chapter-title-long h1,html body.chapter-normalized .hero.chapter-title-long h1 em{font-size:clamp(29px,7vw,41px)!important}html body.chapter-normalized .hero .roman-banner{height:138px!important}}
+@media(max-width:620px){html body header.top nav a,html body header.top nav button{font-size:12px!important}html body header.top nav .pwa-state{font-size:10px!important}html body #external-reader>.roma-hero{padding-top:15px!important;padding-bottom:18px!important}html body #external-reader>.roma-hero .hero-copy h1{font-size:clamp(38px,10vw,52px)!important;margin-bottom:9px!important}html body #external-reader>.roma-hero .hero-copy p{font-size:14px!important}html body #external-reader>.roma-hero .hero-mosaic{width:min(54%,180px)!important;margin-top:12px!important}html body .portal-home-overview{grid-template-columns:1fr;gap:10px;margin-top:18px}html body .portal-home-feature{padding:15px;gap:12px}}

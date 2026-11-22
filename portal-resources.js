@@ -1403,10 +1403,18 @@
         const copy=node(d,'div','portal-hero-copy'),grid=node(d,'div','hero-grid chapter-hero-grid'),visual=node(d,'div','roman-banner chapter-cover-visual');
         const kicker=hero.querySelector('.eyebrow'),lead=hero.querySelector('p'),caption=hero.querySelector('figcaption');
         if(kicker)copy.append(kicker);copy.append(title);if(lead)copy.append(lead);
-        visual.append(picture,node(d,'span','roman-banner-label',title.textContent.trim()));
+        visual.append(picture);
         const media=node(d,'div','chapter-hero-media');media.append(visual);if(caption)media.append(caption);
         grid.append(copy,media);hero.replaceChildren(grid);hero.classList.remove('portal-unified-hero');hero.classList.add('chapter-cover');
       }
+    }
+    if(hero&&title){
+      hero.querySelectorAll('.roman-banner-label').forEach(label=>label.remove());
+      const length=title.textContent.trim().length;
+      hero.classList.toggle('chapter-title-long',length>38);
+      hero.classList.toggle('chapter-title-very-long',length>62);
+      const photo=hero.querySelector('.roman-banner img');
+      if(photo){const fit=()=>{if(photo.naturalWidth&&photo.naturalHeight)photo.classList.toggle('chapter-cover-portrait',photo.naturalWidth/photo.naturalHeight<1.4)};photo.addEventListener('load',fit);fit()}
     }
     const map=d.getElementById('mapa');
     if(map){
