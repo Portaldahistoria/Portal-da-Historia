@@ -1,5 +1,5 @@
 /* Portal da História — offline application shell. */
-const VERSION = 'portal-historia-pwa-v49';
+const VERSION = 'portal-historia-pwa-v50';
 const CORE = VERSION + '-core';
 const MEDIA = 'portal-historia-pwa-v1-media';
 const BASE = new URL('./', self.location.href);
@@ -11,7 +11,7 @@ const chapters = [
 const files = [
   './','index.html','og-image.png','manifest.webmanifest','app-icon-192.png','app-icon-512.png','aplicativo.html','aplicativo.js',
   'pwa.js','pwa.css','style.css','portal.css','refinement.css','fullwidth.css',
-  'chronology.css','chapters.js','grades.js','app.js','portal.js','hero-grain.svg',
+  'chronology.css','chapter-index.js','grades.js','app.js','portal.js','hero-grain.svg',
   'historical-mosaic.svg','historical-texture-white.svg','historical-texture-red.svg','portal-mark.svg','portal-texture.css','portal-history-data.js','portal-glossary.js','portal-resources.js','enem-original.js','roma-imperial.html','chapter-em.html','chapter-em.js',
   'fonts/Anton-Regular.woff2','fonts/OFL-Anton.txt','chapter-standard.css','chapter-standard.js','chapter-medieval.css',
   'chapter-medieval.js','chapter-assessment.js','chapter-maps.js',
