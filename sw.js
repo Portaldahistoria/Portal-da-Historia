@@ -1,5 +1,5 @@
 /* Portal da História — offline application shell. */
-const VERSION = 'portal-historia-pwa-v50';
+const VERSION = 'portal-historia-pwa-v51';
 const CORE = VERSION + '-core';
 const MEDIA = 'portal-historia-pwa-v1-media';
 const BASE = new URL('./', self.location.href);
@@ -15,6 +15,17 @@ const files = [
   'historical-mosaic.svg','historical-texture-white.svg','historical-texture-red.svg','portal-mark.svg','portal-texture.css','portal-history-data.js','portal-glossary.js','portal-resources.js','enem-original.js','roma-imperial.html','chapter-em.html','chapter-em.js',
   'fonts/Anton-Regular.woff2','fonts/OFL-Anton.txt','chapter-standard.css','chapter-standard.js','chapter-medieval.css',
   'chapter-medieval.js','chapter-assessment.js','chapter-maps.js',
+  'img/alta-idade-media-01.svg',
+  'img/alta-idade-media-02.webp',
+  'img/alta-idade-media-03.webp',
+  'img/alta-idade-media-04.webp',
+  'img/alta-idade-media-05.webp',
+  'img/alta-idade-media-06.webp',
+  'img/alta-idade-media-07.webp',
+  'img/alta-idade-media-08.webp',
+  'img/alta-idade-media-09.webp',
+  'img/alta-idade-media-10.webp',
+  'img/alta-idade-media-11.svg',
   ...chapters.map(x=>'chapters/'+x+'.html')
 ];
 const canonical = url => new URL(url.pathname, url.origin).href;
