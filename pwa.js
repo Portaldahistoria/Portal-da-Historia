@@ -27,7 +27,7 @@
   const pill=(label,path)=>{const b=make('button');b.type='button';b.setAttribute('aria-pressed','false');b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+path+'</svg>';b.append(make('span',label));return b};
   const favorite=pill('Favoritar capítulo','<path d="M20.8 8.7c0 4.2-8.8 10-8.8 10S3.2 12.9 3.2 8.7a4.7 4.7 0 0 1 8.8-2.3 4.7 4.7 0 0 1 8.8 2.3Z"/>');
   const complete=pill('Marcar como estudado','<circle cx="12" cy="12" r="9"/><path d="m8 12 2.6 2.6 5.4-5.4"/>');
-  actions.append(favorite,complete);(document.querySelector('.chapter-menu [data-rome-tab="slides"]')||document.querySelector('.chapter-menu .drawer-heading')||header).after(actions);
+  actions.append(favorite,complete);document.querySelector('.chapter-menu')?.append(actions);
   function selected(k){return library.find(c=>c.key===k);}
   function renderActions(){
     active=selected(location.hash.slice(1));actions.hidden=!active;

@@ -20,16 +20,16 @@ header.top .year-indicator{flex-shrink:0}
 html body.portal-chapter,html body.medieval-standard,html body.portal-chapter .panel,html body.portal-chapter .hero,html body.portal-chapter .banner,html body.portal-chapter .portal-station,html body.portal-chapter .portal-expanded,html body.portal-chapter .panel :is(.card,.tile,.inter-card,.gloss-card,.lesson),html body.medieval-standard .panel,html body.medieval-standard .hero,html body.medieval-standard .life-card,html body.medieval-standard .word-card,html body #explorar .topic,html body #explorar .station-selected,html body .shell{background-image:var(--history-texture-dark)!important;background-size:126px 126px!important;background-repeat:repeat!important}
 html body.portal-chapter .panel>.sectionhead h2,html body.portal-chapter .panel>h2,html body.medieval-standard .panel>.sectionhead h2{background-image:var(--history-texture-light)!important;background-size:132px 132px!important}
 /* Soft warm cream card surfaces; preserve the red selected states. */
-html body.portal-chapter #explorar .portal-station:not([aria-expanded="true"]),html body #explorar:not(.station-open) .topics>button.topic:not(.is-current),html body.medieval-standard #cotidiano .life-card,html body.medieval-standard #glossario .word-card,html body.portal-chapter #glossario .cards>*,html body.portal-chapter #cotidiano .cards>*,html body :is(#vida,#glossario) .inter-card{background-color:#c9c5c1!important}
-html body.portal-chapter #mapa :is(.branch,.mind-branch,.mind-card,.mental-branch):not(.selected):not(.active),html body.medieval-standard #mapa :is(.mental-branch,.mind-node,.stem):not(.selected):not(.active),html body #mapa .mental-branch:not(.selected):not(.active){background-color:#c9c5c1!important}
-@media(min-width:901px){.chapter-menu .pwa-chapter-actions{position:static;margin:9px 0 12px}.chapter-menu .chapter-options{margin-top:10px}}
+html body.portal-chapter #explorar .portal-station:not([aria-expanded="true"]),html body #explorar:not(.station-open) .topics>button.topic:not(.is-current),html body.medieval-standard #cotidiano .life-card,html body.medieval-standard #glossario .word-card,html body.portal-chapter #glossario .cards>*,html body.portal-chapter #cotidiano .cards>*,html body :is(#vida,#glossario) .inter-card{background-color:#d4d4d4!important}
+html body.portal-chapter #mapa :is(.branch,.mind-branch,.mind-card,.mental-branch):not(.selected):not(.active),html body.medieval-standard #mapa :is(.mental-branch,.mind-node,.stem):not(.selected):not(.active),html body #mapa .mental-branch:not(.selected):not(.active){background-color:#d4d4d4!important}
+@media(min-width:901px){.chapter-menu .pwa-chapter-actions{position:static;margin:14px 0 12px;padding-top:14px;border-top:1px solid #d7d7d7}.chapter-menu .chapter-options{margin-top:10px}}
 .chapter-menu .chapter-options .pwa-chapter-actions button{border:1px solid #c8a1a5;border-radius:999px;background:#fff;color:#861b23;padding:8px 11px;min-height:38px;font-size:12px;line-height:1.25;letter-spacing:normal}
 .chapter-menu .chapter-options .pwa-chapter-actions button[aria-pressed=true]{background:#861b23;border-color:#861b23;color:#fff}
 .chapter-menu .chapter-options .pwa-chapter-actions button:hover{border-color:#861b23}
 html body.medieval-standard .hero .eyebrow{color:#861b23!important}
 /* Shared material lists for school years and chapter tabs. */
 #cards.portal-resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;grid-auto-flow:row;align-items:start;gap:14px}
-.portal-resource-card{background:#c9c5c1;border:1px solid #e0d4d6;border-top:4px solid #b52b33;border-radius:12px;padding:20px;min-width:0;color:#292325;box-shadow:0 3px 10px #321d220a}
+.portal-resource-card{background:#d4d4d4;border:1px solid #e0d4d6;border-top:4px solid #b52b33;border-radius:12px;padding:20px;min-width:0;color:#292325;box-shadow:0 3px 10px #321d220a}
 .portal-resource-card h3{font-size:clamp(17px,2vw,22px);margin:7px 0 14px;line-height:1.25;color:#292325}
 .portal-resource-card .resource-label{font:700 11px/1.4 Arial,sans-serif;color:#861b23;letter-spacing:1px}
 .portal-resource-link{display:flex!important;flex-direction:column;align-items:flex-start;gap:4px;padding:11px 12px;border:1px solid #e0d4d6;border-radius:8px;margin:7px 0;background:#fff;color:#861b23!important;text-decoration:none!important;line-height:1.4;overflow-wrap:anywhere}
@@ -40,7 +40,7 @@ html body.medieval-standard .hero .eyebrow{color:#861b23!important}
 .portal-preview-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
 .portal-preview-button{background:#861b23;color:#fff;border:1px solid #861b23;border-radius:7px;padding:10px 14px;font-weight:700;cursor:pointer}
 .portal-slide-preview{background:#fff;padding:16px;border:1px solid #e0d4d6;border-radius:12px}
-.portal-slide-preview iframe{display:block;width:100%;height:clamp(360px,60vh,700px);border:0;background:#c9c5c1}
+.portal-slide-preview iframe{display:block;width:100%;height:clamp(360px,60vh,700px);border:0;background:#d4d4d4}
 .portal-slide-preview[hidden]{display:none!important}
 @media(max-width:700px){#cards.portal-resource-grid{grid-template-columns:1fr}.portal-resource-card{padding:16px}.portal-slide-preview iframe{height:400px}}
 .portal-enem-launch{display:inline-flex;background:#861b23;color:#fff!important;border-radius:8px;padding:12px 18px;font-weight:700;margin-top:12px;text-decoration:none}
@@ -56,3 +56,13 @@ html body.medieval-standard .hero .eyebrow{color:#861b23!important}
 .enem-navigation button:disabled{opacity:.4;cursor:not-allowed}
 .enem-gabarito-link{display:block;margin:12px 0 0 auto;border:0;background:none;color:#861b23;font-weight:700;cursor:pointer;padding:8px}
 .enem-answer-card p{font-size:16px;line-height:1.55}
+.portal-life-entry{display:flex;justify-content:center;margin:12px 0 18px}
+.portal-slides-stack{width:100%;max-width:none;gap:20px}
+.portal-slide-preview{background:#fff;padding:18px}
+.portal-slide-preview .resource-label{display:block;color:#861b23;font-weight:700;font-size:12px}
+.portal-slide-preview h3{margin:8px 0 15px;color:#292325}
+.portal-slide-preview iframe{height:650px;max-height:none;background:#f0f0f0}
+@media(max-width:650px){.portal-slide-preview iframe{height:460px}}
+/* True neutral gray: the red texture stays in the page background, not on cards. */
+html body.portal-chapter #explorar .portal-station,html body #explorar:not(.station-open) .topics>button.topic,html body.portal-chapter #mapa :is(.branch,.mind-branch,.mind-card,.mental-branch),html body.medieval-standard #mapa :is(.mental-branch,.mind-node,.stem),html body #mapa .mental-branch,html body.portal-chapter #glossario .cards>*,html body.portal-chapter #cotidiano .cards>*,html body.medieval-standard #cotidiano .life-card,html body.medieval-standard #glossario .word-card,html body :is(#vida,#glossario) .inter-card{background-color:#d4d4d4!important;background-image:none!important}
+html body.portal-chapter #explorar .portal-station:is(:hover,[aria-expanded="true"]),html body #explorar:not(.station-open) .topics>button.topic:is(:hover,.is-current),html body #mapa .mental-branch:is(:hover,.selected,.active){background-color:#e3e3e3!important}

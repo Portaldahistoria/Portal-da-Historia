@@ -9,24 +9,24 @@ body.medieval-standard #tempo .event .date{background:#a51e26!important;color:#f
 body.medieval-standard #tempo .event-more{background:#f8e6e9!important;border-left:4px solid #b52b33!important;border-radius:8px!important}
 body.medieval-standard #tempo .event .card{border-top:0!important;border-left:4px solid #b52b33!important}
 body.medieval-standard :is(.note,.callout,.source-box,.feedback){background:#f8e6e9!important;color:#292325!important;border:1px solid #e7c5cb!important;border-left:4px solid #b52b33!important;border-radius:8px!important}
-body.medieval-standard #mapa .mind-node{background:#c9c5c1!important;border:1px solid #c8b9bc!important;border-left:4px solid #b52b33!important;border-radius:10px!important;box-shadow:0 4px 12px #321d2210!important}
+body.medieval-standard #mapa .mind-node{background:#d4d4d4!important;border:1px solid #c8b9bc!important;border-left:4px solid #b52b33!important;border-radius:10px!important;box-shadow:0 4px 12px #321d2210!important}
 body.medieval-standard #mapa .mind-node.selected,body.medieval-standard #mapa .mind-node:hover{background:#f8e6e9!important;border-color:#a51e26!important}
 body.medieval-standard #mapa .mind-node span,body.medieval-standard #mapa .mind-info p{color:#50464a!important}
 body.medieval-standard :is(.mini,.muted,.atlas-note,.atlas-fallback,.atlas-map figcaption){color:#62565a!important}
 body.medieval-standard #mapa .branch-root{background:#a51e26!important;color:white!important;border-radius:9px!important}
 body.medieval-standard #mapa .branch-stems{border-color:#b52b33!important}
-body.medieval-standard #mapa .stem{border:1px solid #d7c9cb!important;background:#c9c5c1!important;color:#292325!important;border-radius:8px!important}
+body.medieval-standard #mapa .stem{border:1px solid #d7c9cb!important;background:#d4d4d4!important;color:#292325!important;border-radius:8px!important}
 body.medieval-standard #mapa .stem:before{background:#b52b33!important}
 body.medieval-standard #mapa .stem.active{border-color:#a51e26!important;background:#f8e6e9!important}
 body.medieval-standard #mapa .stem-dot{background:#a51e26!important;color:white!important}
 body.medieval-standard #mapa .node-explanation,body.medieval-standard #mapa .connection{background:#f8e6e9!important;border-color:#e7c5cb!important;color:#292325!important;border-radius:8px!important}
-body.medieval-standard #cotidiano .life-card{background:#c9c5c1!important;border:1px solid #c8b9bc!important;border-top:4px solid #b52b33!important;border-radius:12px!important;min-height:140px!important}
+body.medieval-standard #cotidiano .life-card{background:#d4d4d4!important;border:1px solid #c8b9bc!important;border-top:4px solid #b52b33!important;border-radius:12px!important;min-height:140px!important}
 body.medieval-standard #cotidiano .life-card:hover,body.medieval-standard #glossario .word-card:hover{outline:2px solid #b52b33!important}
 body.medieval-standard .medieval-icon{display:inline-flex!important;width:34px!important;height:34px!important;background:#a51e26!important;border-radius:7px!important;align-items:center;justify-content:center;color:white!important;margin:0 0 8px!important}
 body.medieval-standard .medieval-icon svg{width:24px;height:24px;display:block}
 body.medieval-standard #cotidiano .life-card .emoji{font-size:0!important}
-body.medieval-standard #glossario .word-card{background:#c9c5c1!important;border-top:4px solid #b52b33!important}
-body.medieval-standard #atlas .atlas-hero,body.medieval-standard #atlas .atlas-map{background:#c9c5c1!important;border:1px solid #e7d7db!important;border-radius:12px!important}
+body.medieval-standard #glossario .word-card{background:#d4d4d4!important;border-top:4px solid #b52b33!important}
+body.medieval-standard #atlas .atlas-hero,body.medieval-standard #atlas .atlas-map{background:#d4d4d4!important;border:1px solid #e7d7db!important;border-radius:12px!important}
 body.medieval-standard #atlas .atlas-layout{background:white!important;border:1px solid #d7c9cb!important;box-shadow:0 4px 12px #321d2210!important;border-radius:12px!important}
 body.medieval-standard #atlas .atlas-map img{background:white!important;max-height:none!important;display:block;width:100%;height:auto}
 body.medieval-standard .atlas-interactive-viewport{width:100%;overflow:auto;max-height:520px;border-radius:8px;background:white}
@@ -46,7 +46,7 @@ body.medieval-standard #quiz .bar{background:#a51e26!important}
 body.medieval-standard #mapa .rome-mind-layout{display:grid;grid-template-columns:minmax(270px,.8fr) minmax(0,1.4fr);gap:22px;align-items:start;margin:20px auto 44px;max-width:1500px}
 body.medieval-standard #mapa .rome-mind-left{min-width:0}
 body.medieval-standard #mapa .mental-branches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-body.medieval-standard #mapa .mental-branch{display:block;text-align:left;position:relative;padding:17px 14px;min-height:113px;background:#c9c5c1!important;border:1px solid #d7c9cb!important;border-left:4px solid #b52b33!important;border-radius:10px!important;box-shadow:0 3px 10px #321d220b!important}
+body.medieval-standard #mapa .mental-branch{display:block;text-align:left;position:relative;padding:17px 14px;min-height:113px;background:#d4d4d4!important;border:1px solid #d7c9cb!important;border-left:4px solid #b52b33!important;border-radius:10px!important;box-shadow:0 3px 10px #321d220b!important}
 body.medieval-standard #mapa .mental-branch.selected,body.medieval-standard #mapa .mental-branch:hover{background:#f8e6e9!important;border-color:#a51e26!important}
 body.medieval-standard #mapa .mental-branch-icon{position:absolute;top:14px;left:12px;width:27px!important;height:27px!important;margin:0!important}
 body.medieval-standard #mapa .mental-branch-icon svg{width:22px;height:22px}
