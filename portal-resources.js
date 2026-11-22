@@ -1383,8 +1383,9 @@
       if(q.image){const img=node(d,'img','enem-facsimile');img.src=q.image;img.alt='Questão original: '+q.title;img.addEventListener('error',()=>{img.hidden=true;card.querySelector('.enem-image-warning').hidden=false},{once:true});card.append(img);const warning=node(d,'p','enem-image-warning','A imagem não carregou. Abra a questão original no link abaixo.');warning.hidden=true;card.append(warning)}
       else if(q.pdf){
         const url=q.pdf+(q.page?'#page='+q.page+'&view=FitH':'#view=FitH');
-        card.append(node(d,'p','','Questão nº '+q.number+' no caderno oficial exibido abaixo. A numeração pode variar conforme a cor do caderno.'));
-        const frame=node(d,'iframe','enem-official-paper');frame.title='Prova oficial do Inep — '+q.title;frame.src=url;frame.loading='lazy';frame.style.cssText='width:100%;height:clamp(420px,65vh,780px);border:1px solid #ddd;border-radius:12px';card.append(frame,link(d,{title:'Abrir caderno oficial do Inep',url}));
+        const compilation=q.pdf.includes('/publicacoes/');
+        card.append(node(d,'p','',compilation?'Questão nº '+q.number+' na publicação oficial do Inep. Para responder sem ver a resolução, abra a questão original no acervo vinculado.':'Questão nº '+q.number+' no caderno oficial exibido abaixo. A numeração pode variar conforme a cor do caderno.'));
+        const frame=node(d,'iframe','enem-official-paper');frame.title='Fonte oficial do Inep — '+q.title;frame.src=url;frame.loading='lazy';frame.style.cssText='width:100%;height:clamp(420px,65vh,780px);border:1px solid #ddd;border-radius:12px';card.append(frame,link(d,{title:compilation?'Abrir publicação oficial do Inep':'Abrir caderno oficial do Inep',url}));
       }
       else card.append(node(d,'p','','Consulte o enunciado e as alternativas originais no acervo vinculado.'));
       card.append(link(d,{title:'Abrir questão original completa',url:q.url}),link(d,{title:'Consultar provas oficiais do Inep',url:official}));

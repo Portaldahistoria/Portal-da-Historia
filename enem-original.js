@@ -200,7 +200,7 @@ window.PORTAL_ENEM_ORIGINAL={
       "page": 14
     },
     {
-      "answer": null,
+      "answer": "D",
       "image": null,
       "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2006/2006_amarela.pdf",
       "number": 13,
@@ -214,7 +214,10 @@ window.PORTAL_ENEM_ORIGINAL={
     },
     {
       "answer": "C",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/publicacoes/diversas/temas_da_educacao_basica/filosofia_no_enem.pdf",
+      "number": 57,
+      "page": null
     },
     {
       "answer": "C",
@@ -236,7 +239,10 @@ window.PORTAL_ENEM_ORIGINAL={
     },
     {
       "answer": "C",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2012/caderno_enem2012_dom_azul.pdf",
+      "number": 116,
+      "page": 12
     }
   ],
   "1-6": [
