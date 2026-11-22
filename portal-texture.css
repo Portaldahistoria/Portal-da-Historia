@@ -220,3 +220,16 @@ html body:has(> #home)>footer #sobre p{font-size:13px!important;line-height:1.35
 html body:has(> #home)>footer #sobre .button{padding:5px 9px!important;font-size:11px!important;line-height:1.25!important;min-height:0!important;margin:0!important}
 html body:has(> #home)>footer>span{font-size:11px!important;line-height:1.3!important}
 @media(max-width:600px){html body:has(> #home)>footer{padding:10px 4vw!important}html body:has(> #home)>footer #sobre{gap:5px 10px!important}html body:has(> #home)>footer #sobre p{flex-basis:100%}}
+/* The footer contains only the identity; About is opened on demand. */
+html body:has(> #home)>footer{min-height:64px!important;padding:19px 3vw!important;background-color:#861b23!important;color:#fff!important;border-top:1px solid #741720}
+html body:has(> #home)>footer>span{color:#fff!important;font-size:13px!important;font-weight:700;line-height:1.4!important;letter-spacing:.8px}
+html body .portal-about-dialog{width:min(680px,calc(100% - 32px));max-height:85dvh;box-sizing:border-box;padding:28px;border:1px solid #861b23;border-radius:12px;background:#fff;color:#292325;box-shadow:0 12px 60px #0005}
+html body .portal-about-dialog::backdrop{background:#1b0d0790}
+html body .portal-about-dialog #sobre{display:block!important;width:100%;margin:0!important;padding:10px 0 0!important;background:transparent!important;color:#292325!important}
+html body .portal-about-dialog #sobre .kicker{color:#861b23!important}
+html body .portal-about-dialog #sobre .kicker i{background:#861b23!important}
+html body .portal-about-dialog #sobre h2{font-size:clamp(26px,4vw,38px)!important;color:#861b23!important;line-height:1.15;margin:10px 0 16px}
+html body .portal-about-dialog #sobre p{font-size:16px;line-height:1.6;max-width:none;margin:0 0 20px}
+html body .portal-about-dialog .about-close,html body .portal-about-dialog #sobre .button{border:1px solid #861b23;background:#861b23;color:white;padding:9px 14px;border-radius:6px;font:700 14px/1.3 Arial,sans-serif;cursor:pointer;text-decoration:none}
+html body .portal-about-dialog .about-close{float:right;margin:0 0 10px 12px}
+@media(max-width:600px){html body:has(> #home)>footer{padding:16px 4vw!important;gap:5px!important}html body:has(> #home)>footer>span{font-size:12px!important}}
