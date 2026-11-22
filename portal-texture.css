@@ -1,5 +1,5 @@
 /* The historical motifs become a faint, repeating paper texture. */
-:root{--portal-header-height:76px;--history-texture-light:url("historical-texture-white.svg?v=31");--history-texture-dark:url("historical-texture-red.svg?v=31")}
+:root{--portal-header-height:76px;--history-texture-light:url("historical-texture-white.svg?v=31");--history-texture-dark:url("historical-texture-red.svg?v=33")}
 html{scroll-padding-top:calc(var(--portal-header-height) + 12px)}
 body,#home,.acervo-layout,.library,.year-drawer,.local-roma .roma-content-layout,.local-roma .chapter-menu,.local-roma .embedded-material,.acervo-layout .card,.pwa-dialog,.android-card{background-image:var(--history-texture-dark)!important;background-size:84px 84px!important;background-repeat:repeat!important}
 header.top,#home>.hero,#external-reader>.hero,.reading-hero,.about,body>footer{background-image:var(--history-texture-light)!important;background-size:84px 84px!important;background-repeat:repeat!important}
@@ -67,7 +67,7 @@ html body.medieval-standard .hero .eyebrow{color:#861b23!important}
 html body.portal-chapter #explorar .portal-station,html body #explorar:not(.station-open) .topics>button.topic,html body.portal-chapter #mapa :is(.branch,.mind-branch,.mind-card,.mental-branch),html body.medieval-standard #mapa :is(.mental-branch,.mind-node,.stem),html body #mapa .mental-branch,html body.portal-chapter #glossario .cards>*,html body.portal-chapter #cotidiano .cards>*,html body.medieval-standard #cotidiano .life-card,html body.medieval-standard #glossario .word-card,html body :is(#vida,#glossario) .inter-card{background-color:#ffffff!important;background-image:none!important}
 html body.portal-chapter #explorar .portal-station:is(:hover,[aria-expanded="true"]),html body #explorar:not(.station-open) .topics>button.topic:is(:hover,.is-current),html body #mapa .mental-branch:is(:hover,.selected,.active){background-color:#e3e3e3!important}
 /* Keep the historic mosaic continuous on every red and white page surface. */
-:root{--history-texture-light:url("historical-texture-white.svg?v=31");--history-texture-dark:url("historical-texture-red.svg?v=31");--neutral-card:#ffffff;--neutral-active:#e9e9e9}
+:root{--history-texture-light:url("historical-texture-white.svg?v=31");--history-texture-dark:url("historical-texture-red.svg?v=33");--neutral-card:#ffffff;--neutral-active:#e9e9e9}
 html body header.top,html body .hero,html body .roma-hero,html body .reading-hero,html body .about,html body:has(> #home)>footer{background-image:var(--history-texture-light)!important;background-size:84px 84px!important;background-repeat:repeat!important}
 html body.portal-chapter .hero,html body.medieval-standard .hero,html body .shell>.hero{background-image:var(--history-texture-dark)!important}
 html body .local-roma .roma-content-layout,html body .local-roma .chapter-menu,html body .local-roma .embedded-material,html body .acervo-layout,html body .library,html body .year-drawer,html body .shell,html body .panel{background-image:var(--history-texture-dark)!important}
