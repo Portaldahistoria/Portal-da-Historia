@@ -29,11 +29,17 @@ window.PORTAL_ENEM_ORIGINAL={
   "1-2": [
     {
       "answer": "E",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/enem/provas_e_gabaritos/2020_PV_impresso_D1_CD1.pdf",
+      "number": 87,
+      "page": 30
     },
     {
       "answer": "E",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/enem/provas_e_gabaritos/2020_PV_impresso_D1_CD1.pdf",
+      "number": 70,
+      "page": 26
     },
     {
       "answer": "A",
@@ -41,11 +47,17 @@ window.PORTAL_ENEM_ORIGINAL={
     },
     {
       "answer": "E",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2017/cad_1_ampliada_azul_5112017.pdf",
+      "number": 79,
+      "page": null
     },
     {
       "answer": "C",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2015/CAD_ENEM%202015_DIA%201_01_AZUL.pdf",
+      "number": 28,
+      "page": null
     },
     {
       "answer": "A",
@@ -57,7 +69,10 @@ window.PORTAL_ENEM_ORIGINAL={
     },
     {
       "answer": "B",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D1_CD1.pdf",
+      "number": 87,
+      "page": 31
     },
     {
       "answer": "D",
@@ -69,11 +84,17 @@ window.PORTAL_ENEM_ORIGINAL={
     },
     {
       "answer": "B",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2013/dia1_caderno1_azul.pdf",
+      "number": 26,
+      "page": null
     },
     {
       "answer": "E",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2012/caderno_enem2012_sab_azul.pdf",
+      "number": 16,
+      "page": null
     },
     {
       "answer": "E",
@@ -91,7 +112,10 @@ window.PORTAL_ENEM_ORIGINAL={
     },
     {
       "answer": "E",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D1_CD1.pdf",
+      "number": 53,
+      "page": null
     },
     {
       "answer": "B",
@@ -99,19 +123,31 @@ window.PORTAL_ENEM_ORIGINAL={
     },
     {
       "answer": "E",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/enem/provas_e_gabaritos/2021_PV_digital_D1_CD1_ingles.pdf",
+      "number": 88,
+      "page": null
     },
     {
       "answer": "C",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2014/2014_PV_impresso_D1_CD1.pdf",
+      "number": 2,
+      "page": 2
     },
     {
       "answer": "B",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2013/dia1_caderno1_azul.pdf",
+      "number": 23,
+      "page": null
     },
     {
       "answer": "E",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/publicacoes/diversas/temas_da_educacao_basica/filosofia_no_enem.pdf",
+      "number": 18,
+      "page": 51
     },
     {
       "answer": "A",
@@ -129,11 +165,17 @@ window.PORTAL_ENEM_ORIGINAL={
     },
     {
       "answer": "C",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/enem/provas_e_gabaritos/2025_PV_impresso_D1_CD1.pdf",
+      "number": 49,
+      "page": 23
     },
     {
       "answer": "E",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/enem/provas_e_gabaritos/2021_PV_impresso_D1_CD2_superampliada.pdf",
+      "number": 58,
+      "page": null
     },
     {
       "answer": "A",
@@ -145,15 +187,24 @@ window.PORTAL_ENEM_ORIGINAL={
     },
     {
       "answer": "B",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2015/2015_PV_impresso_D1_CD3.pdf",
+      "number": 12,
+      "page": 5
     },
     {
       "answer": "A",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2008/2008_amarela.pdf",
+      "number": 47,
+      "page": 14
     },
     {
       "answer": null,
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2006/2006_amarela.pdf",
+      "number": 13,
+      "page": 5
     }
   ],
   "1-5": [
@@ -167,11 +218,17 @@ window.PORTAL_ENEM_ORIGINAL={
     },
     {
       "answer": "C",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/enem/provas_e_gabaritos/2020_PV_digital_D1_CD3_ingles.pdf",
+      "number": 90,
+      "page": null
     },
     {
       "answer": "B",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/enem/provas_e_gabaritos/2020_PV_impresso_D1_CD1.pdf",
+      "number": 72,
+      "page": 27
     },
     {
       "answer": "B",
@@ -185,7 +242,10 @@ window.PORTAL_ENEM_ORIGINAL={
   "1-6": [
     {
       "answer": "D",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/enem/provas_e_gabaritos/2020_PV_impresso_D1_CD1.pdf",
+      "number": 52,
+      "page": 22
     },
     {
       "answer": "B",
@@ -193,7 +253,10 @@ window.PORTAL_ENEM_ORIGINAL={
     },
     {
       "answer": "D",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/enem/provas_e_gabaritos/2022_PV_digital_D1_CD3_ingles.pdf",
+      "number": 54,
+      "page": null
     },
     {
       "answer": "C",
@@ -207,15 +270,24 @@ window.PORTAL_ENEM_ORIGINAL={
   "1-7": [
     {
       "answer": "B",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2019/2019_PV_impresso_D1_CD2.pdf",
+      "number": 58,
+      "page": null
     },
     {
       "answer": "A",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2012/caderno_enem2012_sab_azul.pdf",
+      "number": 1,
+      "page": 1
     },
     {
       "answer": "E",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/enem/provas_e_gabaritos/2024_PV_impresso_D1_CD1.pdf",
+      "number": 51,
+      "page": null
     },
     {
       "answer": "A",
@@ -229,7 +301,10 @@ window.PORTAL_ENEM_ORIGINAL={
   "1-8": [
     {
       "answer": "D",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/enem/provas_e_gabaritos/2023_PV_impresso_D1_CD1.pdf",
+      "number": 74,
+      "page": 27
     },
     {
       "answer": "E",
@@ -255,11 +330,17 @@ window.PORTAL_ENEM_ORIGINAL={
     },
     {
       "answer": "C",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2018/2018_PV_impresso_D1_CD1.pdf",
+      "number": 54,
+      "page": null
     },
     {
       "answer": "A",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2011/01_AZUL_GAB.pdf",
+      "number": 31,
+      "page": 10
     },
     {
       "answer": "D",
@@ -283,17 +364,26 @@ window.PORTAL_ENEM_ORIGINAL={
     },
     {
       "answer": "E",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2012/caderno_enem2012_sab_azul.pdf",
+      "number": 40,
+      "page": null
     }
   ],
   "1-10": [
     {
       "answer": "E",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2010/AZUL_Sabado_GAB.pdf",
+      "number": 19,
+      "page": null
     },
     {
       "answer": "B",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2019/caderno_de_questoes_1_dia_caderno_2_amarelo_superampliada_aplicacao_regular.pdf",
+      "number": 73,
+      "page": 69
     },
     {
       "answer": "B",
@@ -301,7 +391,10 @@ window.PORTAL_ENEM_ORIGINAL={
     },
     {
       "answer": "D",
-      "image": null
+      "image": null,
+      "pdf": "https://download.inep.gov.br/educacao_basica/enem/provas/2009/dia1_caderno2_amarelo.pdf",
+      "number": 84,
+      "page": 27
     },
     {
       "answer": "A",

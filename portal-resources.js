@@ -1381,6 +1381,11 @@
     function render(){const q=questions[index];card.replaceChildren();if(!q){card.append(node(d,'p','','Questões em curadoria.'));return}
       card.append(node(d,'small','resource-label',q.title+' · '+(index+1)+' de '+questions.length),node(d,'h3','',q.description));
       if(q.image){const img=node(d,'img','enem-facsimile');img.src=q.image;img.alt='Questão original: '+q.title;img.addEventListener('error',()=>{img.hidden=true;card.querySelector('.enem-image-warning').hidden=false},{once:true});card.append(img);const warning=node(d,'p','enem-image-warning','A imagem não carregou. Abra a questão original no link abaixo.');warning.hidden=true;card.append(warning)}
+      else if(q.pdf){
+        const url=q.pdf+(q.page?'#page='+q.page+'&view=FitH':'#view=FitH');
+        card.append(node(d,'p','','Questão nº '+q.number+' no caderno oficial exibido abaixo. A numeração pode variar conforme a cor do caderno.'));
+        const frame=node(d,'iframe','enem-official-paper');frame.title='Prova oficial do Inep — '+q.title;frame.src=url;frame.loading='lazy';frame.style.cssText='width:100%;height:clamp(420px,65vh,780px);border:1px solid #ddd;border-radius:12px';card.append(frame,link(d,{title:'Abrir caderno oficial do Inep',url}));
+      }
       else card.append(node(d,'p','','Consulte o enunciado e as alternativas originais no acervo vinculado.'));
       card.append(link(d,{title:'Abrir questão original completa',url:q.url}),link(d,{title:'Consultar provas oficiais do Inep',url:official}));
       const opts=node(d,'div','enem-options enem-letter-options');for(const letter of 'ABCDE'){const b=btn(letter,()=>{answers[index]=letter;try{localStorage.setItem('ph-enem-original-v1-'+id,JSON.stringify(answers))}catch{}render();renderAnswers()},'enem-option');b.setAttribute('aria-pressed',String(answers[index]===letter));opts.append(b)}card.append(opts);
@@ -1440,10 +1445,8 @@
     }
     const terms=window.PORTAL_GLOSSARIES?.[slug(year,id)],gloss=d.getElementById('glossario');
     if(terms&&gloss){const grid=node(d,'div','portal-dictionary');for(const [term,definition] of [...terms].sort((a,b)=>a[0].localeCompare(b[0],'pt-BR'))){const card=node(d,'article','card portal-dictionary-card');card.append(node(d,'h3','',term),node(d,'p','',definition));grid.append(card)}const head=node(d,'div','sectionhead');head.append(node(d,'h2','','Glossário'),node(d,'p','','Consulte os principais termos e conceitos históricos do capítulo.'));gloss.replaceChildren(head,grid)}
-    // Keep the original daily-life material accessible from Explorar without
-    // introducing a different sidebar order in each chapter.
-    const life=d.getElementById('cotidiano')||d.getElementById('vida');
-    if(life&&!explorar.querySelector('.portal-life-link')){const button=node(d,'button','portal-preview-button portal-life-link',year===6&&id===10?'Vida romana':year===6?'Vida medieval':'Sociedade e cotidiano');button.type='button';const show=key=>{if(d.defaultView.portalChapter)d.defaultView.portalChapter.show(key);else d.defaultView.selectTab?.(key,true);try{window.portalRevealChapter(d.getElementById(key))}catch{}};button.onclick=()=>show(life.id);const block=node(d,'div','portal-life-entry');block.append(button);(explorar.querySelector('.sectionhead')||explorar.firstElementChild)?.after(block);const back=node(d,'button','portal-preview-button','Voltar a Explorar');back.type='button';back.onclick=()=>show('explorar');const backBlock=node(d,'div','portal-life-entry');backBlock.append(back);life.append(backBlock)}
+    // Daily-life content is accessed exclusively through the chapter sidebar.
+    d.querySelectorAll('.portal-life-entry,.portal-life-link').forEach(element=>element.remove());
     const result=[];const create=(key,label,content)=>{if(d.getElementById(key))return;const panel=node(d,'section','panel portal-resource-panel');panel.id=key;const head=node(d,'div','sectionhead');head.append(node(d,'h2','',label));panel.append(head,content);explorar.parentElement.append(panel);result.push({id:key,label})};
     const entry=slideData[slug(year,id)]||{slides:[]};if(!d.getElementById('slides')){const grid=node(d,'div','portal-resource-list portal-slides-stack');if(!entry.slides.length)grid.append(group(d,'Apresentações do capítulo',[],'MATERIAL DE AULA',entry.restricted?'Os slides ainda não estão disponíveis para acesso.':undefined));
       if(entry.slides.length){entry.slides.forEach((s,i)=>{const id=s.url.match(/\/file\/d\/([^/]+)/)?.[1];const preview=node(d,'div','portal-slide-preview');preview.append(node(d,'small','resource-label','SLIDE '+(i+1)+' DE '+entry.slides.length),node(d,'h3','',s.title));if(id){const frame=node(d,'iframe');frame.title=s.title;frame.src='https://drive.google.com/file/d/'+id+'/preview';frame.loading='lazy';frame.allowFullscreen=true;preview.append(frame)}preview.append(link(d,{title:'Abrir no Drive se a prévia não carregar',url:s.url}));grid.append(preview)})}
