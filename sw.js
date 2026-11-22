@@ -1,5 +1,5 @@
 /* Portal da História — offline application shell. */
-const VERSION = 'portal-historia-pwa-v36';
+const VERSION = 'portal-historia-pwa-v37';
 const CORE = VERSION + '-core';
 const MEDIA = 'portal-historia-pwa-v1-media';
 const BASE = new URL('./', self.location.href);

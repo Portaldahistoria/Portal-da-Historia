@@ -373,3 +373,9 @@ html body #external-reader>.roma-hero .hero-copy h1{font-size:clamp(29px,7.5vw,4
 html body #external-reader>.roma-hero .hero-copy p{font-size:13px!important;line-height:1.4!important}
 html body #external-reader>.roma-hero .hero-mosaic{width:clamp(95px,22vw,155px)!important;margin-top:10px!important}
 }
+
+/* v37: editorial introduction and predictable anchor offsets */
+html body .portal-home-overview.portal-editorial{padding:24px 28px;min-height:0;}
+html body .portal-editorial-copy p{max-width:620px;}
+html body #capitulos,html body .embedded-material{scroll-margin-top:calc(var(--portal-header-height,76px) + 12px);}
+@media(max-width:900px){html body .portal-home-overview.portal-editorial{padding:18px;}}
