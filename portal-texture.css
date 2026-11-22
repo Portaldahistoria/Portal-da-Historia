@@ -254,7 +254,7 @@ html body.chapter-normalized .portal-atlas-detail p{margin:5px 0}
 html body.chapter-normalized .portal-atlas-frame{display:block;width:100%;height:360px;max-width:100%;border:1px solid #e1d4d6;border-radius:8px;margin:12px 0}
 html body.chapter-normalized .portal-atlas-raster{position:relative;overflow:hidden;max-width:510px;width:100%;height:340px;margin:12px auto 5px;border:1px solid #e1d4d6;border-radius:8px;background:#e1eced}
 html body.chapter-normalized .portal-atlas-tiles{position:absolute;top:50%;left:50%;width:768px;height:768px}
-html body.chapter-normalized .portal-atlas-tile{position:absolute;width:256px!important;height:256px!important;min-width:256px!important;max-width:none!important;border:0!important;border-radius:0!important;object-fit:fill!important}
+html body.chapter-normalized .portal-atlas-tile{filter:saturate(.55);position:absolute;width:256px!important;height:256px!important;min-width:256px!important;max-width:none!important;border:0!important;border-radius:0!important;object-fit:fill!important}
 html body.chapter-normalized .portal-atlas-marker{position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);background:#861b23;color:#fff;padding:7px 10px;border:2px solid white;border-radius:7px;box-shadow:0 2px 8px #0004;font-size:13px;font-weight:bold;white-space:nowrap}
 html body.chapter-normalized .portal-atlas-marker:after{content:'';position:absolute;left:50%;top:100%;transform:translateX(-50%);border:7px solid transparent;border-top-color:#861b23}
 html body.chapter-normalized .portal-atlas-credit{display:block;text-align:right;font-size:11px;color:#861b23;text-decoration:underline}
