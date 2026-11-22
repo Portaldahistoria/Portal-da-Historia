@@ -289,3 +289,87 @@ html body.chapter-normalized .hero .chapter-hero-media figcaption{font-size:12px
 
 /* Remove the unused chapter-grid spacer when the landing overview is visible. */
 html body .library.portal-landing #cards{display:none!important;min-height:0!important;margin:0!important}
+
+/* A restrained editorial landing page, replacing the former feature-card grid. */
+html body .portal-home-overview.portal-editorial{display:block;background:#fff;border:1px solid #e1d4d6;border-left:5px solid #a51e26;border-radius:6px;max-width:1320px;margin:24px 0 10px;padding:25px 28px;box-shadow:0 2px 8px #321d220a}
+html body .portal-editorial-main{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:25px;align-items:center;padding-bottom:23px;border-bottom:1px solid #e8dfe0}
+html body .portal-editorial-kicker{font:700 11px/1.3 Arial,sans-serif;color:#861b23;letter-spacing:1.7px}
+html body .portal-editorial-copy h3{font:600 clamp(25px,2.8vw,40px)/1.12 Arial,sans-serif;letter-spacing:-.045em;margin:8px 0 10px;color:#292325}
+html body .portal-editorial-copy p{font:16px/1.55 Arial,sans-serif;color:#51494b;max-width:510px;margin:0}
+html body .portal-editorial-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+html body .portal-editorial-stats>div{padding-left:16px;border-left:1px solid #e1d4d6;display:flex;flex-direction:column;gap:4px}
+html body .portal-editorial-stats strong{font:500 clamp(36px,4.9vw,68px)/1 Arial,sans-serif;letter-spacing:-.055em;color:#861b23}
+html body .portal-editorial-stats span{font:600 14px/1.35 Arial,sans-serif;color:#51494b}
+html body .portal-editorial-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-top:20px}
+html body .portal-editorial-flow>div{display:flex;align-items:center;gap:13px;min-width:0}
+html body .portal-editorial-flow b{font:500 24px/1 Arial,sans-serif;color:#a51e26}
+html body .portal-editorial-flow strong,html body .portal-editorial-flow small{display:block;line-height:1.35}
+html body .portal-editorial-flow strong{font-size:15px;color:#292325}
+html body .portal-editorial-flow small{font-size:13px;color:#60585a;margin-top:4px}
+@media(max-width:900px){html body .portal-editorial-main{grid-template-columns:1fr;gap:18px}html body .portal-editorial-flow{grid-template-columns:1fr;gap:14px}html body .portal-home-overview.portal-editorial{padding:18px}}
+/* Stations: white editorial cards with balanced photographs and consistent reading flow. */
+html body.chapter-normalized #explorar .portal-station-grid,html body.chapter-normalized #explorar .topics{gap:22px!important;align-items:stretch!important}
+html body.chapter-normalized #explorar :is(.portal-station,button.topic){text-align:left!important;align-items:stretch!important;padding:15px!important;gap:10px!important;box-sizing:border-box}
+html body.chapter-normalized #explorar :is(.portal-station,button.topic) img{width:100%!important;height:auto!important;aspect-ratio:16/9;object-fit:cover!important;object-position:center 30%!important;display:block!important;border-radius:8px!important}
+html body.chapter-normalized #explorar :is(.portal-station,button.topic) :is(strong,b,.station-title){font-size:18px!important;line-height:1.3!important;text-align:left!important}
+html body.chapter-normalized #explorar :is(.portal-station,button.topic) :is(small,.station-question){font-size:15px!important;line-height:1.5!important;text-align:left!important;min-height:0!important}
+html body.chapter-normalized #explorar .portal-station em{margin-top:auto!important;padding-top:12px;border-top:1px solid #eadfe1;text-align:left!important;align-self:stretch;font-size:14px!important}
+html body.chapter-normalized #explorar button.topic .topic-action{margin-top:auto!important}
+html body.chapter-normalized #explorar .portal-station:focus-visible{outline:3px solid #861b23!important;outline-offset:2px}
+/* Map branches: no clipping; the full description is reserved for the expanded view. */
+html body.chapter-normalized #mapa .mental-branches{grid-auto-rows:auto!important;gap:10px!important}
+html body.chapter-normalized #mapa .mental-branch{height:auto!important;min-height:65px!important;max-height:none!important;padding:12px!important;justify-content:center!important}
+html body.chapter-normalized #mapa .mental-branch strong{display:block!important;white-space:normal!important;max-height:none!important;overflow:visible!important;-webkit-line-clamp:unset!important;font-size:14px!important;line-height:1.3!important}
+html body.chapter-normalized #mapa .mental-branch small{display:none!important}
+html body.chapter-normalized #mapa .mental-branch.selected{background:#fff6f6!important;border-left-color:#861b23!important}
+html body.chapter-normalized #mapa .radial-node{height:auto!important;min-height:82px!important;max-height:none!important;padding:8px!important;overflow:visible!important}
+html body.chapter-normalized #mapa .node-title{display:block!important;white-space:normal!important;-webkit-line-clamp:unset!important;overflow:visible!important;font-size:14px!important;line-height:1.22!important}
+html body.chapter-normalized #mapa .radial-center{height:auto!important;min-height:82px!important;max-height:none!important;padding:10px!important}
+html body.chapter-normalized #mapa .radial-node[aria-pressed="true"]{background:#fff1f2!important;border:2px solid #861b23!important}
+@media(max-width:600px){html body.chapter-normalized #mapa .mental-branches{grid-template-columns:repeat(2,minmax(0,1fr))!important}html body.chapter-normalized #mapa .roman-radial{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));height:auto!important;min-height:0!important;gap:10px;padding:12px!important}html body.chapter-normalized #mapa .roman-radial>svg{display:none!important}html body.chapter-normalized #mapa .radial-center{position:static!important;transform:none!important;width:100%!important;grid-column:1/-1;min-height:54px!important}html body.chapter-normalized #mapa .radial-node{position:static!important;transform:none!important;width:100%!important;min-height:66px!important}html body.chapter-normalized #mapa .node-title{font-size:13px!important}}
+/* Keep time flowing downward, with a visual axis and an interactive selected event. */
+html body.chapter-normalized :is(#tempo,#linha) .portal-compact-timeline:has(.portal-timeline-event){display:grid!important;grid-template-columns:1fr!important;gap:9px!important;position:relative!important;max-width:900px!important;margin:15px auto!important;padding:0 0 0 24px!important}
+html body.chapter-normalized .portal-compact-timeline:has(.portal-timeline-event)::before{content:"";position:absolute;top:14px;bottom:14px;left:7px;width:2px;background:#c8a1a5}
+html body.chapter-normalized :is(#tempo,#linha) .portal-compact-timeline>.portal-timeline-event{position:relative;display:grid!important;grid-template-columns:minmax(90px,116px) minmax(0,1fr);align-items:center!important;gap:12px!important;text-align:left!important;padding:12px 14px!important;border:1px solid #ded4d6!important;border-left:3px solid #a51e26!important;min-height:54px!important;color:#292325!important;background:#fff!important;font:15px/1.45 Arial,sans-serif!important}
+html body.chapter-normalized .portal-timeline-event::before{content:"";position:absolute;left:-24px;top:50%;width:11px;height:11px;transform:translateY(-50%);border:2px solid #fff;border-radius:50%;background:#a51e26;box-shadow:0 0 0 1px #a51e26}
+html body.chapter-normalized .portal-timeline-event strong{font-size:15px!important;color:#861b23!important;min-width:0!important}
+html body.chapter-normalized .portal-timeline-event[aria-pressed=true]{border-color:#861b23!important;background:#fff2f3!important;box-shadow:0 0 0 1px #861b23!important}
+html body.chapter-normalized .portal-timeline-event[aria-pressed=true]::before{background:#861b23;box-shadow:0 0 0 3px #e8bfc3}
+@media(max-width:480px){html body.chapter-normalized :is(#tempo,#linha) .portal-compact-timeline>.portal-timeline-event{grid-template-columns:1fr!important;gap:4px!important;padding:10px!important}}
+/* Shared materials, atlas, assessment and exam controls. */
+html body .portal-resource-card{border:1px solid #ded4d6!important;border-top:3px solid #a51e26!important;border-radius:10px!important;padding:18px!important}
+html body :is(.portal-resource-card,.portal-slide-preview) h3{font:700 20px/1.3 Arial,sans-serif!important;margin:7px 0 13px!important;letter-spacing:normal!important}
+html body .portal-slide-preview{padding:20px!important;border:1px solid #ded4d6!important;border-top:3px solid #a51e26!important;border-radius:10px!important}
+html body .portal-slides-stack{gap:16px!important}
+html body .portal-slide-preview iframe{height:clamp(420px,62vh,690px)!important}
+html body.chapter-normalized #glossario .portal-dictionary-card{padding:13px 16px!important}
+html body.chapter-normalized .portal-atlas-raster{max-width:830px!important;height:380px!important;margin:10px auto!important}
+html body.chapter-normalized .portal-atlas-tiles{width:1280px!important;height:768px!important}
+html body.chapter-normalized .portal-quiz{max-width:860px!important;padding:24px!important;border-top:3px solid #a51e26!important}
+html body.chapter-normalized .portal-quiz-progress,.portal-enem-progress{height:10px!important;border-radius:8px;background:#e7d7db;overflow:hidden;margin:12px 0 18px}
+html body .portal-enem-progress span{display:block;height:100%;background:#a51e26;transition:width .2s}
+html body.chapter-normalized .portal-quiz-answers .choice{font-size:17px!important;min-height:52px!important;padding:14px 16px!important}
+html body.chapter-normalized .portal-quiz-answers .choice.correct{background:#e8f4e8!important;color:#244c30!important;border:2px solid #3b7b4a!important}
+html body.chapter-normalized .portal-quiz-answers .choice.wrong{background:#fce8e8!important;color:#8a2029!important;border:2px solid #a51e26!important}
+html body.chapter-normalized .enem-letter-options .enem-option{min-height:48px!important;font-size:17px!important;border-radius:7px!important}
+html body .enem-navigation .portal-preview-button,html body .portal-enem-launch{min-height:44px!important;border-radius:7px!important;padding:11px 16px!important}
+html body .enem-navigation .portal-preview-button:first-child{background:#fff!important;color:#861b23!important;border:1px solid #861b23!important}
+@media(max-width:600px){html body.chapter-normalized .portal-atlas-raster{height:310px!important}html body .portal-slide-preview iframe{height:390px!important}html body .portal-slide-preview,html body.chapter-normalized .portal-quiz{padding:14px!important}html body.chapter-normalized .portal-quiz-answers .choice{font-size:16px!important}}
+/* Mobile chapter navigation: one compact control, open the full list on demand. */
+html body .chapter-topic-toggle{display:none}
+@media(max-width:900px){html body .local-roma .chapter-menu{min-height:0!important;max-height:none!important;height:auto!important;padding:12px 14px!important;border-bottom:1px solid #e0d4d6!important}
+html body .chapter-menu .drawer-heading{margin:0!important;padding:0!important;border:0!important}
+html body .chapter-menu .drawer-heading h2{display:none!important}
+html body .chapter-menu .drawer-heading small{font-size:11px!important}
+html body .chapter-topic-toggle{display:flex!important;align-items:center;justify-content:space-between;width:100%;min-height:44px;padding:10px 12px;background:#861b23;color:#fff;border:1px solid #861b23;border-radius:7px;font:700 15px/1.3 Arial,sans-serif;margin-top:8px}
+html body .chapter-topic-toggle[aria-expanded=true] svg{transform:rotate(180deg)}
+html body .chapter-menu:not(.topics-open) .chapter-options,html body .chapter-menu:not(.topics-open) .pwa-chapter-actions{display:none!important}
+html body .chapter-menu.topics-open .chapter-options{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px!important}
+html body .chapter-menu.topics-open .pwa-chapter-actions{display:grid!important}
+html body .chapter-menu .chapter-back-link{min-height:38px!important;margin-top:8px!important;background:#861b23!important;color:#fff!important;border:1px solid #861b23!important}
+html body .chapter-menu .chapter-options>button{font-size:14px!important;min-height:42px!important}
+html body #external-reader>.roma-hero{min-height:0!important;height:auto!important;padding:14px 5vw!important}
+html body #external-reader>.roma-hero .hero-copy h1{font-size:clamp(29px,7.5vw,44px)!important}
+html body #external-reader>.roma-hero .hero-copy p{font-size:13px!important;line-height:1.4!important}
+html body #external-reader>.roma-hero .hero-mosaic{width:clamp(95px,22vw,155px)!important;margin-top:10px!important}
+}
