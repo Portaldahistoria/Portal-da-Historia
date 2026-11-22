@@ -22,12 +22,12 @@
     "restricted": 0
   },
   "7-10": {
-    "slides": [],
-    "restricted": 1
+    "slides": [{"title":"Slide 7º ano - Escravização e resistência","url":"https://drive.google.com/file/d/18Bvf9ghxpXY7MXMKQ0KkJKDBsVWKuNc7/view?usp=drivesdk","complementar":false}],
+    "restricted": 0
   },
   "7-11": {
-    "slides": [],
-    "restricted": 1
+    "slides": [{"title":"Slide 7º ano - África Ocidental Gana, Mali e Songai","url":"https://drive.google.com/file/d/1CZvkvOJmpn7gnue2RyihEpwSpAdh2hUU/view?usp=drivesdk","complementar":false}],
+    "restricted": 0
   },
   "8-1": {
     "slides": [
@@ -1355,7 +1355,7 @@
   const slug = (year,id) => year+'-'+id;
   const node = (d,tag,cls,text) => {const e=d.createElement(tag);if(cls)e.className=cls;if(text)e.textContent=text;return e;};
   function link(d,entry){const a=node(d,'a','portal-resource-link');a.href=entry.url;a.target='_blank';a.rel='noopener noreferrer';a.append(node(d,'strong','',entry.title));if(entry.description)a.append(node(d,'small','',entry.description));if(entry.complementar)a.append(node(d,'small','','Material complementar do Ensino Médio'));return a}
-  function group(d,title,links,label,empty){const a=node(d,'article','portal-resource-card');a.append(node(d,'small','resource-label',label),node(d,'h3','',title));if(links.length)links.forEach(x=>a.append(link(d,x)));else a.append(node(d,'p','resource-empty',empty||'Ainda não localizamos uma apresentação correspondente no Drive.'));return a}
+  function group(d,title,links,label,empty){const a=node(d,'article','portal-resource-card');a.append(node(d,'small','resource-label',label),node(d,'h3','',title));if(links.length)links.forEach(x=>a.append(link(d,x)));else a.append(node(d,'p','resource-empty',empty||'Os slides ainda não estão disponíveis para acesso.'));return a}
   function renderGrade(target,year,type){const d=target.ownerDocument;target.replaceChildren();target.classList.add('portal-resource-grid');if(type==='enem'){
       const list=year===1?chapterList(year).map(c=>({title:c.title,links:enemData[slug(year,c.id)]||[],label:'CAPÍTULO '+c.id})):review[String(year)]||[];
       if(year===1){chapterList(year).forEach(c=>{const count=(window.PORTAL_ENEM_PRACTICE?.[c.id]||[]).length;const a=group(d,c.title,[],'CAPÍTULO '+c.id,count+' questões de estudo com gabarito comentado.');const open=node(d,'a','portal-enem-launch','Resolver questões');open.href='#capitulo-'+c.id;open.onclick=()=>{try{sessionStorage.setItem('portal-open-enem',String(c.id))}catch{}};a.append(open);target.append(a)})}
@@ -1363,7 +1363,7 @@
       target.append(group(d,'Provas e gabaritos oficiais do Inep',[{title:'Consultar cadernos e gabaritos',description:'Fonte oficial',url:official}],'FONTE OFICIAL'));
     }else{
       if(year===2||year===3){(extraSlides[String(year)]||[]).forEach(x=>target.append(group(d,x.title,x.slides,'MATERIAL COMPLEMENTAR')));return;}
-      chapterList(year).forEach(c=>{const x=slideData[slug(year,c.id)]||{slides:[]};target.append(group(d,c.title,x.slides,'CAPÍTULO '+c.id,x.restricted?'Material localizado; aguarda liberação de acesso pelo professor.':undefined))});
+      chapterList(year).forEach(c=>{const x=slideData[slug(year,c.id)]||{slides:[]};target.append(group(d,c.title,x.slides,'CAPÍTULO '+c.id,x.restricted?'Os slides ainda não estão disponíveis para acesso.':undefined))});
     }}
   function practice(d,id){
     const source=(enemData['1-'+id]||[]).filter(q=>q.title.startsWith('ENEM ')),rows=(window.PORTAL_ENEM_PRACTICE?.[id]||[]);
@@ -1388,7 +1388,7 @@
     const life=d.getElementById('cotidiano')||d.getElementById('vida');
     if(life&&!explorar.querySelector('.portal-life-link')){const button=node(d,'button','portal-preview-button portal-life-link',year===6&&id===10?'Vida romana':year===6?'Vida medieval':'Sociedade e cotidiano');button.type='button';const show=key=>{if(d.defaultView.portalChapter)d.defaultView.portalChapter.show(key);else d.defaultView.selectTab?.(key,true);try{window.portalRevealChapter(d.getElementById(key))}catch{}};button.onclick=()=>show(life.id);const block=node(d,'div','portal-life-entry');block.append(button);(explorar.querySelector('.sectionhead')||explorar.firstElementChild)?.after(block);const back=node(d,'button','portal-preview-button','Voltar a Explorar');back.type='button';back.onclick=()=>show('explorar');const backBlock=node(d,'div','portal-life-entry');backBlock.append(back);life.append(backBlock)}
     const result=[];const create=(key,label,content)=>{if(d.getElementById(key))return;const panel=node(d,'section','panel portal-resource-panel');panel.id=key;const head=node(d,'div','sectionhead');head.append(node(d,'h2','',label));panel.append(head,content);explorar.parentElement.append(panel);result.push({id:key,label})};
-    const entry=slideData[slug(year,id)]||{slides:[]};if(!d.getElementById('slides')){const grid=node(d,'div','portal-resource-list portal-slides-stack');if(!entry.slides.length)grid.append(group(d,'Apresentações do capítulo',[],'MATERIAL DE AULA',entry.restricted?'Material localizado; aguarda liberação de acesso pelo professor.':undefined));
+    const entry=slideData[slug(year,id)]||{slides:[]};if(!d.getElementById('slides')){const grid=node(d,'div','portal-resource-list portal-slides-stack');if(!entry.slides.length)grid.append(group(d,'Apresentações do capítulo',[],'MATERIAL DE AULA',entry.restricted?'Os slides ainda não estão disponíveis para acesso.':undefined));
       if(entry.slides.length){entry.slides.forEach((s,i)=>{const id=s.url.match(/\/file\/d\/([^/]+)/)?.[1];const preview=node(d,'div','portal-slide-preview');preview.append(node(d,'small','resource-label','SLIDE '+(i+1)+' DE '+entry.slides.length),node(d,'h3','',s.title));if(id){const frame=node(d,'iframe');frame.title=s.title;frame.src='https://drive.google.com/file/d/'+id+'/preview';frame.loading='lazy';frame.allowFullscreen=true;preview.append(frame)}preview.append(link(d,{title:'Abrir no Drive se a prévia não carregar',url:s.url}));grid.append(preview)})}
       create('slides','Slides',grid)}
     if(year===1){const exercise=practice(d,id);create('enem','Questões ENEM',exercise.wrapper);create('enem-gabarito','Gabarito comentado',exercise.answerBox)}
