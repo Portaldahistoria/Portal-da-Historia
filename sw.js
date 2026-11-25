@@ -1,5 +1,5 @@
 /* Portal da História — offline application shell. */
-const VERSION = 'portal-historia-pwa-v61';
+const VERSION = 'portal-historia-pwa-v62';
 const CORE = VERSION + '-core';
 const MEDIA = 'portal-historia-pwa-v1-media';
 const BASE = new URL('./', self.location.href);
@@ -9,6 +9,7 @@ const chapters = [
   ...Array.from({length:12},(_,i)=>'9-'+(i+1))
 ];
 const files = [
+  'img/gabi-portrait.webp','img/gil-portrait.webp','img/gabi-walk.webp','img/gil-walk.webp',
   'campaign-landscape.js',
   './','index.html','jogos.html','og-image.png','manifest.webmanifest','app-icon-192.png','app-icon-512.png','aplicativo.html','aplicativo.js',
   'pwa.js','pwa.css','style.css','portal.css','refinement.css','fullwidth.css',
