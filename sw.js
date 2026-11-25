@@ -1,5 +1,5 @@
 /* Portal da História — offline application shell. */
-const VERSION = 'portal-historia-pwa-v64';
+const VERSION = 'portal-historia-pwa-v65';
 const CORE = VERSION + '-core';
 const MEDIA = 'portal-historia-pwa-v1-media';
 const BASE = new URL('./', self.location.href);
@@ -9,6 +9,7 @@ const chapters = [
   ...Array.from({length:12},(_,i)=>'9-'+(i+1))
 ];
 const files = [
+  'img/gabi-dive.webp','img/gio-dive.webp','img/chronicle-travel.webp','img/chronicle-itineraries.webp',
   'cronicas-atlas.html','img/chronicle-variants.webp','img/chronicle-nile.webp','img/gabi-lit.webp','img/gio-lit.webp',
   'img/gabi-portrait.webp','img/gio-portrait.webp','img/gabi-walk.webp','img/gio-walk.webp','img/chronicle-fauna.webp',
   ...Array.from({length:6},(_,i)=>'img/chronicle-world-'+i+'.webp'),
