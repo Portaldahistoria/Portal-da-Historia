@@ -30,28 +30,79 @@ function platformGame(){
     stopScene();let stopped=false,raf=0,keys={},last=0,acc=0,time=0,hits=0,lives=3,checkpoint=0,invuln=0;const w=GABE_WORLDS[worldIndex],s=w.stages[phase];
     stage.innerHTML='<div class="campaign-top"><button class="action secondary-action" id="phase-back">Mapa do mundo</button><span>'+w.title+' · Fase '+(phase+1)+' / 6</span></div><h3>'+s[0]+'</h3><div class="hud"><span id="gabe-hearts">♥ ♥ ♥</span><span id="gabe-items">0 / 3 · '+s[2]+'</span><span id="gabe-time">00:00</span></div><div class="platform-wrap campaign-screen"><canvas id="gabe-canvas" width="480" height="270" tabindex="0" aria-label="Gabi em '+s[0]+'"></canvas></div><div class="controls platform-controls campaign-controls"><button data-move="left" aria-label="Mover para esquerda">←</button><button data-move="right" aria-label="Mover para direita">→</button><button data-move="jump" aria-label="Pular">↑ Pular</button><button id="gabe-restart" aria-label="Reiniciar fase">↻</button></div><div class="field-notes"><div class="gabe-mini">'+gabeIcon()+'</div><div><strong>Diário de Gabi</strong><p id="gabe-note" role="status">'+s[3]+'</p><small>Uma estrela abre o portal. Cada estrela vale 100 pontos. O artefato dobra o total. · As tábuas cedem. O sinal ! avisa quando um inimigo vai saltar. · Setas ou A/D para andar · Espaço para saltar · Controles de toque abaixo do cenário.</small></div></div>';
     const canvas=$('gabe-canvas'),ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;const W=480,H=270,ground=228,worldLen=4140+phase*216;
-    // Six route layouts; the terrain, platform placement and obstacles change with each destination.
-    const shapes=[[36,54,36,66,42,54],[48,72,42,58,66,36],[60,40,72,42,54,65],[72,46,58,72,42,54],[42,66,54,72,54,66],[66,74,48,66,74,55]];
+    // Hand-authored itineraries: ferry, terraces, lift, bridge, market, patrol.
+    const routes=[
+      ['FFMTFRFTMF','MRTRMMRBTR','TTLTBTLTTB','TRTLRMTTRM','BTLBTTRBLT','MFRMFTMRFM'],
+      ['FRFFMFTRFF','MRMRTRMTMR','TLTTLTBTLT','RTRMMTRMRM','TRLTMRTRLT','TBRTRBTLRT'],
+      ['MMRMTMRTRM','TTLTRTBTLT','BTMBTBMTBT','BTBTLBTBTB','FFMFRFFMRF','RMFTMRFTMR'],
+      ['MRMTRMRMTR','BTTBMBTLBT','RMBRMBRTMB','BTBBLTBBLT','FMRFFMRFFM','TRFMTRMFTR'],
+      ['MMBMRMBMRM','TMTRMTLTRM','BTBRBTLRBT','RMRTRMRMRT','MRBMRTRBRM','RMTBRMTFMR'],
+      ['LBLMLBLMLB','MLBRMLBLRM','LLTBLTLLBT','FMFFLFMFFL','BRMBRMBRMB','MLFTBRMLFT']
+    ];
     const pads=[],relics=[],obstacles=[],gaps=[];
-    const spacing=324+phase*18;
-    for(let i=0;i<12;i++){
-      const x=130+i*spacing, rise=shapes[phase][(i+worldIndex)%6];
-      pads.push({x,y:ground-rise,w:90-phase*3,h:12},{x:x+112,y:ground-rise-36,w:125-phase*4, fragile:i%3===2, wear:0, cooldown:0,h:12},{x:x+252,y:ground-rise,w:78,h:12});
-      if(i===1||i===5||i===10)relics.push({x:x+158,y:i===5?ground-13:ground-rise-53,got:false});
-      if(i===7)relics.push({x:x+180,y:ground-rise-52,artifact:true,got:false});
-      obstacles.push({jumper:(i+worldIndex)%3===1,origin:x+55,x:x+55,y:ground-15,w:20,h:15});
-      if((i+phase+worldIndex)%3===1)gaps.push({x:x+225,w:54+phase*7});
+    const route=routes[worldIndex][phase];
+    const missions={
+      '0-1':['Copie o registro do escriba',['Ler','Copiar','Selar']],
+      '1-1':['Registre a colheita de Uruk',['Contar','Marcar','Arquivar']],
+      '4-3':['Acompanhe uma proposta na Assembleia',['Propor','Debater','Votar']],
+      '5-2':['Ponha a máquina em funcionamento',['Água','Caldeira','Pistão']]
+    };
+    const mission=missions[worldIndex+'-'+phase];
+    let actionIndex=0;
+    const stations=[];
+    function pad(x,rise,width,extra={}){
+      const item={x,y:ground-rise,w:width,h:12,baseX:x,baseY:ground-rise,...extra};
+      pads.push(item);return item;
+    }
+    for(let i=0;i<route.length;i++){
+      const x=100+Math.floor(i*(worldLen-240)/route.length),type=route[i];
+      let shelf;
+      if(type==='F'){
+        gaps.push({x:x+62,w:249});pad(x+152,13,82,{motion:'ferry'});shelf=pad(x+308,43,69);
+      }else if(type==='T'){
+        pad(x,38,72);pad(x+72,84,70);shelf=pad(x+148,134,101);pad(x+270,72,76);
+      }else if(type==='L'){
+        pad(x+39,79,75,{motion:'lift'});shelf=pad(x+140,147,95);pad(x+274,65,76);
+      }else if(type==='B'){
+        gaps.push({x:x+62,w:242});
+        for(let j=0;j<4;j++)pad(x+54+j*64,20+(j%2)*24,48,{fragile:true,wear:0,cooldown:0});
+        shelf=pad(x+310,51,64);
+      }else if(type==='R'){
+        pad(x+25,48,84);shelf=pad(x+151,75,107);
+      }else{
+        pad(x+14,47,116);shelf=pad(x+180,58,127);
+      }
+      if(mission&&[0,3,7].includes(i))stations.push({x:shelf.x+shelf.w/2,y:shelf.y});
+      if([1,5,6,8].includes(i))relics.push({x:shelf.x+shelf.w/2,y:shelf.y-16,artifact:i===6,got:false});
+      if('RMT'.includes(type)){
+        const origin=x+(type==='T'?240:149);
+        obstacles.push({jumper:type==='R',origin,x:origin,y:ground-15,w:20,h:15});
+      }
+    }
+    function movePlatforms(){
+      const station=stations[actionIndex];
+      if(station&&Math.abs(p.x+p.w/2-station.x)<28&&Math.abs(p.y+p.h-station.y)<8){
+        actionIndex++;hud();note(actionIndex===3?mission[0]+' · Missão cumprida!':mission[1][actionIndex-1]+' ✓ · Próxima ação: '+mission[1][actionIndex]);
+      }
+      for(const b of pads){
+        if(!b.motion)continue;
+        const aboard=p.on&&Math.abs(p.y+p.h-b.y)<1&&p.x+p.w>b.x&&p.x<b.x+b.w;
+        const wave=Math.sin(time/61+b.baseX);
+        const nx=b.baseX+(b.motion==='ferry'?Math.round(wave*90):0);
+        const ny=b.baseY+(b.motion==='lift'?Math.round(wave*56):0);
+        if(aboard){p.x+=nx-b.x;p.y+=ny-b.y}b.x=nx;b.y=ny;
+      }
     }
     const starsFound=()=>relics.filter(r=>!r.artifact&&r.got).length;
     const doubled=()=>relics.some(r=>r.artifact&&r.got);
     const score=()=>starsFound()*100*(doubled()?2:1);
     gaps.sort((a,b)=>a.x-b.x);const floors=[];let edge=0;for(const g of gaps){if(g.x>edge)floors.push({x:edge,y:ground,w:g.x-edge,h:42});edge=g.x+g.w}floors.push({x:edge,y:ground,w:worldLen-edge,h:42});
     const solids=[...floors,...pads];let p,cam=0;function spawn(){p={x:checkpoint+24,y:ground-31,vx:0,vy:0,w:19,h:26,face:1,on:false};cam=Math.max(0,p.x-110)}spawn();
-    function hud(){$('gabe-hearts').textContent='♥ '.repeat(lives)+'♡ '.repeat(3-lives);$('gabe-items').textContent=starsFound()+' / 3 ★ · '+score()+' pontos'+(doubled()?' · Artefato ×2':'')}
+    function hud(){$('gabe-hearts').textContent='♥ '.repeat(lives)+'♡ '.repeat(3-lives);$('gabe-items').textContent=starsFound()+' / 3 ★ · '+score()+' pontos'+(doubled()?' · Artefato ×2':'')+(mission?' · '+mission[0]+' '+actionIndex+'/3':'')}
     function note(t){$('gabe-note').textContent=t}
     function intersects(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
     function damage(){if(invuln>0&&p.y<320)return;hits++;lives--;if(lives<=0){lives=3;checkpoint=0;relics.forEach(r=>r.got=false);note('Gabi voltou ao início. As relíquias podem ser recuperadas novamente.')}else note('Gabi voltou ao último ponto seguro. Respire e tente outro salto.');spawn();invuln=60;hud()}
-    function tick(){time++;for(const pad of pads)if(pad.cooldown>0)pad.cooldown--;if(invuln)invuln--;let d=(keys.right?1:0)-(keys.left?1:0);if(d)p.face=d;p.vx=d*3.15;if(keys.jump&&p.on){p.vy=-9.6;p.on=false}p.x=Math.max(0,Math.min(worldLen-p.w,p.x+p.vx));const old=p.y+p.h;p.vy=Math.min(10,p.vy+.48);p.y+=p.vy;p.on=false;for(const x of solids){if(!x.cooldown&&p.vy>=0&&old<=x.y+.01&&p.y+p.h>=x.y&&p.x+p.w>x.x&&p.x<x.x+x.w){p.y=x.y-p.h;p.vy=0;p.on=true;if(x.fragile&&++x.wear>=45){x.cooldown=150;x.wear=0}break}}if(p.y>H+40){invuln=0;damage();return}
+    function tick(){time++;movePlatforms();for(const pad of pads)if(pad.cooldown>0)pad.cooldown--;if(invuln)invuln--;let d=(keys.right?1:0)-(keys.left?1:0);if(d)p.face=d;p.vx=d*3.15;if(keys.jump&&p.on){p.vy=-9.6;p.on=false}p.x=Math.max(0,Math.min(worldLen-p.w,p.x+p.vx));const old=p.y+p.h;p.vy=Math.min(10,p.vy+.48);p.y+=p.vy;p.on=false;for(const x of solids){if(!x.cooldown&&p.vy>=0&&old<=x.y+.01&&p.y+p.h>=x.y&&p.x+p.w>x.x&&p.x<x.x+x.w){p.y=x.y-p.h;p.vy=0;p.on=true;if(x.fragile&&++x.wear>=45){x.cooldown=150;x.wear=0}break}}if(p.y>H+40){invuln=0;damage();return}
       for(const o of obstacles){
         o.x=o.origin+Math.round((42+phase*2)*Math.sin(time/(46-phase*2)+o.origin));
         const cycle=(time+o.origin)%144;
@@ -59,13 +110,18 @@ function platformGame(){
         const arc=(cycle-94)/42;
         o.y=ground-o.h-(o.jumper&&arc>=0&&arc<=1?Math.round(4*arc*(1-arc)*(38+phase*3)):0);
       }
-      for(const o of obstacles)if(intersects(p,o)&&!invuln){damage();return}for(const r of relics)if(!r.got&&intersects(p,{x:r.x-8,y:r.y-8,w:16,h:16})){r.got=true;hud();note(r.artifact?'Artefato ×2 · '+s[2]+'. '+s[3]:'Estrela coletada! '+starsFound()+' de 3.')}if(p.x>worldLen*.49&&checkpoint===0&&p.on&&p.y+p.h===ground){checkpoint=Math.max(0,p.x-24);note('Ponto de descanso registrado!')}if(p.x>worldLen-48){if(starsFound()>0){complete();return}else note('Encontre uma estrela para abrir o portal.')}cam=Math.max(0,Math.min(worldLen-W,p.x-150));if(time%30===0){const t=Math.floor(time/60);$('gabe-time').textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}}
+      for(const o of obstacles)if(intersects(p,o)&&!invuln){damage();return}for(const r of relics)if(!r.got&&intersects(p,{x:r.x-8,y:r.y-8,w:16,h:16})){r.got=true;hud();note(r.artifact?'Artefato ×2 · '+s[2]+'. '+s[3]:'Estrela coletada! '+starsFound()+' de 3.')}if(p.x>worldLen*.49&&checkpoint===0&&p.on&&p.y+p.h===ground){checkpoint=Math.max(0,p.x-24);note('Ponto de descanso registrado!')}if(p.x>worldLen-48){if(starsFound()>0&&(!mission||actionIndex===3)){complete();return}else note(mission&&actionIndex<3?'Visite a estação: '+mission[1][actionIndex]:'Encontre uma estrela para abrir o portal.')}cam=Math.max(0,Math.min(worldLen-W,p.x-150));if(time%30===0){const t=Math.floor(time/60);$('gabe-time').textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}}
     function complete(){const stars=starsFound();save(worldIndex,phase,stars);stopScene();stage.innerHTML='<div class="complete campaign-win"><div class="gabe-mini">'+gabeIcon()+'</div><h3>Fase concluída!</h3><div class="victory-stars">'+'★'.repeat(stars)+'☆'.repeat(3-stars)+'</div><p>'+s[0]+' · '+s[3]+'</p><p>'+score()+' pontos'+(doubled()?' · Artefato histórico ×2':'')+' · '+hits+' retornos</p><button class="action" id="next-phase">'+(phase<5?'Próxima fase':'Voltar ao mapa')+'</button><button class="action secondary-action" id="phase-list">Escolher outra fase</button></div>';$('next-phase').onclick=()=>{if(phase<5){phase++;runPhase()}else phaseMap()};$('phase-list').onclick=phaseMap}
     function box(x,y,a,b,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),Math.round(a),Math.round(b))}
     function frame(){
       drawBackdrop(ctx,W,H,worldIndex,phase,cam,time);
       ctx.save();ctx.translate(-Math.floor(cam),0);for(const b of solids){
         if(b.cooldown||b.x>cam+W||b.x+b.w<cam)continue;
+        if(b.motion){
+          box(b.x,b.y,b.w,4,'#f6c887');box(b.x+3,b.y+4,b.w-6,6,'#885142');
+          if(b.motion==='ferry'){box(b.x+12,b.y+10,b.w-24,4,'#593c46');box(b.x+10,b.y-18,3,18,'#ad7b54');box(b.x+13,b.y-17,14,8,'#f0a95b')}
+          else{box(b.x+b.w/2,30,2,Math.max(0,b.y-30),'#8b746a');box(b.x+6,b.y+3,b.w-12,3,'#54677a')}continue;
+        }
         if(b.fragile){
           for(let j=0;j<b.w;j+=10){const dy=b.wear>20?(time+j)%3:0;box(b.x+j,b.y+dy,9,9,'#845344');box(b.x+j,b.y+dy,9,3,'#edbb76');box(b.x+j+3,b.y+dy+4,4,1,'#bd8054')}
           box(b.x,b.y+9,b.w,2,'#513c45');continue;
@@ -78,7 +134,11 @@ function platformGame(){
         box(o.x+2+step*3,o.y+12,5,3,'#503951');box(o.x+13-step*3,o.y+12,5,3,'#503951');
       }
       for(const r of relics){if(r.got)continue;let y=r.y+Math.round(Math.sin((time+r.x)/12)*2);let x=r.x;if(!r.artifact){const widths=[2,4,6,18,16,12,10,12,14];widths.forEach((width,row)=>box(x-width/2,y-9+row*2,width,2,row<4?'#fff3a0':'#ffbd36'));box(x-4,y+7,8,2,w.colors[0]);continue}const kind=s[2].toLowerCase();if(/moeda|coroa|amulet/.test(kind)){box(x-5,y-8,10,16,'#d89d42');box(x-8,y-5,16,10,'#e8bc65');box(x-5,y-5,10,10,'#ffdf86');box(x-1,y-4,2,8,'#a56c35')}else if(/ânfora|cerâmica|cesto|sementes|grãos/.test(kind)){box(x-4,y-9,8,4,'#edc08c');box(x-6,y-5,12,10,'#c97e56');box(x-8,y-3,16,6,'#b6634a');box(x-4,y+5,8,3,'#e8b77e');box(x-4,y-2,8,2,'#f2d0a7')}else if(/tabuleta|mármore|mosaico|pintura|máquina/.test(kind)){box(x-7,y-7,14,14,'#c69a82');box(x-4,y-4,3,3,'#f5d9a8');box(x+1,y+1,3,3,'#80645b');box(x+1,y-4,3,3,'#e2b87d')}else{box(x-7,y-8,14,16,'#d3a25d');box(x-5,y-6,10,12,'#ffe0a0');box(x-4,y-3,8,2,'#9d6952');box(x-4,y+2,8,2,'#9d6952')}}
-      const ex=worldLen-40;box(ex-20,ground-75,12,75,'#ddbd95');box(ex+15,ground-75,12,75,'#ddbd95');box(ex-20,ground-83,47,12,'#f3d6a7');box(ex-7,ground-65,22,65,starsFound()>0?'#8dc5b4':'#6c4d67');if(checkpoint){box(checkpoint,ground-44,3,44,'#544251');box(checkpoint+3,ground-43,20,11,'#cdaa81')}
+      stations.forEach((point,j)=>{
+        box(point.x,point.y-36,3,36,'#573d49');box(point.x-23,point.y-40,50,17,j<actionIndex?'#346955':'#613e60');
+        ctx.fillStyle='#fff1bb';ctx.textAlign='center';ctx.font='bold 9px monospace';ctx.fillText(mission[1][j],point.x+2,point.y-28);ctx.textAlign='left';
+      });
+      const ex=worldLen-40;box(ex-20,ground-75,12,75,'#ddbd95');box(ex+15,ground-75,12,75,'#ddbd95');box(ex-20,ground-83,47,12,'#f3d6a7');box(ex-7,ground-65,22,65,starsFound()>0&&(!mission||actionIndex===3)?'#8dc5b4':'#6c4d67');if(checkpoint){box(checkpoint,ground-44,3,44,'#544251');box(checkpoint+3,ground-43,20,11,'#cdaa81')}
       if(!invuln||time%8<4){const x=Math.round(p.x),y=Math.round(p.y),walk=p.vx&&p.on?Math.floor(time/6)%2:0;ctx.save();ctx.translate(x+(p.face<0?19:0),y);ctx.scale(p.face<0?-1:1,1);box(3,3,14,20,'#493747');box(3,7,14,12,'#b87c4e');box(14,11,7,7,'#d2925c');box(6,8,10,9,'#e2ad76');box(9,12,2,3,'#2c2730');box(18,13,2,2,'#493747');box(4,1,13,6,'#6a4094');box(0,6,7,3,'#6a4094');box(12,-1,5,3,'#9864bb');box(5,18,11,5,'#936448');box(5,23,5,3+walk,'#5c433f');box(13,23,5,4-walk,'#5c433f');ctx.restore()}
       ctx.restore()
     }
