@@ -24,6 +24,12 @@
 .map-traveler{width:clamp(40px,6vw,60px);height:clamp(50px,7.5vw,75px);transform:translate(-50%,calc(-100% - 3px));transition:none}.travel-pin[aria-pressed=true]{outline:3px solid #ffe49b}
 .play-console{display:grid;grid-template-columns:minmax(0,1fr) 106px;align-items:center;gap:8px;max-width:920px;margin:auto}.play-console .campaign-screen{width:100%;min-width:0}.play-console .campaign-controls{margin:0;display:grid;grid-template-columns:1fr 1fr;align-content:center;gap:5px}.play-console .campaign-controls button{min-width:0;width:100%;min-height:42px;padding:3px;font:bold 15px monospace}.play-console .map-key,.play-console [data-move=special],.play-console [data-move=jump]{grid-column:1/-1}
 @media(max-width:620px){.play-console{grid-template-columns:minmax(0,1fr) 74px;gap:4px}.play-console .campaign-controls{gap:3px}.play-console .campaign-controls button{font-size:13px;min-height:32px}.play-console .campaign-screen canvas{max-height:none}}
+/* Campaign menu, map labels and handheld controls */
+.chronicle-title nav .action,.chronicle-title nav .secondary-action{background:#18484a;border:2px solid #f6d495;color:#fff3ce;box-shadow:inset 0 -3px #103336,0 3px #362c29}.chronicle-title nav .action:hover{background:#26605e}
+.travel-board{display:block;max-width:960px;margin:auto}.travel-chart{aspect-ratio:1.75;border:2px solid #a98b5c}.travel-index[hidden]{display:none}.travel-index .record-panel{margin:12px 0 0}.pin-caption{position:absolute;top:calc(100% + 4px);left:50%;transform:translateX(-50%);padding:3px 7px;white-space:normal;width:max-content;max-width:clamp(75px,18vw,165px);font:600 clamp(10px,1.4vw,14px)/1.15 system-ui;color:#fff6e0;background:#20312dee;border:1px solid #c0ad84;border-radius:4px;box-shadow:0 2px 4px #0006}.travel-pin:disabled .pin-caption{background:#373938ee}.travel-pin{z-index:1}.map-traveler{z-index:2}
+.play-console{display:block;position:relative;max-width:920px;margin:0 auto;border:2px solid #83785c;border-radius:14px;background:#142e33;overflow:hidden}.play-console .campaign-screen{max-width:none;border:0;border-radius:0;margin:0}.play-console .campaign-screen canvas{width:100%;max-height:none}.play-console .campaign-controls{display:block;position:absolute;inset:0;pointer-events:none}.steer-pad,.ability-pad,.console-tools{position:absolute;display:flex;gap:5px;align-items:center;pointer-events:auto}.steer-pad{bottom:8px;left:8px}.ability-pad{bottom:8px;right:8px}.console-tools{right:8px;top:8px}.play-console .campaign-controls button{width:auto;min-width:43px;min-height:43px;padding:4px 11px;border-radius:22px;border:1px solid #ebe5cd9c;box-shadow:inset 0 -2px #071b20aa,0 1px 4px #07111988;background:#16353be8;color:#fff5df;font:700 14px system-ui}.play-console .steer-pad button{font-size:20px}.play-console .console-tools button{min-height:32px;min-width:32px;font-size:12px}.play-console .campaign-controls button:active{background:#398178}
+.museum{max-width:900px;margin:auto;color:#f6ead0}.museum header{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.museum header small{margin-left:auto}.museum-detail{background:#233c3a;border-left:3px solid #dfc488;padding:12px 16px;border-radius:5px}.museum-detail p{margin:5px 0}.museum h4{margin:16px 0 7px}.shelf{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}.exhibit{background:#343436;color:#c2bfba;border:1px solid #595652;border-radius:7px;padding:6px;font-size:12px}.exhibit i{width:48px;height:48px;display:block;margin:auto;image-rendering:pixelated;filter:grayscale(1);opacity:.58}.exhibit.found{color:#fff3cd;background:#314b43;border-color:#aa9564}.exhibit.found i{filter:none;opacity:1}.exhibit[aria-pressed=true]{outline:2px solid #f3cf89}
+@media(max-width:620px){.travel-chart{aspect-ratio:1.25}.shelf{grid-template-columns:repeat(3,minmax(0,1fr))}.steer-pad,.ability-pad{bottom:4px;gap:3px}.steer-pad{left:3px}.ability-pad{right:3px}.console-tools{right:4px;top:4px}.play-console .campaign-controls button{font-size:12px;min-height:36px;min-width:36px;padding:4px 7px}.play-console .console-tools button{min-height:28px;min-width:28px}.play-console .steer-pad button{font-size:16px}.chronicle-title{min-height:245px}}
 </style></head><body><header class="top"><a class="brand" href="./#inicio"><img src="portal-mark.svg" alt=""><span>PORTAL DA HISTÓRIA<small>PROFESSOR GABRIEL</small></span></a><a class="back" href="./#inicio">Voltar ao Portal</a></header><main class="shell"><div class="dev-strip">Em desenvolvimento</div><div class="head"><div><div class="eyebrow">Acervo interativo</div><h1>Laboratório de Jogos</h1><p>Explore mundos históricos, recupere relíquias e atravesse o tempo. Escolha uma aventura para jogar.</p></div></div><div id="gallery" class="gallery" aria-label="Selecione um jogo"></div><section id="arena" class="arena" hidden><div class="gamebar"><button id="leave">Todos os jogos</button><h2 id="gameTitle"></h2><span class="status" id="gameStatus">ROMA IMPERIAL</span></div><div id="stage" class="stage"></div></section></main><footer class="footer">Portal da História · Professor Gabriel Gomes · Jogos educativos</footer><script>
 const $=id=>document.getElementById(id),stage=$('stage');let current=null,cleanup=()=>{};const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};const icons={coin:['0011100','0111110','1101011','1101011','1101011','0111110','0011100'],scroll:['0111110','1100011','0111110','0100010','0101110','0100010','0111110'],amphora:['0011100','0111110','1110111','1101011','0111110','0011100','0001000'],helmet:['0011100','0111110','1111111','1100011','1100011','1100001','0110000'],column:['0111110','1111111','0011100','0011100','0011100','0111110','1111111'],wheat:['0001000','0101010','0011100','0101010','0011100','0001000','0001000'],ship:['0001000','0011100','0111110','0001000','1111111','0111110','0011100'],cross:['0001000','0001000','0111110','0001000','0001000','0001000','0001000'],book:['1000001','1110111','1010101','1010101','1010101','1110111','0001000'],key:['0111000','1101100','1101100','0111000','0001111','0001010','0001000'],person:['0011100','0011100','0001000','0111110','0101010','0001000','0010100'],arch:['0111110','1111111','1100011','1100011','1100011','1100011','1100011']};const colors={coin:'#e8b85b',scroll:'#e8c49b',amphora:'#cf795a',helmet:'#c5b3a4',column:'#d6c9b9',wheat:'#e6c572',ship:'#b68c6f',cross:'#e4d3b2',book:'#8bb6a0',key:'#dfb46e',person:'#be4850',arch:'#e0c09c'};
 function art(name,fill){
@@ -56,6 +62,7 @@ function mapGame(){const cities=[{name:'Roma',x:45,y:43,hint:'Na Península Itá
 const GABE_WORLDS=[{"title":"Egito Antigo","era":"c. 3000–30 a.C.","colors":["#efb77b","#bf815a","#74565c","#e0b179"],"icon":"pyramid","stages":[["Mergulho no Nilo","Nilo","Fragmento de cerâmica","O ciclo das cheias do Nilo favorecia a agricultura."],["A oficina dos escribas","Escribas","Papiros","A escrita hieroglífica registrava informações religiosas e administrativas."],["As pirâmides de Gizé","Gizé","Papiros de arquitetura","As pirâmides eram monumentos funerários reais, construídos por trabalhadores organizados."],["O templo de Karnak","Karnak","Amuletos","Templos eram centros religiosos, econômicos e políticos."],["Vale dos Reis","Necrópole","Fragmentos de pinturas","As tumbas revelam crenças egípcias sobre a vida após a morte."],["Alexandria","Alexandria","Rolos de papiro","Alexandria tornou-se um centro de intercâmbio cultural no período helenístico."]]},{"title":"Mesopotâmia","era":"c. 3500–539 a.C.","colors":["#cfa07c","#8b6d61","#695365","#bc8260"],"icon":"ziggurat","stages":[["Os rios Tigre e Eufrates","Rios","Cestos de sementes","A irrigação permitiu o desenvolvimento agrícola entre os rios Tigre e Eufrates."],["Uruk e a escrita","Uruk","Tabuletas","A escrita cuneiforme foi desenvolvida na Mesopotâmia."],["O zigurate de Ur","Ur","Tabuletas de templo","Zigurates eram construções monumentais ligadas à religião."],["Babilônia de Hamurábi","Babilônia","Tabuletas de leis","O Código de Hamurábi reúne leis que expressavam hierarquias e relações sociais."],["Nínive","Nínive","Registros da biblioteca","A biblioteca de Assurbanípal preservou textos em tabuletas de argila."],["Porta de Ishtar","Babilônia","Fragmentos de cerâmica","A Porta de Ishtar ilustra a monumentalidade da Babilônia neobabilônica."]]},{"title":"Grécia Antiga","era":"c. 800–146 a.C.","colors":["#86b4c7","#82929a","#596e87","#e0c9ad"],"icon":"temple","stages":[["A ágora de Atenas","Atenas","Óstracos","A ágora era espaço de comércio e convivência cívica."],["A Acrópole","Atenas","Fragmentos de mármore","A Acrópole abriga monumentos como o Partenon."],["Esparta","Esparta","Peças de cerâmica","Esparta possuía uma organização social e política própria."],["Olímpia","Olímpia","Coroas de oliveira","Os jogos de Olímpia estavam ligados a celebrações religiosas."],["O porto do Pireu","Pireu","Ânforas","O comércio marítimo conectava comunidades do mundo grego."],["A era helenística","Mundo helenístico","Moedas","A expansão macedônica ampliou os intercâmbios culturais."]]},{"title":"Roma Imperial","era":"27 a.C.–476 d.C. (Ocidente)","colors":["#92a1bd","#a17c77","#65556d","#ceb090"],"icon":"arch","stages":[["Fórum Romano","Roma","Moedas imperiais","O Fórum era um centro político, religioso e comercial."],["Coliseu","Roma","Bilhetes simbólicos","Espetáculos públicos integravam a vida urbana e a política imperial."],["Via Ápia","Via Ápia","Marcos miliários","As estradas facilitavam deslocamentos e a administração das províncias."],["Pompeia","Pompeia","Fragmentos de mosaico","A erupção do Vesúvio em 79 d.C. preservou vestígios da vida romana."],["Porto de Óstia","Óstia","Ânforas","Óstia abastecia Roma por meio do comércio marítimo e fluvial."],["Constantinopla","Constantinopla","Pergaminhos","Constantinopla tornou-se capital imperial em 330 d.C."]]},{"title":"Revolução Francesa","era":"1789–1799","colors":["#9baaba","#8c7c87","#525d77","#c3b6ab"],"icon":"city","stages":[["Paris antes de 1789","Paris","Cadernos de reivindicações","O Antigo Regime era marcado por privilégios de nascimento e desigualdades."],["Versalhes","Versalhes","Documentos dos Estados Gerais","Os Estados Gerais foram convocados em 1789."],["A praça da Bastilha","Paris","Panfletos","A tomada da Bastilha em 14 de julho de 1789 tornou-se símbolo da Revolução."],["Assembleia Nacional","Paris","Páginas da declaração","A Declaração dos Direitos do Homem e do Cidadão proclamou direitos em 1789."],["A Convenção","Paris","Jornais","A República foi proclamada em 1792, em meio a conflitos políticos."],["O Diretório","Paris","Documentos políticos","O Diretório governou de 1795 a 1799, antes do golpe de 18 de Brumário."]]},{"title":"Revolução Industrial","era":"c. 1760–1850","colors":["#879ba7","#6e727a","#3f495d","#a17d70"],"icon":"factory","stages":[["As oficinas têxteis","Inglaterra","Amostras de tecido","A mecanização transformou a produção têxtil britânica."],["Manchester","Manchester","Registros de trabalho","A industrialização acelerou o crescimento urbano e transformou o trabalho."],["Máquinas a vapor","Inglaterra","Peças de máquinas","A energia a vapor impulsionou fábricas e transportes."],["O canal comercial","Inglaterra","Caixas de mercadorias","Canais permitiam transportar matérias-primas e produtos."],["A ferrovia","Liverpool–Manchester","Bilhetes de viagem","A ferrovia Liverpool–Manchester foi inaugurada em 1830."],["Cidade industrial","Inglaterra","Documentos de trabalhadores","Mudanças nas condições de trabalho estimularam formas de organização coletiva."]]}];
 const chronicleScenes=Array.from({length:6},(_,i)=>{const img=new Image();img.src='img/chronicle-world-'+i+'.webp';return img});
 const critters=new Image();critters.src='img/chronicle-variants.webp';
+const nileFauna=new Image();nileFauna.src='img/fauna-do-nilo.webp';
 const gameIcons=new Image();gameIcons.src='img/cronicas-objetos.webp';
 const treasures=new Image();treasures.src='img/cronicas-marcos.webp';
 const workshop=new Image();workshop.src='img/oficina-escribas.webp';
@@ -120,10 +127,57 @@ function platformGame(){
   const diveAtlas={};for(const name of ['Gabi','Gio']){diveAtlas[name]=new Image();diveAtlas[name].src='img/'+name.toLowerCase()+'-swim.webp'}
   for(const name of ['Gabi','Gio']){atlas[name]=new Image();atlas[name].src='img/'+name.toLowerCase()+'-trilha.webp'}
   let preview=false;
+  const artifactIcons=[
+      [4,9,9,18,19,9],[20,7,7,7,8,4],[4,21,4,22,5,6],
+      [6,27,15,23,5,9],[8,10,10,10,10,9],[24,8,25,26,27,9]
+    ];
+  const collected=new Set();
+  const artifactKey=(w,f)=>'cronicas-acervo:'+w+'-'+f;
+  function hasArtifact(w,f){
+    const key=artifactKey(w,f);
+    if(collected.has(key))return true;
+    try{return localStorage.getItem(key)==='1'}catch{return false}
+  }
+  function catalogArtifact(w,f){
+    const key=artifactKey(w,f);collected.add(key);
+    try{localStorage.setItem(key,'1')}catch{}
+  }
+  const objectNotes=[
+    ['Um caco conserva pistas da forma, da pintura e do uso do recipiente original.','Folhas de papiro serviam de suporte aos registros dos escribas.','Desenhos e medidas permitiam planejar o trabalho dos construtores.','Pequenos amuletos podiam ser usados junto ao corpo como proteção.','Um trecho de pintura permite observar cores, figuras e convenções de uma cena maior.','O rolo conservava o texto enrolado e era aberto à medida que se lia.'],
+    ['Os cestos ajudavam no transporte e no armazenamento de sementes.','Os escribas pressionavam uma ponta de junco na argila ainda úmida.','Registros em argila podiam acompanhar as atividades econômicas dos templos.','Copiar textos jurídicos em argila ajudava a transmitir regras e decisões.','Conjuntos de tabuletas reuniam textos literários, listas e correspondência.','Cacos e tijolos decorados dão pistas sobre a cor e o acabamento das construções.'],
+    ['Em Atenas, um caco podia receber um nome em uma votação de ostracismo.','Marcas de ferramentas podem revelar como a pedra foi esculpida.','Vasos e seus fragmentos guardam indícios sobre o uso e a decoração da cerâmica.','Em Olímpia, o vencedor recebia uma coroa feita de ramos de oliveira.','As duas alças facilitavam o manuseio desses recipientes de transporte.','Imagens e inscrições nas moedas ajudam a identificar quem as emitiu.'],
+    ['Retratos e inscrições divulgavam a imagem do imperador.','A peça do jogo representa a organização do acesso aos espetáculos.','Essas pedras marcavam distâncias ao longo das estradas romanas.','Um mosaico reúne pequenas peças para formar figuras e padrões.','Marcas nas ânforas ajudam a investigar a circulação de mercadorias.','O pergaminho era preparado com pele animal para receber a escrita.'],
+    ['Nesses cadernos, comunidades registravam queixas e pedidos.','Os registros permitem investigar as demandas apresentadas pelos diferentes grupos.','Textos impressos curtos faziam circular argumentos políticos.','Uma declaração registra princípios e direitos debatidos em seu tempo.','A imprensa divulgava notícias e disputava interpretações dos acontecimentos.','Documentos políticos ajudam a comparar projetos de governo.'],
+    ['A trama e as fibras dão pistas sobre como um tecido foi produzido.','Registros de fábrica podem revelar jornadas, funções e remuneração.','Uma engrenagem transmite movimento entre partes de uma máquina.','As caixas protegiam as mercadorias durante o transporte.','Bilhetes registram trajetos e o acesso aos transportes.','Esses registros ajudam a investigar as condições de vida e as reivindicações dos trabalhadores.']
+  ];
+  function artifactRoom(){
+    stopScene();
+    stage.innerHTML='<section class="museum"><header><button class="action" id="museum-back">← Capa</button><h3>Sala de artefatos</h3><small id="museum-count"></small></header><div class="museum-detail" aria-live="polite">Toque em uma peça para conhecer sua história.</div><div id="shelves"></div></section>';
+    let count=0;
+    GABE_WORLDS.forEach((world,w)=>{
+      const shelf=document.createElement('section');
+      shelf.innerHTML='<h4>'+world.title+'</h4><div class="shelf"></div>';
+      world.stages.forEach((stageInfo,f)=>{
+        const found=hasArtifact(w,f),id=artifactIcons[w][f],cols=id<12?4:6,k=id<12?id:id-12;
+        if(found)count++;
+        const button=document.createElement('button');button.className='exhibit'+(found?' found':'');
+        button.setAttribute('aria-label',stageInfo[2]+(found?' · coletado':' · a descobrir'));
+        button.innerHTML='<i aria-hidden="true"></i><span>'+stageInfo[2]+'</span>';
+        const icon=button.querySelector('i');icon.style.backgroundImage='url(img/cronicas-'+(id<12?'objetos':'marcos')+'.webp)';
+        icon.style.backgroundSize=(cols*100)+'% 300%';icon.style.backgroundPosition=(k%cols)*100/(cols-1)+'% '+Math.floor(k/cols)*50+'%';
+        button.onclick=()=>{
+          const info=stage.querySelector('.museum-detail');
+          info.innerHTML='<strong>'+stageInfo[2]+'</strong><p>'+objectNotes[w][f]+'</p><small>'+world.title+' · '+stageInfo[0]+' · '+(found?'Coletado':'A descobrir')+'</small>';
+          info.scrollIntoView({block:'nearest'});stage.querySelectorAll('.exhibit').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+        };
+        shelf.querySelector('.shelf').append(button);
+      });$('shelves').append(shelf);
+    });$('museum-count').textContent=count+' / 36 coletados';$('museum-back').onclick=startMenu;
+  }
   function startMenu(){
     stopScene();stopScene=()=>{};preview=false;
-    stage.innerHTML='<section class="chronicle-title"><img src="img/chronicle-cover.webp" alt="Gabi e Gio avistam o Nilo e as pirâmides"><div><h3><img class="menu-mark" src="img/cronicas-titulo.png" alt="Crônicas de Capivara"></h3><nav><button class="action" id="new-game">Iniciar</button><button class="action secondary-action" id="view-map">Visualizar o mapa</button></nav></div></section>';
-    $('new-game').onclick=newRun;
+    stage.innerHTML='<section class="chronicle-title"><img src="img/chronicle-cover.webp" alt="Gabi e Gio avistam o Nilo e as pirâmides"><div><h3><img class="menu-mark" src="img/cronicas-titulo.png" alt="Crônicas de Capivara"></h3><nav><button class="action" id="new-game">Iniciar</button><button class="action secondary-action" id="view-map">Visualizar o mapa</button><button class="action" id="museum-open">Sala de artefatos</button></nav></div></section>';
+    $('new-game').onclick=newRun;$('museum-open').onclick=artifactRoom;
     $('view-map').onclick=()=>{preview=true;worldIndex=0;phase=0;worldMap()};
   }
   function selectHero(){
@@ -200,17 +254,17 @@ function platformGame(){
       });
       const pin=document.createElement('button');pin.className='travel-pin';pin.style.left=points[i][0]+'%';pin.style.top=points[i][1]+'%';
       pin.textContent=complete?'✓':i+1;pin.setAttribute('aria-label',label+(complete?' · concluído':enabled?' · disponível':' · bloqueado'));pin.title=label;pin.disabled=!enabled&&!preview;pin.onclick=enter;chart.append(pin);
-      const item=document.createElement('button');item.disabled=!enabled&&!preview;item.onclick=enter;
-      item.innerHTML='<b>'+(regional?String(i+1).padStart(2,'0'):['𓂀','◆','Ω','Ⅳ','⚜','⚙'][i])+'</b><span>'+label+'</span><small>'+(regional?(complete?'★'.repeat(progress[worldIndex+'-'+i]):enabled?'Jogar':'Bloqueada'):(enabled?GABE_WORLDS[i].stages.filter((_,p)=>done(i,p)).length+'/6':'Bloqueado'))+'</small>';$('index').append(item);
+      const caption=document.createElement('span');caption.className='pin-caption';caption.textContent=label;
+      pin.append(caption);
     });
-    if(!regional)ranking($('index'));
+    if(!regional)ranking($('index'));else $('index').hidden=true;
   }
   function worldMap(){travelMap(false)}
   function phaseMap(){travelMap(true)}
   function gabeIcon(){return '<img width="100%" height="100%" alt="'+hero+'" src="img/'+hero.toLowerCase()+'-portrait.webp">'}
   function runPhase(){
     stopScene();let stopped=false,raf=0,keys={},last=0,acc=0,time=0,hits=0,cooldown=0,checkpoint=0,invuln=0;const w=GABE_WORLDS[worldIndex],s=w.stages[phase];
-    stage.innerHTML='<div class="campaign-top"><span>'+w.title+' · Fase '+(phase+1)+' / 6</span></div><h3>'+s[0]+'</h3><div class="hud"><span id="gabe-hearts">♥ ♥ ♥</span><span id="gabe-items">0 / 3 · '+s[2]+'</span><span id="gabe-time">00:00</span></div><div class="play-console"><div class="platform-wrap campaign-screen"><canvas id="gabe-canvas" width="480" height="270" tabindex="0" aria-label="'+hero+' em '+s[0]+'"></canvas></div><div class="controls platform-controls campaign-controls"><button data-move="left" aria-label="Mover para esquerda">←</button><button data-move="right" aria-label="Mover para direita">→</button><button data-move="duck" aria-label="Abaixar">↓</button><button data-move="special" id="power"></button><button data-move="jump" aria-label="Pular">↑ Pular</button><button id="gabe-restart" aria-label="Reiniciar fase">↻</button><button id="phase-back" class="map-key" aria-label="Voltar ao mapa">Mapa</button></div></div><div class="field-notes"><div class="gabe-mini">'+gabeIcon()+'</div><div><strong>Diário de '+hero+'</strong><p id="gabe-note" role="status">'+s[3]+'</p><small>Uma estrela abre o portal. Cada estrela vale 100 pontos. O artefato dobra o total. · As tábuas cedem. O sinal ! avisa quando um inimigo vai saltar. · ↓ para abaixar · Espaço para saltar · X para usar a habilidade.</small></div></div>';
+    stage.innerHTML='<div class="campaign-top"><span>'+w.title+' · Fase '+(phase+1)+' / 6</span></div><h3>'+s[0]+'</h3><div class="hud"><span id="gabe-hearts">♥ ♥ ♥</span><span id="gabe-items">0 / 3 · '+s[2]+'</span><span id="gabe-time">00:00</span></div><div class="play-console"><div class="platform-wrap campaign-screen"><canvas id="gabe-canvas" width="480" height="270" tabindex="0" aria-label="'+hero+' em '+s[0]+'"></canvas></div><div class="controls platform-controls campaign-controls"><div class="steer-pad"><button data-move="left" aria-label="Mover para esquerda">←</button><button data-move="right" aria-label="Mover para direita">→</button><button data-move="duck" aria-label="Abaixar">↓</button></div><div class="ability-pad"><button data-move="special" id="power"></button><button data-move="jump" aria-label="Pular">↑ Pular</button></div><div class="console-tools"><button id="gabe-restart" aria-label="Reiniciar fase">↻</button><button id="phase-back" class="map-key" aria-label="Voltar ao mapa">Mapa</button></div></div></div><div class="field-notes"><div class="gabe-mini">'+gabeIcon()+'</div><div><strong>Diário de '+hero+'</strong><p id="gabe-note" role="status">'+s[3]+'</p><small>Uma estrela abre o portal. Cada estrela vale 100 pontos. O artefato dobra o total. · As tábuas cedem. O sinal ! avisa quando um inimigo vai saltar. · ↓ para abaixar · Espaço para saltar · X para usar a habilidade.</small></div></div>';
     const canvas=$('gabe-canvas'),ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;const W=480,H=270,ground=228,worldLen=4140+phase*216;
     // Hand-authored itineraries: ferry, terraces, lift, bridge, market, patrol.
     const routes=[
@@ -221,6 +275,7 @@ function platformGame(){
       ['MMBMRMBMRM','TMTRMTLTRM','BTBRBTLRBT','RMRTRMRMRT','MRBMRTRBRM','RMTBRMTFMR'],
       ['LBLMLBLMLB','MLBRMLBLRM','LLTBLTLLBT','FMFFLFMFFL','BRMBRMBRMB','MLFTBRMLFT']
     ];
+    const portal={x:worldLen-116,y:ground-31,r:29};
     const pads=[],relics=[],obstacles=[],gaps=[];
     const route=routes[worldIndex][phase];
     const diving=worldIndex===0&&phase===0, shots=[];
@@ -251,7 +306,7 @@ function platformGame(){
       const x=100+Math.floor(i*(worldLen-240)/route.length),type=route[i];
       if(diving){
         if([1,4,6,8].includes(i))relics.push({x:x+122,y:[0,68,0,0,185,0,133,0,92][i],artifact:i===6,got:false});
-        if(i>0)obstacles.push({origin:x+175,x:x+175,y:182,w:i%3===0?66:32,h:i%3===0?20:18,species:i%3===0?'croc':'fish',kind:0,depth:85+(i*47)%126});
+        if(i>0)obstacles.push({origin:x+175,x:x+175,y:182,w:i%3===0?66:32,h:i%3===0?20:18,species:i%3===0?'croc':'fish',variant:([1,2,4,5,7,8].indexOf(i)+3)%3,volley:0,wait:45,kind:0,depth:85+(i*47)%126});
         continue;
       }
       let shelf;
@@ -319,6 +374,32 @@ function platformGame(){
       leaves.push({page,x:p.x+p.w/2,y:p.y+p.h/2,w:page?15:10,h:page?12:6,vx:p.face*(page?3.7:4.3),life:80});
       cooldown=page?72:48;
     }
+    function swim(o){
+      const croc=o.species==='croc',angle=o.walkTime/(croc?78:44)+o.origin;
+      const patrol=o.origin+Math.sin(angle)*(croc?68:48);
+      const depth=o.depth+Math.sin(angle*1.6)*(croc?7:16);
+      const dx=p.x+p.w/2-o.x-o.w/2,dy=p.y+p.h/2-o.y-o.h/2;
+      if(o.dash>0){
+        o.x+=o.face*4.5;o.y+=o.aimY;o.dash--;return;
+      }
+      if(o.windup>0){
+        o.windup--;if(!o.windup){o.dash=24;o.wait=180}
+        return;
+      }
+      o.x+=Math.max(-2,Math.min(2,patrol-o.x));o.y+=(depth-o.y)*.12;
+      o.face=Math.cos(angle)>=0?1:-1;
+      if(o.wait>0)o.wait--;
+      if(o.wait||Math.abs(dx)>175||Math.abs(dy)>(croc?48:100))return;
+      o.face=dx<0?-1:1;
+      if(croc){o.windup=24;o.aimY=Math.max(-1.1,Math.min(1.1,dy/24));return}
+      const triple=o.variant===1||(o.variant===2&&o.volley%2===1);
+      const heading=Math.atan2(dy,dx);
+      for(const offset of triple?[-.23,0,.23]:[0]){
+        shots.push({bubble:true,x:o.x+(o.face>0?o.w:0),y:o.y+o.h/2,w:8,h:8,
+          vx:1.6*Math.cos(heading+offset),vy:1.6*Math.sin(heading+offset),life:125});
+      }
+      o.volley++;o.wait=triple?172:119;
+    }
     function tick(){time++;
       if(cooldown)cooldown--;
       if(keys.special)special();
@@ -345,12 +426,9 @@ function platformGame(){
           continue
         }
         o.walkTime=(o.walkTime||0)+1;
-        o.x=o.origin+Math.round((42+phase*2)*Math.sin(o.walkTime/(46-phase*2)+o.origin));
+        if(!diving)o.x=o.origin+Math.round((42+phase*2)*Math.sin(o.walkTime/(46-phase*2)+o.origin));
         if(diving){
-          const speed=o.species==='croc'?78:44, angle=time/speed+o.origin;
-          o.x=o.origin+Math.sin(angle)*(o.species==='croc'?74:51);
-          o.y=o.depth+Math.sin(angle*1.6)*(o.species==='croc'?6:16);
-          o.face=Math.cos(angle)>=0?1:-1;continue;
+          swim(o);continue;
         }
         const cycle=(time+o.origin)%144;
         o.warning=(o.kind===1&&cycle>=70&&cycle<94)||(o.kind===3&&cycle>=85&&cycle<110);
@@ -371,7 +449,7 @@ function platformGame(){
         }
       }
       for(let j=shots.length-1;j>=0;j--){
-        const shot=shots[j];shot.x+=shot.vx;
+        const shot=shots[j];shot.x+=shot.vx;shot.y+=shot.vy||0;
         if(--shot.life<=0){shots.splice(j,1);continue}
         if(!invuln&&intersects(p,shot)){shots.splice(j,1);damage();if(stopped)return}
       }
@@ -379,7 +457,7 @@ function platformGame(){
         if(o.sleep||o.stun||!intersects(p,o))continue;
         if(!diving&&p.vy>0&&old<=o.y+5){stun(o);p.y=o.y-p.h;p.vy=-6;p.on=false;break}
         if(!invuln){damage();return}
-      }for(const r of relics)if(!r.got&&intersects(p,{x:r.x-8,y:r.y-8,w:16,h:16})){r.got=true;hud();note(r.artifact?'Artefato ×2 · '+s[2]+'. '+s[3]:'Estrela coletada! '+starsFound()+' de 3.')}if(p.x>worldLen*.49&&checkpoint===0&&(diving||p.on&&p.y+p.h===ground)){checkpoint=Math.max(0,p.x-24);note('Ponto de descanso registrado!')}if(p.x>worldLen-48){if(starsFound()>0&&(!mission||actionIndex===3)){complete();return}else note(mission&&actionIndex<3?'Visite a estação: '+mission[1][actionIndex]:'Encontre uma estrela para abrir o portal.')}cam=Math.max(0,Math.min(worldLen-W,p.x-150));if(time%30===0){const t=Math.floor(time/60);$('gabe-time').textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}}
+      }for(const r of relics)if(!r.got&&intersects(p,{x:r.x-8,y:r.y-8,w:16,h:16})){r.got=true;if(r.artifact)catalogArtifact(worldIndex,phase);hud();note(r.artifact?'Artefato ×2 · '+s[2]+'. '+s[3]:'Estrela coletada! '+starsFound()+' de 3.')}if(p.x>worldLen*.49&&checkpoint===0&&(diving||p.on&&p.y+p.h===ground)){checkpoint=Math.max(0,p.x-24);note('Ponto de descanso registrado!')}if(Math.hypot(p.x+p.w/2-portal.x,p.y+p.h/2-portal.y)<portal.r){if(starsFound()>0&&(!mission||actionIndex===3)){complete();return}else note(mission&&actionIndex<3?'Visite a estação: '+mission[1][actionIndex]:'Encontre uma estrela para abrir o portal.')}cam=Math.max(0,Math.min(worldLen-W,p.x-150));if(time%30===0){const t=Math.floor(time/60);$('gabe-time').textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}}
     function complete(){const stars=starsFound();save(worldIndex,phase,stars);reach=Math.max(reach,(worldIndex*6+phase+1)*100);if(reach===3600){endRun(true);return}stopScene();stage.innerHTML='<div class="complete campaign-win"><div class="gabe-mini">'+gabeIcon()+'</div><h3>Fase concluída!</h3><div class="victory-stars">'+'★'.repeat(stars)+'☆'.repeat(3-stars)+'</div><p>'+s[0]+' · '+s[3]+'</p><p>'+score()+' pontos'+(doubled()?' · Artefato histórico ×2':'')+' · '+hits+' danos</p><button class="action" id="next-phase">'+(phase<5?'Próxima fase':'Mapa geral')+'</button><button class="action secondary-action" id="phase-list">Escolher outra fase</button></div>';$('next-phase').onclick=()=>{if(phase<5){phase++;runPhase()}else worldMap()};$('phase-list').onclick=phaseMap}
     function box(x,y,a,b,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),Math.round(a),Math.round(b))}
     function icon(sheet,index,x,y,width,height,flip=false){
@@ -389,13 +467,17 @@ function platformGame(){
       ctx.drawImage(sheet,(index%cols)*96,Math.floor(index/cols)*96,96,96,-width/2,-height/2,width,height);ctx.restore();
     }
     function drawSwimmer(o){
-      const size=o.species==='croc'?82:40;
-      icon(gameIcons,o.species==='croc'?1:0,o.x+o.w/2,o.y+o.h/2,size,size,o.face<0);
+      const croc=o.species==='croc';
+      const frame=croc?(o.dash||o.windup?5:3+Math.floor(time/12)%2):o.variant;
+      if(!nileFauna.naturalWidth){icon(gameIcons,croc?1:0,o.x+o.w/2,o.y+o.h/2,o.w+8,o.w+8,o.face<0);return}
+      ctx.save();ctx.translate(o.x+o.w/2,o.y+o.h/2);ctx.scale(o.face,1);
+      ctx.rotate(o.dash?o.aimY*.08:Math.sin(time/10+o.origin)*.055);
+      const size=croc?82:43;
+      ctx.drawImage(nileFauna,frame%3*128,Math.floor(frame/3)*128,128,128,-size/2,-size/2,size,size);
+      ctx.restore();
+      if(o.windup){ctx.fillStyle='#ffe598';ctx.font='bold 12px monospace';ctx.fillText('!',o.x+o.w/2,o.y-7)}
     }
-    const relicArt=[
-      [4,9,9,18,19,9],[20,7,7,7,8,4],[4,21,4,22,5,6],
-      [6,27,15,23,5,9],[8,10,10,10,10,9],[24,8,25,26,27,9]
-    ][worldIndex][phase];
+    const relicArt=artifactIcons[worldIndex][phase];
     function frame(){
       drawBackdrop(ctx,W,H,worldIndex,phase,cam,time);
       ctx.save();ctx.translate(-Math.floor(cam),0);for(const b of solids){if(diving)continue;
@@ -445,6 +527,10 @@ function platformGame(){
         box(leaf.x,leaf.y+2,10,3,'#568337');box(leaf.x+3,leaf.y,6,4,'#a8db62');box(leaf.x+1,leaf.y+4,5,1,'#d6eca5');
       }
       for(const shot of shots){
+        if(shot.bubble){
+          const x=shot.x+4,y=shot.y+4;ctx.fillStyle='#87ebff77';ctx.strokeStyle='#e4fdff';ctx.lineWidth=1.3;
+          ctx.beginPath();ctx.arc(x,y,4.5,0,Math.PI*2);ctx.fill();ctx.stroke();box(x-2,y-2,2,1,'white');continue;
+        }
         const size=23+Math.sin(time*.6)*3;icon(gameIcons,11,shot.x+4,shot.y+3,size,size,shot.vx<0);
       }
       if(diving){
@@ -471,9 +557,17 @@ function platformGame(){
         icon(prop<12?gameIcons:treasures,prop<12?prop:prop-12,point.x,point.y-23,34,34);
         ctx.restore();
       });
-      const ex=worldLen-40;
-      ctx.save();ctx.globalAlpha=starsFound()&&(!mission||actionIndex===3)?1:.65;
-      icon(gameIcons,3,ex,ground-39,85+Math.sin(time/11)*3,85);ctx.restore();
+      ctx.save();ctx.translate(portal.x,portal.y);
+      const active=starsFound()>0&&(!mission||actionIndex===3);
+      ctx.globalAlpha=active?1:.55;
+      ctx.fillStyle='#34205abc';ctx.beginPath();ctx.arc(0,0,portal.r,0,Math.PI*2);ctx.fill();
+      ctx.strokeStyle=active?'#83efff':'#aa9cb8';ctx.lineWidth=2;ctx.stroke();ctx.rotate(time*.038);
+      for(let arm=0;arm<3;arm++){
+        ctx.rotate(2*Math.PI/3);ctx.strokeStyle=['#a088ff','#48cfef','#e7c2ff'][arm];ctx.lineWidth=2;ctx.beginPath();
+        for(let j=0;j<=22;j++){const t=j/22,r=4+22*t,x=Math.cos(t*3.8)*r,y=Math.sin(t*3.8)*r;if(!j)ctx.moveTo(x,y);else ctx.lineTo(x,y)}
+        ctx.stroke();
+      }
+      ctx.restore();
       const marker=Math.floor(worldLen*.49);
       icon(treasures,worldIndex,marker,ground-24,48,48);
       if(checkpoint){ctx.fillStyle='#fff199';ctx.beginPath();ctx.arc(marker,ground-52,2.5,0,Math.PI*2);ctx.fill()}
@@ -530,6 +624,7 @@ function platformGame(){
   startMenu()
 }
 </script></body></html>
+
 
 
 
