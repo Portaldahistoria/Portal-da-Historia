@@ -12,7 +12,7 @@
 .chronicle-title nav{display:grid;gap:10px;width:min(100%,220px)}.chronicle-title nav .action{min-height:44px;padding:9px 6px;margin:0;border:1px solid #f1cc83;border-radius:6px;background:#f4ce81;color:#33281b;font:bold clamp(14px,2vw,19px) Georgia,serif;box-shadow:0 3px 0 #805c2e}.chronicle-title nav .secondary-action{background:#173c49;color:#ffebc5;box-shadow:0 3px 0 #081f29}.chronicle-title nav button:hover{filter:brightness(1.1)}
 @media(max-width:570px){.chronicle-title{min-height:225px}.chronicle-title img{width:77%;object-position:19% center}.chronicle-title>div{width:48%;padding:14px 8px 14px 14px}.chronicle-title h3{font-size:clamp(22px,6.4vw,33px)!important}.chronicle-title nav{gap:8px}}
 .map-traveler{position:absolute;width:32px;height:40px;background-size:600% 100%;image-rendering:pixelated;transform:translate(-50%,calc(-100% - 8px));pointer-events:none;z-index:2;transition:left .34s ease,top .34s ease;filter:drop-shadow(0 2px 1px #203640)}.travel-chart{aspect-ratio:1.55;border:3px solid #aa8347;border-radius:10px}.campaign-controls button{touch-action:none;user-select:none;-webkit-user-select:none;min-height:46px;min-width:46px}.campaign-controls button:active{background:#21667a;color:white}
-.cover.chronicle-card-cover{height:auto;aspect-ratio:2/1}.cover>.gallery-wordmark{position:absolute;right:2%;top:50%;transform:translateY(-50%);width:47%;height:auto;max-width:235px;image-rendering:pixelated;pointer-events:none}.dev-strip{background:white;border-left:4px solid #963643;padding:5px 12px;color:#67343c;font:700 12px monospace;margin-bottom:12px}
+.cover.chronicle-card-cover{height:auto;aspect-ratio:2/1}.cover>.gallery-wordmark{position:absolute;right:3%;top:50%;transform:translateY(-50%);width:43%;height:auto;max-width:235px;image-rendering:pixelated;pointer-events:none}.dev-strip{background:white;border-left:4px solid #963643;padding:5px 12px;color:#67343c;font:700 12px monospace;margin-bottom:12px}
 .chronicle-title>div{background:linear-gradient(90deg,transparent,#352334e8 13%,#302036f7);border-left:3px solid #c39751}
 .chronicle-title h3{width:94%}.chronicle-title h3 img.menu-mark{position:static;display:block;width:100%;height:auto;image-rendering:pixelated}
 .chronicle-title nav .action,.campaign-controls button,.record-end .action{border:2px solid #e8bc6c;border-radius:2px;box-shadow:inset 0 0 0 2px #684858,2px 3px #342439;background:#533546;color:#fff1ca;font:bold clamp(12px,2vw,16px) monospace}
@@ -34,7 +34,7 @@ function art(name,fill){
 }
 function cover(kind){
   const src=kind===5?'chronicle-cover':'galeria-capivaras-'+kind;
-  const title=kind===5?'<img class="gallery-wordmark" src="img/cronicas-assinatura.png" alt="">':'';
+  const title=kind===5?'<img class="gallery-wordmark" src="img/cronicas-titulo.png" alt="">':'';
   return '<img class="illustrated-cover" src="img/'+src+'.webp" alt="">'+title;
 }
 const games=[['Corrida pelo Tempo','Ordene as relíquias na linha do tempo.','CRONOLOGIA',timelineGame],['Detetive da História','Procure objetos históricos escondidos no arquivo.','OBJETOS OCULTOS',detectiveGame],['Conexões Históricas','Vire cartas e encontre pares de conceitos.','MEMÓRIA',memoryGame],['Expedição Romana','Atravesse o labirinto e recolha os artefatos.','AVENTURA',mazeGame],['Geografia Histórica','Trace rotas pelo Mediterrâneo e descubra cidades.','MAPA',mapGame],['Crônicas de Capivara','Explore diferentes períodos da História com Gabi e Gio, suas capivarinhas guias.','',platformGame]];
