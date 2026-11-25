@@ -14,7 +14,9 @@
   const state=make('span','Preparando estudo offline…','pwa-state');state.setAttribute('role','status');
   const androidWebView=/Android/i.test(navigator.userAgent)&&(/;\s*wv\b/i.test(navigator.userAgent)||/Version\/4\.0.*Chrome\//i.test(navigator.userAgent));
   const appMode=androidWebView||matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
-  if(!appMode)toolbar.append(install);toolbar.append(studies,state);
+  if(!appMode)toolbar.append(install);toolbar.append(studies);
+  const footer=document.querySelector('footer')||document.body.appendChild(document.createElement('footer'));
+  footer.append(state);
   const measureHeader=()=>document.documentElement.style.setProperty('--portal-header-height',Math.ceil(header.getBoundingClientRect().height)+'px');
   new ResizeObserver(measureHeader).observe(header);measureHeader();
   const modal=make('dialog',null,'pwa-dialog');modal.setAttribute('aria-label','Meus estudos e instalação');document.body.append(modal);
