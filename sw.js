@@ -1,5 +1,5 @@
 /* Portal da História — offline application shell. */
-const VERSION = 'portal-historia-pwa-v84';
+const VERSION = 'portal-historia-pwa-v85';
 const CORE = VERSION + '-core';
 const MEDIA = 'portal-historia-pwa-v1-media';
 const BASE = new URL('./', self.location.href);
@@ -14,7 +14,7 @@ const files = [
   'img/gabi-portrait.webp','img/gio-portrait.webp','img/gabi-walk.webp','img/gio-walk.webp','img/chronicle-fauna.webp',
   ...Array.from({length:6},(_,i)=>'img/chronicle-world-'+i+'.webp'),
   ...Array.from({length:5},(_,i)=>'img/chronicle-game-'+i+'.webp'),
-  'campaign-landscape.js','jogos.css','jogos.js',
+  'campaign-landscape.js','nile-boss.js','jogos.css','jogos.js','img/guardiao-nilo-poses-v78.png',
   'img/cronicas-chefes-v77.png','img/cronicas-arenas-v77.png','img/acervo-36-v77.png','img/gabi-trilha.webp','img/gio-trilha.webp','img/gabi-swim.webp','img/gio-swim.webp','img/chronicle-cover.webp','img/cronicas-titulo.png','img/egito-roteiro.webp','img/chronicle-islands.webp','img/fauna-do-nilo.webp','img/cronicas-objetos.webp','img/cronicas-marcos.webp','img/oficina-escribas.webp',
   './','index.html','jogos.html','og-image.png','manifest.webmanifest','app-icon-192.png','app-icon-512.png','aplicativo.html','aplicativo.js',
   'pwa.js','pwa.css','style.css','portal.css','refinement.css','fullwidth.css',
