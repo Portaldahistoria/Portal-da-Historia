@@ -287,7 +287,7 @@ function platformGame(){
   function gabeIcon(){return '<img width="100%" height="100%" alt="'+hero+'" src="img/'+hero.toLowerCase()+'-portrait.webp">'}
   function runPhase(){
     stopScene();let stopped=false,raf=0,keys={},last=0,acc=0,time=0,hits=0,cooldown=0,checkpoint=0,invuln=0;const w=GABE_WORLDS[worldIndex],s=w.stages[phase];
-    stage.innerHTML='<div class="campaign-top"><span>'+w.title+' · Fase '+(phase+1)+' / 6</span></div><h3>'+s[0]+'</h3><div class="hud"><span id="gabe-hearts">♥ ♥ ♥</span><span id="gabe-items">0 / 3 · '+s[2]+'</span><span id="gabe-time">00:00</span></div><div class="play-console"><div class="platform-wrap campaign-screen"><canvas id="gabe-canvas" width="480" height="270" tabindex="0" aria-label="'+hero+' em '+s[0]+'"></canvas></div><div class="controls platform-controls campaign-controls"><div class="steer-pad"><button data-move="left" aria-label="Mover para esquerda">←</button><button data-move="right" aria-label="Mover para direita">→</button><button data-move="duck" aria-label="Abaixar">↓</button></div><div class="ability-pad"><button data-move="special" id="power"></button><button data-move="jump" aria-label="Pular">↑ Pular</button></div><div class="console-tools"><button id="gabe-restart" aria-label="Reiniciar fase">↻</button><button id="phase-back" class="map-key" aria-label="Voltar ao mapa">Mapa</button></div></div></div><div class="field-notes"><div class="gabe-mini">'+gabeIcon()+'</div><div><strong>Diário de '+hero+'</strong><p id="gabe-note" role="status">'+s[3]+'</p><small>Uma estrela abre o portal. Cada estrela vale 100 pontos. O artefato dobra o total. · As tábuas cedem. O sinal ! avisa quando um inimigo vai saltar. · ↓ para abaixar · Espaço para saltar · X para usar a habilidade.</small></div></div>';
+    stage.innerHTML='<div class="campaign-top"><span>'+w.title+' · Fase '+(phase+1)+' / 6</span></div><h3>'+s[0]+'</h3><div class="hud"><span id="gabe-hearts">♥ ♥ ♥</span><span id="gabe-items">0 / 3 · '+s[2]+'</span><span id="gabe-time">00:00</span></div><div class="play-console"><div class="platform-wrap campaign-screen"><canvas id="gabe-canvas" width="480" height="270" tabindex="0" aria-label="'+hero+' em '+s[0]+'"></canvas></div><div class="controls platform-controls campaign-controls"><div class="steer-pad"><button data-move="left" aria-label="Mover para esquerda">←</button><button data-move="right" aria-label="Mover para direita">→</button><button data-move="duck" aria-label="Abaixar">↓</button></div><div class="ability-pad"><button data-move="special" id="power"></button><button data-move="jump" aria-label="Pular">↑ Pular</button></div><div class="console-tools"><button id="gabe-restart" aria-label="Reiniciar fase">↻</button><button id="phase-back" class="map-key" aria-label="Voltar ao mapa">Mapa</button></div></div></div><div class="field-notes"><div class="gabe-mini">'+gabeIcon()+'</div><div><strong>Diário de '+hero+'</strong><p id="gabe-note" role="status">'+s[3]+'</p><small>Uma estrela abre o portal. Cada estrela vale 100 pontos. O artefato dobra o total. · As tábuas cedem. O sinal ! avisa quando um inimigo vai saltar. · ↓ para abaixar · Espaço para saltar · X ou J para usar a habilidade.</small></div></div>';
     const canvas=$('gabe-canvas'),ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;const W=480,H=270,ground=228,worldLen=4140+phase*216;
     // Hand-authored itineraries: ferry, terraces, lift, bridge, market, patrol.
     const routes=[
@@ -303,8 +303,8 @@ function platformGame(){
     const route=routes[worldIndex][phase];
     const diving=worldIndex===0&&phase===0, shots=[];
     const leaves=[];
-    const power=$('power');power.textContent=hero==='Gio'?'Folhas':'Páginas';
-    power.title=hero==='Gio'?'Lançar folhas (X)':'Lançar páginas que paralisam (X)';
+    const power=$('power');power.textContent=hero==='Gio'?'Folhas (X/J)':'Ampulhetas (X/J)';
+    power.title=hero==='Gio'?'Lançar folhas (X ou J)':'Lançar ampulhetas que paralisam (X ou J)';
     if(diving){
       stage.querySelector('[data-move="duck"]').hidden=true;
       const button=stage.querySelector('[data-move="jump"]');button.textContent='↑ Nadar';button.setAttribute('aria-label','Nadar para cima');
@@ -545,7 +545,7 @@ function platformGame(){
         box(o.x+2+step*3,o.y+12,5,3,'#503951');box(o.x+13-step*3,o.y+12,5,3,'#503951');
       }
       for(const leaf of leaves){
-        if(leaf.page){icon(gameIcons,10,leaf.x+7,leaf.y+5+Math.sin(time/5)*2,20,20,leaf.vx<0);continue}
+        if(leaf.page){ctx.save();ctx.translate(leaf.x+7,leaf.y+6);ctx.rotate(Math.floor(time/6)%8*Math.PI/4);box(-7,-8,14,3,'#8a563a');box(-6,-7,12,1,'#ffe2a0');box(-6,5,12,3,'#8a563a');box(-5,-5,10,10,'#4b3544');box(-4,-4,8,2,'#d4c5a0');box(-3,-2,6,2,'#ffdfa8');box(-1,0,2,2,'#ffdfa8');box(-3,2,6,3,'#e8b75c');ctx.restore();continue}
         box(leaf.x,leaf.y+2,10,3,'#568337');box(leaf.x+3,leaf.y,6,4,'#a8db62');box(leaf.x+1,leaf.y+4,5,1,'#d6eca5');
       }
       for(const shot of shots){
@@ -568,8 +568,7 @@ function platformGame(){
         const y=r.y+Math.sin((time+r.x)/12)*2;
         if(!r.artifact){icon(gameIcons,2,r.x,y,24,24);continue}
         if(collectionArt.naturalWidth)ctx.drawImage(collectionArt,phase*144,worldIndex*144,144,144,r.x-20,y-22,40,40);
-        ctx.font='bold 10px sans-serif';ctx.textAlign='center';
-        const width=ctx.measureText(s[2]).width+10;box(r.x-width/2,y-36,width,14,'#282431df');ctx.fillStyle='#ffe9b2';ctx.fillText(s[2],r.x,y-26);ctx.textAlign='left';
+
       }
       stations.forEach((point,j)=>{
         if(point.x<cam-40||point.x>cam+W+40)return;
@@ -581,14 +580,11 @@ function platformGame(){
       });
       ctx.save();ctx.translate(portal.x,portal.y);
       const active=starsFound()>0&&(!mission||actionIndex===3);
-      ctx.globalAlpha=active?1:.55;
-      ctx.fillStyle='#34205abc';ctx.beginPath();ctx.arc(0,0,portal.r,0,Math.PI*2);ctx.fill();
-      ctx.strokeStyle=active?'#83efff':'#aa9cb8';ctx.lineWidth=2;ctx.stroke();ctx.rotate(time*.038);
-      for(let arm=0;arm<3;arm++){
-        ctx.rotate(2*Math.PI/3);ctx.strokeStyle=['#a088ff','#48cfef','#e7c2ff'][arm];ctx.lineWidth=2;ctx.beginPath();
-        for(let j=0;j<=22;j++){const t=j/22,r=4+22*t,x=Math.cos(t*3.8)*r,y=Math.sin(t*3.8)*r;if(!j)ctx.moveTo(x,y);else ctx.lineTo(x,y)}
-        ctx.stroke();
-      }
+      const stone=['#c69b62','#ab7051','#d2c1a5','#b9aa98','#9e938d','#8f6453'][worldIndex],shade=['#88603f','#703e36','#8c8278','#776c69','#625b69','#523b3c'][worldIndex],light=['#ffdf88','#f7b974','#bce8ff','#f8d28e','#dfc8ff','#ffb879'][worldIndex];
+      const radius=portal.r;ctx.fillStyle=active?'#251c37':'#30282d';ctx.beginPath();ctx.arc(0,0,radius-2,0,Math.PI*2);ctx.fill();
+      if(active){const reduced=typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches;const pulse=reduced?0:time*.04;const glow=ctx.createRadialGradient(0,0,2,0,0,radius-2);glow.addColorStop(0,light);glow.addColorStop(.38,'#664d73');glow.addColorStop(1,'#211a30');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(0,0,radius-2,0,Math.PI*2);ctx.fill();for(let j=0;j<8;j++){const angle=j*Math.PI/4+pulse;box(Math.cos(angle)*(radius-7),Math.sin(angle)*(radius-7),2,2,light)}}
+      for(let j=0;j<12;j++){const angle=j*Math.PI/6;ctx.save();ctx.rotate(angle);box(-4,-radius-5,8,9,shade);box(-3,-radius-5,6,6,stone);box(-3,-radius-5,6,1,'#f4d9aa');ctx.restore()}
+      for(let j=0;j<3;j++){const angle=-Math.PI/2+(j-1)*.55;const x=Math.cos(angle)*(radius+2),y=Math.sin(angle)*(radius+2);box(x-3,y-3,6,6,shade);box(x-2,y-2,4,4,j<starsFound()?light:'#41343e')}
       ctx.restore();
       const marker=Math.floor(worldLen*.49);
       icon(treasures,worldIndex,marker,ground-24,48,48);
@@ -609,7 +605,7 @@ function platformGame(){
       ctx.restore()
     }
     function loop(t){if(stopped||disposed)return;if(!last)last=t;acc+=Math.min(50,t-last);last=t;while(acc>=16.67&&!stopped){tick();acc-=16.67}if(stopped)return;frame();raf=requestAnimationFrame(loop)}
-    const km={ArrowDown:'duck',s:'duck',S:'duck',x:'special',X:'special',ArrowLeft:'left',a:'left',A:'left',ArrowRight:'right',d:'right',D:'right',ArrowUp:'jump',w:'jump',W:'jump',' ':'jump'};const down=e=>{if(km[e.key]){e.preventDefault();keys[km[e.key]]=true}},up=e=>{if(km[e.key])keys[km[e.key]]=false},blur=()=>{keys={}};document.addEventListener('keydown',down);document.addEventListener('keyup',up);window.addEventListener('blur',blur);stage.querySelectorAll('[data-move]').forEach(b=>{const k=b.dataset.move;b.onpointerdown=e=>{e.preventDefault();b.setPointerCapture(e.pointerId);keys[k]=true};b.onpointerup=b.onpointercancel=b.onlostpointercapture=()=>keys[k]=false});stopScene=()=>{stopped=true;cancelAnimationFrame(raf);document.removeEventListener('keydown',down);document.removeEventListener('keyup',up);window.removeEventListener('blur',blur)};$('phase-back').onclick=phaseMap;$('gabe-restart').onclick=runPhase;hud();frame();canvas.focus({preventScroll:true});raf=requestAnimationFrame(loop)
+    const km={ArrowDown:'duck',s:'duck',S:'duck',x:'special',X:'special',j:'special',J:'special',ArrowLeft:'left',a:'left',A:'left',ArrowRight:'right',d:'right',D:'right',ArrowUp:'jump',w:'jump',W:'jump',' ':'jump'};const down=e=>{if(km[e.key]){e.preventDefault();keys[km[e.key]]=true}},up=e=>{if(km[e.key])keys[km[e.key]]=false},blur=()=>{keys={}};document.addEventListener('keydown',down);document.addEventListener('keyup',up);window.addEventListener('blur',blur);stage.querySelectorAll('[data-move]').forEach(b=>{const k=b.dataset.move;b.onpointerdown=e=>{e.preventDefault();b.setPointerCapture(e.pointerId);keys[k]=true};b.onpointerup=b.onpointercancel=b.onlostpointercapture=()=>keys[k]=false});stopScene=()=>{stopped=true;cancelAnimationFrame(raf);document.removeEventListener('keydown',down);document.removeEventListener('keyup',up);window.removeEventListener('blur',blur)};$('phase-back').onclick=phaseMap;$('gabe-restart').onclick=runPhase;hud();frame();canvas.focus({preventScroll:true});raf=requestAnimationFrame(loop)
   }
   function drawBackdrop(c,W,H,wi,pi,cam,t){const scene=wi===0&&pi===0?nileScene:wi===0&&pi===1?workshop:chronicleScenes[wi];
     if(!scene.complete&&c.canvas.id!=='gabe-canvas'){
