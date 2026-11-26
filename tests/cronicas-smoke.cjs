@@ -34,6 +34,8 @@ const fs = require('node:fs');
       await f.locator('.travel-pin').first().click();
       await f.locator('#gabe-canvas').waitFor({state:'visible',timeout:15000});
       assert.deepEqual(await f.locator('#gabe-canvas').evaluate(el=>[el.width,el.height]),[960,540]);
+      assert.equal(await f.locator('.game-help').count(),0);
+      if(w===0){assert.equal(await f.locator('#artifact-toast').isVisible(),false);assert.equal(await f.locator('.play-console').evaluate(el=>getComputedStyle(el).borderTopWidth),'0px')}
       await f.locator('#gabe-canvas').focus();
       await page.keyboard.down('ArrowRight');
       await page.waitForTimeout(350);

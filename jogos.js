@@ -43,6 +43,16 @@ const gameIcons=new Image();gameIcons.src='img/cronicas-objetos.webp';
 const treasures=new Image();treasures.src='img/cronicas-marcos.webp';
 const workshop=new Image();workshop.src='img/oficina-escribas.webp';
 const nileScene=new Image();nileScene.src='img/chronicle-nile.webp';
+const nilePanorama=new Image();nilePanorama.src='img/nilo-panorama-v81.png';
+const nileProps=new Image();nileProps.src='img/nilo-objetos-v81.png';
+function drawHourglass(ctx,x,y,scale=1){
+  ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.imageSmoothingEnabled=false;
+  const poly=(points,color)=>{ctx.fillStyle=color;ctx.beginPath();points.forEach(([a,b],i)=>i?ctx.lineTo(a,b):ctx.moveTo(a,b));ctx.closePath();ctx.fill()};
+  poly([[-7,-9],[7,-9],[6,-5],[2,0],[6,5],[7,9],[-7,9],[-6,5],[-2,0],[-6,-5]],'#3e2b28');
+  poly([[-5,-7],[5,-7],[4,-4],[1,0],[4,4],[5,7],[-5,7],[-4,4],[-1,0],[-4,-4]],'#b8d6df');
+  poly([[-4,-5],[4,-5],[0,-1]],'#f3bd5d');poly([[-4,6],[0,2],[4,6]],'#f3bd5d');
+  ctx.fillStyle='#fff2a8';ctx.fillRect(-1,0,1,4);ctx.fillStyle='#c18b37';ctx.fillRect(-8,-10,16,3);ctx.fillRect(-8,7,16,3);ctx.fillStyle='#ffe19a';ctx.fillRect(-7,-10,14,1);ctx.fillRect(-7,7,14,1);ctx.restore();
+}
 function platformGame(){
   let worldIndex=0,phase=0,stopScene=()=>{},progress={},lives=3,health=2,reach=0;
   let disposed=false,hero='Gabi',playerId='',playerName='';
@@ -263,7 +273,7 @@ function platformGame(){
   ];
   const bossPoints=[[50,56],[87,52],[82,78],[57,13],[84,16],[16,25]];
   function pixelControls(root){
-    const shapes={left:'M1 8h3V5h3V2h3v5h6v6h-6v5H7v-3H4v-3H1z',right:'M19 8h-3V5h-3V2h-3v5H4v6h6v5h3v-3h3v-3h3z',duck:'M7 2h6v9h5v3h-4v3h-3v3H9v-3H6v-3H2v-3h5z',jump:'M7 18h6V9h5V6h-4V3h-3V0H9v3H6v3H2v3h5z',shoot:'M4 1h12v3h-2v4l-3 2 3 2v4h2v3H4v-3h2v-4l3-2-3-2V4H4z',leaf:'M17 1h2v9h-3v5h-5v3H5v-4H2v-3h3V6h6V3h6z',dash:'M1 4h9v3H1zM1 10h6v3H1zM12 2h4v5h-4zM9 8h7v5h3v4h-5v-5h-2l-4 7H3v-3h3z',map:'M1 3h6v2h6V3h6v14h-6v2H7v-2H1zM4 7v7h2V7zM9 8v7h2V8zM14 7v7h2V7z',restart:'M5 2h11v3h3v9h-3v4H5v-3H2v-5h4v4h8v-3h2V6H8v4H1V3h3z'};
+    const shapes={left:'M1 8h3V5h3V2h3v5h6v6h-6v5H7v-3H4v-3H1z',right:'M19 8h-3V5h-3V2h-3v5H4v6h6v5h3v-3h3v-3h3z',duck:'M7 2h6v9h5v3h-4v3h-3v3H9v-3H6v-3H2v-3h5z',jump:'M7 18h6V9h5V6h-4V3h-3V0H9v3H6v3H2v3h5z',shoot:'M3 1h14v3h-2l-1 3-3 3 3 3 1 3h2v3H3v-3h2l1-3 3-3-3-3-1-3H3zM7 5l3 3 3-3zM7 15h6l-3-3z',leaf:'M17 1h2v9h-3v5h-5v3H5v-4H2v-3h3V6h6V3h6z',dash:'M1 4h9v3H1zM1 10h6v3H1zM12 2h4v5h-4zM9 8h7v5h3v4h-5v-5h-2l-4 7H3v-3h3z',map:'M1 3h6v2h6V3h6v14h-6v2H7v-2H1zM4 7v7h2V7zM9 8v7h2V8zM14 7v7h2V7z',restart:'M5 2h11v3h3v9h-3v4H5v-3H2v-5h4v4h8v-3h2V6H8v4H1V3h3z'};
     root.querySelectorAll('button[data-move],button[data-boss-key],#phase-back,#gabe-restart,#boss-map,#boss-restart').forEach(btn=>{let k=btn.dataset.move||btn.dataset.bossKey||(btn.id.includes('restart')?'restart':'map');if(k==='special'||k==='shoot')k=hero==='Gabi'?'shoot':'leaf';const d=shapes[k];if(!d)return;const old=btn.textContent.trim();let label=k==='left'||k==='right'?'':old.replace(/^[↑↓↻]\s*/,'');if(k==='duck')label='Abaixar';btn.innerHTML='<svg class="control-glyph" viewBox="0 0 20 20" aria-hidden="true"><path fill="#ffdc91" fill-rule="evenodd" d="'+d+'"/></svg>'+label; if(!btn.getAttribute('aria-label'))btn.setAttribute('aria-label',old||k);});
   }
   function runBoss(){
@@ -411,7 +421,7 @@ function platformGame(){
       else{drawBackdrop(ctx,W,H,worldIndex,5,0,t);box(0,floor,W,H-floor,'#49343a');for(let x=0;x<W;x+=32){box(x,floor,31,6,boss.color);box(x+2,floor+7,28,15,'#78564d');box(x+2,floor+7,28,2,'#bb956f')}}
       drawBoss();
       for(const h of hazards){if(h.kind.startsWith('nile')){drawNileHazard(h);continue}if(h.warn){box(h.x,floor-4,h.w,4,h.warn%8<4?'#ffdfa8':'#a85039');continue}const {x,y,w,h:height,kind}=h;if(kind==='steam'||kind==='vent'){for(let j=0;j<5;j++){const dx=Math.round(Math.sin(t/7+j)*4);box(x+dx+j%2*5,y+j*height/5,w-8,height/5+2,j%2?'#d9c9bd':'#aa9b97')}}else if(kind==='disc'||kind==='highDisc'||kind==='lob'){box(x+3,y,w-6,height,'#503544');box(x,y+3,w,height-6,boss.accent);box(x+4,y+4,w-8,height-8,'#fff0c2')}else{box(x,y,w,height,'#503544');box(x+2,y+2,w-4,height-4,boss.accent);for(let j=0;j<w;j+=8)box(x+j,y+2,4,4,'#ffdfa8')}}
-      for(const shot of shots){if(hero==='Gabi'){box(shot.x,shot.y,12,2,'#e8bc6c');box(shot.x,shot.y+8,12,2,'#e8bc6c');box(shot.x+3,shot.y+2,6,2,'#ffdfa8');box(shot.x+5,shot.y+4,2,2,'#ffdfa8');box(shot.x+3,shot.y+6,6,2,'#ffdfa8')}else{box(shot.x,shot.y+3,12,5,'#a8db62');box(shot.x+3,shot.y+1,6,9,'#739944')}}
+      for(const shot of shots){if(hero==='Gabi'){drawHourglass(ctx,shot.x+6,shot.y+5,.75)}else{box(shot.x,shot.y+3,12,5,'#a8db62');box(shot.x+3,shot.y+1,6,9,'#739944')}}
       if(!inv||t%8<4){ctx.save();ctx.translate(p.x+p.w/2,p.y+p.h);ctx.scale(p.face,1);if(atlas[hero].naturalWidth){const f=p.on?(keys.left||keys.right?1+Math.floor(t/7)%5:0):2;ctx.drawImage(atlas[hero],f*64,0,64,80,-19,-42,38,42)}else{box(-12,-27,24,26,'#a6784f');box(-8,-35,17,13,'#b58a5b')}ctx.restore()}
       for(const sp of sparks){ctx.save();ctx.globalAlpha=sp.life/20;box(sp.x,sp.y,3,3,sp.c);ctx.restore()}
     }
@@ -426,7 +436,7 @@ function platformGame(){
   }
   function runPhase(){
     persist();stopScene();let stopped=false,raf=0,keys={},last=0,acc=0,time=0,hits=0,cooldown=0,checkpoint=0,invuln=0;const w=GABE_WORLDS[worldIndex],s=w.stages[phase];
-    stage.innerHTML='<div class="campaign-top"><span>'+w.title+' · Fase '+(phase+1)+' / 6</span></div><h3>'+s[0]+'</h3><div class="hud"><span id="gabe-hearts">♥ ♥ ♥</span><span id="gabe-items">0 / 3 · '+s[2]+'</span><span id="gabe-time">00:00</span></div><div class="play-console"><div class="platform-wrap campaign-screen"><canvas id="gabe-canvas" width="480" height="270" tabindex="0" aria-label="'+hero+' em '+s[0]+'"></canvas><div id="artifact-toast" class="artifact-toast" hidden role="status"></div></div><div class="controls platform-controls campaign-controls"><div class="steer-pad"><button data-move="left" aria-label="Mover para esquerda">←</button><button data-move="right" aria-label="Mover para direita">→</button><button data-move="duck" aria-label="Abaixar">↓</button></div><div class="ability-pad"><button data-move="special" id="power"></button><button data-move="jump" aria-label="Pular">↑ Pular</button></div><div class="console-tools"><button id="gabe-restart" aria-label="Reiniciar fase">Reiniciar</button><button id="phase-back" class="map-key" aria-label="Voltar ao mapa">Mapa</button></div></div></div><div class="field-notes"><div class="gabe-mini">'+gabeIcon()+'</div><div><strong>Diário '+(hero==='Gabi'?'do Gabi':'da Gio')+'</strong><p id="gabe-note" role="status">'+s[3]+'</p><details class="game-help"><summary>Como jogar</summary><small>Uma estrela abre o portal. Cada estrela vale 100 pontos. O artefato dobra o total. · As tábuas cedem. O sinal ! avisa quando um inimigo vai saltar. · ↓ para abaixar · Espaço para saltar · X ou J: habilidade. Dois acertos derrotam inimigos comuns; desvie dos crocodilos e inimigos grandes.</small><p class="landscape-hint">Para uma visão maior, experimente jogar com o celular na horizontal.</p></details></div></div>';
+    stage.innerHTML='<div class="campaign-top"><span>'+w.title+' · Fase '+(phase+1)+' / 6</span></div><h3>'+s[0]+'</h3><div class="hud"><span id="gabe-hearts">♥ ♥ ♥</span><span id="gabe-items">0 / 3 · '+s[2]+'</span><span id="gabe-time">00:00</span></div><div class="play-console"><div class="platform-wrap campaign-screen"><canvas id="gabe-canvas" width="480" height="270" tabindex="0" aria-label="'+hero+' em '+s[0]+'"></canvas></div><div class="controls platform-controls campaign-controls"><div class="steer-pad"><button data-move="left" aria-label="Mover para esquerda">←</button><button data-move="right" aria-label="Mover para direita">→</button><button data-move="duck" aria-label="Abaixar">↓</button></div><div class="ability-pad"><button data-move="special" id="power"></button><button data-move="jump" aria-label="Pular">↑ Pular</button></div><div class="console-tools"><button id="gabe-restart" aria-label="Reiniciar fase">Reiniciar</button><button id="phase-back" class="map-key" aria-label="Voltar ao mapa">Mapa</button></div></div></div><div class="phase-feedback"><span id="gabe-note" role="status"></span><span id="artifact-toast" class="artifact-compact" hidden role="status"></span></div>';
     const canvas=$('gabe-canvas'),ctx=canvas.getContext('2d');canvas.width=960;canvas.height=540;ctx.scale(2,2);ctx.imageSmoothingEnabled=false;const W=480,H=270,ground=228,worldLen=4140+phase*216;
     let crouchAmount=0;
     // Hand-authored itineraries: ferry, terraces, lift, bridge, market, patrol.
@@ -442,6 +452,8 @@ function platformGame(){
     const pads=[],relics=[],obstacles=[],gaps=[];
     const route=routes[worldIndex][phase];
     const diving=worldIndex===0&&phase===0, shots=[];
+    const swimBubbles=[];let checkpointY=ground-31;
+    if(diving){portal.y=211;portal.r=37;stage.querySelector('.phase-feedback').classList.add('nile-feedback')}
     const leaves=[];
     const consolePanel=stage.querySelector('.campaign-controls');const heartPanel=document.createElement('div');heartPanel.className='pixel-life';heartPanel.append($('gabe-hearts'));consolePanel.prepend(heartPanel);
     const power=$('power');power.textContent=hero==='Gio'?'Folhas (X/J)':'Ampulhetas (X/J)';
@@ -450,7 +462,7 @@ function platformGame(){
       stage.querySelector('[data-move="duck"]').hidden=true;
       const button=stage.querySelector('[data-move="jump"]');button.textContent='↑ Nadar';button.setAttribute('aria-label','Nadar para cima');
       $('gabe-note').textContent='Segure Nadar para subir e solte para descer. Use as setas para avançar entre peixes e crocodilos.';
-      stage.querySelector('.field-notes small').textContent='Uma estrela abre o portal. O fragmento de cerâmica dobra os pontos.';
+      $('gabe-note').classList.add('visually-hidden-note');
     }
     const missions={
       '0-1':['Copie o registro do escriba',['Consultar o modelo de papiro','Copiar com a pena de junco','Selar o registro']],
@@ -514,7 +526,9 @@ function platformGame(){
     const doubled=()=>relics.some(r=>r.artifact&&r.got);
     const score=()=>starsFound()*100*(doubled()?2:1);
     gaps.sort((a,b)=>a.x-b.x);const floors=[];let edge=0;for(const g of gaps){if(g.x>edge)floors.push({x:edge,y:ground,w:g.x-edge,h:42});edge=g.x+g.w}floors.push({x:edge,y:ground,w:worldLen-edge,h:42});
-    const solids=[...floors,...pads];let p,cam=0;function spawn(){p={x:checkpoint+24,y:ground-31,vx:0,vy:0,w:diving?40:19,h:diving?24:26,face:1,on:false};cam=Math.max(0,p.x-110)}spawn();
+    const solids=[...floors,...pads],midpoint=Math.floor(worldLen*.49);
+    const checkpointMarker=diving?midpoint:(floors.some(f=>midpoint>=f.x+16&&midpoint+36<f.x+f.w)?midpoint:(floors.find(f=>f.x>midpoint&&f.w>60)?.x??midpoint)+20);
+    let p,cam=0;function spawn(){p={x:checkpoint+24,y:diving?checkpointY:ground-31,vx:0,vy:0,w:diving?40:19,h:diving?24:26,face:1,on:false};swimBubbles.length=0;cam=Math.max(0,p.x-110)}spawn();
     function hud(){const meter=$('gabe-hearts'),units=Math.max(0,Math.min(6,(lives-1)*2+health));meter.setAttribute('aria-label','Vida: '+units/2+' de 3');meter.innerHTML=Array.from({length:3},(_,i)=>{const n=Math.max(0,Math.min(2,units-i*2));return '<span aria-hidden="true" class="pixel-heart heart-'+n+'"></span>'}).join('');$('gabe-items').textContent=starsFound()+' / 3 ★ · '+score()+' pontos'+(doubled()?' · Artefato ×2':'')+(mission?' · '+mission[0]+' '+actionIndex+'/3':'')}
     function note(t){$('gabe-note').textContent=t}
     function intersects(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
@@ -564,7 +578,7 @@ function platformGame(){
       }
       o.volley++;o.wait=triple?172:119;
     }
-    let toastUntil=0;function tick(){time++;if(toastUntil&&time>=toastUntil){$('artifact-toast').hidden=true;toastUntil=0}
+    function tick(){time++;
       if(cooldown)cooldown--;
       if(keys.special)special();
       power.setAttribute('aria-disabled',String(cooldown>0));
@@ -572,7 +586,9 @@ function platformGame(){
       const crouched=!diving&&keys.duck&&p.on;
       if(!diving){crouchAmount=Math.max(0,Math.min(8,crouchAmount+(crouched?1:-1)));const h=Math.round(26-8*crouchAmount/8);p.y+=p.h-h;p.h=h}
       movePlatforms();for(const pad of pads)if(pad.cooldown>0)pad.cooldown--;if(invuln)invuln--;let d=(keys.right?1:0)-(keys.left?1:0);if(d)p.face=d;p.vx=d*(diving?1.9:crouched?.8:2.45);if(!diving&&!crouched&&keys.jump&&p.on){p.vy=-9.6;p.on=false}p.x=Math.max(0,Math.min(worldLen-p.w,p.x+p.vx));const old=p.y+p.h;p.vy=diving?p.vy*.82+(keys.jump?-.40:.29):Math.min(10,p.vy+.48);
-      p.y=diving?Math.max(14,Math.min(ground-p.h,p.y+p.vy)):p.y+p.vy;p.on=false;for(const x of solids){if(!diving&&!x.cooldown&&p.vy>=0&&old<=x.y+.01&&p.y+p.h>=x.y&&p.x+p.w>x.x&&p.x<x.x+x.w){p.y=x.y-p.h;p.vy=0;p.on=true;if(x.fragile&&++x.wear>=45){x.cooldown=150;x.wear=0}break}}if(p.y>H+40){damage(true);return}
+      p.y=diving?Math.max(12,Math.min(H-p.h-10,p.y+p.vy)):p.y+p.vy;p.on=false;for(const x of solids){if(!diving&&!x.cooldown&&p.vy>=0&&old<=x.y+.01&&p.y+p.h>=x.y&&p.x+p.w>x.x&&p.x<x.x+x.w){p.y=x.y-p.h;p.vy=0;p.on=true;if(x.fragile&&++x.wear>=45){x.cooldown=150;x.wear=0}break}}if(p.y>H+40){damage(true);return}
+      if(!checkpoint&&p.x+p.w/2>=checkpointMarker){checkpoint=checkpointMarker-12;checkpointY=diving?Math.max(12,Math.min(H-p.h-10,p.y)):ground-31;note('Ponto de descanso registrado!')}
+      if(diving){if(time%9===0)swimBubbles.push({x:p.x+p.w/2-p.face*15,y:p.y+p.h/2+5,age:0,drift:Math.sin(time/13)*.12});for(const v of swimBubbles){v.age++;v.y-=.43;v.x+=v.drift}while(swimBubbles.length&&swimBubbles[0].age>75)swimBubbles.shift()}
       reach=Math.max(reach,(worldIndex*7+phase)*100+Math.min(99,Math.floor(p.x/worldLen*100)));
       for(const leaf of leaves){leaf.x+=leaf.vx;leaf.life--;
         for(const o of obstacles)if(!o.defeated&&!o.sleep&&intersects(leaf,o)){
@@ -627,7 +643,7 @@ function platformGame(){
         if(o.defeated||o.sleep||o.stun||!intersects(p,o))continue;
         if(!diving&&p.vy>0&&old<=o.y+5){stun(o);p.y=o.y-p.h;p.vy=-6;p.on=false;break}
         if(!invuln){damage();return}
-      }for(const r of relics)if(!r.got&&intersects(p,{x:r.x-8,y:r.y-8,w:16,h:16})){r.got=true;if(r.artifact){catalogArtifact(worldIndex,phase);const toast=$('artifact-toast');toast.textContent=s[2];toast.hidden=false;toastUntil=time+180;}hud();note(r.artifact?'Artefato ×2 · '+s[2]+'. '+s[3]:'Estrela coletada! '+starsFound()+' de 3.')}if(p.x>worldLen*.49&&checkpoint===0&&(diving||p.on&&p.y+p.h===ground)){checkpoint=Math.max(0,p.x-24);note('Ponto de descanso registrado!')}if(Math.hypot(p.x+p.w/2-portal.x,p.y+p.h/2-portal.y)<portal.r){if(starsFound()>0&&(!mission||actionIndex===3)){complete();return}else note(mission&&actionIndex<3?'Visite a estação: '+mission[1][actionIndex]:'Encontre uma estrela para abrir o portal.')}cam=Math.max(0,Math.min(worldLen-W,p.x-150));if(time%30===0){const t=Math.floor(time/60);$('gabe-time').textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}}
+      }for(const r of relics)if(!r.got&&intersects(p,{x:r.x-8,y:r.y-8,w:16,h:16})){r.got=true;if(r.artifact){catalogArtifact(worldIndex,phase);const toast=$('artifact-toast');toast.textContent='Artefato coletado · '+s[2];toast.hidden=false;}hud();note(r.artifact?'Artefato ×2 · '+s[2]+'. '+s[3]:'Estrela coletada! '+starsFound()+' de 3.')}if(Math.hypot(p.x+p.w/2-portal.x,p.y+p.h/2-portal.y)<portal.r){if(starsFound()>0&&(!mission||actionIndex===3)){complete();return}else note(mission&&actionIndex<3?'Visite a estação: '+mission[1][actionIndex]:'Encontre uma estrela para abrir o portal.')}cam=Math.max(0,Math.min(worldLen-W,p.x-150));if(time%30===0){const t=Math.floor(time/60);$('gabe-time').textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}}
     function complete(){const stars=starsFound();reach=Math.max(reach,(worldIndex*7+phase+1)*100);save(worldIndex,phase,stars);stopScene();stage.innerHTML='<div class="complete campaign-win"><div class="gabe-mini">'+gabeIcon()+'</div><h3>Fase concluída!</h3><div class="victory-stars">'+'★'.repeat(stars)+'☆'.repeat(3-stars)+'</div><p>'+s[0]+' · '+s[3]+'</p><p>'+score()+' pontos'+(doubled()?' · Artefato histórico ×2':'')+' · '+hits+' danos</p><button class="action" id="next-phase">'+(phase<5?'Próxima fase':'Enfrentar chefe')+'</button><button class="action secondary-action" id="phase-list">Escolher outra fase</button></div>';$('next-phase').onclick=()=>{if(phase<5){phase++;runPhase()}else{phase=6;runBoss()}};$('phase-list').onclick=phaseMap}
     function box(x,y,a,b,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),Math.round(a),Math.round(b))}
     function icon(sheet,index,x,y,width,height,flip=false){
@@ -658,6 +674,13 @@ function platformGame(){
           // Moving shafts of light and distant suspended particles remain behind gameplay.
           for(let i=0;i<7;i++){const x=((i*79-cam*.075)%560+560)%560-40,shift=Math.sin(time/95+i)*7;ctx.fillStyle='#c7ffed0c';ctx.beginPath();ctx.moveTo(x+shift,0);ctx.lineTo(x+18+shift,0);ctx.lineTo(x-43+shift,195);ctx.lineTo(x-68+shift,195);ctx.closePath();ctx.fill()}
           for(let i=0;i<32;i++){const x=((i*83-cam*.18+Math.sin(time/47+i)*7)%W+W)%W,y=(i*31+time*.12)%H;box(x,y,1+i%2,1,'#b5f5ec50')}
+          // Independent, harmless schools in the background, on different depth planes.
+          if(nileFauna.naturalWidth)for(let i=0;i<28;i++){
+            const direction=i%3===0?-1:1,span=1850,x=((i*173+time*(.25+i%4*.09)*direction)%span+span)%span-cam*.35-80;
+            if(x<-35||x>W+35)continue;
+            const y=42+(i*47)%154+Math.sin(time/70+i)*5,size=11+i%4*3;
+            ctx.save();ctx.globalAlpha=.27+i%3*.07;ctx.translate(x,y);ctx.scale(direction,1);ctx.drawImage(nileFauna,(i%3)*128,0,128,128,-size/2,-size/2,size,size);ctx.restore();
+          }
         }else if(phase===1){
           for(let i=0;i<19;i++){const x=((i*97-cam*.31+time*.12)%W+W)%W,y=30+(i*47+Math.sin(time/40+i)*8)%170;box(x,y,1,1,'#ffe6ac80')}
         }
@@ -710,7 +733,7 @@ function platformGame(){
         box(o.x+2+step*3,o.y+12,5,3,'#503951');box(o.x+13-step*3,o.y+12,5,3,'#503951');
       }
       for(const leaf of leaves){
-        if(leaf.page){ctx.save();ctx.translate(leaf.x+7,leaf.y+6);ctx.rotate(Math.floor(time/6)%8*Math.PI/4);box(-7,-8,14,3,'#8a563a');box(-6,-7,12,1,'#ffe2a0');box(-6,5,12,3,'#8a563a');box(-5,-5,10,10,'#4b3544');box(-4,-4,8,2,'#d4c5a0');box(-3,-2,6,2,'#ffdfa8');box(-1,0,2,2,'#ffdfa8');box(-3,2,6,3,'#e8b75c');ctx.restore();continue}
+        if(leaf.page){drawHourglass(ctx,leaf.x+7,leaf.y+6,.88);continue}
         box(leaf.x,leaf.y+2,10,3,'#568337');box(leaf.x+3,leaf.y,6,4,'#a8db62');box(leaf.x+1,leaf.y+4,5,1,'#d6eca5');
       }
       for(const shot of shots){
@@ -721,20 +744,20 @@ function platformGame(){
         const size=23+Math.sin(time*.6)*3;icon(gameIcons,11,shot.x+4,shot.y+3,size,size,shot.vx<0);
       }
       if(diving){
-        ctx.save();ctx.translate(Math.floor(cam),0);
-        for(let i=0;i<24;i++){
-          const x=(i*79)%W+Math.sin(time/50+i)*3,y=H-(time*(.29+(i%4)*.09)+i*43)%H;
+        for(let i=0;i<150;i++){
+          const x=(i*79)%worldLen+Math.sin(time/50+i)*3,y=H-(time*(.29+(i%4)*.09)+i*43)%H;
+          if(x<cam-8||x>cam+W+8)continue;
           ctx.strokeStyle='#bcf3ffa8';ctx.lineWidth=1;ctx.beginPath();ctx.arc(x,y,1+i%3,0,Math.PI*2);ctx.stroke();
         }
-        ctx.restore();
-        // Small bubbles from the swimmer, with a short fading wake.
-        for(let i=0;i<6;i++){const age=(time+i*9)%48,x=p.x+p.w/2-p.face*(14+age*.42)+Math.sin(age/8+i)*3,y=p.y+p.h/2-age*.43;ctx.save();ctx.globalAlpha=(1-age/48)*.7;ctx.strokeStyle='#e4fcff';ctx.lineWidth=.65;ctx.beginPath();ctx.arc(x,y,1.5+i%3*.55,0,Math.PI*2);ctx.stroke();ctx.restore()}
+        // Previously emitted bubbles remain at their own coordinates when the traveler turns.
+        for(const v of swimBubbles){ctx.save();ctx.globalAlpha=(1-v.age/75)*.65;ctx.strokeStyle='#e4fcff';ctx.lineWidth=.65;ctx.beginPath();ctx.arc(v.x,v.y,1.5+v.age/50,0,Math.PI*2);ctx.stroke();ctx.restore()}
       }
       for(const r of relics){
         if(r.got||r.x<cam-24||r.x>cam+W+24)continue;
         const y=r.y+Math.sin((time+r.x)/12)*2;
         if(!r.artifact){icon(gameIcons,2,r.x,y,24,24);continue}
-        if(collectionArt.naturalWidth){const cw=collectionArt.naturalWidth/6,ch=collectionArt.naturalHeight/6;ctx.drawImage(collectionArt,phase*cw,worldIndex*ch,cw,ch,r.x-20,y-22,40,40)}else{box(r.x-5,y-5,10,10,'#e8bc6c');box(r.x-2,y-2,4,4,'#fff0c2')}
+        if(diving&&nileProps.naturalWidth)ctx.drawImage(nileProps,1562,134,490,513,r.x-15,y-16,30,31);
+        else if(collectionArt.naturalWidth){const cw=collectionArt.naturalWidth/6,ch=collectionArt.naturalHeight/6;ctx.drawImage(collectionArt,phase*cw,worldIndex*ch,cw,ch,r.x-20,y-22,40,40)}else{box(r.x-5,y-5,10,10,'#e8bc6c');box(r.x-2,y-2,4,4,'#fff0c2')}
 
       }
       stations.forEach((point,j)=>{
@@ -747,15 +770,20 @@ function platformGame(){
       });
       ctx.save();ctx.translate(portal.x,portal.y);
       const active=starsFound()>0&&(!mission||actionIndex===3);
+      if(diving&&nileProps.naturalWidth){
+        ctx.drawImage(nileProps,40,19,684,687,-53,-62,106,109);
+        if(!active){ctx.fillStyle='#102f36b8';ctx.fillRect(-15,-34,30,56)}else{for(let i=0;i<7;i++){const y=21-((time*.65+i*9)%56),x=-11+(i*11)%23;box(x,y,2,2,'#bafceeae')}}
+      }else{
       const stone=['#c69b62','#ab7051','#d2c1a5','#b9aa98','#9e938d','#8f6453'][worldIndex],shade=['#88603f','#703e36','#8c8278','#776c69','#625b69','#523b3c'][worldIndex],light=['#ffdf88','#f7b974','#bce8ff','#f8d28e','#dfc8ff','#ffb879'][worldIndex];
       const radius=portal.r;ctx.fillStyle=active?'#251c37':'#30282d';ctx.beginPath();ctx.arc(0,0,radius-2,0,Math.PI*2);ctx.fill();
       if(active){const reduced=typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches;const pulse=reduced?0:time*.04;const glow=ctx.createRadialGradient(0,0,2,0,0,radius-2);glow.addColorStop(0,light);glow.addColorStop(.38,'#664d73');glow.addColorStop(1,'#211a30');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(0,0,radius-2,0,Math.PI*2);ctx.fill();for(let j=0;j<8;j++){const angle=j*Math.PI/4+pulse;box(Math.cos(angle)*(radius-7),Math.sin(angle)*(radius-7),2,2,light)}}
       for(let j=0;j<12;j++){const angle=j*Math.PI/6;ctx.save();ctx.rotate(angle);box(-4,-radius-5,8,9,shade);box(-3,-radius-5,6,6,stone);box(-3,-radius-5,6,1,'#f4d9aa');ctx.restore()}
       for(let j=0;j<3;j++){const angle=-Math.PI/2+(j-1)*.55;const x=Math.cos(angle)*(radius+2),y=Math.sin(angle)*(radius+2);box(x-3,y-3,6,6,shade);box(x-2,y-2,4,4,j<starsFound()?light:'#41343e')}
+      }
       ctx.restore();
-      const marker=Math.floor(worldLen*.49);
-      icon(treasures,worldIndex,marker,ground-24,48,48);
-      if(checkpoint){ctx.fillStyle='#fff199';ctx.beginPath();ctx.arc(marker,ground-52,2.5,0,Math.PI*2);ctx.fill()}
+      const marker=checkpointMarker;
+      if(diving&&nileProps.naturalWidth){ctx.drawImage(nileProps,830,20,580,678,marker-24,H-72,48,57);if(checkpoint){ctx.save();ctx.globalAlpha=.7+.2*Math.sin(time/8);ctx.fillStyle='#baffea';ctx.beginPath();ctx.arc(marker,H-62,4,0,Math.PI*2);ctx.fill();ctx.restore()}}
+      else{icon(treasures,worldIndex,marker,ground-24,48,48);if(checkpoint){ctx.fillStyle='#fff199';ctx.beginPath();ctx.arc(marker,ground-52,2.5,0,Math.PI*2);ctx.fill()}}
       if((!invuln||time%8<4)&&atlas[hero].naturalWidth){
         ctx.save();ctx.translate(Math.round(p.x+p.w/2),Math.round(p.y+p.h/2));ctx.scale(p.face,1);
         if(diving&&diveAtlas[hero].naturalWidth){
@@ -780,6 +808,7 @@ function platformGame(){
     const km={ArrowDown:'duck',s:'duck',S:'duck',x:'special',X:'special',j:'special',J:'special',ArrowLeft:'left',a:'left',A:'left',ArrowRight:'right',d:'right',D:'right',ArrowUp:'jump',w:'jump',W:'jump',' ':'jump'};const down=e=>{if(km[e.key]){e.preventDefault();keys[km[e.key]]=true}},up=e=>{if(km[e.key])keys[km[e.key]]=false},blur=()=>{keys={}};document.addEventListener('keydown',down);document.addEventListener('keyup',up);window.addEventListener('blur',blur);stage.querySelectorAll('[data-move]').forEach(b=>{const k=b.dataset.move;b.onpointerdown=e=>{e.preventDefault();b.setPointerCapture(e.pointerId);keys[k]=true};b.onpointerup=b.onpointercancel=b.onlostpointercapture=()=>keys[k]=false});stopScene=()=>{stopped=true;cancelAnimationFrame(raf);document.removeEventListener('keydown',down);document.removeEventListener('keyup',up);window.removeEventListener('blur',blur)};$('phase-back').onclick=phaseMap;$('gabe-restart').onclick=runPhase;pixelControls(stage);hud();frame();canvas.focus({preventScroll:true});raf=requestAnimationFrame(loop)
   }
   function drawBackdrop(c,W,H,wi,pi,cam,t){const scene=wi===0&&pi===0?nileScene:wi===0&&pi===1?workshop:chronicleScenes[wi];
+    if(wi===0&&pi===0&&nilePanorama.naturalWidth){const sw=nilePanorama.naturalHeight*W/H,sx=Math.max(0,Math.min(1,cam/(4140-W)))*(nilePanorama.naturalWidth-sw);c.drawImage(nilePanorama,sx,0,sw,nilePanorama.naturalHeight,0,0,W,H);return}
     if(!scene.complete&&c.canvas.id!=='gabe-canvas'){
       scene.addEventListener('load',()=>{if(c.canvas.isConnected)drawBackdrop(c,W,H,wi,pi,cam,t)},{once:true});
     }
