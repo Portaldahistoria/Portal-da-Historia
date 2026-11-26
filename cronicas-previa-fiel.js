@@ -46,8 +46,8 @@ const workshop=new Image();workshop.src='img/oficina-escribas.webp';
 const nileScene=new Image();nileScene.src='img/chronicle-nile.webp';
 const nilePanorama=new Image();nilePanorama.src='img/nilo-panorama-v81.png';
 const nileProps=new Image();nileProps.src='img/nilo-objetos-v81.png';
-function drawHourglass(ctx,x,y,scale=1){
-  ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.imageSmoothingEnabled=false;
+function drawHourglass(ctx,x,y,scale=1,angle=0){
+  ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.scale(scale,scale);ctx.imageSmoothingEnabled=false;
   const poly=(points,color)=>{ctx.fillStyle=color;ctx.beginPath();points.forEach(([a,b],i)=>i?ctx.lineTo(a,b):ctx.moveTo(a,b));ctx.closePath();ctx.fill()};
   poly([[-7,-9],[7,-9],[6,-5],[2,0],[6,5],[7,9],[-7,9],[-6,5],[-2,0],[-6,-5]],'#3e2b28');
   poly([[-5,-7],[5,-7],[4,-4],[1,0],[4,4],[5,7],[-5,7],[-4,4],[-1,0],[-4,-4]],'#b8d6df');
@@ -426,7 +426,7 @@ const previewArt=window.PREVIEW_ASSETS||{};
       else{drawBackdrop(ctx,W,H,worldIndex,5,0,t);box(0,floor,W,H-floor,'#49343a');for(let x=0;x<W;x+=32){box(x,floor,31,6,boss.color);box(x+2,floor+7,28,15,'#78564d');box(x+2,floor+7,28,2,'#bb956f')}}
       drawBoss();
       for(const h of hazards){if(h.kind.startsWith('nile')){drawNileHazard(h);continue}if(h.warn){box(h.x,floor-4,h.w,4,h.warn%8<4?'#ffdfa8':'#a85039');continue}const {x,y,w,h:height,kind}=h;if(kind==='steam'||kind==='vent'){for(let j=0;j<5;j++){const dx=Math.round(Math.sin(t/7+j)*4);box(x+dx+j%2*5,y+j*height/5,w-8,height/5+2,j%2?'#d9c9bd':'#aa9b97')}}else if(kind==='disc'||kind==='highDisc'||kind==='lob'){box(x+3,y,w-6,height,'#503544');box(x,y+3,w,height-6,boss.accent);box(x+4,y+4,w-8,height-8,'#fff0c2')}else{box(x,y,w,height,'#503544');box(x+2,y+2,w-4,height-4,boss.accent);for(let j=0;j<w;j+=8)box(x+j,y+2,4,4,'#ffdfa8')}}
-      for(const shot of shots){if(hero==='Gabi'){drawHourglass(ctx,shot.x+6,shot.y+5,.75)}else{box(shot.x,shot.y+3,12,5,'#a8db62');box(shot.x+3,shot.y+1,6,9,'#739944')}}
+      for(const shot of shots){if(hero==='Gabi'){drawHourglass(ctx,shot.x+6,shot.y+5,.52,(95-shot.life)*.25*Math.sign(shot.vx))}else{box(shot.x,shot.y+3,12,5,'#a8db62');box(shot.x+3,shot.y+1,6,9,'#739944')}}
       if(!inv||t%8<4){ctx.save();ctx.translate(p.x+p.w/2,p.y+p.h);ctx.scale(p.face,1);if(atlas[hero].naturalWidth){const f=p.on?(keys.left||keys.right?1+Math.floor(t/7)%5:0):2;ctx.drawImage(atlas[hero],f*64,0,64,80,-19,-42,38,42)}else{box(-12,-27,24,26,'#a6784f');box(-8,-35,17,13,'#b58a5b')}ctx.restore()}
       for(const sp of sparks){ctx.save();ctx.globalAlpha=sp.life/20;box(sp.x,sp.y,3,3,sp.c);ctx.restore()}
     }
@@ -738,7 +738,7 @@ const previewArt=window.PREVIEW_ASSETS||{};
         box(o.x+2+step*3,o.y+12,5,3,'#503951');box(o.x+13-step*3,o.y+12,5,3,'#503951');
       }
       for(const leaf of leaves){
-        if(leaf.page){drawHourglass(ctx,leaf.x+7,leaf.y+6,.88);continue}
+        if(leaf.page){drawHourglass(ctx,leaf.x+7,leaf.y+6,.52,(80-leaf.life)*.25*Math.sign(leaf.vx));continue}
         box(leaf.x,leaf.y+2,10,3,'#568337');box(leaf.x+3,leaf.y,6,4,'#a8db62');box(leaf.x+1,leaf.y+4,5,1,'#d6eca5');
       }
       for(const shot of shots){
