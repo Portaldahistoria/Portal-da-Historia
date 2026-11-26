@@ -172,27 +172,23 @@ function platformGame(){
       });$('shelves').append(shelf);
     });$('museum-count').textContent=count+' / 36 coletados';$('museum-back').onclick=startMenu;
   }
+const previewArt=window.PREVIEW_ASSETS||{};
+  function artScreen(key){stage.replaceChildren();const panel=document.createElement('section');panel.className='new-art-screen';const img=document.createElement('img');img.src=previewArt[key];img.alt=key;panel.append(img);stage.append(panel);return panel}
+  function hotspot(panel,x,y,w,h,label,action){const b=document.createElement('button');b.className='art-hot';b.style.cssText='left:'+x+'%;top:'+y+'%;width:'+w+'%;height:'+h+'%';b.title=label;b.setAttribute('aria-label',label);b.onclick=action;panel.append(b);return b}
+  function artLabel(panel,x,y,label,action){const b=document.createElement('button');b.className='art-label';b.style.left=x+'%';b.style.top=y+'%';b.textContent=label;b.onclick=action;panel.append(b);return b}
+  function availableWorld(i){worldIndex=i;phase=0;persist();phaseMap()}
+  function pendingMap(key,title){const panel=artScreen(key);artLabel(panel,50,8,title+' · em desenvolvimento',()=>{}).disabled=true;artLabel(panel,10,94,'← Mapa geral',worldMap)}
+  function visualGroup(key,title,choices){const panel=artScreen(key);const box=document.createElement('div');box.className='art-choice';const heading=document.createElement('h3');heading.textContent=title;box.append(heading);for(const [name,i] of choices){const b=document.createElement('button');b.textContent=name;b.onclick=()=>availableWorld(i);box.append(b)}panel.append(box);artLabel(panel,10,94,'← Mapa geral',worldMap)}
   function startMenu(){
     stopScene();stopScene=()=>{};if(previewOrigin){({worldIndex,phase}=previewOrigin);previewOrigin=null}preview=false;
-    stage.innerHTML='<section class="chronicle-title"><img src="img/chronicle-cover.webp" alt="Gabi e Gio avistam o Nilo e as pirâmides"><div><h3><img class="menu-mark" src="img/cronicas-titulo.png" alt="Crônicas de Capivara"></h3><nav><button class="action" id="new-game">Novo jogo</button><button class="action" id="continue-game">Continuar</button><button class="action secondary-action" id="view-map">Visualizar o mapa</button><button class="action" id="museum-open">Sala de artefatos</button></nav></div></section>';
-    $('new-game').onclick=newRun;$('continue-game').hidden=!profiles().length;$('continue-game').onclick=continueRun;$('museum-open').onclick=()=>artifactRoom();
-    $('view-map').onclick=()=>{previewOrigin={worldIndex,phase};preview=true;worldIndex=0;phase=0;worldMap()};
+    const panel=artScreen('cover');[['Novo jogo',newRun],['Continuar',()=>profiles().length?continueRun():newRun()],['Mapa',()=>{previewOrigin={worldIndex,phase};preview=true;worldMap()}],['Sala de artefatos',()=>artifactRoom()]].forEach(([name,fn],i)=>hotspot(panel,56,36.5+i*11.8,31,10.8,name,fn));
   }
   function selectHero(){
-    stopScene();stopScene=()=>{};
-    stage.innerHTML='<section class="hero-select"><p>CRÔNICAS DE CAPIVARA</p><h3>Escolha seu personagem</h3><label class="player-name">Nome ou apelido <input id="player-name" maxlength="24" autocomplete="off" placeholder="Seu nome"></label><div class="hero-pair"></div><div class="hero-actions"><button class="action" id="hero-confirm">Confirmar personagem</button><button class="action secondary-action" id="hero-back">Voltar</button></div></section>';
-    let selected=hero;
-    const buttons=[];
-    for(const name of ['Gabi','Gio']){
-      const b=document.createElement('button');buttons.push(b);b.dataset.name=name;
-      b.innerHTML='<img src="img/'+name.toLowerCase()+'-portrait.webp" alt=""><strong>'+name+'</strong><small>'+(name==='Gabi'?'Paralisa os obstáculos':'Lança folhas contra obstáculos')+'</small>';
-      b.setAttribute('aria-pressed',String(name===hero));
-      b.onclick=()=>{selected=name;for(const option of buttons)option.setAttribute('aria-pressed',String(option===b))};
-      stage.querySelector('.hero-pair').append(b);
-    }
-    $('hero-confirm').onclick=()=>{const input=$('player-name');const name=input.value.trim();if(!name){input.setCustomValidity('Informe seu nome ou apelido');input.reportValidity();return}hero=selected;playerName=name;playerId=crypto.randomUUID?crypto.randomUUID():String(Date.now());persist();worldMap()};$('player-name').oninput=()=> $('player-name').setCustomValidity('');
-    $('hero-back').onclick=startMenu;
-
+    stopScene();const panel=artScreen('heroes');let selected=hero;const buttons=[];
+    function pick(name){selected=name;buttons.forEach((b,i)=>b.classList.toggle('selected',name===['Gabi','Gio'][i]))}
+    buttons.push(hotspot(panel,8,22,41,53,'Gabi',()=>pick('Gabi')),hotspot(panel,51,22,41,53,'Gio',()=>pick('Gio')));pick(hero);
+    const input=document.createElement('input');input.className='art-name';input.placeholder='Seu nome';input.maxLength=24;input.setAttribute('aria-label','Nome do jogador');panel.append(input);
+    hotspot(panel,2,82,20,12,'Voltar',startMenu);hotspot(panel,75,82,23,12,'Confirmar',()=>{if(!input.value.trim()){input.focus();return}hero=selected;playerName=input.value.trim();playerId=crypto.randomUUID?crypto.randomUUID():String(Date.now());persist();worldMap()});
   }
   const worldPoints=[[17,35],[49,35],[83,35],[17,80],[49,80],[83,80]];
   const itineraries=[
@@ -261,8 +257,15 @@ function platformGame(){
     traveler.onclick=()=>{if(!walking){const pin=chart.querySelectorAll('.travel-pin')[stopAt];if(pin&&!pin.disabled)pin.click()}};
     if(!regional){const index=$('index');const existing=[...index.querySelectorAll('.destination-action')];index.replaceChildren();for(const [label,worlds] of groups){const section=document.createElement('section');const heading=document.createElement('h4');heading.textContent=label;section.append(heading);for(const i of worlds)section.append(existing[i]);if(!worlds.length){const note=document.createElement('small');note.textContent='Campanha em desenvolvimento';section.append(note)}index.append(section)}ranking(index);} if(TEST_UNLOCK_ALL&&!preview){const note=document.createElement('small');note.className='test-mode-note';note.textContent='Modo de testes · todos os destinos liberados';stage.querySelector('.travel-head').append(note)}
   }
-  function worldMap(){travelMap(false)}
-  function phaseMap(){travelMap(true)}
+  function worldMap(){stopScene();const panel=artScreen('general');
+    const entries=[[24,28,'Pré-História',()=>pendingMap('pre-historia','Pré-História')],[23,46,'Egito e Mesopotâmia',()=>visualGroup('antiguidade-oriental','Escolha a campanha',[['Egito Antigo',0],['Mesopotâmia',1]])],[76,30,'Antiguidade Clássica',()=>visualGroup('grecia-antiga','Antiguidade Clássica',[['Grécia Antiga',2],['Roma Imperial',3]])],[76,47,'Roma Imperial',()=>availableWorld(3)],[23,64,'Idade Média',()=>pendingMap('idade-media','Idade Média')],[23,82,'Expansão Marítima',()=>pendingMap('expansao-maritima','Expansão Marítima')],[77,64,'Revoluções Modernas',()=>visualGroup('revolucoes-modernas','Revoluções Modernas',[['Revolução Francesa',4],['Revolução Industrial',5]])],[77,82,'América',()=>pendingMap('america','América')],[50,59,'Árvore do Conhecimento',()=>pendingMap('arvore-do-conhecimento','Árvore do Conhecimento')]];
+    entries.forEach(([x,y,name,fn])=>hotspot(panel,x-10,y-8,20,16,name,fn));
+    artLabel(panel,23,52,'Egito Antigo',()=>availableWorld(0));artLabel(panel,23,56,'Mesopotâmia',()=>availableWorld(1));artLabel(panel,76,36,'Antiguidade Clássica',entries[2][3]);hotspot(panel,1,88,18,11,'Voltar',startMenu);
+  }
+  function phaseMap(){stopScene();const keys=['antiguidade-oriental','antiguidade-oriental','grecia-antiga','roma-antiga','revolucoes-modernas','revolucoes-modernas'];const panel=artScreen(keys[worldIndex]);const nodes=[[[195,319],[345,479],[518,373],[735,452],[949,539],[1121,407],[1350,292]],[[223,465],[452,417],[710,368],[949,277],[1035,418],[1018,565],[1330,505]],[[226,495],[400,420],[553,307],[806,337],[922,462],[1070,578],[1330,419]],[[167,626],[399,560],[562,450],[739,346],[953,420],[1205,452],[1387,265]]];const n=nodes[worldIndex<2?0:worldIndex===2?1:worldIndex===3?2:3];const w=GABE_WORLDS[worldIndex];artLabel(panel,50,9,w.title,()=>{}).disabled=true;
+    n.forEach(([xx,yy],i)=>{const x=xx/15.36,y=yy/8.64;const fn=()=>{phase=i;preview=false;persist();i===6?runBoss():runPhase()};const b=hotspot(panel,x-5,y-7,10,14,i===6?bosses[worldIndex].name:w.stages[i][0],fn);if(i===6){const img=document.createElement('img');img.className='art-boss';img.src=previewArt[['nile','zig','bronze','arena','bastille','steam'][worldIndex]];b.append(img)}artLabel(panel,x,y+6,i===6?'Chefe':('Fase '+(i+1)+' · '+(progress[worldIndex+'-'+i]||0)+'★'),fn)});
+    artLabel(panel,10,94,'← Mapa geral',worldMap);
+  }
   function gabeIcon(){return '<img width="100%" height="100%" alt="'+hero+'" src="img/'+hero.toLowerCase()+'-portrait.webp">'}
 
   const bosses=[
