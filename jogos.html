@@ -122,6 +122,8 @@
 .chronicle-pixel .player-name{display:block;margin:12px auto;color:#ffdfa8;font-size:14px}.chronicle-pixel .player-name input{display:block;margin:8px auto;padding:12px;max-width:100%;border:3px double #eac17a;background:#30201f;color:#ffe5ae;font:inherit}.saved-profiles{display:grid;gap:12px;max-width:440px;margin:20px auto}.chronicle-pixel .campaign-controls button,.chronicle-pixel .boss-controls button{min-height:44px;min-width:44px}.chronicle-pixel .game-help{color:#ffe5ae;padding:10px;margin-top:10px;border:2px solid #a36a3b;background:#382622}.chronicle-pixel .game-help summary{cursor:pointer;min-height:44px;display:flex;align-items:center}.landscape-hint{display:none}@media(orientation:portrait) and (max-width:700px){.landscape-hint{display:block;color:#eac17a;font-size:12px}}
 
 .chronicle-pixel .museum-profile{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px;margin:14px 0;color:#ffe3ae;border:3px double #ba8b50;background:#3d2820}.chronicle-pixel .museum-profile select{min-height:44px;max-width:100%;background:#30201f;color:#ffe3ae;border:2px solid #c69856;font:inherit;padding:8px}.chronicle-pixel .museum-detail{margin:12px 0 20px}.chronicle-pixel .campaign-controls button,.chronicle-pixel .boss-controls button{touch-action:none;user-select:none;-webkit-user-select:none}.chronicle-pixel .campaign-controls button:focus-visible,.chronicle-pixel .boss-controls button:focus-visible{outline:3px solid #ffdf91;outline-offset:2px}
+
+.chronicle-pixel .test-mode-note{display:block;color:#e9c795;font-size:12px;padding:6px 8px;border-bottom:2px solid #9f7040}.chronicle-pixel .map-traveler{z-index:3;transform:translate(-50%,-100%);margin-top:-10px}.chronicle-pixel .travel-pin .pin-caption{pointer-events:none}.chronicle-pixel .travel-pin:focus-visible{z-index:4}
 </style><link rel="stylesheet" href="fonts/portal-pixel.css"></head><body><header class="top"><a class="brand" href="./#inicio"><img src="portal-mark.svg" alt=""><span>PORTAL DA HISTÓRIA<small>PROFESSOR GABRIEL</small></span></a><a class="back" href="./#inicio">Voltar ao Portal</a></header><main class="shell"><div class="dev-strip">Em desenvolvimento</div><div class="head"><div><div class="eyebrow">Acervo interativo</div><h1>Laboratório de Jogos</h1><p>Explore mundos históricos, recupere relíquias e atravesse o tempo. Escolha uma aventura para jogar.</p></div></div><div id="gallery" class="gallery" aria-label="Selecione um jogo"></div><section id="arena" class="arena" hidden><div class="gamebar"><button id="leave">Todos os jogos</button><h2 id="gameTitle"></h2><span class="status" id="gameStatus">ROMA IMPERIAL</span></div><div id="stage" class="stage"></div></section></main><footer class="footer">Portal da História · Professor Gabriel Gomes · Jogos educativos</footer><script>
 const $=id=>document.getElementById(id),stage=$('stage');let current=null,cleanup=()=>{};const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};const icons={coin:['0011100','0111110','1101011','1101011','1101011','0111110','0011100'],scroll:['0111110','1100011','0111110','0100010','0101110','0100010','0111110'],amphora:['0011100','0111110','1110111','1101011','0111110','0011100','0001000'],helmet:['0011100','0111110','1111111','1100011','1100011','1100001','0110000'],column:['0111110','1111111','0011100','0011100','0011100','0111110','1111111'],wheat:['0001000','0101010','0011100','0101010','0011100','0001000','0001000'],ship:['0001000','0011100','0111110','0001000','1111111','0111110','0011100'],cross:['0001000','0001000','0111110','0001000','0001000','0001000','0001000'],book:['1000001','1110111','1010101','1010101','1010101','1110111','0001000'],key:['0111000','1101100','1101100','0111000','0001111','0001010','0001000'],person:['0011100','0011100','0001000','0111110','0101010','0001000','0010100'],arch:['0111110','1111111','1100011','1100011','1100011','1100011','1100011']};const colors={coin:'#e8b85b',scroll:'#e8c49b',amphora:'#cf795a',helmet:'#c5b3a4',column:'#d6c9b9',wheat:'#e6c572',ship:'#b68c6f',cross:'#e4d3b2',book:'#8bb6a0',key:'#dfb46e',person:'#be4850',arch:'#e0c09c'};
 function art(name,fill){
@@ -202,7 +204,7 @@ function platformGame(){
     target.append(panel);
   }
   function locationLabel(value){
-    if(value>=4200)return '42 fases concluídas';
+    if(value>=4200)return 'Último destino alcançado';
     const index=Math.floor(value/100),w=Math.floor(index/7),p=index%7;
     return (p===6?bosses[w].name:GABE_WORLDS[w].stages[p][0])+' ('+value%100+'%)';
   }
@@ -324,7 +326,7 @@ function platformGame(){
     const chart=$('chart');
     chart.style.backgroundImage='url(img/'+(regional&&!worldIndex?'egito-roteiro':'chronicle-islands')+'.webp)';
     if(regional&&worldIndex){chart.style.backgroundSize='300% 200%';chart.style.backgroundPosition=(worldIndex%3)*50+'% '+Math.floor(worldIndex/3)*100+'%'}
-    chart.setAttribute('aria-label',regional?'Roteiro ilustrado das seis fases':'Mapa dos destinos da campanha');
+    chart.setAttribute('aria-label',regional?'Roteiro ilustrado das sete fases':'Mapa dos destinos da campanha');
     chart.innerHTML='<svg viewBox="0 0 720 400" preserveAspectRatio="none" aria-hidden="true"><polyline points="'+route+'" fill="none" stroke="#fff1cb" stroke-width="7"/><polyline points="'+route+'" fill="none" stroke="#74594a" stroke-width="3" stroke-dasharray="7 6"/></svg><span class="map-compass" aria-hidden="true">N<br>✥</span>';
     $('map-return').onclick=regional?worldMap:startMenu;
     const traveler=document.createElement('button');traveler.type='button';
@@ -364,7 +366,7 @@ function platformGame(){
       pin.append(caption);
     });
     traveler.onclick=()=>{if(!walking){const pin=chart.querySelectorAll('.travel-pin')[stopAt];if(pin&&!pin.disabled)pin.click()}};
-    if(!regional)ranking($('index'));else $('index').hidden=true;
+    if(!regional)ranking($('index'));else $('index').hidden=true; if(TEST_UNLOCK_ALL&&!preview){const note=document.createElement('small');note.className='test-mode-note';note.textContent='Modo de testes · todos os destinos liberados';stage.querySelector('.travel-head').append(note)}
   }
   function worldMap(){travelMap(false)}
   function phaseMap(){travelMap(true)}
@@ -396,9 +398,9 @@ function platformGame(){
     function say(msg){$('boss-notice').textContent=msg}
     function overlap(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
     function burst(x,y,c){for(let i=0;i<8;i++){const a=i*Math.PI/4;sparks.push({x,y,vx:Math.cos(a)*1.7,vy:Math.sin(a)*1.7,life:20,c})}}
-    function finish(won){stopScene();if(won){reach=Math.max(reach,(worldIndex+1)*700);save(worldIndex,6,3);if(worldIndex===5&&GABE_WORLDS.every((_,i)=>finished(i))){endRun(true);return}}
+    function finish(won){stopScene();if(won){reach=Math.max(reach,(worldIndex+1)*700);save(worldIndex,6,3);if(GABE_WORLDS.every((_,i)=>finished(i))){endRun(true);return}}
       stage.innerHTML='<div class="complete campaign-win"><div class="gabe-mini">'+gabeIcon()+'</div><h3>'+(won?'Chefe derrotado!':'Tente novamente!')+'</h3><p>'+boss.name+'</p><p>'+(won?'Você derrotou o guardião deste mundo.':'Observe o padrão dos ataques e espere a abertura do núcleo.')+'</p><button class="action" id="boss-again">'+(won?'Próximo mundo':'Repetir batalha')+'</button><button class="action secondary-action" id="boss-return">Voltar ao mapa</button></div>';
-      $('boss-again').onclick=()=>{if(won){if(worldIndex<5)worldIndex++;phase=0;worldMap()}else runBoss()};$('boss-return').onclick=phaseMap;
+      $('boss-again').onclick=()=>{if(won){if(worldIndex<5)worldIndex++;phase=0;persist();worldMap()}else runBoss()};$('boss-return').onclick=phaseMap;
     }
     function hurt(){if(inv||dash)return;playerHP--;inv=72;burst(p.x+p.w/2,p.y+10,'#e65c66');hud();if(playerHP<=0)finish(false)}
     function launchHazard(type){const spd=hp<=boss.hp/2?3.7:2.8;
@@ -698,13 +700,13 @@ function platformGame(){
           for(let j=0;j<b.w;j+=10){const dy=b.wear>20?(time+j)%3:0;box(b.x+j,b.y+dy,9,9,'#845344');box(b.x+j,b.y+dy,9,3,'#edbb76');box(b.x+j+3,b.y+dy+4,4,1,'#bd8054')}
           box(b.x,b.y+9,b.w,2,'#513c45');continue;
         }
-        box(b.x,b.y,b.w,b.h,'#5e4143');box(b.x+1,b.y+1,b.w-2,4,'#e4bd87');
-        const brick=['#ad805e','#ad7864','#a3947d','#ac806d','#9d8082','#976e64'][worldIndex];
+        const surface=['#edc78b','#d99865','#e3d7c1','#d1b7a0','#c4bdba','#a3a1a0'][worldIndex];box(b.x,b.y,b.w,b.h,['#76543b','#6a4031','#82776b','#6a514a','#55535b','#38383d'][worldIndex]);box(b.x+1,b.y+1,b.w-2,4,surface);
+        const brick=['#c49a60','#a96a47','#d0c1a5','#a88a77','#929198','#665e60'][worldIndex];
         for(let row=0;row<Math.ceil((b.h-5)/9);row++){
           const left=b.x-(row%2)*12;
           for(let x=Math.max(left,left+Math.floor((cam-left)/24)*24);x<Math.min(b.x+b.w,cam+W);x+=24){
             const start=Math.max(b.x,x+1),width=Math.min(b.x+b.w,x+24)-start,y=b.y+5+row*9;
-            if(width>0){box(start,y,width,Math.min(8,b.y+b.h-y),brick);box(start,y,Math.min(7,width),1,'#d4a987')}
+            if(width>0){box(start,y,width,Math.min(8,b.y+b.h-y),brick);box(start,y,Math.min(7,width),1,surface);if(worldIndex===0&&width>14&&row%2===0)box(start+8,y+3,5,2,'#967044');if(worldIndex===1&&width>12)box(start+4,y+5,7,1,'#d29465');if(worldIndex===2&&width>10)box(start+5,y+2,2,Math.min(5,b.y+b.h-y-2),'#a59b8b');if(worldIndex===3&&width>15)box(start+8,y+4,6,2,'#846e65');if(worldIndex===4&&width>12)box(start+4,y+4,3,2,'#77757c');if(worldIndex===5&&width>16){box(start+3,y+3,2,2,'#d2a46e');box(start+width-5,y+3,2,2,'#d2a46e')}}
           }
         }}for(const o of obstacles){
         if(o.x<cam-55||o.x>cam+W+55)continue;
