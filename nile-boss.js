@@ -55,12 +55,22 @@ const NileBoss = (() => {
   function makeHazard(event, p, {x, floor, playerX}) {
     if (event.kind === 'nileWave') {
       const speed = (p.enraged ? 3.8 : 3) + event.variant * .25;
-      return {kind:event.kind,x:x-86,y:floor-25,w:48,h:25,vx:-speed,vy:0,life:210,age:0};
+      return {kind:event.kind,x:x-86,y:floor-34,w:60,h:34,vx:-speed,vy:0,life:210,age:0};
     }
-    if (event.kind === 'nileShock') return {kind:event.kind,x:x-90,y:floor-13,w:56,h:13,vx:p.enraged?-5:-4.2,vy:0,life:150,age:0};
+    if (event.kind === 'nileShock') return {kind:event.kind,x:x-90,y:floor-16,w:72,h:16,vx:p.enraged?-5:-4.2,vy:0,life:150,age:0};
     if (event.kind === 'nileGeyser') return {kind:event.kind,x:clamp(playerX-12,10,310),y:floor-80,w:35,h:80,vx:0,vy:0,life:74,warn:34,age:0};
     return null;
   }
-  return {plan, pose, eventsAt, makeHazard};
+  function hazardFrame(h) {
+    if(h.kind==='nileGeyser')return h.age<42?0:h.age<60?1:2;
+    return [0,1,2,1][Math.floor(h.age/8)%4];
+  }
+  function hazardHeight(h) {
+    if(h.warn)return 0;
+    const f=hazardFrame(h);
+    if(h.kind==='nileGeyser')return h.h*(f===0?clamp((h.age-34)/8,.12,.86):f===1?1:.87);
+    return h.h*(h.kind==='nileWave'?[1,.89,.72][f]:[1,.79,.59][f]);
+  }
+  return {plan, pose, eventsAt, makeHazard, hazardFrame, hazardHeight};
 })();
 if (typeof module !== 'undefined' && module.exports) module.exports = NileBoss;
