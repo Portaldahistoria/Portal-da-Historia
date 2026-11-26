@@ -14,6 +14,7 @@ const fs = require('node:fs');
     await f.getByRole('button',{name:/Crônicas de Capivara Explore/}).click();
     await f.getByRole('button',{name:'Sala de artefatos'}).click();
     assert.equal(await f.locator('.exhibit').count(),36);
+    assert.match(await f.locator('.exhibit i').first().evaluate(el=>getComputedStyle(el).backgroundImage),/acervo-36-v77\.png/);
     await f.locator('.exhibit').first().click();
     assert.match(await f.locator('.museum-detail').innerText(),/cerâmica/i);
     await page.screenshot({path:'test-artifacts/acervo-desktop.png',fullPage:true});

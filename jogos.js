@@ -104,7 +104,7 @@ function platformGame(){
   for(const name of ['Gabi','Gio']){atlas[name]=new Image();atlas[name].src='img/'+name.toLowerCase()+'-trilha.webp'}
   let preview=false;
   const collectionArt=new Image();
-  collectionArt.src='img/acervo-36.webp';
+  collectionArt.src='img/acervo-36-v77.png';
   function showSpecimen(element,w,f){
     element.style.backgroundImage='url('+collectionArt.src+')';
     element.style.backgroundSize='600% 600%';
