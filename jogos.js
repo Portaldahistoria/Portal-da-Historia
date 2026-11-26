@@ -31,6 +31,7 @@ function mapGame(){const cities=[{name:'Roma',x:45,y:43,hint:'Na Península Itá
 
 
 const GABE_WORLDS=[{"title":"Egito Antigo","era":"c. 3000–30 a.C.","colors":["#efb77b","#bf815a","#74565c","#e0b179"],"icon":"pyramid","stages":[["Mergulho no Nilo","Nilo","Fragmento de cerâmica","O ciclo das cheias do Nilo favorecia a agricultura."],["A oficina dos escribas","Escribas","Papiros","A escrita hieroglífica registrava informações religiosas e administrativas."],["As pirâmides de Gizé","Gizé","Papiros de arquitetura","As pirâmides eram monumentos funerários reais, construídos por trabalhadores organizados."],["O templo de Karnak","Karnak","Amuletos","Templos eram centros religiosos, econômicos e políticos."],["Vale dos Reis","Necrópole","Fragmentos de pinturas","As tumbas revelam crenças egípcias sobre a vida após a morte."],["Alexandria","Alexandria","Rolos de papiro","Alexandria tornou-se um centro de intercâmbio cultural no período helenístico."]]},{"title":"Mesopotâmia","era":"c. 3500–539 a.C.","colors":["#cfa07c","#8b6d61","#695365","#bc8260"],"icon":"ziggurat","stages":[["Os rios Tigre e Eufrates","Rios","Cestos de sementes","A irrigação permitiu o desenvolvimento agrícola entre os rios Tigre e Eufrates."],["Uruk e a escrita","Uruk","Tabuletas","A escrita cuneiforme foi desenvolvida na Mesopotâmia."],["O zigurate de Ur","Ur","Tabuletas de templo","Zigurates eram construções monumentais ligadas à religião."],["Babilônia de Hamurábi","Babilônia","Tabuletas de leis","O Código de Hamurábi reúne leis que expressavam hierarquias e relações sociais."],["Nínive","Nínive","Registros da biblioteca","A biblioteca de Assurbanípal preservou textos em tabuletas de argila."],["Porta de Ishtar","Babilônia","Fragmentos de cerâmica","A Porta de Ishtar ilustra a monumentalidade da Babilônia neobabilônica."]]},{"title":"Grécia Antiga","era":"c. 800–146 a.C.","colors":["#86b4c7","#82929a","#596e87","#e0c9ad"],"icon":"temple","stages":[["A ágora de Atenas","Atenas","Óstracos","A ágora era espaço de comércio e convivência cívica."],["A Acrópole","Atenas","Fragmentos de mármore","A Acrópole abriga monumentos como o Partenon."],["Esparta","Esparta","Peças de cerâmica","Esparta possuía uma organização social e política própria."],["Olímpia","Olímpia","Coroas de oliveira","Os jogos de Olímpia estavam ligados a celebrações religiosas."],["O porto do Pireu","Pireu","Ânforas","O comércio marítimo conectava comunidades do mundo grego."],["A era helenística","Mundo helenístico","Moedas","A expansão macedônica ampliou os intercâmbios culturais."]]},{"title":"Roma Imperial","era":"27 a.C.–476 d.C. (Ocidente)","colors":["#92a1bd","#a17c77","#65556d","#ceb090"],"icon":"arch","stages":[["Fórum Romano","Roma","Moedas imperiais","O Fórum era um centro político, religioso e comercial."],["Coliseu","Roma","Bilhetes simbólicos","Espetáculos públicos integravam a vida urbana e a política imperial."],["Via Ápia","Via Ápia","Marcos miliários","As estradas facilitavam deslocamentos e a administração das províncias."],["Pompeia","Pompeia","Fragmentos de mosaico","A erupção do Vesúvio em 79 d.C. preservou vestígios da vida romana."],["Porto de Óstia","Óstia","Ânforas","Óstia abastecia Roma por meio do comércio marítimo e fluvial."],["Constantinopla","Constantinopla","Pergaminhos","Constantinopla tornou-se capital imperial em 330 d.C."]]},{"title":"Revolução Francesa","era":"1789–1799","colors":["#9baaba","#8c7c87","#525d77","#c3b6ab"],"icon":"city","stages":[["Paris antes de 1789","Paris","Cadernos de reivindicações","O Antigo Regime era marcado por privilégios de nascimento e desigualdades."],["Versalhes","Versalhes","Documentos dos Estados Gerais","Os Estados Gerais foram convocados em 1789."],["A praça da Bastilha","Paris","Panfletos","A tomada da Bastilha em 14 de julho de 1789 tornou-se símbolo da Revolução."],["Assembleia Nacional","Paris","Páginas da declaração","A Declaração dos Direitos do Homem e do Cidadão proclamou direitos em 1789."],["A Convenção","Paris","Jornais","A República foi proclamada em 1792, em meio a conflitos políticos."],["O Diretório","Paris","Documentos políticos","O Diretório governou de 1795 a 1799, antes do golpe de 18 de Brumário."]]},{"title":"Revolução Industrial","era":"c. 1760–1850","colors":["#879ba7","#6e727a","#3f495d","#a17d70"],"icon":"factory","stages":[["As oficinas têxteis","Inglaterra","Amostras de tecido","A mecanização transformou a produção têxtil britânica."],["Manchester","Manchester","Registros de trabalho","A industrialização acelerou o crescimento urbano e transformou o trabalho."],["Máquinas a vapor","Inglaterra","Peças de máquinas","A energia a vapor impulsionou fábricas e transportes."],["O canal comercial","Inglaterra","Caixas de mercadorias","Canais permitiam transportar matérias-primas e produtos."],["A ferrovia","Liverpool–Manchester","Bilhetes de viagem","A ferrovia Liverpool–Manchester foi inaugurada em 1830."],["Cidade industrial","Inglaterra","Documentos de trabalhadores","Mudanças nas condições de trabalho estimularam formas de organização coletiva."]]}];
+const bossSprites=new Image();bossSprites.src='img/cronicas-chefes-v77.png';
 const chronicleScenes=Array.from({length:6},(_,i)=>{const img=new Image();img.src='img/chronicle-world-'+i+'.webp';return img});
 const critters=new Image();critters.src='img/chronicle-variants.webp';
 const nileFauna=new Image();nileFauna.src='img/fauna-do-nilo.webp';
@@ -110,6 +111,7 @@ function platformGame(){
     element.style.backgroundPosition=f*20+'% '+w*20+'%';
   }
   const collected=new Set();
+  let previewOrigin=null;
   const artifactKey=(w,f)=>'cronicas-acervo:'+(playerId?playerId+':':'')+w+'-'+f;
   function hasArtifact(w,f){
     const key=artifactKey(w,f);
@@ -128,11 +130,11 @@ function platformGame(){
     ['Nesses cadernos, comunidades registravam queixas e pedidos.','Os registros permitem investigar as demandas apresentadas pelos diferentes grupos.','Textos impressos curtos faziam circular argumentos políticos.','Uma declaração registra princípios e direitos debatidos em seu tempo.','A imprensa divulgava notícias e disputava interpretações dos acontecimentos.','Documentos políticos ajudam a comparar projetos de governo.'],
     ['A trama e as fibras dão pistas sobre como um tecido foi produzido.','Registros de fábrica podem revelar jornadas, funções e remuneração.','Uma engrenagem transmite movimento entre partes de uma máquina.','As caixas protegiam as mercadorias durante o transporte.','Bilhetes registram trajetos e o acesso aos transportes.','Esses registros ajudam a investigar as condições de vida e as reivindicações dos trabalhadores.']
   ];
-  function artifactRoom(){
+  function artifactRoom(owner=playerId){
     stopScene();
     const entries=profiles();
     stage.innerHTML='<section class="museum"><header><button class="action" id="museum-back">← Capa</button><h3>Sala de artefatos</h3><small id="museum-count"></small></header><label class="museum-profile">Acervo de <select id="museum-profile"></select></label><div class="museum-detail" aria-live="polite">Toque em uma peça para conhecer sua história.</div><div id="shelves"></div></section>';
-    const picker=$('museum-profile');const legacy=document.createElement('option');legacy.value='';legacy.textContent='Coleção anterior do aparelho';picker.append(legacy);for(const profile of entries){const opt=document.createElement('option');opt.value=profile.id;opt.textContent=profile.name+' · '+profile.hero;picker.append(opt)}picker.value=playerId;const collectionOwner=picker.value;picker.onchange=()=>{const previous=playerId;playerId=picker.value;artifactRoom();playerId=previous};
+    const picker=$('museum-profile');const legacy=document.createElement('option');legacy.value='';legacy.textContent='Coleção anterior do aparelho';picker.append(legacy);for(const profile of entries){const opt=document.createElement('option');opt.value=profile.id;opt.textContent=profile.name+' · '+profile.hero;picker.append(opt)}picker.value=owner;const collectionOwner=picker.value;picker.onchange=()=>artifactRoom(picker.value);
     const museumFound=(w,f)=>{const key='cronicas-acervo:'+(collectionOwner?collectionOwner+':':'')+w+'-'+f;try{return collected.has(key)||localStorage.getItem(key)==='1'}catch{return collected.has(key)}};
     let count=0;
     GABE_WORLDS.forEach((world,w)=>{
@@ -156,10 +158,10 @@ function platformGame(){
     });$('museum-count').textContent=count+' / 36 coletados';$('museum-back').onclick=startMenu;
   }
   function startMenu(){
-    stopScene();stopScene=()=>{};preview=false;
+    stopScene();stopScene=()=>{};if(previewOrigin){({worldIndex,phase}=previewOrigin);previewOrigin=null}preview=false;
     stage.innerHTML='<section class="chronicle-title"><img src="img/chronicle-cover.webp" alt="Gabi e Gio avistam o Nilo e as pirâmides"><div><h3><img class="menu-mark" src="img/cronicas-titulo.png" alt="Crônicas de Capivara"></h3><nav><button class="action" id="new-game">Novo jogo</button><button class="action" id="continue-game">Continuar</button><button class="action secondary-action" id="view-map">Visualizar o mapa</button><button class="action" id="museum-open">Sala de artefatos</button></nav></div></section>';
-    $('new-game').onclick=newRun;$('continue-game').hidden=!profiles().length;$('continue-game').onclick=continueRun;$('museum-open').onclick=artifactRoom;
-    $('view-map').onclick=()=>{preview=true;worldIndex=0;phase=0;worldMap()};
+    $('new-game').onclick=newRun;$('continue-game').hidden=!profiles().length;$('continue-game').onclick=continueRun;$('museum-open').onclick=()=>artifactRoom();
+    $('view-map').onclick=()=>{previewOrigin={worldIndex,phase};preview=true;worldIndex=0;phase=0;worldMap()};
   }
   function selectHero(){
     stopScene();stopScene=()=>{};
@@ -248,11 +250,11 @@ function platformGame(){
 
   const bosses=[
     {name:'Guardião do Nilo',kind:0,hp:12,color:'#b68c55',accent:'#ffdc83',attacks:['wave','charge','wave']},
-    {name:'Sentinela do Zigurate',kind:1,hp:14,color:'#b16b47',accent:'#f5bd70',attacks:['fall','wave','fall']},
-    {name:'Colosso de Bronze',kind:2,hp:16,color:'#a99869',accent:'#d9edc7',attacks:['disc','wave','disc']},
-    {name:'Guardião da Arena',kind:3,hp:18,color:'#a28d87',accent:'#ffd39a',attacks:['charge','disc','wave']},
-    {name:'Autômato da Bastilha',kind:4,hp:20,color:'#8d899e',accent:'#f4c7df',attacks:['disc','fall','disc']},
-    {name:'Titã a Vapor',kind:5,hp:22,color:'#986747',accent:'#ffd18b',attacks:['steam','wave','fall']}
+    {name:'Sentinela do Zigurate',kind:1,hp:14,color:'#b16b47',accent:'#f5bd70',attacks:['fall','quake','fall']},
+    {name:'Colosso de Bronze',kind:2,hp:16,color:'#a99869',accent:'#d9edc7',attacks:['disc','highDisc','disc']},
+    {name:'Guardião da Arena',kind:3,hp:18,color:'#a28d87',accent:'#ffd39a',attacks:['charge','sweep','charge']},
+    {name:'Autômato da Bastilha',kind:4,hp:20,color:'#8d899e',accent:'#f4c7df',attacks:['lob','fall','lob']},
+    {name:'Titã a Vapor',kind:5,hp:22,color:'#986747',accent:'#ffd18b',attacks:['steam','vent','steam']}
   ];
   const bossPoints=[[50,56],[87,52],[82,78],[57,13],[84,16],[16,25]];
   function pixelControls(root){
@@ -262,7 +264,7 @@ function platformGame(){
   function runBoss(){
     persist();stopScene();
     const boss=bosses[worldIndex],W=480,H=270,floor=226,bx=375,by=155,p={x:55,y:floor-28,w:22,h:28,vy:0,face:1,on:true};
-    let stopped=false,raf=0,last=0,acc=0,t=0,keys={},hp=boss.hp,playerHP=6,inv=0,cd=0,dashCD=0,dash=0,shots=[],hazards=[],sparks=[],attackNo=0,cycle=0,mode='warning',modeLeft=72;
+    let stopped=false,raf=0,last=0,acc=0,t=0,keys={},hp=boss.hp,playerHP=6,inv=0,cd=0,dashCD=0,dash=0,shots=[],hazards=[],sparks=[],attackNo=0,cycle=0,mode='warning',modeLeft=72,hitFlash=0,defeatTimer=0;
     reach=Math.max(reach,(worldIndex*7+6)*100);
     stage.innerHTML='<section class="boss-stage"><div class="campaign-top"><span>'+GABE_WORLDS[worldIndex].title+' · Fase 7 / 7 · Chefe</span></div><h3>'+boss.name+'</h3><div class="boss-hud"><div><small>VIDA DO VIAJANTE</small><div id="boss-hearts"></div></div><div class="boss-health"><small>RESISTÊNCIA DO CHEFE</small><div class="boss-meter"><i id="boss-bar"></i></div><span id="boss-hp"></span></div><div><small>ESQUIVA</small><span id="boss-dash-status">Pronta</span></div></div><div class="boss-canvas"><canvas id="boss-canvas" width="480" height="270" tabindex="0" aria-label="Arena do chefe '+boss.name+'"></canvas></div><div class="boss-controls"><div><button data-boss-key="left">←</button><button data-boss-key="right">→</button></div><div><button data-boss-key="jump">Pular · Espaço</button><button data-boss-key="shoot">'+(hero==='Gabi'?'Ampulhetas':'Folhas')+' · X/J</button><button data-boss-key="dash">Esquiva · C</button></div><div><button id="boss-restart">Reiniciar</button><button id="boss-map">Mapa</button></div></div><p class="boss-notice" id="boss-notice" role="status">Observe o chefe e ataque quando o núcleo dourado estiver exposto.</p><details><summary>Como enfrentar o chefe</summary><p>Setas ou A/D para mover, Espaço para pular, X ou J para atacar, C para esquivar. Os chefes são guardiões fictícios inspirados nos cenários históricos.</p></details></section>';
     const bossControls=stage.querySelector('.boss-controls'),bossCanvas=stage.querySelector('.boss-canvas'),cabinet=document.createElement('div');cabinet.className='boss-cabinet';bossCanvas.before(cabinet);cabinet.append(bossCanvas,bossControls);const lifePanel=document.createElement('div');lifePanel.className='pixel-life';lifePanel.append($('boss-hearts'));bossControls.prepend(lifePanel);const oldLife=stage.querySelector('.boss-hud>div:first-child');oldLife.hidden=true;
@@ -278,26 +280,44 @@ function platformGame(){
     }
     function hurt(){if(inv||dash)return;playerHP--;inv=72;burst(p.x+p.w/2,p.y+10,'#e65c66');hud();if(playerHP<=0)finish(false)}
     function launchHazard(type){const spd=hp<=boss.hp/2?3.7:2.8;
+      if(type==='quake'||type==='vent'){hazards.push({x:Math.max(16,Math.min(310,p.x-8)),y:floor-(type==='vent'?75:24),w:type==='vent'?30:52,h:type==='vent'?75:24,vx:0,vy:0,life:95,kind:type,warn:40});return}
+      if(type==='lob'){hazards.push({x:bx-46,y:by-8,w:13,h:13,vx:-3.1,vy:-4.5,life:150,kind:type});return}
+      if(type==='sweep'){hazards.push({x:bx-45,y:floor-46,w:60,h:12,vx:-spd*1.25,vy:0,life:150,kind:type});return}
       if(type==='fall'){hazards.push({x:Math.max(25,Math.min(320,p.x+20)),y:30,w:25,h:25,vx:0,vy:0,life:110,kind:type,warn:36});return}
-      const size=type==='steam'?[35,43]:type==='charge'?[45,24]:type==='disc'?[15,15]:[23,15];
-      hazards.push({x:bx-35,y:type==='disc'?185-(attackNo%2)*25:floor-size[1],w:size[0],h:size[1],vx:-spd*(type==='charge'?1.4:type==='steam'?.65:1),vy:0,life:190,kind:type});
+      const size=type==='steam'?[35,43]:type==='charge'?[45,24]:(type==='disc'||type==='highDisc')?[15,15]:[23,15];
+      hazards.push({x:bx-35,y:type==='highDisc'?floor-61:type==='disc'?floor-22:floor-size[1],w:size[0],h:size[1],vx:-spd*(type==='charge'?1.4:type==='steam'?.65:1),vy:0,life:190,kind:type});
     }
-    function tick(){t++;if(inv)inv--;if(cd)cd--;if(dashCD){dashCD--;if(!dashCD)hud()}if(dash)dash--;
+    function tick(){t++;if(hitFlash)hitFlash--;if(defeatTimer){if(--defeatTimer===0)finish(true);return}if(inv)inv--;if(cd)cd--;if(dashCD){dashCD--;if(!dashCD)hud()}if(dash)dash--;
       const d=(keys.right?1:0)-(keys.left?1:0);if(d)p.face=d;if(keys.dash&&!dashCD){dash=13;dashCD=95;hud()}p.x=Math.max(12,Math.min(330,p.x+(dash?p.face*7:d*2.6)));
       if(keys.jump&&p.on){p.vy=-9.5;p.on=false}p.vy=Math.min(11,p.vy+.48);p.y+=p.vy;if(p.y+p.h>=floor){p.y=floor-p.h;p.vy=0;p.on=true}
       if(keys.shoot&&!cd){shots.push({x:p.x+p.w/2,y:p.y+12,w:12,h:10,vx:p.face*5.1,life:95});cd=hero==='Gabi'?27:22}
       if(--modeLeft<=0){if(mode==='warning'){mode='attack';modeLeft=hp<=boss.hp/2?124:108;cycle=0;say('Ataque do chefe! Desvie.')}else if(mode==='attack'){mode='open';modeLeft=hp<=boss.hp/2?145:165;say('Núcleo exposto! Ataque agora.')}else{mode='warning';modeLeft=hp<=boss.hp/2?42:58;attackNo++;say('O chefe prepara um novo ataque.')}}
       if(mode==='attack'){cycle++;if(cycle===1||cycle%34===0)launchHazard(boss.attacks[(attackNo+Math.floor(cycle/34))%boss.attacks.length])}
       const target={x:bx-35,y:by-22,w:72,h:93};
-      for(const shot of shots){shot.x+=shot.vx;shot.life--;if(overlap(shot,target)){shot.life=0;if(mode==='open'){hp--;burst(shot.x,shot.y,boss.accent);hud();if(hp<=0){finish(true);return}}else burst(shot.x,shot.y,'#a5949a')}}
+      for(const shot of shots){shot.x+=shot.vx;shot.life--;if(overlap(shot,target)){shot.life=0;if(mode==='open'){hp--;hitFlash=10;burst(shot.x,shot.y,boss.accent);hud();if(hp<=0){mode='defeat';defeatTimer=55;shots=[];hazards=[];say('Guardião derrotado!');return}}else burst(shot.x,shot.y,'#a5949a')}}
       shots=shots.filter(v=>v.life>0&&v.x>0&&v.x<W);
-      for(const h of hazards){h.life--;if(h.warn){h.warn--;continue}if(h.kind==='fall')h.vy=Math.min(7,h.vy+.35);h.x+=h.vx;h.y+=h.vy;if(overlap(p,h)){hurt();if(stopped)return;h.life=0}}
+      for(const h of hazards){h.life--;if(h.warn){h.warn--;continue}if(h.kind==='fall'||h.kind==='lob')h.vy=Math.min(7,h.vy+.35);h.x+=h.vx;h.y+=h.vy;if(overlap(p,h)){hurt();if(stopped)return;h.life=0}}
       hazards=hazards.filter(h=>h.life>0&&h.x>-60&&h.y<H+40);
       for(const sp of sparks){sp.x+=sp.vx;sp.y+=sp.vy;sp.life--}sparks=sparks.filter(sp=>sp.life>0);
     }
     function drawBoss(){
+      if(bossSprites.complete&&bossSprites.naturalWidth){
+        const sw=bossSprites.naturalWidth/3,top=boss.kind<3,sy=top?0:Math.round(bossSprites.naturalHeight*.465),sh=top?Math.round(bossSprites.naturalHeight*.465):Math.round(bossSprites.naturalHeight*.505);
+        const size=mode==='warning'?1+Math.sin(t/7)*.025:mode==='attack'?1+Math.sin(t/4)*.035:1;
+        const dw=Math.round(178*size),dh=Math.round(dw*sh/sw),lean=mode==='attack'?Math.round(-6*Math.abs(Math.sin(t/5))):0;
+        const sink=mode==='defeat'?Math.round((55-defeatTimer)*.7):0;
+        const bob=mode==='defeat'?0:Math.round(Math.sin(t/12)*2);
+        ctx.save(); ctx.imageSmoothingEnabled=false;
+        if(mode==='defeat')ctx.globalAlpha=Math.max(0,defeatTimer/55);
+        if(hitFlash&&hitFlash%4<2)ctx.filter='brightness(1.6)';
+        ctx.drawImage(bossSprites,(boss.kind%3)*sw,sy,sw,sh,Math.round(bx-dw/2+lean),floor-dh+7+bob+sink,dw,dh);
+        ctx.restore();
+        if(mode==='warning'){box(bx-2,floor-dh-9,5,9,'#ffe6a4');box(bx-2,floor-dh+3,5,4,'#ffe6a4')}
+        if(mode==='open'){const r=11+Math.floor(t/8)%5;ctx.save();ctx.strokeStyle='#ffe9a2';ctx.lineWidth=2;ctx.strokeRect(bx-r,floor-78-r,r*2,r*2);ctx.restore()}
+        return;
+      }
       const c=boss.color,a=boss.accent,sh='#30202a',gold='#e0ac58',hi='#ffe3a0',bob=Math.round(Math.sin(t/13)*2);
-      ctx.save();ctx.translate(bx,by+bob);
+      ctx.save();const pose=mode==='attack'?Math.round(Math.sin(t/4)*5):mode==='warning'?-Math.round(Math.sin(t/8)*3):0;ctx.translate(bx+pose,by+bob+(mode==='defeat'?Math.round((55-defeatTimer)*.7):0));if(mode==='defeat')ctx.globalAlpha=Math.max(0,defeatTimer/55);if(hitFlash&&hitFlash%4<2)ctx.filter='brightness(1.6)';
       const R=(x,y,w,h,col)=>box(x,y,w,h,col);
       const poly=(pts,col)=>{ctx.fillStyle=col;ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fill()};
       R(-42,56,86,7,sh);R(-31,29,26,36,sh);R(6,29,26,36,sh);R(-28,32,20,27,c);R(10,32,19,27,c);R(-33,57,28,9,sh);R(6,57,30,9,sh);R(-30,56,22,5,gold);R(9,56,23,5,gold);
@@ -322,10 +342,12 @@ function platformGame(){
       }
       R(-13,23,26,22,sh);R(-11,25,22,18,gold);R(-8,28,16,12,mode==='open'?hi:'#674b53');if(mode==='open'){R(-4,30,8,8,'#fff4ce');R(-2,32,4,4,'#ffffff')}
       if(mode==='warning'){R(-3,-70,6,10,hi);R(-3,-57,6,5,hi)}
+      if(mode==='open'){const radius=17+Math.floor(t/6)%5;ctx.strokeStyle=hi;ctx.lineWidth=1;ctx.strokeRect(-radius,34-radius,radius*2,radius*2)}
+      if(mode==='attack'){for(let i=0;i<3;i++)R(-52-i*7,20+i*5,4,2,a)}
       ctx.restore();
     }
     function frame(){drawBackdrop(ctx,W,H,worldIndex,5,0,t);box(0,floor,W,H-floor,'#49343a');for(let x=0;x<W;x+=32){box(x,floor,31,6,boss.color);box(x+2,floor+7,28,15,'#78564d');box(x+2,floor+7,28,2,'#bb956f')}drawBoss();
-      for(const h of hazards){if(h.warn){box(h.x,floor-3,h.w,3,'#ffdfa8');continue}box(h.x,h.y,h.w,h.h,'#503544');box(h.x+2,h.y+2,h.w-4,h.h-4,h.kind==='steam'?'#d9c9bd':boss.accent)}
+      for(const h of hazards){if(h.warn){box(h.x,floor-4,h.w,4,h.warn%8<4?'#ffdfa8':'#a85039');continue}const {x,y,w,h:height,kind}=h;if(kind==='steam'||kind==='vent'){for(let j=0;j<5;j++){const dx=Math.round(Math.sin(t/7+j)*4);box(x+dx+j%2*5,y+j*height/5,w-8,height/5+2,j%2?'#d9c9bd':'#aa9b97')}}else if(kind==='disc'||kind==='highDisc'||kind==='lob'){box(x+3,y,w-6,height,'#503544');box(x,y+3,w,height-6,boss.accent);box(x+4,y+4,w-8,height-8,'#fff0c2')}else{box(x,y,w,height,'#503544');box(x+2,y+2,w-4,height-4,boss.accent);for(let j=0;j<w;j+=8)box(x+j,y+2,4,4,'#ffdfa8')}}
       for(const shot of shots){if(hero==='Gabi'){box(shot.x,shot.y,12,2,'#e8bc6c');box(shot.x,shot.y+8,12,2,'#e8bc6c');box(shot.x+3,shot.y+2,6,2,'#ffdfa8');box(shot.x+5,shot.y+4,2,2,'#ffdfa8');box(shot.x+3,shot.y+6,6,2,'#ffdfa8')}else{box(shot.x,shot.y+3,12,5,'#a8db62');box(shot.x+3,shot.y+1,6,9,'#739944')}}
       if(!inv||t%8<4){ctx.save();ctx.translate(p.x+p.w/2,p.y+p.h);ctx.scale(p.face,1);if(atlas[hero].naturalWidth){const f=p.on?(keys.left||keys.right?1+Math.floor(t/7)%5:0):2;ctx.drawImage(atlas[hero],f*64,0,64,80,-19,-42,38,42)}else{box(-12,-27,24,26,'#a6784f');box(-8,-35,17,13,'#b58a5b')}ctx.restore()}
       for(const sp of sparks){ctx.save();ctx.globalAlpha=sp.life/20;box(sp.x,sp.y,3,3,sp.c);ctx.restore()}
@@ -631,7 +653,7 @@ function platformGame(){
         if(r.got||r.x<cam-24||r.x>cam+W+24)continue;
         const y=r.y+Math.sin((time+r.x)/12)*2;
         if(!r.artifact){icon(gameIcons,2,r.x,y,24,24);continue}
-        if(collectionArt.naturalWidth)ctx.drawImage(collectionArt,phase*144,worldIndex*144,144,144,r.x-20,y-22,40,40);
+        if(collectionArt.naturalWidth){const cw=collectionArt.naturalWidth/6,ch=collectionArt.naturalHeight/6;ctx.drawImage(collectionArt,phase*cw,worldIndex*ch,cw,ch,r.x-20,y-22,40,40)}else{box(r.x-5,y-5,10,10,'#e8bc6c');box(r.x-2,y-2,4,4,'#fff0c2')}
 
       }
       stations.forEach((point,j)=>{
