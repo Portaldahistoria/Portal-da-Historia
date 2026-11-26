@@ -1,0 +1,27 @@
+name: Validar Crônicas v77
+on:
+  push:
+    branches: ['work/cronicas-v77-validacao']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright
+      - run: npx playwright install --with-deps chromium
+      - run: node --check jogos.js && node --check portal.js && node --check sw.js
+      - run: |
+          python3 -m http.server 8765 > /tmp/cronicas-http.log 2>&1 &
+          node tests/cronicas-smoke.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cronicas-capturas-reais
+          path: test-artifacts/
