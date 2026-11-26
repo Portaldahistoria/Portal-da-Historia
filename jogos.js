@@ -35,6 +35,7 @@ const bossArenas=new Image();bossArenas.src='img/cronicas-arenas-v77.png';
 const bossSprites=new Image();bossSprites.src='img/cronicas-chefes-v77.png';
 const nileSprites=new Image();nileSprites.src='img/guardiao-nilo-poses-v78.png';
 const nileEffects=new Image();nileEffects.src='img/guardiao-nilo-efeitos-v79.png';
+const crouchSprites=new Image();crouchSprites.src='img/cronicas-agachar-v80.png';
 const chronicleScenes=Array.from({length:6},(_,i)=>{const img=new Image();img.src='img/chronicle-world-'+i+'.webp';return img});
 const critters=new Image();critters.src='img/chronicle-variants.webp';
 const nileFauna=new Image();nileFauna.src='img/fauna-do-nilo.webp';
@@ -321,6 +322,10 @@ function platformGame(){
         const pose=NileBoss.pose(nilePlan,mode,cycle,modeLeft,t),f=pose.frame,cw=nileSprites.naturalWidth/3,ch=nileSprites.naturalHeight/2;
         const baseline=[480,480,480,456,461,459][f]/512*ch,anchor=[278,275,280,325,270,300][f]/512*cw;
         const scale=220/cw, x=bx+pose.offset-anchor*scale, y=floor-baseline*scale;
+        if(mode==='attack'&&nilePlan.key==='lunge'&&pose.frame===3){
+          for(let i=2;i>=1;i--){const previous=NileBoss.pose(nilePlan,mode,Math.max(0,cycle-i*3),modeLeft,t-i*3);if(previous.frame!==3||previous.offset===pose.offset)continue;ctx.save();ctx.globalAlpha=i===1?.16:.08;ctx.drawImage(nileSprites,0,ch,cw,baseline+2,bx+previous.offset-anchor*scale,y,220,(baseline+2)*scale);ctx.restore()}
+          ctx.save();ctx.globalAlpha=.5;for(let i=0;i<6;i++){const dx=(i*9+cycle*2)%42;box(bx+pose.offset+20+dx,floor-2-(i%3)*3,3+i%2,2,'#e9c38a')}ctx.restore();
+        }
         ctx.save();if(hitFlash&&hitFlash%4<2)ctx.filter='brightness(1.65)';if(mode==='defeat')ctx.globalAlpha=Math.max(0,defeatTimer/55);
         ctx.drawImage(nileSprites,(f%3)*cw,Math.floor(f/3)*ch,cw,baseline+2,x,y,220,(baseline+2)*scale);
         ctx.restore();
@@ -422,7 +427,8 @@ function platformGame(){
   function runPhase(){
     persist();stopScene();let stopped=false,raf=0,keys={},last=0,acc=0,time=0,hits=0,cooldown=0,checkpoint=0,invuln=0;const w=GABE_WORLDS[worldIndex],s=w.stages[phase];
     stage.innerHTML='<div class="campaign-top"><span>'+w.title+' · Fase '+(phase+1)+' / 6</span></div><h3>'+s[0]+'</h3><div class="hud"><span id="gabe-hearts">♥ ♥ ♥</span><span id="gabe-items">0 / 3 · '+s[2]+'</span><span id="gabe-time">00:00</span></div><div class="play-console"><div class="platform-wrap campaign-screen"><canvas id="gabe-canvas" width="480" height="270" tabindex="0" aria-label="'+hero+' em '+s[0]+'"></canvas><div id="artifact-toast" class="artifact-toast" hidden role="status"></div></div><div class="controls platform-controls campaign-controls"><div class="steer-pad"><button data-move="left" aria-label="Mover para esquerda">←</button><button data-move="right" aria-label="Mover para direita">→</button><button data-move="duck" aria-label="Abaixar">↓</button></div><div class="ability-pad"><button data-move="special" id="power"></button><button data-move="jump" aria-label="Pular">↑ Pular</button></div><div class="console-tools"><button id="gabe-restart" aria-label="Reiniciar fase">Reiniciar</button><button id="phase-back" class="map-key" aria-label="Voltar ao mapa">Mapa</button></div></div></div><div class="field-notes"><div class="gabe-mini">'+gabeIcon()+'</div><div><strong>Diário '+(hero==='Gabi'?'do Gabi':'da Gio')+'</strong><p id="gabe-note" role="status">'+s[3]+'</p><details class="game-help"><summary>Como jogar</summary><small>Uma estrela abre o portal. Cada estrela vale 100 pontos. O artefato dobra o total. · As tábuas cedem. O sinal ! avisa quando um inimigo vai saltar. · ↓ para abaixar · Espaço para saltar · X ou J: habilidade. Dois acertos derrotam inimigos comuns; desvie dos crocodilos e inimigos grandes.</small><p class="landscape-hint">Para uma visão maior, experimente jogar com o celular na horizontal.</p></details></div></div>';
-    const canvas=$('gabe-canvas'),ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;const W=480,H=270,ground=228,worldLen=4140+phase*216;
+    const canvas=$('gabe-canvas'),ctx=canvas.getContext('2d');canvas.width=960;canvas.height=540;ctx.scale(2,2);ctx.imageSmoothingEnabled=false;const W=480,H=270,ground=228,worldLen=4140+phase*216;
+    let crouchAmount=0;
     // Hand-authored itineraries: ferry, terraces, lift, bridge, market, patrol.
     const routes=[
       ['FFMTFRFTMF','MRTRMMRBTR','TTLTBTLTTB','TRTLRMTTRM','BTLBTTRBLT','MFRMFTMRFM'],
@@ -564,7 +570,7 @@ function platformGame(){
       power.setAttribute('aria-disabled',String(cooldown>0));
       power.classList.toggle('recharging',cooldown>0);power.style.setProperty('--charge',Math.round(100*(1-cooldown/(hero==='Gabi'?72:48)))+'%');
       const crouched=!diving&&keys.duck&&p.on;
-      if(!diving){const h=crouched?15:26;p.y+=p.h-h;p.h=h}
+      if(!diving){crouchAmount=Math.max(0,Math.min(8,crouchAmount+(crouched?1:-1)));const h=Math.round(26-8*crouchAmount/8);p.y+=p.h-h;p.h=h}
       movePlatforms();for(const pad of pads)if(pad.cooldown>0)pad.cooldown--;if(invuln)invuln--;let d=(keys.right?1:0)-(keys.left?1:0);if(d)p.face=d;p.vx=d*(diving?1.9:crouched?.8:2.45);if(!diving&&!crouched&&keys.jump&&p.on){p.vy=-9.6;p.on=false}p.x=Math.max(0,Math.min(worldLen-p.w,p.x+p.vx));const old=p.y+p.h;p.vy=diving?p.vy*.82+(keys.jump?-.40:.29):Math.min(10,p.vy+.48);
       p.y=diving?Math.max(14,Math.min(ground-p.h,p.y+p.vy)):p.y+p.vy;p.on=false;for(const x of solids){if(!diving&&!x.cooldown&&p.vy>=0&&old<=x.y+.01&&p.y+p.h>=x.y&&p.x+p.w>x.x&&p.x<x.x+x.w){p.y=x.y-p.h;p.vy=0;p.on=true;if(x.fragile&&++x.wear>=45){x.cooldown=150;x.wear=0}break}}if(p.y>H+40){damage(true);return}
       reach=Math.max(reach,(worldIndex*7+phase)*100+Math.min(99,Math.floor(p.x/worldLen*100)));
@@ -639,10 +645,24 @@ function platformGame(){
       const size=croc?82:43;
       ctx.drawImage(nileFauna,frame%3*128,Math.floor(frame/3)*128,128,128,-size/2,-size/2,size,size);
       ctx.restore();
+      // A restrained wake behind moving fish, without changing their collision boxes.
+      ctx.save();ctx.globalAlpha=o.dash?.55:.25;for(let i=0;i<(o.dash?5:3);i++){const age=(time+i*7)%24,x=o.x+o.w/2-o.face*(size*.25+age*.65),y=o.y+o.h/2+Math.sin(age/4+i)*3;box(x,y,Math.max(1,4-age/8),1,'#b6f4ea')}ctx.restore();
       if(o.windup){ctx.fillStyle='#ffe598';ctx.font='bold 12px monospace';ctx.fillText('!',o.x+o.w/2,o.y-7)}
     }
     function frame(){
       drawBackdrop(ctx,W,H,worldIndex,phase,cam,time);
+      if(worldIndex===0){
+        ctx.save();
+        if(diving){
+          const glow=ctx.createLinearGradient(0,0,0,H);glow.addColorStop(0,'#a4fff51a');glow.addColorStop(.54,'#135e9900');glow.addColorStop(1,'#082e4926');ctx.fillStyle=glow;ctx.fillRect(0,0,W,H);
+          // Moving shafts of light and distant suspended particles remain behind gameplay.
+          for(let i=0;i<7;i++){const x=((i*79-cam*.075)%560+560)%560-40,shift=Math.sin(time/95+i)*7;ctx.fillStyle='#c7ffed0c';ctx.beginPath();ctx.moveTo(x+shift,0);ctx.lineTo(x+18+shift,0);ctx.lineTo(x-43+shift,195);ctx.lineTo(x-68+shift,195);ctx.closePath();ctx.fill()}
+          for(let i=0;i<32;i++){const x=((i*83-cam*.18+Math.sin(time/47+i)*7)%W+W)%W,y=(i*31+time*.12)%H;box(x,y,1+i%2,1,'#b5f5ec50')}
+        }else if(phase===1){
+          for(let i=0;i<19;i++){const x=((i*97-cam*.31+time*.12)%W+W)%W,y=30+(i*47+Math.sin(time/40+i)*8)%170;box(x,y,1,1,'#ffe6ac80')}
+        }
+        ctx.restore();
+      }
       ctx.save();ctx.translate(-Math.floor(cam),0);for(const b of solids){if(diving)continue;
         if(b.cooldown||b.x>cam+W||b.x+b.w<cam)continue;
         if(b.motion){
@@ -655,6 +675,7 @@ function platformGame(){
           box(b.x,b.y+9,b.w,2,'#513c45');continue;
         }
         const surface=['#edc78b','#d99865','#e3d7c1','#d1b7a0','#c4bdba','#a3a1a0'][worldIndex];box(b.x,b.y,b.w,b.h,['#76543b','#6a4031','#82776b','#6a514a','#55535b','#38383d'][worldIndex]);box(b.x+1,b.y+1,b.w-2,4,surface);
+        if(worldIndex===0){box(b.x,b.y,b.w,1,'#ffe4a5');box(b.x,b.y+4,b.w,2,phase===1?'#287b78':'#a46c40');for(let q=Math.max(0,Math.floor((cam-b.x)/20)*20);q<Math.min(b.w,cam+W-b.x);q+=20){box(b.x+q+3,b.y+2,5,1,'#fff1bd');if(phase===1&&q+16<b.w)box(b.x+q+10,b.y+4,3,2,'#d9a357')}}
         const brick=['#c49a60','#a96a47','#d0c1a5','#a88a77','#929198','#665e60'][worldIndex];
         for(let row=0;row<Math.ceil((b.h-5)/9);row++){
           const left=b.x-(row%2)*12;
@@ -706,6 +727,8 @@ function platformGame(){
           ctx.strokeStyle='#bcf3ffa8';ctx.lineWidth=1;ctx.beginPath();ctx.arc(x,y,1+i%3,0,Math.PI*2);ctx.stroke();
         }
         ctx.restore();
+        // Small bubbles from the swimmer, with a short fading wake.
+        for(let i=0;i<6;i++){const age=(time+i*9)%48,x=p.x+p.w/2-p.face*(14+age*.42)+Math.sin(age/8+i)*3,y=p.y+p.h/2-age*.43;ctx.save();ctx.globalAlpha=(1-age/48)*.7;ctx.strokeStyle='#e4fcff';ctx.lineWidth=.65;ctx.beginPath();ctx.arc(x,y,1.5+i%3*.55,0,Math.PI*2);ctx.stroke();ctx.restore()}
       }
       for(const r of relics){
         if(r.got||r.x<cam-24||r.x>cam+W+24)continue;
@@ -739,9 +762,14 @@ function platformGame(){
           const stroke=Math.floor(time/(keys.jump?6:10))%4;
           ctx.rotate(p.vy*.09);
           ctx.drawImage(diveAtlas[hero],stroke*96,0,96,60,-35,-21,70,43);
+        }else if(crouchAmount>0&&crouchSprites.naturalWidth){
+          const f=crouchAmount<3?0:crouchAmount<6?1:p.vx&&Math.floor(time/7)%2?3:2,row=hero==='Gabi'?0:1;
+          const crops=[[[129,55,379,410],[104,80,367,409],[78,108,351,410],[52,113,328,410]],[[113,27,376,402],[113,57,373,402],[82,83,354,401],[74,98,348,401]]];
+          const [x1,y1,x2,y2]=crops[row][f],sw=x2-x1,sh=y2-y1,scale=.098;
+          ctx.drawImage(crouchSprites,Math.floor(f*crouchSprites.naturalWidth/4)+x1,Math.floor(row*crouchSprites.naturalHeight/2)+y1,sw,sh,-sw*scale/2,p.h/2-sh*scale,sw*scale,sh*scale);
         }else{
           const step=p.on?(p.vx?1+Math.floor(time/7)%5:0):2;
-          ctx.drawImage(atlas[hero],step*64,0,64,80,-15,p.h===15?-12:-25,30,p.h===15?21:38);
+          ctx.drawImage(atlas[hero],step*64,0,64,80,-15,p.h/2-38,30,38);
         }
 
         ctx.restore();
