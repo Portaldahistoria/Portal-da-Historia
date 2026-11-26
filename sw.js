@@ -1,5 +1,5 @@
 /* Portal da História — offline application shell. */
-const VERSION = 'portal-historia-pwa-v82';
+const VERSION = 'portal-historia-pwa-v83';
 const CORE = VERSION + '-core';
 const MEDIA = 'portal-historia-pwa-v1-media';
 const BASE = new URL('./', self.location.href);
@@ -14,7 +14,7 @@ const files = [
   'img/gabi-portrait.webp','img/gio-portrait.webp','img/gabi-walk.webp','img/gio-walk.webp','img/chronicle-fauna.webp',
   ...Array.from({length:6},(_,i)=>'img/chronicle-world-'+i+'.webp'),
   ...Array.from({length:5},(_,i)=>'img/chronicle-game-'+i+'.webp'),
-  'campaign-landscape.js',
+  'campaign-landscape.js','jogos.css','jogos.js',
   './','index.html','jogos.html','og-image.png','manifest.webmanifest','app-icon-192.png','app-icon-512.png','aplicativo.html','aplicativo.js',
   'pwa.js','pwa.css','style.css','portal.css','refinement.css','fullwidth.css',
   'chronology.css','chapter-index.js','grades.js','app.js','portal.js','hero-grain.svg',
