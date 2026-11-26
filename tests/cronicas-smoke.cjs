@@ -33,12 +33,26 @@ const fs = require('node:fs');
       assert.equal(await f.locator('.travel-pin:disabled').count(),0);
       await f.locator('.travel-pin').first().click();
       await f.locator('#gabe-canvas').waitFor({state:'visible',timeout:15000});
+      assert.deepEqual(await f.locator('#gabe-canvas').evaluate(el=>[el.width,el.height]),[960,540]);
       await f.locator('#gabe-canvas').focus();
       await page.keyboard.down('ArrowRight');
       await page.waitForTimeout(350);
       await page.keyboard.up('ArrowRight');
       await f.locator('#phase-back').click();
       await f.locator('.boss-pin').waitFor({state:'visible'});
+      if(w===0){
+        await f.locator('.destination-action').nth(1).click();
+        await f.locator('#gabe-canvas').waitFor({state:'visible',timeout:15000});
+        await f.locator('#gabe-canvas').focus();
+        await page.keyboard.down('ArrowDown');
+        await page.waitForTimeout(350);
+        await f.locator('#gabe-canvas').screenshot({path:'test-artifacts/egito-escribas-agachado.png'});
+        await page.keyboard.up('ArrowDown');
+        await page.waitForTimeout(350);
+        await f.locator('#gabe-canvas').screenshot({path:'test-artifacts/egito-escribas-em-pe.png'});
+        await f.locator('#phase-back').click();
+        await f.locator('.boss-pin').waitFor({state:'visible'});
+      }
       await f.locator('.boss-pin').click();
       await f.locator('#boss-canvas').waitFor({state:'visible',timeout:15000});
       assert.equal(await f.locator('.boss-stage h3').innerText(),names[w]);
