@@ -2,6 +2,9 @@ name: Validar Crônicas v77
 on:
   push:
     branches: ['work/cronicas-v77-validacao']
+  pull_request:
+    branches: ['main']
+    paths: ['jogos.js', 'jogos.css', 'sw.js', 'portal.js', 'img/cronicas-chefes-v77.png', 'tests/cronicas-smoke.cjs', '.github/workflows/cronicas-smoke.yml']
   workflow_dispatch:
 permissions:
   contents: read
