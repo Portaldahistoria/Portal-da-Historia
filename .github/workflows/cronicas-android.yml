@@ -1,0 +1,39 @@
+name: Build Crônicas Android
+on:
+  push:
+    branches: ['main']
+    paths: ['android-cronicas/**', 'cronicas/**', '.github/workflows/cronicas-android.yml', 'jogos.js', 'jogos.css', 'nile-boss.js', 'campaign-landscape.js', 'img/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare and build test APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDK="$ANDROID_HOME"
+          BUILD="$(find "$SDK/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -1)"
+          PLATFORM="$SDK/platforms/android-35/android.jar"
+          test -f "$PLATFORM"
+          mkdir -p build/res/drawable build/obj build/dex build/assets/game
+          cp cronicas/icon-192.png build/res/drawable/icon.png
+          cp -r cronicas fonts img build/assets/game/
+          cp jogos.js jogos.css campaign-landscape.js nile-boss.js build/assets/game/
+          "$BUILD/aapt2" compile --dir build/res -o build/resources.zip
+          "$BUILD/aapt2" link -o build/base.apk -I "$PLATFORM" --manifest android-cronicas/AndroidManifest.xml -A build/assets build/resources.zip
+          javac -source 8 -target 8 -classpath "$PLATFORM" -d build/obj android-cronicas/MainActivity.java
+          "$BUILD/d8" --lib "$PLATFORM" --min-api 23 --output build/dex $(find build/obj -name '*.class')
+          (cd build/dex && zip -j ../base.apk classes.dex)
+          "$BUILD/zipalign" -f 4 build/base.apk build/aligned.apk
+          PASS="$(openssl rand -hex 24)"
+          keytool -genkeypair -keystore "$RUNNER_TEMP/cronicas-test.p12" -storetype PKCS12 -storepass "$PASS" -keypass "$PASS" -alias cronicas -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Cronicas de Capivara Teste"
+          "$BUILD/apksigner" sign --ks "$RUNNER_TEMP/cronicas-test.p12" --ks-pass "pass:$PASS" --out build/Cronicas-de-Capivara-teste.apk build/aligned.apk
+          "$BUILD/apksigner" verify --verbose build/Cronicas-de-Capivara-teste.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Cronicas-de-Capivara-APK-teste
+          path: build/Cronicas-de-Capivara-teste.apk

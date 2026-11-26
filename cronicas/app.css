@@ -1,0 +1,10 @@
+.cronicas-app{background:#291c16;color:#f8dfb2;min-height:100vh;min-height:100dvh;overscroll-behavior:none}
+.cronicas-app .shell{width:100%;max-width:1320px;margin:0 auto;padding: max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+.cronicas-app .arena{max-width:none;margin:0;border:0;box-shadow:none;border-radius:0}
+.cronicas-app .gamebar{position:static;gap:12px}
+.cronicas-app .stage{padding:clamp(8px,2vw,24px)}
+.cronicas-app .app-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 10px;color:#edc48b;font:12px/1.4 'Portal Pixel',monospace}
+.cronicas-app .app-tools button{min-height:36px;padding:5px 12px;background:#674026;color:#ffe0a1;border:2px solid #c58d4d;font:inherit}
+.cronicas-app #install-help{padding:8px 10px;margin:0 0 8px;font-size:13px;background:#40291d;color:#ffdfa8}
+@media(display-mode:standalone){.cronicas-app #app-install{display:none}}
+@media(max-width:650px){.cronicas-app .gamebar h2{font-size:clamp(13px,3.4vw,18px)}.cronicas-app .stage{padding:5px}.cronicas-app .gamebar{padding:8px}.cronicas-app .app-tools{font-size:10px}}
