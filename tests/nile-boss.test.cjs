@@ -57,3 +57,12 @@ test('all scheduled events fire exactly once inside their active attack',()=>{
     assert.deepEqual(emitted,p.events);
   }
 });
+
+test('water effects have animated sprite frames and collision follows visible height',()=>{
+  const w=NileBoss.makeHazard(plans(12)[0].events[0],plans(12)[0],{x:375,floor:226,playerX:55});
+  const heights=[];for(const age of [0,8,16,24]){w.age=age;heights.push(NileBoss.hazardHeight(w));assert.ok(NileBoss.hazardFrame(w)>=0&&NileBoss.hazardFrame(w)<3)}
+  assert.ok(heights[0]>heights[1]&&heights[1]>heights[2]&&heights[3]===heights[1]);
+  const geyser=NileBoss.makeHazard(plans(12)[2].events[0],plans(12)[2],{x:375,floor:226,playerX:55});
+  assert.equal(NileBoss.hazardHeight(geyser),0);
+  geyser.warn=0;geyser.age=35;const small=NileBoss.hazardHeight(geyser);geyser.age=45;assert.ok(small<geyser.h);assert.equal(NileBoss.hazardHeight(geyser),geyser.h);
+});

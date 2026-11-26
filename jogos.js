@@ -34,6 +34,7 @@ const GABE_WORLDS=[{"title":"Egito Antigo","era":"c. 3000–30 a.C.","colors":["
 const bossArenas=new Image();bossArenas.src='img/cronicas-arenas-v77.png';
 const bossSprites=new Image();bossSprites.src='img/cronicas-chefes-v77.png';
 const nileSprites=new Image();nileSprites.src='img/guardiao-nilo-poses-v78.png';
+const nileEffects=new Image();nileEffects.src='img/guardiao-nilo-efeitos-v79.png';
 const chronicleScenes=Array.from({length:6},(_,i)=>{const img=new Image();img.src='img/chronicle-world-'+i+'.webp';return img});
 const critters=new Image();critters.src='img/chronicle-variants.webp';
 const nileFauna=new Image();nileFauna.src='img/fauna-do-nilo.webp';
@@ -311,7 +312,7 @@ function platformGame(){
       const target=nile?{x:bossX-48,y:floor-108,w:85,h:108}:{x:bx-35,y:by-22,w:72,h:93};
       for(const shot of shots){shot.x+=shot.vx;shot.life--;if(overlap(shot,target)){shot.life=0;if(mode==='open'){hp--;hitFlash=10;burst(shot.x,shot.y,boss.accent);hud();if(hp<=0){mode='defeat';defeatTimer=55;shots=[];hazards=[];say('Guardião derrotado!');return}}else burst(shot.x,shot.y,'#a5949a')}}
       shots=shots.filter(v=>v.life>0&&v.x>0&&v.x<W);
-      for(const h of hazards){h.life--;h.age=(h.age||0)+1;if(h.warn){h.warn--;continue}if(h.kind==='fall'||h.kind==='lob')h.vy=Math.min(7,h.vy+.35);h.x+=h.vx;h.y+=h.vy;const hit=h.kind==='nileGeyser'?{x:h.x,y:floor-Math.max(6,h.h*Math.min(1,(h.age-34)/8)),w:h.w,h:Math.max(6,h.h*Math.min(1,(h.age-34)/8))}:h;if(overlap(p,hit)){hurt();if(stopped)return;if(h.kind!=='nileGeyser')h.life=0}}
+      for(const h of hazards){h.life--;h.age=(h.age||0)+1;if(h.warn){h.warn--;continue}if(h.kind==='fall'||h.kind==='lob')h.vy=Math.min(7,h.vy+.35);h.x+=h.vx;h.y+=h.vy;const visible=h.kind.startsWith('nile')?NileBoss.hazardHeight(h):h.h;const hit=h.kind.startsWith('nile')?{x:h.x,y:floor-visible,w:h.w,h:visible}:h;if(overlap(p,hit)){hurt();if(stopped)return;if(h.kind!=='nileGeyser')h.life=0}}
       hazards=hazards.filter(h=>h.life>0&&h.x>-60&&h.y<H+40);
       for(const sp of sparks){sp.x+=sp.vx;sp.y+=sp.vy;sp.life--}sparks=sparks.filter(sp=>sp.life>0);
     }
@@ -380,6 +381,13 @@ function platformGame(){
     function drawNileHazard(h){
       const {x,y,w,h:height,kind}=h;
       if(h.warn){const a=h.warn%12<6?'#ffcc74':'#ae693d';box(x,floor-3,w,3,a);for(let i=0;i<w;i+=8)box(x+i,floor-7,3,4,a);return}
+      if(nileEffects.complete&&nileEffects.naturalWidth){
+        const f=NileBoss.hazardFrame(h),cw=nileEffects.naturalWidth/3,ratio=nileEffects.naturalHeight/1254;
+        const rows={nileWave:[55,323,[277,245,198]],nileShock:[450,227,[153,120,89]],nileGeyser:[700,504,[315,467,406]]};
+        const [sy,sh,opaque]=rows[kind],dh=NileBoss.hazardHeight(h)*sh/opaque[f],dw=w*1.1;
+        ctx.drawImage(nileEffects,f*cw,sy*ratio,cw,sh*ratio,x-(dw-w)/2,floor-dh,dw,dh);
+        return;
+      }
       if(kind==='nileWave'){
         // Articulated wave crest, dark water base and animated foam.
         const step=2,phase=h.age/5;
