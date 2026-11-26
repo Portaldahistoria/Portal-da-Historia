@@ -301,8 +301,9 @@ function platformGame(){
   ];
   const done=(w,p)=>Number(progress[w+'-'+p])>0;
   const finished=w=>GABE_WORLDS[w].stages.every((_,p)=>done(w,p))&&done(w,6);
-  const openWorld=w=>w===0||finished(w-1)||GABE_WORLDS[w].stages.some((_,p)=>done(w,p));
-  const openPhase=(w,p)=>openWorld(w)&&(p===6?GABE_WORLDS[w].stages.every((_,i)=>done(w,i)):p===0||done(w,p)||done(w,p-1));
+  const TEST_UNLOCK_ALL=true; // Temporário: permite testar todos os mundos e chefes sem concluir a campanha.
+  const openWorld=w=>TEST_UNLOCK_ALL||w===0||finished(w-1)||GABE_WORLDS[w].stages.some((_,p)=>done(w,p));
+  const openPhase=(w,p)=>TEST_UNLOCK_ALL||(openWorld(w)&&(p===6?GABE_WORLDS[w].stages.every((_,i)=>done(w,i)):p===0||done(w,p)||done(w,p-1)));
   function travelMap(regional){
     stopScene();stopScene=()=>{};if(disposed)return;
     const w=GABE_WORLDS[worldIndex], points=regional?[...itineraries[worldIndex],bossPoints[worldIndex]]:worldPoints;
