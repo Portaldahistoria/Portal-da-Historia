@@ -33,6 +33,7 @@ function mapGame(){const cities=[{name:'Roma',x:45,y:43,hint:'Na Península Itá
 const GABE_WORLDS=[{"title":"Egito Antigo","era":"c. 3000–30 a.C.","colors":["#efb77b","#bf815a","#74565c","#e0b179"],"icon":"pyramid","stages":[["Mergulho no Nilo","Nilo","Fragmento de cerâmica","O ciclo das cheias do Nilo favorecia a agricultura."],["A oficina dos escribas","Escribas","Papiros","A escrita hieroglífica registrava informações religiosas e administrativas."],["As pirâmides de Gizé","Gizé","Papiros de arquitetura","As pirâmides eram monumentos funerários reais, construídos por trabalhadores organizados."],["O templo de Karnak","Karnak","Amuletos","Templos eram centros religiosos, econômicos e políticos."],["Vale dos Reis","Necrópole","Fragmentos de pinturas","As tumbas revelam crenças egípcias sobre a vida após a morte."],["Alexandria","Alexandria","Rolos de papiro","Alexandria tornou-se um centro de intercâmbio cultural no período helenístico."]]},{"title":"Mesopotâmia","era":"c. 3500–539 a.C.","colors":["#cfa07c","#8b6d61","#695365","#bc8260"],"icon":"ziggurat","stages":[["Os rios Tigre e Eufrates","Rios","Cestos de sementes","A irrigação permitiu o desenvolvimento agrícola entre os rios Tigre e Eufrates."],["Uruk e a escrita","Uruk","Tabuletas","A escrita cuneiforme foi desenvolvida na Mesopotâmia."],["O zigurate de Ur","Ur","Tabuletas de templo","Zigurates eram construções monumentais ligadas à religião."],["Babilônia de Hamurábi","Babilônia","Tabuletas de leis","O Código de Hamurábi reúne leis que expressavam hierarquias e relações sociais."],["Nínive","Nínive","Registros da biblioteca","A biblioteca de Assurbanípal preservou textos em tabuletas de argila."],["Porta de Ishtar","Babilônia","Fragmentos de cerâmica","A Porta de Ishtar ilustra a monumentalidade da Babilônia neobabilônica."]]},{"title":"Grécia Antiga","era":"c. 800–146 a.C.","colors":["#86b4c7","#82929a","#596e87","#e0c9ad"],"icon":"temple","stages":[["A ágora de Atenas","Atenas","Óstracos","A ágora era espaço de comércio e convivência cívica."],["A Acrópole","Atenas","Fragmentos de mármore","A Acrópole abriga monumentos como o Partenon."],["Esparta","Esparta","Peças de cerâmica","Esparta possuía uma organização social e política própria."],["Olímpia","Olímpia","Coroas de oliveira","Os jogos de Olímpia estavam ligados a celebrações religiosas."],["O porto do Pireu","Pireu","Ânforas","O comércio marítimo conectava comunidades do mundo grego."],["A era helenística","Mundo helenístico","Moedas","A expansão macedônica ampliou os intercâmbios culturais."]]},{"title":"Roma Imperial","era":"27 a.C.–476 d.C. (Ocidente)","colors":["#92a1bd","#a17c77","#65556d","#ceb090"],"icon":"arch","stages":[["Fórum Romano","Roma","Moedas imperiais","O Fórum era um centro político, religioso e comercial."],["Coliseu","Roma","Bilhetes simbólicos","Espetáculos públicos integravam a vida urbana e a política imperial."],["Via Ápia","Via Ápia","Marcos miliários","As estradas facilitavam deslocamentos e a administração das províncias."],["Pompeia","Pompeia","Fragmentos de mosaico","A erupção do Vesúvio em 79 d.C. preservou vestígios da vida romana."],["Porto de Óstia","Óstia","Ânforas","Óstia abastecia Roma por meio do comércio marítimo e fluvial."],["Constantinopla","Constantinopla","Pergaminhos","Constantinopla tornou-se capital imperial em 330 d.C."]]},{"title":"Revolução Francesa","era":"1789–1799","colors":["#9baaba","#8c7c87","#525d77","#c3b6ab"],"icon":"city","stages":[["Paris antes de 1789","Paris","Cadernos de reivindicações","O Antigo Regime era marcado por privilégios de nascimento e desigualdades."],["Versalhes","Versalhes","Documentos dos Estados Gerais","Os Estados Gerais foram convocados em 1789."],["A praça da Bastilha","Paris","Panfletos","A tomada da Bastilha em 14 de julho de 1789 tornou-se símbolo da Revolução."],["Assembleia Nacional","Paris","Páginas da declaração","A Declaração dos Direitos do Homem e do Cidadão proclamou direitos em 1789."],["A Convenção","Paris","Jornais","A República foi proclamada em 1792, em meio a conflitos políticos."],["O Diretório","Paris","Documentos políticos","O Diretório governou de 1795 a 1799, antes do golpe de 18 de Brumário."]]},{"title":"Revolução Industrial","era":"c. 1760–1850","colors":["#879ba7","#6e727a","#3f495d","#a17d70"],"icon":"factory","stages":[["As oficinas têxteis","Inglaterra","Amostras de tecido","A mecanização transformou a produção têxtil britânica."],["Manchester","Manchester","Registros de trabalho","A industrialização acelerou o crescimento urbano e transformou o trabalho."],["Máquinas a vapor","Inglaterra","Peças de máquinas","A energia a vapor impulsionou fábricas e transportes."],["O canal comercial","Inglaterra","Caixas de mercadorias","Canais permitiam transportar matérias-primas e produtos."],["A ferrovia","Liverpool–Manchester","Bilhetes de viagem","A ferrovia Liverpool–Manchester foi inaugurada em 1830."],["Cidade industrial","Inglaterra","Documentos de trabalhadores","Mudanças nas condições de trabalho estimularam formas de organização coletiva."]]}];
 const bossArenas=new Image();bossArenas.src='img/cronicas-arenas-v77.png';
 const bossSprites=new Image();bossSprites.src='img/cronicas-chefes-v77.png';
+const nileSprites=new Image();nileSprites.src='img/guardiao-nilo-poses-v78.png';
 const chronicleScenes=Array.from({length:6},(_,i)=>{const img=new Image();img.src='img/chronicle-world-'+i+'.webp';return img});
 const critters=new Image();critters.src='img/chronicle-variants.webp';
 const nileFauna=new Image();nileFauna.src='img/fauna-do-nilo.webp';
@@ -265,15 +266,18 @@ function platformGame(){
   }
   function runBoss(){
     persist();stopScene();
-    const boss=bosses[worldIndex],W=480,H=270,floor=226,bx=375,by=155,p={x:55,y:floor-28,w:22,h:28,vy:0,face:1,on:true};
+    const boss=bosses[worldIndex],W=480,H=270,floor=226,bx=375,by=155,nile=boss.kind===0,p={x:55,y:floor-28,w:22,h:28,vy:0,face:1,on:true};
     let stopped=false,raf=0,last=0,acc=0,t=0,keys={},hp=boss.hp,playerHP=6,inv=0,cd=0,dashCD=0,dash=0,shots=[],hazards=[],sparks=[],attackNo=0,cycle=0,mode='warning',modeLeft=72,hitFlash=0,defeatTimer=0;
+    let nilePlan=nile?NileBoss.plan(0,hp,boss.hp):null;
+    if(nile)modeLeft=nilePlan.warning;
     reach=Math.max(reach,(worldIndex*7+6)*100);
     stage.innerHTML='<section class="boss-stage"><div class="campaign-top"><span>'+GABE_WORLDS[worldIndex].title+' · Fase 7 / 7 · Chefe</span></div><h3>'+boss.name+'</h3><div class="boss-hud"><div><small>VIDA DO VIAJANTE</small><div id="boss-hearts"></div></div><div class="boss-health"><small>RESISTÊNCIA DO CHEFE</small><div class="boss-meter"><i id="boss-bar"></i></div><span id="boss-hp"></span></div><div><small>ESQUIVA</small><span id="boss-dash-status">Pronta</span></div></div><div class="boss-canvas"><canvas id="boss-canvas" width="480" height="270" tabindex="0" aria-label="Arena do chefe '+boss.name+'"></canvas></div><div class="boss-controls"><div><button data-boss-key="left">←</button><button data-boss-key="right">→</button></div><div><button data-boss-key="jump">Pular · Espaço</button><button data-boss-key="shoot">'+(hero==='Gabi'?'Ampulhetas':'Folhas')+' · X/J</button><button data-boss-key="dash">Esquiva · C</button></div><div><button id="boss-restart">Reiniciar</button><button id="boss-map">Mapa</button></div></div><p class="boss-notice" id="boss-notice" role="status">Observe o chefe e ataque quando o núcleo dourado estiver exposto.</p><details><summary>Como enfrentar o chefe</summary><p>Setas ou A/D para mover, Espaço para pular, X ou J para atacar, C para esquivar. Os chefes são guardiões fictícios inspirados nos cenários históricos.</p></details></section>';
     const bossControls=stage.querySelector('.boss-controls'),bossCanvas=stage.querySelector('.boss-canvas'),cabinet=document.createElement('div');cabinet.className='boss-cabinet';bossCanvas.before(cabinet);cabinet.append(bossCanvas,bossControls);const lifePanel=document.createElement('div');lifePanel.className='pixel-life';lifePanel.append($('boss-hearts'));bossControls.prepend(lifePanel);const oldLife=stage.querySelector('.boss-hud>div:first-child');oldLife.hidden=true;
-    const canvas=$('boss-canvas'),ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;
+    const canvas=$('boss-canvas'),ctx=canvas.getContext('2d');canvas.width=W*2;canvas.height=H*2;ctx.scale(2,2);ctx.imageSmoothingEnabled=false;
     function box(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h))}
     function hud(){ $('boss-hearts').innerHTML=Array.from({length:3},(_,i)=>'<span class="pixel-heart heart-'+Math.max(0,Math.min(2,playerHP-i*2))+'" aria-hidden="true"></span>').join('');$('boss-hearts').setAttribute('aria-label','Vida: '+playerHP/2+' de 3');$('boss-bar').style.width=100*hp/boss.hp+'%';$('boss-hp').textContent=hp+' / '+boss.hp;$('boss-dash-status').textContent=dashCD?'Recarregando':'Pronta'}
     function say(msg){$('boss-notice').textContent=msg}
+    if(nile){say(nilePlan.hint);stage.querySelector('.boss-stage details p').textContent='O Guardião alterna maré, investida e impacto. Observe a preparação, pule as ondas, esquive da investida e saia das marcas de água. Quando ele se ajoelhar, contra-ataque. Abaixo da metade da resistência, os padrões ganham novos golpes.'}
     function overlap(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
     function burst(x,y,c){for(let i=0;i<8;i++){const a=i*Math.PI/4;sparks.push({x,y,vx:Math.cos(a)*1.7,vy:Math.sin(a)*1.7,life:20,c})}}
     function finish(won){stopScene();if(won){reach=Math.max(reach,(worldIndex+1)*700);save(worldIndex,6,3);if(GABE_WORLDS.every((_,i)=>finished(i))){endRun(true);return}}
@@ -293,16 +297,41 @@ function platformGame(){
       const d=(keys.right?1:0)-(keys.left?1:0);if(d)p.face=d;if(keys.dash&&!dashCD){dash=13;dashCD=95;hud()}p.x=Math.max(12,Math.min(330,p.x+(dash?p.face*7:d*2.6)));
       if(keys.jump&&p.on){p.vy=-9.5;p.on=false}p.vy=Math.min(11,p.vy+.48);p.y+=p.vy;if(p.y+p.h>=floor){p.y=floor-p.h;p.vy=0;p.on=true}
       if(keys.shoot&&!cd){shots.push({x:p.x+p.w/2,y:p.y+12,w:12,h:10,vx:p.face*5.1,life:95});cd=hero==='Gabi'?27:22}
-      if(--modeLeft<=0){if(mode==='warning'){mode='attack';modeLeft=hp<=boss.hp/2?124:108;cycle=0;say('Ataque do chefe! Desvie.')}else if(mode==='attack'){mode='open';modeLeft=hp<=boss.hp/2?145:165;say('Núcleo exposto! Ataque agora.')}else{mode='warning';modeLeft=hp<=boss.hp/2?42:58;attackNo++;say('O chefe prepara um novo ataque.')}}
-      if(mode==='attack'){cycle++;if(cycle===1||cycle%34===0)launchHazard(boss.attacks[(attackNo+Math.floor(cycle/34))%boss.attacks.length])}
-      const target={x:bx-35,y:by-22,w:72,h:93};
+      if(--modeLeft<=0){if(mode==='warning'){mode='attack';modeLeft=nile?nilePlan.duration:hp<=boss.hp/2?124:108;cycle=0;say(nile?nilePlan.attack:'Ataque do chefe! Desvie.')}else if(mode==='attack'){mode='open';modeLeft=nile?nilePlan.recovery:hp<=boss.hp/2?145:165;if(nile){hazards=[];say('O Guardião está exausto! Ataque enquanto ele estiver ajoelhado.')}else say('Núcleo exposto! Ataque agora.')}else{mode='warning';attackNo++;if(nile){nilePlan=NileBoss.plan(attackNo,hp,boss.hp);modeLeft=nilePlan.warning;say(nilePlan.hint)}else{modeLeft=hp<=boss.hp/2?42:58;say('O chefe prepara um novo ataque.')}}}
+      if(mode==='attack'){
+        cycle++;
+        if(nile){for(const event of NileBoss.eventsAt(nilePlan,cycle)){const hazard=NileBoss.makeHazard(event,nilePlan,{x:bx,floor,playerX:p.x+p.w/2});if(hazard)hazards.push(hazard)}}
+        else if(cycle===1||cycle%34===0)launchHazard(boss.attacks[(attackNo+Math.floor(cycle/34))%boss.attacks.length]);
+      }
+      const pose=nile?NileBoss.pose(nilePlan,mode,cycle,modeLeft,t):null,bossX=bx+(pose?.offset||0);
+      if(nile&&pose.strike&&mode==='attack'){
+        const strike=nilePlan.key==='lunge'?{x:bossX-105,y:floor-60,w:110,h:60}:{x:bx-82,y:floor-32,w:96,h:32};
+        if(overlap(p,strike)){hurt();if(stopped)return}
+      }
+      const target=nile?{x:bossX-48,y:floor-108,w:85,h:108}:{x:bx-35,y:by-22,w:72,h:93};
       for(const shot of shots){shot.x+=shot.vx;shot.life--;if(overlap(shot,target)){shot.life=0;if(mode==='open'){hp--;hitFlash=10;burst(shot.x,shot.y,boss.accent);hud();if(hp<=0){mode='defeat';defeatTimer=55;shots=[];hazards=[];say('Guardião derrotado!');return}}else burst(shot.x,shot.y,'#a5949a')}}
       shots=shots.filter(v=>v.life>0&&v.x>0&&v.x<W);
-      for(const h of hazards){h.life--;if(h.warn){h.warn--;continue}if(h.kind==='fall'||h.kind==='lob')h.vy=Math.min(7,h.vy+.35);h.x+=h.vx;h.y+=h.vy;if(overlap(p,h)){hurt();if(stopped)return;h.life=0}}
+      for(const h of hazards){h.life--;h.age=(h.age||0)+1;if(h.warn){h.warn--;continue}if(h.kind==='fall'||h.kind==='lob')h.vy=Math.min(7,h.vy+.35);h.x+=h.vx;h.y+=h.vy;const hit=h.kind==='nileGeyser'?{x:h.x,y:floor-Math.max(6,h.h*Math.min(1,(h.age-34)/8)),w:h.w,h:Math.max(6,h.h*Math.min(1,(h.age-34)/8))}:h;if(overlap(p,hit)){hurt();if(stopped)return;if(h.kind!=='nileGeyser')h.life=0}}
       hazards=hazards.filter(h=>h.life>0&&h.x>-60&&h.y<H+40);
       for(const sp of sparks){sp.x+=sp.vx;sp.y+=sp.vy;sp.life--}sparks=sparks.filter(sp=>sp.life>0);
     }
     function drawBoss(){
+      if(nile&&nileSprites.complete&&nileSprites.naturalWidth){
+        const pose=NileBoss.pose(nilePlan,mode,cycle,modeLeft,t),f=pose.frame,cw=nileSprites.naturalWidth/3,ch=nileSprites.naturalHeight/2;
+        const baseline=[480,480,480,456,461,459][f]/512*ch,anchor=[278,275,280,325,270,300][f]/512*cw;
+        const scale=220/cw, x=bx+pose.offset-anchor*scale, y=floor-baseline*scale;
+        ctx.save();if(hitFlash&&hitFlash%4<2)ctx.filter='brightness(1.65)';if(mode==='defeat')ctx.globalAlpha=Math.max(0,defeatTimer/55);
+        ctx.drawImage(nileSprites,(f%3)*cw,Math.floor(f/3)*ch,cw,baseline+2,x,y,220,(baseline+2)*scale);
+        ctx.restore();
+        if(mode==='warning'&&nilePlan.key==='lunge'){
+          ctx.save();ctx.globalAlpha=.7;for(let px=145;px<305;px+=16){box(px,floor-4,8,2,'#ffdb7a');box(px+3,floor-7,3,7,'#d87837')}ctx.restore();
+        }
+        if(mode==='open'){
+          const cx=bx-15,cy=floor-63,glow=7+Math.floor((Math.sin(t/7)+1)*3);
+          ctx.save();ctx.globalAlpha=.70;for(let i=0;i<4;i++){const angle=i*Math.PI/2+t/18,px=cx+Math.cos(angle)*glow,py=cy+Math.sin(angle)*glow;box(px-1,py-1,3,3,'#f1a3ff');box(px,py,1,1,'#fff1fe')}ctx.restore();
+        }
+        return;
+      }
       if(bossSprites.complete&&bossSprites.naturalWidth){
         const sw=bossSprites.naturalWidth/3,top=boss.kind<3,sy=top?0:Math.round(bossSprites.naturalHeight*.465),sh=top?Math.round(bossSprites.naturalHeight*.465):Math.round(bossSprites.naturalHeight*.505);
         const size=mode==='warning'?1+Math.sin(t/7)*.025:mode==='attack'?1+Math.sin(t/4)*.035:1;
@@ -348,11 +377,27 @@ function platformGame(){
       if(mode==='attack'){for(let i=0;i<3;i++)R(-52-i*7,20+i*5,4,2,a)}
       ctx.restore();
     }
+    function drawNileHazard(h){
+      const {x,y,w,h:height,kind}=h;
+      if(h.warn){const a=h.warn%12<6?'#ffcc74':'#ae693d';box(x,floor-3,w,3,a);for(let i=0;i<w;i+=8)box(x+i,floor-7,3,4,a);return}
+      if(kind==='nileWave'){
+        // Articulated wave crest, dark water base and animated foam.
+        const step=2,phase=h.age/5;
+        for(let j=0;j<w;j+=step){const crest=Math.max(3,Math.round(5+height*.70*Math.pow(Math.sin(Math.PI*j/w),1.3)+2*Math.sin(j/4+phase)));box(x+j,floor-crest,step,crest,'#1a507f');box(x+j,floor-crest,step,Math.min(6,crest),'#4baecc');if(j%6<3)box(x+j,floor-crest-2,step,3,'#d8faff')}
+        for(let j=0;j<5;j++){const px=x+(j*11+h.age*2)%w;box(px,floor-4-j%3*4,3,2,'#a7e7f6')}
+      }else if(kind==='nileShock'){
+        for(let j=0;j<w;j+=4){const a=Math.sin(Math.PI*j/w),crest=Math.round(3+a*11);box(x+j,floor-crest,4,crest,'#3c8fb0');box(x+j,floor-crest,4,2,'#e4fdff');if((j+h.age)%13<5)box(x+j,floor-crest-4,3,2,'#fbe3ac')}
+      }else if(kind==='nileGeyser'){
+        const rise=Math.min(1,(h.age-34)/8),hh=Math.max(6,Math.round(height*rise));
+        for(let j=0;j<hh;j+=4){const spread=Math.round(6*Math.sin(j/14+h.age/4));const yy=floor-j-4;box(x+spread/2+4,yy,w-8,4,'#2f7fac');box(x+10+spread/2,yy,w-20,4,'#72d5e4');if(j%12===0)box(x+8+((j+h.age)%14),yy,5,3,'#e8ffff')}
+        for(let j=0;j<6;j++){const dx=(j*9+h.age)%w;box(x+dx,floor-hh-3-(j%3)*3,3,3,'#a9eaff')}
+      }
+    }
     function frame(){
       if(bossArenas.complete&&bossArenas.naturalWidth){const cw=bossArenas.naturalWidth/2,ch=bossArenas.naturalHeight/3,sx=(worldIndex%2)*cw+2,sy=Math.floor(worldIndex/2)*ch+2,usableW=cw-4,usableH=ch-4,split=Math.round(usableH*[.81,.81,.82,.82,.83,.83][worldIndex]);ctx.drawImage(bossArenas,sx,sy,usableW,split,0,0,W,floor);ctx.drawImage(bossArenas,sx,sy+split,usableW,usableH-split,0,floor,W,H-floor)}
       else{drawBackdrop(ctx,W,H,worldIndex,5,0,t);box(0,floor,W,H-floor,'#49343a');for(let x=0;x<W;x+=32){box(x,floor,31,6,boss.color);box(x+2,floor+7,28,15,'#78564d');box(x+2,floor+7,28,2,'#bb956f')}}
       drawBoss();
-      for(const h of hazards){if(h.warn){box(h.x,floor-4,h.w,4,h.warn%8<4?'#ffdfa8':'#a85039');continue}const {x,y,w,h:height,kind}=h;if(kind==='steam'||kind==='vent'){for(let j=0;j<5;j++){const dx=Math.round(Math.sin(t/7+j)*4);box(x+dx+j%2*5,y+j*height/5,w-8,height/5+2,j%2?'#d9c9bd':'#aa9b97')}}else if(kind==='disc'||kind==='highDisc'||kind==='lob'){box(x+3,y,w-6,height,'#503544');box(x,y+3,w,height-6,boss.accent);box(x+4,y+4,w-8,height-8,'#fff0c2')}else{box(x,y,w,height,'#503544');box(x+2,y+2,w-4,height-4,boss.accent);for(let j=0;j<w;j+=8)box(x+j,y+2,4,4,'#ffdfa8')}}
+      for(const h of hazards){if(h.kind.startsWith('nile')){drawNileHazard(h);continue}if(h.warn){box(h.x,floor-4,h.w,4,h.warn%8<4?'#ffdfa8':'#a85039');continue}const {x,y,w,h:height,kind}=h;if(kind==='steam'||kind==='vent'){for(let j=0;j<5;j++){const dx=Math.round(Math.sin(t/7+j)*4);box(x+dx+j%2*5,y+j*height/5,w-8,height/5+2,j%2?'#d9c9bd':'#aa9b97')}}else if(kind==='disc'||kind==='highDisc'||kind==='lob'){box(x+3,y,w-6,height,'#503544');box(x,y+3,w,height-6,boss.accent);box(x+4,y+4,w-8,height-8,'#fff0c2')}else{box(x,y,w,height,'#503544');box(x+2,y+2,w-4,height-4,boss.accent);for(let j=0;j<w;j+=8)box(x+j,y+2,4,4,'#ffdfa8')}}
       for(const shot of shots){if(hero==='Gabi'){box(shot.x,shot.y,12,2,'#e8bc6c');box(shot.x,shot.y+8,12,2,'#e8bc6c');box(shot.x+3,shot.y+2,6,2,'#ffdfa8');box(shot.x+5,shot.y+4,2,2,'#ffdfa8');box(shot.x+3,shot.y+6,6,2,'#ffdfa8')}else{box(shot.x,shot.y+3,12,5,'#a8db62');box(shot.x+3,shot.y+1,6,9,'#739944')}}
       if(!inv||t%8<4){ctx.save();ctx.translate(p.x+p.w/2,p.y+p.h);ctx.scale(p.face,1);if(atlas[hero].naturalWidth){const f=p.on?(keys.left||keys.right?1+Math.floor(t/7)%5:0):2;ctx.drawImage(atlas[hero],f*64,0,64,80,-19,-42,38,42)}else{box(-12,-27,24,26,'#a6784f');box(-8,-35,17,13,'#b58a5b')}ctx.restore()}
       for(const sp of sparks){ctx.save();ctx.globalAlpha=sp.life/20;box(sp.x,sp.y,3,3,sp.c);ctx.restore()}

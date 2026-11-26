@@ -1,10 +1,10 @@
-name: Validar Crônicas v77
+name: Validar Crônicas
 on:
   push:
-    branches: ['work/cronicas-v77-validacao']
+    branches: ['work/cronicas-*']
   pull_request:
     branches: ['main']
-    paths: ['jogos.js', 'jogos.css', 'sw.js', 'portal.js', 'img/cronicas-chefes-v77.png', 'tests/cronicas-smoke.cjs', '.github/workflows/cronicas-smoke.yml']
+    paths: ['jogos.js', 'jogos.css', 'jogos.html', 'sw.js', 'portal.js', 'nile-boss.js', 'img/cronicas-chefes-v77.png', 'img/guardiao-nilo-poses-v78.png', 'tests/**', '.github/workflows/cronicas-smoke.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -20,6 +20,7 @@ jobs:
       - run: npm install --no-save playwright
       - run: npx playwright install --with-deps chromium
       - run: node --check jogos.js && node --check portal.js && node --check sw.js
+      - run: node --test tests/nile-boss.test.cjs
       - run: |
           python3 -m http.server 8765 > /tmp/cronicas-http.log 2>&1 &
           node tests/cronicas-smoke.cjs

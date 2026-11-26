@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 (async()=>{
-  const browser=await chromium.launch({headless:true});
+  const browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_EXECUTABLE_PATH?{executablePath:process.env.CHROMIUM_EXECUTABLE_PATH}:{})});
   const errors=[];
   const base=process.env.TEST_URL||'http://127.0.0.1:8765';
   fs.mkdirSync('test-artifacts',{recursive:true});
@@ -43,6 +43,7 @@ const fs = require('node:fs');
       await f.locator('#boss-canvas').waitFor({state:'visible',timeout:15000});
       assert.equal(await f.locator('.boss-stage h3').innerText(),names[w]);
       assert.equal(await f.locator('#boss-hearts .pixel-heart').count(),3);
+      assert.deepEqual(await f.locator('#boss-canvas').evaluate(el=>[el.width,el.height]),[960,540]);
       await f.locator('#boss-canvas').focus();
       await page.keyboard.down('ArrowRight');
       await page.waitForTimeout(300);
@@ -50,6 +51,20 @@ const fs = require('node:fs');
       for(const key of ['Space','x','c']){await page.keyboard.down(key);await page.waitForTimeout(100);await page.keyboard.up(key)}
       assert.equal(await f.locator('#boss-dash-status').innerText(),'Recarregando');
       await page.screenshot({path:'test-artifacts/chefe-'+(w+1)+'.png',fullPage:true});
+      if(w===0){
+        const notice=f.locator('#boss-notice');
+        await notice.filter({hasText:'Maré do Nilo!'}).waitFor({state:'visible',timeout:15000});
+        await page.waitForTimeout(550);
+        await f.locator('#boss-canvas').screenshot({path:'test-artifacts/nilo-mare.png'});
+        await notice.filter({hasText:'está exausto'}).waitFor({state:'visible',timeout:15000});
+        await f.locator('#boss-canvas').screenshot({path:'test-artifacts/nilo-vulneravel.png'});
+        await notice.filter({hasText:'Investida do crocodilo!'}).waitFor({state:'visible',timeout:15000});
+        await page.waitForTimeout(530);
+        await f.locator('#boss-canvas').screenshot({path:'test-artifacts/nilo-investida.png'});
+        await notice.filter({hasText:'Impacto no templo!'}).waitFor({state:'visible',timeout:15000});
+        await page.waitForTimeout(850);
+        await f.locator('#boss-canvas').screenshot({path:'test-artifacts/nilo-impacto.png'});
+      }
       await f.locator('#boss-map').click();
       await f.locator('.boss-pin').waitFor({state:'visible'});
       await f.locator('#map-return').click();
