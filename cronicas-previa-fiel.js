@@ -33,6 +33,11 @@ function mapGame(){const cities=[{name:'Roma',x:45,y:43,hint:'Na Península Itá
 
 const GABE_WORLDS=[{"title":"Egito Antigo","era":"c. 3000–30 a.C.","colors":["#efb77b","#bf815a","#74565c","#e0b179"],"icon":"pyramid","stages":[["Mergulho no Nilo","Nilo","Fragmento de cerâmica","O ciclo das cheias do Nilo favorecia a agricultura."],["A oficina dos escribas","Escribas","Papiros","A escrita hieroglífica registrava informações religiosas e administrativas."],["As pirâmides de Gizé","Gizé","Papiros de arquitetura","As pirâmides eram monumentos funerários reais, construídos por trabalhadores organizados."],["O templo de Karnak","Karnak","Amuletos","Templos eram centros religiosos, econômicos e políticos."],["Vale dos Reis","Necrópole","Fragmentos de pinturas","As tumbas revelam crenças egípcias sobre a vida após a morte."],["Alexandria","Alexandria","Rolos de papiro","Alexandria tornou-se um centro de intercâmbio cultural no período helenístico."]]},{"title":"Mesopotâmia","era":"c. 3500–539 a.C.","colors":["#cfa07c","#8b6d61","#695365","#bc8260"],"icon":"ziggurat","stages":[["Os rios Tigre e Eufrates","Rios","Cestos de sementes","A irrigação permitiu o desenvolvimento agrícola entre os rios Tigre e Eufrates."],["Uruk e a escrita","Uruk","Tabuletas","A escrita cuneiforme foi desenvolvida na Mesopotâmia."],["O zigurate de Ur","Ur","Tabuletas de templo","Zigurates eram construções monumentais ligadas à religião."],["Babilônia de Hamurábi","Babilônia","Tabuletas de leis","O Código de Hamurábi reúne leis que expressavam hierarquias e relações sociais."],["Nínive","Nínive","Registros da biblioteca","A biblioteca de Assurbanípal preservou textos em tabuletas de argila."],["Porta de Ishtar","Babilônia","Fragmentos de cerâmica","A Porta de Ishtar ilustra a monumentalidade da Babilônia neobabilônica."]]},{"title":"Grécia Antiga","era":"c. 800–146 a.C.","colors":["#86b4c7","#82929a","#596e87","#e0c9ad"],"icon":"temple","stages":[["A ágora de Atenas","Atenas","Óstracos","A ágora era espaço de comércio e convivência cívica."],["A Acrópole","Atenas","Fragmentos de mármore","A Acrópole abriga monumentos como o Partenon."],["Esparta","Esparta","Peças de cerâmica","Esparta possuía uma organização social e política própria."],["Olímpia","Olímpia","Coroas de oliveira","Os jogos de Olímpia estavam ligados a celebrações religiosas."],["O porto do Pireu","Pireu","Ânforas","O comércio marítimo conectava comunidades do mundo grego."],["A era helenística","Mundo helenístico","Moedas","A expansão macedônica ampliou os intercâmbios culturais."]]},{"title":"Roma Imperial","era":"27 a.C.–476 d.C. (Ocidente)","colors":["#92a1bd","#a17c77","#65556d","#ceb090"],"icon":"arch","stages":[["Fórum Romano","Roma","Moedas imperiais","O Fórum era um centro político, religioso e comercial."],["Coliseu","Roma","Bilhetes simbólicos","Espetáculos públicos integravam a vida urbana e a política imperial."],["Via Ápia","Via Ápia","Marcos miliários","As estradas facilitavam deslocamentos e a administração das províncias."],["Pompeia","Pompeia","Fragmentos de mosaico","A erupção do Vesúvio em 79 d.C. preservou vestígios da vida romana."],["Porto de Óstia","Óstia","Ânforas","Óstia abastecia Roma por meio do comércio marítimo e fluvial."],["Constantinopla","Constantinopla","Pergaminhos","Constantinopla tornou-se capital imperial em 330 d.C."]]},{"title":"Revolução Francesa","era":"1789–1799","colors":["#9baaba","#8c7c87","#525d77","#c3b6ab"],"icon":"city","stages":[["Paris antes de 1789","Paris","Cadernos de reivindicações","O Antigo Regime era marcado por privilégios de nascimento e desigualdades."],["Versalhes","Versalhes","Documentos dos Estados Gerais","Os Estados Gerais foram convocados em 1789."],["A praça da Bastilha","Paris","Panfletos","A tomada da Bastilha em 14 de julho de 1789 tornou-se símbolo da Revolução."],["Assembleia Nacional","Paris","Páginas da declaração","A Declaração dos Direitos do Homem e do Cidadão proclamou direitos em 1789."],["A Convenção","Paris","Jornais","A República foi proclamada em 1792, em meio a conflitos políticos."],["O Diretório","Paris","Documentos políticos","O Diretório governou de 1795 a 1799, antes do golpe de 18 de Brumário."]]},{"title":"Revolução Industrial","era":"c. 1760–1850","colors":["#879ba7","#6e727a","#3f495d","#a17d70"],"icon":"factory","stages":[["As oficinas têxteis","Inglaterra","Amostras de tecido","A mecanização transformou a produção têxtil britânica."],["Manchester","Manchester","Registros de trabalho","A industrialização acelerou o crescimento urbano e transformou o trabalho."],["Máquinas a vapor","Inglaterra","Peças de máquinas","A energia a vapor impulsionou fábricas e transportes."],["O canal comercial","Inglaterra","Caixas de mercadorias","Canais permitiam transportar matérias-primas e produtos."],["A ferrovia","Liverpool–Manchester","Bilhetes de viagem","A ferrovia Liverpool–Manchester foi inaugurada em 1830."],["Cidade industrial","Inglaterra","Documentos de trabalhadores","Mudanças nas condições de trabalho estimularam formas de organização coletiva."]]}];
 const bossArenas=new Image();bossArenas.src='img/cronicas-arenas-v77.png';
+const PREHISTORY=6;
+GABE_WORLDS.push({title:'Pré-História',era:'Paleolítico e Neolítico',colors:['#b8c695','#8d9861','#594630','#e3c88b'],icon:'cave',stages:[['Caminhos da savana','Savana','Biface de pedra','Observe os vestígios da vida em grupos de caçadores-coletores.'],['O abrigo e o fogo','Abrigo','Raspador de pedra','Explore um abrigo e os vestígios de atividades cotidianas.'],['Às margens do rio','Rio','Cesto de fibras','Investigue como os recursos naturais faziam parte da vida cotidiana.'],['As pinturas rupestres','Caverna','Fragmento de pintura rupestre','Observe pinturas como fontes para compreender grupos humanos do passado.'],['A aldeia neolítica','Aldeia','Pote de cerâmica','Explore mudanças relacionadas ao cultivo e à vida em aldeias.'],['Pedra polida e monumentos','Monumentos','Machado de pedra polida','Compare vestígios de ferramentas e construções de diferentes comunidades.']]});
+const prehistoricScenes=new Image();prehistoricScenes.src='img/prehistoria-cenarios-previa.png';
+const prehistoricProps=new Image();prehistoricProps.src='img/prehistoria-objetos-previa.png';
+function preSprite(ctx,index,x,y,w,h){if(!prehistoricProps.naturalWidth)return false;const cw=prehistoricProps.naturalWidth/3,ch=prehistoricProps.naturalHeight/3;ctx.drawImage(prehistoricProps,index%3*cw,Math.floor(index/3)*ch,cw,ch,x,y,w,h);return true}
 const bossSprites=new Image();bossSprites.src='img/cronicas-chefes-v77.png';
 const nileSprites=new Image();nileSprites.src='img/guardiao-nilo-poses-v78.png';
 const nileEffects=new Image();nileEffects.src='img/guardiao-nilo-efeitos-v79.png';
@@ -58,9 +63,9 @@ function platformGame(){
   let worldIndex=0,phase=0,stopScene=()=>{},progress={},lives=3,health=2,reach=0;
   let disposed=false,hero='Gabi',playerId='',playerName='';
   const profilePrefix='cronicas-previa-fiel-v1:';
-  function profiles(){const list=[];try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(!k?.startsWith(profilePrefix))continue;try{const v=JSON.parse(localStorage.getItem(k));if(v&&typeof v.name==='string'&&v.name.trim()&&['Gabi','Gio'].includes(v.hero)&&v.progress&&typeof v.progress==='object'){const clean={};for(const [key,value] of Object.entries(v.progress))if(/^[0-5]-[0-6]$/.test(key)&&Number.isInteger(value)&&value>=1&&value<=3)clean[key]=value;list.push({id:k.slice(profilePrefix.length),name:v.name.slice(0,24),hero:v.hero,progress:clean,world:Number.isInteger(v.world)&&v.world>=0&&v.world<6?v.world:0,phase:Number.isInteger(v.phase)&&v.phase>=0&&v.phase<7?v.phase:0,reach:Number.isInteger(v.reach)&&v.reach>=0&&v.reach<=4200?v.reach:0})}}catch{}}}catch{}return list}
+  function profiles(){const list=[];try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(!k?.startsWith(profilePrefix))continue;try{const v=JSON.parse(localStorage.getItem(k));if(v&&typeof v.name==='string'&&v.name.trim()&&['Gabi','Gio'].includes(v.hero)&&v.progress&&typeof v.progress==='object'){const clean={};for(const [key,value] of Object.entries(v.progress))if(/^[0-6]-[0-6]$/.test(key)&&Number.isInteger(value)&&value>=1&&value<=3)clean[key]=value;list.push({id:k.slice(profilePrefix.length),name:v.name.slice(0,24),hero:v.hero,progress:clean,world:Number.isInteger(v.world)&&v.world>=0&&v.world<GABE_WORLDS.length?v.world:0,phase:Number.isInteger(v.phase)&&v.phase>=0&&v.phase<7?v.phase:0,reach:Number.isInteger(v.reach)&&v.reach>=0&&v.reach<=4900?v.reach:0})}}catch{}}}catch{}return list}
   function persist(){if(!playerId||preview)return;try{localStorage.setItem(profilePrefix+playerId,JSON.stringify({name:playerName,hero,progress,world:worldIndex,phase,reach}))}catch{}}
-  function continueRun(){stopScene();stage.innerHTML='<section class="hero-select"><h3>Continuar campanha</h3><div id="saved-profiles" class="saved-profiles"></div><button class="action" id="profile-back">Voltar</button></section>';const list=$('saved-profiles');for(const v of profiles()){const b=document.createElement('button');b.className='action';b.textContent=v.name+' · '+v.hero+' · '+Object.keys(v.progress).length+'/42';b.onclick=()=>{playerId=v.id;playerName=v.name;hero=v.hero;progress=v.progress;worldIndex=v.world;phase=v.phase;reach=v.reach;lives=3;health=2;preview=false;phaseMap()};list.append(b)}$('profile-back').onclick=startMenu;}
+  function continueRun(){stopScene();stage.innerHTML='<section class="hero-select"><h3>Continuar campanha</h3><div id="saved-profiles" class="saved-profiles"></div><button class="action" id="profile-back">Voltar</button></section>';const list=$('saved-profiles');for(const v of profiles()){const b=document.createElement('button');b.className='action';b.textContent=v.name+' · '+v.hero+' · '+Object.keys(v.progress).length+'/49';b.onclick=()=>{playerId=v.id;playerName=v.name;hero=v.hero;progress=v.progress;worldIndex=v.world;phase=v.phase;reach=v.reach;lives=3;health=2;preview=false;phaseMap()};list.append(b)}$('profile-back').onclick=startMenu;}
   cleanup=()=>{disposed=true;stopScene()};
   const save=(w,p,stars)=>{const key=w+'-'+p;progress[key]=Math.max(progress[key]||0,stars);persist()};
   function newRun(){
@@ -75,7 +80,7 @@ function platformGame(){
         if(!key?.startsWith(recordPrefix))continue;
         try{
           const row=JSON.parse(localStorage.getItem(key));
-          if(typeof row.name==='string'&&Number.isInteger(row.reach)&&row.reach>=0&&row.reach<=4200)records.push(row);
+          if(typeof row.name==='string'&&Number.isInteger(row.reach)&&row.reach>=0&&row.reach<=4900)records.push(row);
         }catch{}
       }
     }catch{}
@@ -94,7 +99,7 @@ function platformGame(){
     target.append(panel);
   }
   function locationLabel(value){
-    if(value>=4200)return 'Último destino alcançado';
+    if(value>=4900)return 'Último destino alcançado';
     const index=Math.floor(value/100),w=Math.floor(index/7),p=index%7;
     return (p===6?bosses[w].name:GABE_WORLDS[w].stages[p][0])+' ('+value%100+'%)';
   }
@@ -121,6 +126,7 @@ function platformGame(){
   const collectionArt=new Image();
   collectionArt.src='img/acervo-36-v77.png';
   function showSpecimen(element,w,f){
+    if(w===PREHISTORY){element.style.backgroundImage='url('+prehistoricProps.src+')';element.style.backgroundSize='300% 300%';element.style.backgroundPosition=(f%3)*50+'% '+(1+Math.floor(f/3))*50+'%';return}
     element.style.backgroundImage='url('+collectionArt.src+')';
     element.style.backgroundSize='600% 600%';
     element.style.backgroundPosition=f*20+'% '+w*20+'%';
@@ -143,7 +149,8 @@ function platformGame(){
     ['Em Atenas, um caco podia receber um nome em uma votação de ostracismo.','Marcas de ferramentas podem revelar como a pedra foi esculpida.','Vasos e seus fragmentos guardam indícios sobre o uso e a decoração da cerâmica.','Em Olímpia, o vencedor recebia uma coroa feita de ramos de oliveira.','As duas alças facilitavam o manuseio desses recipientes de transporte.','Imagens e inscrições nas moedas ajudam a identificar quem as emitiu.'],
     ['Retratos e inscrições divulgavam a imagem do imperador.','A peça do jogo representa a organização do acesso aos espetáculos.','Essas pedras marcavam distâncias ao longo das estradas romanas.','Um mosaico reúne pequenas peças para formar figuras e padrões.','Marcas nas ânforas ajudam a investigar a circulação de mercadorias.','O pergaminho era preparado com pele animal para receber a escrita.'],
     ['Nesses cadernos, comunidades registravam queixas e pedidos.','Os registros permitem investigar as demandas apresentadas pelos diferentes grupos.','Textos impressos curtos faziam circular argumentos políticos.','Uma declaração registra princípios e direitos debatidos em seu tempo.','A imprensa divulgava notícias e disputava interpretações dos acontecimentos.','Documentos políticos ajudam a comparar projetos de governo.'],
-    ['A trama e as fibras dão pistas sobre como um tecido foi produzido.','Registros de fábrica podem revelar jornadas, funções e remuneração.','Uma engrenagem transmite movimento entre partes de uma máquina.','As caixas protegiam as mercadorias durante o transporte.','Bilhetes registram trajetos e o acesso aos transportes.','Esses registros ajudam a investigar as condições de vida e as reivindicações dos trabalhadores.']
+    ['A trama e as fibras dão pistas sobre como um tecido foi produzido.','Registros de fábrica podem revelar jornadas, funções e remuneração.','Uma engrenagem transmite movimento entre partes de uma máquina.','As caixas protegiam as mercadorias durante o transporte.','Bilhetes registram trajetos e o acesso aos transportes.','Esses registros ajudam a investigar as condições de vida e as reivindicações dos trabalhadores.'],
+    ['Peças de pedra permitem investigar atividades e técnicas de grupos do passado.','Marcas de uso ajudam a interpretar a função de uma ferramenta.','Objetos de fibras vegetais são fontes sobre atividades cotidianas.','Pinturas rupestres são vestígios que precisam ser interpretados em seu contexto.','A cerâmica oferece pistas sobre o cotidiano das comunidades.','A pedra polida e os monumentos são vestígios de diferentes práticas e tradições.']
   ];
   function artifactRoom(owner=playerId){
     stopScene();
@@ -170,7 +177,7 @@ function platformGame(){
         };
         shelf.querySelector('.shelf').append(button);
       });$('shelves').append(shelf);
-    });$('museum-count').textContent=count+' / 36 coletados';$('museum-back').onclick=startMenu;
+    });$('museum-count').textContent=count+' / 42 coletados';$('museum-back').onclick=startMenu;
   }
 const previewArt=window.PREVIEW_ASSETS||{};
   function artScreen(key){stage.replaceChildren();const panel=document.createElement('section');panel.className='new-art-screen';const img=document.createElement('img');img.src=previewArt[key];img.alt=key;panel.append(img);stage.append(panel);return panel}
@@ -260,13 +267,13 @@ const previewArt=window.PREVIEW_ASSETS||{};
     if(!regional){const index=$('index');const existing=[...index.querySelectorAll('.destination-action')];index.replaceChildren();for(const [label,worlds] of groups){const section=document.createElement('section');const heading=document.createElement('h4');heading.textContent=label;section.append(heading);for(const i of worlds)section.append(existing[i]);if(!worlds.length){const note=document.createElement('small');note.textContent='Campanha em desenvolvimento';section.append(note)}index.append(section)}ranking(index);} if(TEST_UNLOCK_ALL&&!preview){const note=document.createElement('small');note.className='test-mode-note';note.textContent='Modo de testes · todos os destinos liberados';stage.querySelector('.travel-head').append(note)}
   }
   function worldMap(){stopScene();const panel=artScreen('general');
-    const entries=[[24,28,'Pré-História',()=>pendingMap('pre-historia','Pré-História')],[23,46,'Egito e Mesopotâmia',()=>visualGroup('antiguidade-oriental','Escolha a campanha',[['Egito Antigo',0],['Mesopotâmia',1]])],[76,30,'Antiguidade Clássica',()=>visualGroup('grecia-antiga','Antiguidade Clássica',[['Grécia Antiga',2],['Roma Imperial',3]])],[76,47,'Roma Imperial',()=>availableWorld(3)],[23,64,'Idade Média',()=>pendingMap('idade-media','Idade Média')],[23,82,'Expansão Marítima',()=>pendingMap('expansao-maritima','Expansão Marítima')],[77,64,'Revoluções Modernas',()=>visualGroup('revolucoes-modernas','Revoluções Modernas',[['Revolução Francesa',4],['Revolução Industrial',5]])],[77,82,'América',()=>pendingMap('america','América')],[50,59,'Árvore do Conhecimento',()=>pendingMap('arvore-do-conhecimento','Árvore do Conhecimento')]];
+    const entries=[[24,28,'Pré-História',()=>availableWorld(PREHISTORY)],[23,46,'Egito e Mesopotâmia',()=>visualGroup('antiguidade-oriental','Escolha a campanha',[['Egito Antigo',0],['Mesopotâmia',1]])],[76,30,'Antiguidade Clássica',()=>visualGroup('grecia-antiga','Antiguidade Clássica',[['Grécia Antiga',2],['Roma Imperial',3]])],[76,47,'Roma Imperial',()=>availableWorld(3)],[23,64,'Idade Média',()=>pendingMap('idade-media','Idade Média')],[23,82,'Expansão Marítima',()=>pendingMap('expansao-maritima','Expansão Marítima')],[77,64,'Revoluções Modernas',()=>visualGroup('revolucoes-modernas','Revoluções Modernas',[['Revolução Francesa',4],['Revolução Industrial',5]])],[77,82,'América',()=>pendingMap('america','América')],[50,59,'Árvore do Conhecimento',()=>pendingMap('arvore-do-conhecimento','Árvore do Conhecimento')]];
     entries.forEach(([x,y,name,fn])=>hotspot(panel,x-10,y-8,20,16,name,fn));
     artLabel(panel,23,52,'Egito Antigo',()=>availableWorld(0));artLabel(panel,23,56,'Mesopotâmia',()=>availableWorld(1));artLabel(panel,76,36,'Antiguidade Clássica',entries[2][3]);hotspot(panel,1,88,18,11,'Voltar',startMenu);
-    quickActions([...GABE_WORLDS.map((w,i)=>[w.title,()=>availableWorld(i)]),['Voltar',startMenu]]);
+    quickActions([[GABE_WORLDS[PREHISTORY].title,()=>availableWorld(PREHISTORY)],...GABE_WORLDS.slice(0,PREHISTORY).map((w,i)=>[w.title,()=>availableWorld(i)]),['Voltar',startMenu]]);
   }
-  function phaseMap(){stopScene();const keys=['antiguidade-oriental','antiguidade-oriental','grecia-antiga','roma-antiga','revolucoes-modernas','revolucoes-modernas'];const panel=artScreen(keys[worldIndex]);const nodes=[[[195,319],[345,479],[518,373],[735,452],[949,539],[1121,407],[1350,292]],[[223,465],[452,417],[710,368],[949,277],[1035,418],[1018,565],[1330,505]],[[226,495],[400,420],[553,307],[806,337],[922,462],[1070,578],[1330,419]],[[167,626],[399,560],[562,450],[739,346],[953,420],[1205,452],[1387,265]]];const n=nodes[worldIndex<2?0:worldIndex===2?1:worldIndex===3?2:3];const w=GABE_WORLDS[worldIndex];artLabel(panel,50,9,w.title,()=>{}).disabled=true;
-    n.forEach(([xx,yy],i)=>{const x=xx/15.36,y=yy/8.64;const fn=()=>{phase=i;preview=false;persist();i===6?runBoss():runPhase()};const b=hotspot(panel,x-5,y-7,10,14,i===6?bosses[worldIndex].name:w.stages[i][0],fn);if(i===6){const img=document.createElement('img');img.className='art-boss';img.src=previewArt[['nile','zig','bronze','arena','bastille','steam'][worldIndex]];b.append(img)}artLabel(panel,x,y+6,i===6?'Chefe':('Fase '+(i+1)+' · '+(progress[worldIndex+'-'+i]||0)+'★'),fn)});
+  function phaseMap(){stopScene();const keys=['antiguidade-oriental','antiguidade-oriental','grecia-antiga','roma-antiga','revolucoes-modernas','revolucoes-modernas','pre-historia'];const panel=artScreen(keys[worldIndex]);const nodes=[[[195,319],[345,479],[518,373],[735,452],[949,539],[1121,407],[1350,292]],[[223,465],[452,417],[710,368],[949,277],[1035,418],[1018,565],[1330,505]],[[226,495],[400,420],[553,307],[806,337],[922,462],[1070,578],[1330,419]],[[167,626],[399,560],[562,450],[739,346],[953,420],[1205,452],[1387,265]]];const n=worldIndex===PREHISTORY?[[200,455],[387,412],[572,470],[756,377],[930,443],[1110,370],[1320,415]]:nodes[worldIndex<2?0:worldIndex===2?1:worldIndex===3?2:3];const w=GABE_WORLDS[worldIndex];artLabel(panel,50,9,w.title,()=>{}).disabled=true;
+    n.forEach(([xx,yy],i)=>{const x=xx/15.36,y=yy/8.64;const fn=()=>{phase=i;preview=false;persist();i===6?runBoss():runPhase()};const b=hotspot(panel,x-5,y-7,10,14,i===6?bosses[worldIndex].name:w.stages[i][0],fn);if(i===6){const img=document.createElement('img');img.className='art-boss';img.src=worldIndex===PREHISTORY?'img/prehistoria-objetos-previa.png':previewArt[['nile','zig','bronze','arena','bastille','steam'][worldIndex]];if(worldIndex===PREHISTORY){img.style.objectFit='none';img.style.objectPosition='left top';img.style.display='none';b.textContent='♛'}b.append(img)}artLabel(panel,x,y+6,i===6?'Chefe':('Fase '+(i+1)+' · '+(progress[worldIndex+'-'+i]||0)+'★'),fn)});
     artLabel(panel,10,94,'← Mapa geral',worldMap);
     quickActions([...w.stages.map((s,i)=>[s[0],()=>{phase=i;preview=false;persist();runPhase()}]),[bosses[worldIndex].name,()=>{phase=6;preview=false;persist();runBoss()}],['Mapa geral',worldMap]]);
   }
@@ -278,7 +285,8 @@ const previewArt=window.PREVIEW_ASSETS||{};
     {name:'Colosso de Bronze',kind:2,hp:16,color:'#a99869',accent:'#d9edc7',attacks:['disc','highDisc','disc']},
     {name:'Guardião da Arena',kind:3,hp:18,color:'#a28d87',accent:'#ffd39a',attacks:['charge','sweep','charge']},
     {name:'Autômato da Bastilha',kind:4,hp:20,color:'#8d899e',accent:'#f4c7df',attacks:['lob','fall','lob']},
-    {name:'Titã a Vapor',kind:5,hp:22,color:'#986747',accent:'#ffd18b',attacks:['steam','vent','steam']}
+    {name:'Titã a Vapor',kind:5,hp:22,color:'#986747',accent:'#ffd18b',attacks:['steam','vent','steam']},
+    {name:'Guardião da Era do Gelo',kind:6,hp:14,color:'#93734d',accent:'#ffe1a4',attacks:['quake','charge','fall']}
   ];
   const bossPoints=[[50,56],[87,52],[82,78],[57,13],[84,16],[16,25]];
   function pixelControls(root){
@@ -303,7 +311,7 @@ const previewArt=window.PREVIEW_ASSETS||{};
     function burst(x,y,c){for(let i=0;i<8;i++){const a=i*Math.PI/4;sparks.push({x,y,vx:Math.cos(a)*1.7,vy:Math.sin(a)*1.7,life:20,c})}}
     function finish(won){stopScene();if(won){reach=Math.max(reach,(worldIndex+1)*700);save(worldIndex,6,3);if(GABE_WORLDS.every((_,i)=>finished(i))){endRun(true);return}}
       stage.innerHTML='<div class="complete campaign-win"><div class="gabe-mini">'+gabeIcon()+'</div><h3>'+(won?'Chefe derrotado!':'Tente novamente!')+'</h3><p>'+boss.name+'</p><p>'+(won?'Você derrotou o guardião deste mundo.':'Observe o padrão dos ataques e espere a abertura do núcleo.')+'</p><button class="action" id="boss-again">'+(won?'Próximo mundo':'Repetir batalha')+'</button><button class="action secondary-action" id="boss-return">Voltar ao mapa</button></div>';
-      $('boss-again').onclick=()=>{if(won){if(worldIndex<5)worldIndex++;phase=0;persist();worldMap()}else runBoss()};$('boss-return').onclick=phaseMap;
+      $('boss-again').onclick=()=>{if(won){if(worldIndex===PREHISTORY)worldIndex=0;else if(worldIndex<5)worldIndex++;phase=0;persist();worldMap()}else runBoss()};$('boss-return').onclick=phaseMap;
     }
     function hurt(){if(inv||dash)return;playerHP--;inv=72;burst(p.x+p.w/2,p.y+10,'#e65c66');hud();if(playerHP<=0)finish(false)}
     function launchHazard(type){const spd=hp<=boss.hp/2?3.7:2.8;
@@ -337,6 +345,7 @@ const previewArt=window.PREVIEW_ASSETS||{};
       for(const sp of sparks){sp.x+=sp.vx;sp.y+=sp.vy;sp.life--}sparks=sparks.filter(sp=>sp.life>0);
     }
     function drawBoss(){
+      if(worldIndex===PREHISTORY&&prehistoricProps.naturalWidth){const f=mode==='open'||mode==='defeat'?2:mode==='attack'?1:mode==='warning'?1:0;ctx.save();if(hitFlash&&hitFlash%4<2)ctx.filter='brightness(1.6)';if(mode==='defeat')ctx.globalAlpha=defeatTimer/55;preSprite(ctx,f,bx-100-(mode==='attack'?Math.abs(Math.sin(cycle/12))*12:0),floor-170,195,177);ctx.restore();return}
       if(nile&&nileSprites.complete&&nileSprites.naturalWidth){
         const pose=NileBoss.pose(nilePlan,mode,cycle,modeLeft,t),f=pose.frame,cw=nileSprites.naturalWidth/3,ch=nileSprites.naturalHeight/2;
         const baseline=[480,480,480,456,461,459][f]/512*ch,anchor=[278,275,280,325,270,300][f]/512*cw;
@@ -426,7 +435,8 @@ const previewArt=window.PREVIEW_ASSETS||{};
       }
     }
     function frame(){
-      if(bossArenas.complete&&bossArenas.naturalWidth){const cw=bossArenas.naturalWidth/2,ch=bossArenas.naturalHeight/3,sx=(worldIndex%2)*cw+2,sy=Math.floor(worldIndex/2)*ch+2,usableW=cw-4,usableH=ch-4,split=Math.round(usableH*[.81,.81,.82,.82,.83,.83][worldIndex]);ctx.drawImage(bossArenas,sx,sy,usableW,split,0,0,W,floor);ctx.drawImage(bossArenas,sx,sy+split,usableW,usableH-split,0,floor,W,H-floor)}
+      if(worldIndex===PREHISTORY){drawBackdrop(ctx,W,H,worldIndex,5,0,t);box(0,floor,W,H-floor,'#594630');box(0,floor,W,4,'#b8a16d')}
+      else if(bossArenas.complete&&bossArenas.naturalWidth){const cw=bossArenas.naturalWidth/2,ch=bossArenas.naturalHeight/3,sx=(worldIndex%2)*cw+2,sy=Math.floor(worldIndex/2)*ch+2,usableW=cw-4,usableH=ch-4,split=Math.round(usableH*[.81,.81,.82,.82,.83,.83][worldIndex]);ctx.drawImage(bossArenas,sx,sy,usableW,split,0,0,W,floor);ctx.drawImage(bossArenas,sx,sy+split,usableW,usableH-split,0,floor,W,H-floor)}
       else{drawBackdrop(ctx,W,H,worldIndex,5,0,t);box(0,floor,W,H-floor,'#49343a');for(let x=0;x<W;x+=32){box(x,floor,31,6,boss.color);box(x+2,floor+7,28,15,'#78564d');box(x+2,floor+7,28,2,'#bb956f')}}
       drawBoss();
       for(const h of hazards){if(h.kind.startsWith('nile')){drawNileHazard(h);continue}if(h.warn){box(h.x,floor-4,h.w,4,h.warn%8<4?'#ffdfa8':'#a85039');continue}const {x,y,w,h:height,kind}=h;if(kind==='steam'||kind==='vent'){for(let j=0;j<5;j++){const dx=Math.round(Math.sin(t/7+j)*4);box(x+dx+j%2*5,y+j*height/5,w-8,height/5+2,j%2?'#d9c9bd':'#aa9b97')}}else if(kind==='disc'||kind==='highDisc'||kind==='lob'){box(x+3,y,w-6,height,'#503544');box(x,y+3,w,height-6,boss.accent);box(x+4,y+4,w-8,height-8,'#fff0c2')}else{box(x,y,w,height,'#503544');box(x+2,y+2,w-4,height-4,boss.accent);for(let j=0;j<w;j+=8)box(x+j,y+2,4,4,'#ffdfa8')}}
@@ -455,7 +465,8 @@ const previewArt=window.PREVIEW_ASSETS||{};
       ['MMRMTMRTRM','TTLTRTBTLT','BTMBTBMTBT','BTBTLBTBTB','FFMFRFFMRF','RMFTMRFTMR'],
       ['MRMTRMRMTR','BTTBMBTLBT','RMBRMBRTMB','BTBBLTBBLT','FMRFFMRFFM','TRFMTRMFTR'],
       ['MMBMRMBMRM','TMTRMTLTRM','BTBRBTLRBT','RMRTRMRMRT','MRBMRTRBRM','RMTBRMTFMR'],
-      ['LBLMLBLMLB','MLBRMLBLRM','LLTBLTLLBT','FMFFLFMFFL','BRMBRMBRMB','MLFTBRMLFT']
+      ['LBLMLBLMLB','MLBRMLBLRM','LLTBLTLLBT','FMFFLFMFFL','BRMBRMBRMB','MLFTBRMLFT'],
+      ['MMTRMRTRMM','TRTLTMRTRM','MFBMFTMRFM','TLTRTMLTRM','MRMMTRMMRM','TBTLTRTBTM']
     ];
     const portal={x:worldLen-116,y:ground-31,r:29};
     const pads=[],relics=[],obstacles=[],gaps=[];
@@ -477,7 +488,10 @@ const previewArt=window.PREVIEW_ASSETS||{};
       '0-1':['Copie o registro do escriba',['Consultar o modelo de papiro','Copiar com a pena de junco','Selar o registro']],
       '1-1':['Registre a colheita de Uruk',['Contar','Marcar','Arquivar']],
       '4-3':['Acompanhe uma proposta na Assembleia',['Propor','Debater','Votar']],
-      '5-2':['Ponha a máquina em funcionamento',['Água','Caldeira','Pistão']]
+      '5-2':['Ponha a máquina em funcionamento',['Água','Caldeira','Pistão']],
+      '6-1':['Investigue o abrigo',['Observe os vestígios','Localize os objetos','Registre suas descobertas']],
+      '6-3':['Observe as pinturas',['Identifique as figuras','Compare os registros','Registre a interpretação']],
+      '6-4':['Explore a aldeia',['Observe o cultivo','Localize os recipientes','Registre a organização do espaço']]
     };
     const mission=missions[worldIndex+'-'+phase];
     let actionIndex=0;
@@ -706,9 +720,9 @@ const previewArt=window.PREVIEW_ASSETS||{};
           for(let j=0;j<b.w;j+=10){const dy=b.wear>20?(time+j)%3:0;box(b.x+j,b.y+dy,9,9,'#845344');box(b.x+j,b.y+dy,9,3,'#edbb76');box(b.x+j+3,b.y+dy+4,4,1,'#bd8054')}
           box(b.x,b.y+9,b.w,2,'#513c45');continue;
         }
-        const surface=['#edc78b','#d99865','#e3d7c1','#d1b7a0','#c4bdba','#a3a1a0'][worldIndex];box(b.x,b.y,b.w,b.h,['#76543b','#6a4031','#82776b','#6a514a','#55535b','#38383d'][worldIndex]);box(b.x+1,b.y+1,b.w-2,4,surface);
+        const surface=['#edc78b','#d99865','#e3d7c1','#d1b7a0','#c4bdba','#a3a1a0','#d0be83'][worldIndex];box(b.x,b.y,b.w,b.h,['#76543b','#6a4031','#82776b','#6a514a','#55535b','#38383d','#5a4932'][worldIndex]);box(b.x+1,b.y+1,b.w-2,4,surface);
         if(worldIndex===0){box(b.x,b.y,b.w,1,'#ffe4a5');box(b.x,b.y+4,b.w,2,phase===1?'#287b78':'#a46c40');for(let q=Math.max(0,Math.floor((cam-b.x)/20)*20);q<Math.min(b.w,cam+W-b.x);q+=20){box(b.x+q+3,b.y+2,5,1,'#fff1bd');if(phase===1&&q+16<b.w)box(b.x+q+10,b.y+4,3,2,'#d9a357')}}
-        const brick=['#c49a60','#a96a47','#d0c1a5','#a88a77','#929198','#665e60'][worldIndex];
+        const brick=['#c49a60','#a96a47','#d0c1a5','#a88a77','#929198','#665e60','#8f7750'][worldIndex];
         for(let row=0;row<Math.ceil((b.h-5)/9);row++){
           const left=b.x-(row%2)*12;
           for(let x=Math.max(left,left+Math.floor((cam-left)/24)*24);x<Math.min(b.x+b.w,cam+W);x+=24){
@@ -724,6 +738,7 @@ const previewArt=window.PREVIEW_ASSETS||{};
         if(o.sleep){if(o.sleep>183){ctx.strokeStyle='#f0adff';ctx.lineWidth=3;ctx.beginPath();ctx.arc(o.x+10,o.y+8,42*(196-o.sleep)/13,0,Math.PI*2);ctx.stroke()}continue}
         if(o.fuse){ctx.strokeStyle='#c56ce0';ctx.lineWidth=1;ctx.beginPath();ctx.arc(o.x+10,o.y+8,42,0,Math.PI*2);ctx.stroke()}
         if(o.warning){box(o.x+8,o.y-12,3,6,'#ffde79');box(o.x+8,o.y-4,3,2,'#fff1ae')}
+        if(prehistoricProps.naturalWidth&&worldIndex===PREHISTORY){ctx.save();ctx.translate(o.x+o.w/2,o.y+o.h);ctx.scale(p.x<o.x?1:-1,1);preSprite(ctx,0,-17,-25,34,29);ctx.restore();continue}
         if(critters.naturalWidth){
           const direction=o.kind===3&&o.warning?(p.x<o.x?-1:1):(Math.cos((o.walkTime||0)/(46-phase*2)+o.origin)>=0?1:-1);
           if(o.stun&&o.stun<36&&Math.floor(time/5)%2)continue;
@@ -766,6 +781,7 @@ const previewArt=window.PREVIEW_ASSETS||{};
         const y=r.y+Math.sin((time+r.x)/12)*2;
         if(!r.artifact){icon(gameIcons,2,r.x,y,24,24);continue}
         if(diving&&nileProps.naturalWidth)ctx.drawImage(nileProps,1562,134,490,513,r.x-15,y-16,30,31);
+        else if(worldIndex===PREHISTORY){preSprite(ctx,phase+3,r.x-20,y-22,40,40)}
         else if(collectionArt.naturalWidth){const cw=collectionArt.naturalWidth/6,ch=collectionArt.naturalHeight/6;ctx.drawImage(collectionArt,phase*cw,worldIndex*ch,cw,ch,r.x-20,y-22,40,40)}else{box(r.x-5,y-5,10,10,'#e8bc6c');box(r.x-2,y-2,4,4,'#fff0c2')}
 
       }
@@ -774,7 +790,7 @@ const previewArt=window.PREVIEW_ASSETS||{};
         ctx.save();ctx.globalAlpha=j<actionIndex?.55:1;
         box(point.x-19,point.y-9,38,4,'#c39252');box(point.x-16,point.y-5,4,5,'#775237');box(point.x+12,point.y-5,4,5,'#775237');
         const prop=worldIndex===0?[9,28,29][j]:worldIndex===1?7:worldIndex===4?8:25;
-        icon(prop<12?gameIcons:treasures,prop<12?prop:prop-12,point.x,point.y-23,34,34);
+        if(worldIndex===PREHISTORY)preSprite(ctx,3+((phase+j)%6),point.x-17,point.y-40,34,34);else icon(prop<12?gameIcons:treasures,prop<12?prop:prop-12,point.x,point.y-23,34,34);
         ctx.restore();
       });
       ctx.save();ctx.translate(portal.x,portal.y);
@@ -783,7 +799,7 @@ const previewArt=window.PREVIEW_ASSETS||{};
         ctx.drawImage(nileProps,40,19,684,687,-53,-62,106,109);
         if(!active){ctx.fillStyle='#102f36b8';ctx.fillRect(-15,-34,30,56)}else{for(let i=0;i<7;i++){const y=21-((time*.65+i*9)%56),x=-11+(i*11)%23;box(x,y,2,2,'#bafceeae')}}
       }else{
-      const stone=['#c69b62','#ab7051','#d2c1a5','#b9aa98','#9e938d','#8f6453'][worldIndex],shade=['#88603f','#703e36','#8c8278','#776c69','#625b69','#523b3c'][worldIndex],light=['#ffdf88','#f7b974','#bce8ff','#f8d28e','#dfc8ff','#ffb879'][worldIndex];
+      const stone=['#c69b62','#ab7051','#d2c1a5','#b9aa98','#9e938d','#8f6453','#b99a65'][worldIndex],shade=['#88603f','#703e36','#8c8278','#776c69','#625b69','#523b3c','#62513b'][worldIndex],light=['#ffdf88','#f7b974','#bce8ff','#f8d28e','#dfc8ff','#ffb879','#e5f5a6'][worldIndex];
       const radius=portal.r;ctx.fillStyle=active?'#251c37':'#30282d';ctx.beginPath();ctx.arc(0,0,radius-2,0,Math.PI*2);ctx.fill();
       if(active){const reduced=typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches;const pulse=reduced?0:time*.04;const glow=ctx.createRadialGradient(0,0,2,0,0,radius-2);glow.addColorStop(0,light);glow.addColorStop(.38,'#664d73');glow.addColorStop(1,'#211a30');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(0,0,radius-2,0,Math.PI*2);ctx.fill();for(let j=0;j<8;j++){const angle=j*Math.PI/4+pulse;box(Math.cos(angle)*(radius-7),Math.sin(angle)*(radius-7),2,2,light)}}
       for(let j=0;j<12;j++){const angle=j*Math.PI/6;ctx.save();ctx.rotate(angle);box(-4,-radius-5,8,9,shade);box(-3,-radius-5,6,6,stone);box(-3,-radius-5,6,1,'#f4d9aa');ctx.restore()}
@@ -792,7 +808,7 @@ const previewArt=window.PREVIEW_ASSETS||{};
       ctx.restore();
       const marker=checkpointMarker;
       if(diving&&nileProps.naturalWidth){ctx.drawImage(nileProps,830,20,580,678,marker-24,H-72,48,57);if(checkpoint){ctx.save();ctx.globalAlpha=.7+.2*Math.sin(time/8);ctx.fillStyle='#baffea';ctx.beginPath();ctx.arc(marker,H-62,4,0,Math.PI*2);ctx.fill();ctx.restore()}}
-      else{icon(treasures,worldIndex,marker,ground-24,48,48);if(checkpoint){ctx.fillStyle='#fff199';ctx.beginPath();ctx.arc(marker,ground-52,2.5,0,Math.PI*2);ctx.fill()}}
+      else{if(worldIndex===PREHISTORY)preSprite(ctx,3,marker-22,ground-48,44,48);else icon(treasures,worldIndex,marker,ground-24,48,48);if(checkpoint){ctx.fillStyle='#fff199';ctx.beginPath();ctx.arc(marker,ground-52,2.5,0,Math.PI*2);ctx.fill()}}
       if((!invuln||time%8<4)&&atlas[hero].naturalWidth){
         ctx.save();ctx.translate(Math.round(p.x+p.w/2),Math.round(p.y+p.h/2));ctx.scale(p.face,1);
         if(diving&&diveAtlas[hero].naturalWidth){
@@ -817,6 +833,7 @@ const previewArt=window.PREVIEW_ASSETS||{};
     const km={ArrowDown:'duck',s:'duck',S:'duck',x:'special',X:'special',j:'special',J:'special',ArrowLeft:'left',a:'left',A:'left',ArrowRight:'right',d:'right',D:'right',ArrowUp:'jump',w:'jump',W:'jump',' ':'jump'};const down=e=>{if(km[e.key]){e.preventDefault();keys[km[e.key]]=true}},up=e=>{if(km[e.key])keys[km[e.key]]=false},blur=()=>{keys={}};document.addEventListener('keydown',down);document.addEventListener('keyup',up);window.addEventListener('blur',blur);stage.querySelectorAll('[data-move]').forEach(b=>{const k=b.dataset.move;b.onpointerdown=e=>{e.preventDefault();b.setPointerCapture(e.pointerId);keys[k]=true};b.onpointerup=b.onpointercancel=b.onlostpointercapture=()=>keys[k]=false});stopScene=()=>{stopped=true;cancelAnimationFrame(raf);document.removeEventListener('keydown',down);document.removeEventListener('keyup',up);window.removeEventListener('blur',blur)};$('phase-back').onclick=phaseMap;$('gabe-restart').onclick=runPhase;pixelControls(stage);hud();frame();canvas.focus({preventScroll:true});raf=requestAnimationFrame(loop)
   }
   function drawBackdrop(c,W,H,wi,pi,cam,t){const scene=wi===0&&pi===0?nileScene:wi===0&&pi===1?workshop:chronicleScenes[wi];
+    if(wi===PREHISTORY){if(prehistoricScenes.naturalWidth){const cw=prehistoricScenes.naturalWidth/2,ch=prehistoricScenes.naturalHeight/3,sw=Math.min(cw-4,(ch-4)*W/H),offset=Math.min(1,Math.max(0,cam/(4140+pi*216-W)))*(cw-4-sw);c.drawImage(prehistoricScenes,pi%2*cw+2+offset,Math.floor(pi/2)*ch+2,sw,ch-4,0,0,W,H)}else{c.fillStyle='#64764d';c.fillRect(0,0,W,H)}return}
     if(wi===0&&pi===0&&nilePanorama.naturalWidth){const sw=nilePanorama.naturalHeight*W/H,sx=Math.max(0,Math.min(1,cam/(4140-W)))*(nilePanorama.naturalWidth-sw);c.drawImage(nilePanorama,sx,0,sw,nilePanorama.naturalHeight,0,0,W,H);return}
     if(!scene.complete&&c.canvas.id!=='gabe-canvas'){
       scene.addEventListener('load',()=>{if(c.canvas.isConnected)drawBackdrop(c,W,H,wi,pi,cam,t)},{once:true});
