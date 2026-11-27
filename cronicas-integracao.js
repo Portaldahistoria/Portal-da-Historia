@@ -57,16 +57,16 @@ function drawHourglass(ctx,x,y,scale=1){
 function platformGame(){
   let worldIndex=0,phase=0,stopScene=()=>{},progress={},lives=3,health=2,reach=0;
   let disposed=false,hero='Gabi',playerId='',playerName='';
-  const profilePrefix='cronicas-campanha-v2:';
+  const profilePrefix='cronicas-integracao-teste-v1:';
   function profiles(){const list=[];try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(!k?.startsWith(profilePrefix))continue;try{const v=JSON.parse(localStorage.getItem(k));if(v&&typeof v.name==='string'&&v.name.trim()&&['Gabi','Gio'].includes(v.hero)&&v.progress&&typeof v.progress==='object'){const clean={};for(const [key,value] of Object.entries(v.progress))if(/^[0-5]-[0-6]$/.test(key)&&Number.isInteger(value)&&value>=1&&value<=3)clean[key]=value;list.push({id:k.slice(profilePrefix.length),name:v.name.slice(0,24),hero:v.hero,progress:clean,world:Number.isInteger(v.world)&&v.world>=0&&v.world<6?v.world:0,phase:Number.isInteger(v.phase)&&v.phase>=0&&v.phase<7?v.phase:0,reach:Number.isInteger(v.reach)&&v.reach>=0&&v.reach<=4200?v.reach:0})}}catch{}}}catch{}return list}
   function persist(){if(!playerId||preview)return;try{localStorage.setItem(profilePrefix+playerId,JSON.stringify({name:playerName,hero,progress,world:worldIndex,phase,reach}))}catch{}}
   function continueRun(){stopScene();stage.innerHTML='<section class="hero-select"><h3>Continuar campanha</h3><div id="saved-profiles" class="saved-profiles"></div><button class="action" id="profile-back">Voltar</button></section>';const list=$('saved-profiles');for(const v of profiles()){const b=document.createElement('button');b.className='action';b.textContent=v.name+' · '+v.hero+' · '+Object.keys(v.progress).length+'/42';b.onclick=()=>{playerId=v.id;playerName=v.name;hero=v.hero;progress=v.progress;worldIndex=v.world;phase=v.phase;reach=v.reach;lives=3;health=2;preview=false;phaseMap()};list.append(b)}$('profile-back').onclick=startMenu;}
   cleanup=()=>{disposed=true;stopScene()};
   const save=(w,p,stars)=>{const key=w+'-'+p;progress[key]=Math.max(progress[key]||0,stars);persist()};
   function newRun(){
-    lives=3;health=2;reach=0;progress={};worldIndex=0;phase=0;playerId='';playerName='';selectHero();
+    lives=3;health=2;reach=0;progress={};worldIndex=0;phase=0;playerId='';playerName='';preview=false;previewOrigin=null;selectHero();
   }
-  const recordPrefix='cronicas-chefes-recorde:';
+  const recordPrefix='cronicas-integracao-recorde-v1:';
   function ranking(target){
     const records=[];
     try{
@@ -127,7 +127,7 @@ function platformGame(){
   }
   const collected=new Set();
   let previewOrigin=null;
-  const artifactKey=(w,f)=>'cronicas-acervo:'+(playerId?playerId+':':'')+w+'-'+f;
+  const artifactKey=(w,f)=>'cronicas-integracao-acervo-v1:'+(playerId?playerId+':':'')+w+'-'+f;
   function hasArtifact(w,f){
     const key=artifactKey(w,f);
     if(collected.has(key))return true;
@@ -150,7 +150,7 @@ function platformGame(){
     const entries=profiles();
     stage.innerHTML='<section class="museum"><header><button class="action" id="museum-back">← Capa</button><h3>Sala de artefatos</h3><small id="museum-count"></small></header><label class="museum-profile">Acervo de <select id="museum-profile"></select></label><div class="museum-detail" aria-live="polite">Toque em uma peça para conhecer sua história.</div><div id="shelves"></div></section>';
     const picker=$('museum-profile');const legacy=document.createElement('option');legacy.value='';legacy.textContent='Coleção anterior do aparelho';picker.append(legacy);for(const profile of entries){const opt=document.createElement('option');opt.value=profile.id;opt.textContent=profile.name+' · '+profile.hero;picker.append(opt)}picker.value=owner;const collectionOwner=picker.value;picker.onchange=()=>artifactRoom(picker.value);
-    const museumFound=(w,f)=>{const key='cronicas-acervo:'+(collectionOwner?collectionOwner+':':'')+w+'-'+f;try{return collected.has(key)||localStorage.getItem(key)==='1'}catch{return collected.has(key)}};
+    const museumFound=(w,f)=>{const key='cronicas-integracao-acervo-v1:'+(collectionOwner?collectionOwner+':':'')+w+'-'+f;try{return collected.has(key)||localStorage.getItem(key)==='1'}catch{return collected.has(key)}};
     let count=0;
     GABE_WORLDS.forEach((world,w)=>{
       const shelf=document.createElement('section');
@@ -181,7 +181,7 @@ const finished=w=>GABE_WORLDS[w].stages.every((_,p)=>done(w,p))&&done(w,6);
 const TEST_UNLOCK_ALL=true;
 function worldMap(){const el=illustrated('general');const regions=[['Pré-História',24,28,[]],['Antiguidade Oriental',23,46,[0,1]],['Grécia Antiga',76,30,[2]],['Roma Antiga',76,47,[3]],['Idade Média',23,64,[]],['Expansão Marítima',23,82,[]],['Revoluções Modernas',77,64,[4,5]],['América',77,82,[]],['Árvore do Conhecimento',50,59,[]]];regions.forEach(([name,x,y,worlds])=>{const b=pin(el,x-11,y-8,22,16,name,()=>{if(worlds.length===1){worldIndex=worlds[0];phase=0;phaseMap()}else chooseWorld(name,worlds)});if(!worlds.length)b.title=name+' — em desenvolvimento'});pin(el,1,88,18,11,'Voltar',startMenu)}
 function chooseWorld(name,worlds){stopScene();stage.innerHTML='<section class="hero-select"><h3></h3><div class="campaign-choices"></div><button class="action" id="campaign-back">Voltar</button></section>';stage.querySelector('h3').textContent=name;const list=stage.querySelector('.campaign-choices');if(!worlds.length)list.textContent='Campanha em desenvolvimento; ainda não há fases jogáveis.';worlds.forEach(w=>{const b=document.createElement('button');b.className='action';b.textContent=GABE_WORLDS[w].title;b.onclick=()=>{worldIndex=w;phase=0;phaseMap()};list.append(b)});$('campaign-back').onclick=worldMap}
-function phaseMap(){const w=worldIndex;const keys=['antiguidade-oriental','antiguidade-oriental','grecia-antiga','roma-antiga','revolucoes-modernas','revolucoes-modernas'];const coords=[[[195,319],[345,479],[518,373],[735,452],[949,539],[1121,407],[1350,292]],[[195,319],[345,479],[518,373],[735,452],[949,539],[1121,407],[1350,292]],[[223,465],[452,417],[710,368],[949,277],[1035,418],[1018,565],[1330,505]],[[226,495],[400,420],[553,307],[806,337],[922,462],[1070,578],[1330,419]],[[167,626],[399,560],[562,450],[739,346],[953,420],[1205,452],[1387,265]],[[167,626],[399,560],[562,450],[739,346],[953,420],[1205,452],[1387,265]]];const el=illustrated(keys[w]);const title=document.createElement('strong');title.className='illustrated-campaign-title';title.textContent=GABE_WORLDS[w].title;el.append(title);coords[w].forEach(([a,b],p)=>{const x=a/15.36,y=b/8.64;const label=p===6?bosses[w].name:GABE_WORLDS[w].stages[p][0];const hit=pin(el,x-5,y-8,10,16,label,()=>{phase=p;preview=false;persist();p===6?runBoss():runPhase()});const tag=document.createElement('span');tag.className='illustrated-stars';tag.style.cssText='left:'+x+'%;top:'+(y+7)+'%';tag.textContent='★'.repeat(progress[w+'-'+p]||0)+'☆'.repeat(3-(progress[w+'-'+p]||0));el.append(tag)});pin(el,1,87,20,12,'Mapa geral',worldMap)}
+function phaseMap(){const w=worldIndex;const keys=['antiguidade-oriental','antiguidade-oriental','grecia-antiga','roma-antiga','revolucoes-modernas','revolucoes-modernas'];const coords=[[[195,319],[345,479],[518,373],[735,452],[949,539],[1121,407],[1350,292]],[[195,319],[345,479],[518,373],[735,452],[949,539],[1121,407],[1350,292]],[[223,465],[452,417],[710,368],[949,277],[1035,418],[1018,565],[1330,505]],[[226,495],[400,420],[553,307],[806,337],[922,462],[1070,578],[1330,419]],[[167,626],[399,560],[562,450],[739,346],[953,420],[1205,452],[1387,265]],[[167,626],[399,560],[562,450],[739,346],[953,420],[1205,452],[1387,265]]];const el=illustrated(keys[w]);const title=document.createElement('strong');title.className='illustrated-campaign-title';title.textContent=GABE_WORLDS[w].title;el.append(title);coords[w].forEach(([a,b],p)=>{const x=a/15.36,y=b/8.64;const label=p===6?bosses[w].name:GABE_WORLDS[w].stages[p][0];const hit=pin(el,x-5,y-8,10,16,label,()=>{phase=p;if(preview){previewOrigin=null;preview=false;playerId='';playerName='';progress={};reach=0;lives=3;health=2}persist();p===6?runBoss():runPhase()});const tag=document.createElement('span');tag.className='illustrated-stars';tag.style.cssText='left:'+x+'%;top:'+(y+7)+'%';tag.textContent='★'.repeat(progress[w+'-'+p]||0)+'☆'.repeat(3-(progress[w+'-'+p]||0));el.append(tag)});pin(el,1,87,20,12,'Mapa geral',worldMap)}
     function gabeIcon(){return '<img width="100%" height="100%" alt="'+hero+'" src="img/'+hero.toLowerCase()+'-portrait.webp">'}
 
   const bosses=[
